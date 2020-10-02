@@ -7,13 +7,13 @@
 
 ### Design Platform
 
-> Use Figma
-> **CAUTION**: three people have to use same account
+> Use Figma  
+> **CAUTION**: three people have to use same account  
 
 
 ### TODOs
 
 
-> Move designs from balsamiq and ovenapp.io to Figma 
-> Give feedbacks to each other 
-> **NEXT MEETING : 2020/10/07 WED AFTER CLASS** 
+> Move designs from balsamiq and ovenapp.io to Figma  
+> Give feedbacks to each other  
+> **NEXT MEETING : 2020/10/07 WED AFTER CLASS**  
