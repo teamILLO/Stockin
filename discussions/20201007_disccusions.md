@@ -9,8 +9,9 @@ Daun : Design Changes
 > 1. Get rid of help button on financial statements  
 > 2. Instead, add a feature that compares financial statement that has similar size of market  
 
-Wooyoung: My-page does not have important features  
+Wooyoung: My-page needs to include parts about login and user management
 > Additional Features : Export (**tbd**)
+> Design Idea: Show the stocks as a dot in an x-y coordinate(Cartesian Coordinate)
 
 Junhyeok
 > Use StockSummary Component in main page
@@ -25,7 +26,7 @@ Main Page design
 > 2. Include Recent search, exclude real-time search
 > 3. Auto-complete(jadongwansung)
 > 4. StockSummary component list will be on the red and yellow parts
-> 5. Include rise/fall tab buttons on recommendations
+> 5. Rise/fall recommendations should be both on the main page respectively
 
 Document TODOs
 > 1. Project Abstract - 다운
@@ -42,13 +43,7 @@ Assignments
 > 4. user interface requirement (low level) (10/16)
 
 
-
-
-
-
-
-
-mypage - 첫 화면에서 그룹 선택 => 그룹 내의 주식 비교 + 표 형태로
+## NEXT MEETING : Oct 10(Sat) 10pm.
 
 
 
