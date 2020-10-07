@@ -1,0 +1,23 @@
+#### Agenda
+> 1. Meeting schedules(done)
+> 2. Main page design
+> 3. How to write document
+> 4. Complete flow chart
+
+
+Daun : Design Changes  
+> 1. Get rid of help button on financial statements  
+> 2. Instead, add a feature that compares financial statement that has similar size of market  
+
+Wooyoung: My-page does not have important features  
+> Additional Features : Export
+
+Main Page design
+> 1. **Separate login page** showing draft details about the web service 
+> 2. Include Recent search, exclude real-time search
+> 3. Auto-complete(jadongwansung)
+> 4. StockSummary component list will be on the red and yellow parts
+
+
+
+
