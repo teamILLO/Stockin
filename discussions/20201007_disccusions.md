@@ -23,6 +23,7 @@ Main Page design
 > 2. Include Recent search, exclude real-time search
 > 3. Auto-complete(jadongwansung)
 > 4. StockSummary component list will be on the red and yellow parts
+> 5. Include rise/fall tab buttons on recommendations
 
 Document TODOs
 > 1. Project Abstract - 다운
