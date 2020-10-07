@@ -14,9 +14,11 @@ Wooyoung: My-page does not have important features
 
 Junhyeok
 > Use StockSummary Component in main page
+> Seperate Rise recommendation and Fall recommendation to individual components
 
 G1
 > Headlines should be hided when news analysis result is not clicked
+> Create tab buttons (like hw3's preview tab, write tab buttons) that can switch states between rise recommendations and fall recommendations
 
 Main Page design
 > 1. **Separate login page** showing draft details about the web service
