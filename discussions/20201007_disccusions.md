@@ -10,7 +10,7 @@ Daun : Design Changes
 > 2. Instead, add a feature that compares financial statement that has similar size of market  
 
 Wooyoung: My-page does not have important features  
-> Additional Features : Export
+> Additional Features : Export (**tbd**)
 
 Junhyeok
 > Use StockSummary Component in main page
