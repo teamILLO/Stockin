@@ -39,7 +39,7 @@ Document TODOs
 Assignments
 > 1. Daun, Wooyoung, Junhyeok, G1 : Complete or revise flow chart based on feedbacks (~10/10)
 > 2. List up features that needs user stories (~10/10)
-> 3. Write user stories (~10/11)
+> 3. Write user stories and Document TODOs assigned to oneself (~10/11)
 > 4. user interface requirement (low level) (10/16)
 
 
