@@ -61,13 +61,15 @@
   
 **Daun**  
 - [ ] I finished writing Project Abstract (Refer to proposal)  
-- [ ] I came up of an good name to replace 개요 that has a branding property
+- [ ] I changed the design taking care of all 3 feedbacks given on previous meeting
 - [ ] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
 - [ ] I checked I have covered every possible action as a user story in the Detail Page and revised version of My Page 
 - [ ] I finished writing user stories for Detail Page except for the News tab  
 - [ ] I checked that my user stories fulfill standards of grading guidelines  
   
 **Junhyeok**  
+- [x] I changed the Daily Report window and My Interests window to Daily Report tab and My Interests tab
+- [ ] I created two buttons redirecting to Recommendation Page(or Report Page)
 - [ ] I checked if the flowchart fully contains actions and pages related to Post-login Page(or Main Page)   
 - [ ] I finished writing user stories for Post-login Page(or Main Page)  
 - [ ] I checked that my user stories fulfill standards of grading guidelines  
