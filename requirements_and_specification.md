@@ -1,7 +1,7 @@
 ## stockin': Requirements and Specification
 (Borrowed and Adapted from UCB CS169)
 
-# Please check the grading guidelines before revising the layout  
+# **Please check the grading guidelines before revising the layout**  
 ## Document Revision History
 **Rev. 1.0**
 > When: Oct 11, 2020  
