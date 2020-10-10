@@ -3,7 +3,7 @@
 
 
 ## Document Revision History
-**v1.0.0**
+**Rev. 1.0**
 > When: Oct 11, 2020  
 > What: Created Document Layout  
 > Who:  Junhyeok Park  
