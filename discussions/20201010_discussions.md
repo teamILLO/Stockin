@@ -70,7 +70,7 @@
 **Junhyeok**  
 - [x] I changed the Daily Report window and My Interests window to Daily Report tab and My Interests tab
 - [x] I created two buttons redirecting to Recommendation Page(or Report Page)
-- [ ] I checked if the flowchart fully contains actions and pages related to Post-login Page(or Main Page)   
+- [x] I checked if the flowchart fully contains actions and pages related to Post-login Page(or Main Page)   
 - [ ] I finished writing user stories for Post-login Page(or Main Page)  
 - [ ] I checked that my user stories fulfill standards of grading guidelines  
 - [ ] I checked if there are any grammar errors in the overall document  
