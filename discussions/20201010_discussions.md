@@ -49,7 +49,7 @@
 - [ ] I finished writing Competitive Landscape (Refer to proposal)  
 - [ ] I checked if the flowchart fully contains actions and pages related to Recommendation Page(or Report Page)  
 - [ ] I finished writing user stories for News tab of Detail Page and Recommendation Page(or Report Page)  
-- [ ] I checked that my user stories fulfill standards of grading guidelines  
+- [ ] I checked that my user stories and Competitive Landscape fulfill standards of grading guidelines  
   
 **Wooyoung**  
 - [ ] I finished writing Customer (Refer to proposal)  
@@ -57,7 +57,7 @@
 - [ ] I revised the flowchart so that it fully contains actions and pages related to My Page and Pre-login Page  
 - [ ] I checked I have covered every possible action as a user story in the newly created Pre-Login Page  
 - [ ] I finished writing user stories for My Page and Pre-Login Page  
-- [ ] I checked that my user stories fulfill standards of grading guidelines  
+- [ ] I checked that my user stories and Customer fulfill standards of grading guidelines  
   
 **Daun**  
 - [ ] I finished writing Project Abstract (Refer to proposal)  
@@ -65,14 +65,14 @@
 - [ ] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
 - [ ] I checked I have covered every possible action as a user story in the Detail Page and revised version of My Page 
 - [ ] I finished writing user stories for Detail Page except for the News tab  
-- [ ] I checked that my user stories fulfill standards of grading guidelines  
+- [ ] I checked that my user stories and Project Abstract fulfill standards of grading guidelines  
   
 **Junhyeok**  
 - [x] I changed the Daily Report window and My Interests window to Daily Report tab and My Interests tab
 - [x] I created two buttons redirecting to Recommendation Page(or Report Page)
 - [x] I checked if the flowchart fully contains actions and pages related to Post-login Page(or Main Page)   
-- [ ] I finished writing user stories for Post-login Page(or Main Page)  
-- [ ] I checked that my user stories fulfill standards of grading guidelines  
+- [x] I finished writing user stories for Post-login Page(or Main Page)  
+- [x] I checked that my user stories fulfill standards of grading guidelines  
 - [ ] I checked if there are any grammar errors in the overall document  
 
 #### Next meeting will be held on Oct. 12 after class
