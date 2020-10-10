@@ -1,7 +1,8 @@
-## stockin': Requirements and Specification
+# **Please check the grading guidelines before revising the layout**
+
+# stockin': Requirements and Specification
 (Borrowed and Adapted from UCB CS169)
 
-# **Please check the grading guidelines before revising the layout**  
 ## Document Revision History
 **Rev. 1.0**
 > When: Oct 11, 2020  
@@ -10,6 +11,7 @@
 
 ## Project Abstract<br />
 A one paragraph summary (about 200 words) of what the software will do. (**Must include in the first version.**)
+**WRITE BELOW HERE**
 
 **Document Revision History**<br />
 Your first version of this document is version 1.0. When you evolve this document for future sprints of your project you will increment the minor version number (e.g., 1.1, 1.2, ...). We do not expect that you will have to increment the major version number in the course of this semester. For every version after the initial version, you should list a short bullet list with the main changes and extensions that you made to the document:
@@ -17,12 +19,14 @@ Your first version of this document is version 1.0. When you evolve this documen
        Rev. 1.0 YYYY-MM-DD - initial version
 
 ## **Customer**<br />
-A brief description of the customer for this software, both in general (the population who might eventually use such a system) and specifically for this document (the customer(s) who informed this document).  (**Must include in the first version**)
+A brief description of the customer for this software, both in general (the population who might eventually use such a system) and specifically for this document (the customer(s) who informed this document).  (**Must include in the first version**)  
+**WRITE BELOW HERE**
 
 
-## **Competitive Landscape**<br />
+## **Competitive Landscape**<br />  
 Briefly identify the competitors in this market, and list the main ways in which your project is going to be different.
-(**Must include in the first version**)
+(**Must include in the first version**)  
+**WRITE BELOW HERE**
 
 ## **User Stories**<br />
 This section will include the specification for your project in the form of user stories. For each user story, you should have at least a Feature and one or more Scenarios, each of which can have one or more Acceptance Tests. Acceptance Tests list one or more acceptance tests with concrete values for the parameters, and concrete assertions that you will make to verify the postconditions. Each user story should also have a field called "Sprint" where you specify in which sprint you implemented or plan to implement this feature.
@@ -30,6 +34,156 @@ You should list only the user stories for the previous sprints and those for the
 
 At the end of this section you should maintain a bullet list of user stories that you plan to get to in future sprints, with only minimal detail for each such story. We expect that in future sprints some of these items will be promoted to full fledged user stories.
 (**Must include in the first version, and must be expanded for future sprints**)
+
+## User Stories  
+### Pre-login page  
+> **Story 0 (EXAMPLE)** **DO NOT DELETE THIS EXAMPLE**
+> > **Feature:** Create Tour
+> >  
+> > **Actors:** Traveler or Guide User  
+> >  
+> > **Precondition:** The traveler or the guide has to be a registered user and logged in  
+> >  
+> > **Trigger:** User clicks on the “Create Tour” button  
+> >  
+> > **Scenario:**
+> > ```
+> > 1. The page displays a map with all the map markers that the route that the user has created
+> > 2. On the left you can find buttons to access all the information of the tour such as: Name of
+> > the tour, begin and end times of the tour, description of the tour, description of the
+> > places of route, dates in which the tour is available, transportation means. -(1)  
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) The user does not fill out all fields to create the Tour  
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given the user has fill out all the required fields to create the tour
+> > When the user clicks on the “Create Tour” Button
+> > Then the user should see “Your tour has been created” 
+> > ```
+> **Story 1**
+> > **Feature:** WRITE HERE
+> >  
+> > **Actors:** WRITE HERE 
+> >  
+> > **Precondition:** WRITE HERE 
+> >  
+> > **Trigger:** WRITE HERE 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. WRITE HERE -(1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) The user does not fill out all fields to create the Tour  
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+### Post-login page (Main page)
+> **Story 1**
+> > **Feature:** WRITE HERE
+> >  
+> > **Actors:** WRITE HERE 
+> >  
+> > **Precondition:** WRITE HERE 
+> >  
+> > **Trigger:** WRITE HERE 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. WRITE HERE -(1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) The user does not fill out all fields to create the Tour  
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+### My page
+> **Story 1**
+> > **Feature:** WRITE HERE
+> >  
+> > **Actors:** WRITE HERE 
+> >  
+> > **Precondition:** WRITE HERE 
+> >  
+> > **Trigger:** WRITE HERE 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. WRITE HERE -(1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) The user does not fill out all fields to create the Tour  
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+### Report page
+> **Story 1**
+> > **Feature:** WRITE HERE
+> >  
+> > **Actors:** WRITE HERE 
+> >  
+> > **Precondition:** WRITE HERE 
+> >  
+> > **Trigger:** WRITE HERE 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. WRITE HERE -(1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) The user does not fill out all fields to create the Tour  
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+### Detail page
+> **Story 1**
+> > **Feature:** WRITE HERE
+> >  
+> > **Actors:** WRITE HERE 
+> >  
+> > **Precondition:** WRITE HERE 
+> >  
+> > **Trigger:** WRITE HERE 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. WRITE HERE -(1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) The user does not fill out all fields to create the Tour  
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
 
 ## **User Interface Requirements**<br />
 Describes any customer user interface requirements including graphical user interface requirements. Here you should have sketches or mockups for the main parts of the interface. To save time you may want to use scanned drawings of interface mockups here, instead of Photoshop drawings.
