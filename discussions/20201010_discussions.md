@@ -61,10 +61,11 @@
   
 **Daun**  
 - [ ] I finished writing Project Abstract (Refer to proposal)  
+- [ ] I came up of an good name to replace 개요 that has a branding property
 - [ ] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
 - [ ] I checked I have covered every possible action as a user story in the Detail Page and revised version of My Page 
 - [ ] I finished writing user stories for Detail Page except for the News tab  
-- [ ] I checked that my user stoires fulfill standards of grading guidelines  
+- [ ] I checked that my user stories fulfill standards of grading guidelines  
   
 **Junhyeok**  
 - [ ] I checked if the flowchart fully contains actions and pages related to Post-login Page(or Main Page)   
