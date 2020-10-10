@@ -6,7 +6,7 @@
 #### Daun
 > 1. Name 개요 to something special
 > 2. Specify data's origin date
-> 3. Show rise/fall ranking on detail page  
+> 3. Show rise/fall ranking on detail page
 
 #### Junhyeok
 > 1. Change My Interests window and Daily Report window to separate tabs and place them horizontally
@@ -76,3 +76,8 @@
 - [ ] I checked if there are any grammar errors in the overall document  
 
 #### Next meeting will be held on Oct. 12 after class
+## Next Agenda
+> 1. Feedback on flowchart as a final
+> 2. Do we really need Search Page or should we just use auto-complete feature without Search Page?
+> 3. Feedback on R&S
+> 4. Workload distribution on UI Requirements 
