@@ -1,7 +1,7 @@
 ## stockin': Requirements and Specification
 (Borrowed and Adapted from UCB CS169)
 
-
+# Please check the grading guidelines before revising the layout  
 ## Document Revision History
 **Rev. 1.0**
 > When: Oct 11, 2020  
@@ -16,22 +16,22 @@ Your first version of this document is version 1.0. When you evolve this documen
 
        Rev. 1.0 YYYY-MM-DD - initial version
 
-**Customer**<br />
+## **Customer**<br />
 A brief description of the customer for this software, both in general (the population who might eventually use such a system) and specifically for this document (the customer(s) who informed this document).  (**Must include in the first version**)
 
 
-**Competitive Landscape**<br />
+## **Competitive Landscape**<br />
 Briefly identify the competitors in this market, and list the main ways in which your project is going to be different.
 (**Must include in the first version**)
 
-**User Stories**<br />
+## **User Stories**<br />
 This section will include the specification for your project in the form of user stories. For each user story, you should have at least a Feature and one or more Scenarios, each of which can have one or more Acceptance Tests. Acceptance Tests list one or more acceptance tests with concrete values for the parameters, and concrete assertions that you will make to verify the postconditions. Each user story should also have a field called "Sprint" where you specify in which sprint you implemented or plan to implement this feature.
 You should list only the user stories for the previous sprints and those for the current sprint.
 
 At the end of this section you should maintain a bullet list of user stories that you plan to get to in future sprints, with only minimal detail for each such story. We expect that in future sprints some of these items will be promoted to full fledged user stories.
 (**Must include in the first version, and must be expanded for future sprints**)
 
-**User Interface Requirements**<br />
+## **User Interface Requirements**<br />
 Describes any customer user interface requirements including graphical user interface requirements. Here you should have sketches or mockups for the main parts of the interface. To save time you may want to use scanned drawings of interface mockups here, instead of Photoshop drawings.
 
 Just like for the User Stories section, you need to list here only the parts of the user interface that are applicable to the previous sprints and the current one.
