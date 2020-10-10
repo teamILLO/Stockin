@@ -90,27 +90,236 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### Post-login page (Main page)
 > **Story 1**
-> > **Feature:** WRITE HERE
+> > **Feature:** Users can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
 > >  
-> > **Actors:** WRITE HERE 
+> > **Actors:** Any users 
 > >  
-> > **Precondition:** WRITE HERE 
+> > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** WRITE HERE 
+> > **Trigger:** User clicks on the right-pointing/left-pointing arrow placed inside the tab
 > >  
 > > **Scenario:**
 > > ```
-> > 1. WRITE HERE -(1)
+> > 1. The page at first does not show all 5 stocks due to lack of space
+> > 2. User wants to see differently ranked predictions, so clicks the button - (1) (2)
+> > 3. User now can see a sigle new prediction on the right/left that was previously hidden due to lack of space and no longer can see the previously leftmost/rightmost prediction - (3)
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) The user does not fill out all fields to create the Tour  
+> > (1) When the 1st ranked prediction is at sight, the left-pointing button does not appear.
+> > (2) When the show-more button is at sight, the right-pointing button does not appear.
+> > (3) When the 5th ranked prediction is at the rightmost part, the show-more button appears.
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given that the user is not currently seeing the leftmost or rightmost prediction of the list
+> > When the user clicks left-pointing/right-pointing button
+> > User should see new prediction in left/right direction that was hidden previously
+> > ```
+> **Story 2**
+> > **Feature:** Users can see more highly scored stocks by being redirected to Recommendation Page 
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the "Show-more" button
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User surfed among top 5 highly scored stocks and wants to know about other highly scored stocks.
+> > 2. User clicks the show-more button
+> > 3. User gets redirected to Recommendation Page
+> > 4. Depending on which show-more button is clicked, tab to be initially selected on Recommendation Page will be decided.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When the user clicks the show-more button
+> > User should be redirected to Recommendation Page
+> > The tab in the Recommendtion Page should be properly active regarding to which show-more button is clicked on
+> > ```  
+> **Story 3**
+> > **Feature:** Users can get more information about the stock by clicking the stock
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the stock that he/she wants to get more information about
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User surfed among top 5 highly scored stocks and wants to know about one of the stocks
+> > 2. User clicks on the corresponding stock
+> > 3. User gets redirected to Detail Page of the corresponding stock
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When the user clicks the stock that he/she wants to get more information about
+> > User should be on Detail Page of the corresponding stock
+> > ```  
+> **Story 4**
+> > **Feature:** Users can switch between Daily Report tab and My Interests tab
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the "Daily Report" or "My Interests" tab
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to get information from Daily Report/My Interests tab
+> > 2. User clicks on the "Daily Report" or "My Interests" tab
+> > 3. Daily Report/My Interests tab is activated - (1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens when the target tab is the same as current tab
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given that the target tab is different from current tab
+> > When the user clicks the target tab
+> > The target tab should be activated
+> > ```  
+> **Story 5**
+> > **Feature:** Users can go to My Page anytime
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the "Mypage" button
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to do some jobs related to his/her account at the mypage
+> > 2. User clicks on the "Mypage" button
+> > 3. User gets redirected to My Page
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When the user clicks the mypage button
+> > User should be redirected to My Page
+> > ```  
+> **Story 6**
+> > **Feature:** Users can logout anytime
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the "Logout" button
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User finished getting information from stockin' and wants to logout
+> > 2. User clicks on the "Logout" button
+> > 3. User gets redirected to Pre-login Page
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When the user clicks the mypage button
+> > User should be on My Page
+> > ```  
+> **Story 7**
+> > **Feature:** Users can search for recently searched stock
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the name of one of the recently searched stocks
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to search for a recently searched stock
+> > 2. User clicks on the "Search" input
+> > 3. User sees what he/she recently searched - (1)
+> > 4. User clicks on the name of the stock
+> > 5. User gets redirected to the Detail Page of the corresponding stock
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens if the user has no history of searching
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given that the user has history of searching
+> > When the user clicks on the "Search" input
+> > User should see what he/she has recently searched
+> >   
+> > When the user clicks on the name of one of the recently searched stocks
+> > User should be on Detail Page of the corresponding stock
+> > ```  
+> **Story 8**
+> > **Feature:** Users can search for a specific stock they want to get information about
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the name of the stock of one of the suggestions
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to search for a specific stock
+> > 2. User clicks on the "Search" input
+> > 3. User sees what he/she recently searched, but none of them matches what he/she wants to search for - (1)
+> > 4. User starts typing the name of the specific stock
+> > 5. User sees suggested stocks during typing, and finds what he/she was searching for - (2)
+> > 6. User clicks on the name of the stock
+> > 7. User gets redirected to the Detail Page of the corresponding stock
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens if the user has no history of searching
+> > (2) Nothing happens on empty input
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given that the user has history of searching
+> > When the user clicks on the "Search" input
+> > User should see what he/she has recently searched
+> >   
+> > When the user types letter in the "Search" input
+> > User should see suggestions led by the input
+> >
+> > When the user clicks on the name of one of the suggested input
+> > User should be on Detail Page of the corresponding stock
 > > ```  
 ### My page
 > **Story 1**
@@ -129,7 +338,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) The user does not fill out all fields to create the Tour  
+> > (1) WRITE HERE 
 > > ```
 > > 
 > > **Acceptance Test:**
@@ -153,7 +362,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) The user does not fill out all fields to create the Tour  
+> > (1) WRITE HERE  
 > > ```
 > > 
 > > **Acceptance Test:**
