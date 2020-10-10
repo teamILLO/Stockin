@@ -27,6 +27,8 @@
 > 1. **tbd**: Do we have to add date options to Recommendation page? Okay(3/4) >> we have to store previous data in backend
 > 2. **tbd**: Do we have to add date options to Detail page? Okay(4/4)  >> isw  
 
+
+## TODOs
 #### Document TODOs
 > 1. Project Abstract - 다운
 > 2. Customer - 우영
