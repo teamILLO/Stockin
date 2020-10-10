@@ -39,8 +39,8 @@
 
 #### Assignments
 > 1. Daun, Wooyoung, Junhyeok, G1 : Complete or **revise flow chart** and **change design** based on feedbacks (~10/11)
-> 2. Write down **user stories** and **Document TODOs** at **github wiki (https://github.com/swsnu/swpp2020-team15/wiki)** assigned to oneself (~10/11) (you can see assigned user stories at https://docs.google.com/document/d/1EzT1hXcMKYiAn4c4rrs4N5HdA67S5bmE-BTkQYR7VS8/edit)
-> 3. Wiki will be written using **Markdown**, if you are not familiar, please refer to https://docs.github.com/en/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax#section-links
+> 2. Write down **user stories** and **Document TODOs** at **requirements_and_specification.md (https://github.com/swsnu/swpp2020-team15/blob/master/requirements_and_specification.md)** assigned to oneself (~10/11) (you can see assigned user stories at https://docs.google.com/document/d/1EzT1hXcMKYiAn4c4rrs4N5HdA67S5bmE-BTkQYR7VS8/edit)
+> 3. Requirements & Specification will be written using **Markdown**, if you are not familiar, please refer to https://docs.github.com/en/free-pro-team@latest/github/writing-on-github/basic-writing-and-formatting-syntax#section-links
 > 4. user interface requirement (low level) (~10/16)  
 
 #### Next meeting will be held on Oct. 12 after class
