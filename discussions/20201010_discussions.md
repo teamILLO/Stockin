@@ -53,6 +53,7 @@
   
 **Wooyoung**  
 - [ ] I finished writing Customer (Refer to proposal)  
+- [ ] I have integrated 4 components in My page to create 1 whole page design
 - [ ] I revised the flowchart so that it fully contains actions and pages related to My Page and Pre-login Page  
 - [ ] I checked I have covered every possible action as a user story in the newly created Pre-Login Page  
 - [ ] I finished writing user stories for My Page and Pre-Login Page  
@@ -61,7 +62,7 @@
 **Daun**  
 - [ ] I finished writing Project Abstract (Refer to proposal)  
 - [ ] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
-- [ ] I checked I have covered every possible action as a user story in the Detail Page  
+- [ ] I checked I have covered every possible action as a user story in the Detail Page and revised version of My Page 
 - [ ] I finished writing user stories for Detail Page except for the News tab  
 - [ ] I checked that my user stoires fulfill standards of grading guidelines  
   
