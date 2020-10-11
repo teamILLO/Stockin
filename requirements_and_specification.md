@@ -348,27 +348,150 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### Report page
 > **Story 1**
-> > **Feature:** WRITE HERE
+> > **Feature:** User wants to see rise / fall stocks
 > >  
-> > **Actors:** WRITE HERE 
+> > **Actors:** Any users  
 > >  
-> > **Precondition:** WRITE HERE 
+> > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** WRITE HERE 
+> > **Trigger:** User clicks rise / fall tab 
 > >  
 > > **Scenario:**
 > > ```
-> > 1. WRITE HERE -(1)
+> > 1. User wants to see rise / fall stocks
+> > 2. User clicks rise / fall tab, should immediately render selected tab
+> > 3. User should see block list of selected tab
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) WRITE HERE  
+> > (1) Nothing happens when user clicks same tab
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters the report page, rise tab should represent in default.
+> > When user clicks rise / fall tab 
+> > User should see selected tab
+> >
+> > When user re-enters the report page
+> > User should see same tab, same stocks based on user history
+> > ```  
+> **Story 2**
+> > **Feature:** User wants to see another day recommendation
+> >  
+> > **Actors:** Any users  
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks date picker
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to see another day recommendation report
+> > 2. User clicks date picker, pick date user wants to see 
+> > 3. User should see picked date report
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens when user clicks same date
+> > (2) Nothing happens when user clicks future date that is yet to come
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given user first enters the report page, report should represent current date in default
+> > When user clicks date picker
+> > User should see selected date report
+> >
+> > When user re-enters the report  page
+> > User should see same date based on user history
+> > ```  
+> **Story 3**
+> > **Feature:** User wants to see more stocks of  block list
+> >  
+> > **Actors:** Any users  
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User scrolls the page
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to see more stocks of block list
+> > 2. User scrolls the block list
+> > 3. User should see stocks according to degree of scrolling
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens when user reaches end of the list
+> > (2) Nothing happens when user reaches top of the page
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given user first enters the report page, report should represent current date in default
+> > When user clicks date picker
+> > User should see selected date report
+> >
+> > When user re-enters the report  page
+> > User should see same scrolled list based on user history
+> > ```  
+> **Story 4**
+> > **Feature:** User wants to see specific stock in detail
+> >  
+> > **Actors:** Any users  
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks the stock name in block component
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to see specific stock in detail
+> > 2. User clicks the stock name in block component
+> > 3. User should see the stock detail page
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user clicks the stock name in block component
+> > Redirect to Detail page and activated
+> > user should see detail page
+> > ```  
+> **Story 5**
+> > **Feature:** User wants to see more analysed News in detail
+> >  
+> > **Actors:** Any users  
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** In block component, user clicks the “more” button next to article list 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to see see analysed News in detail 
+> > 2. User clicks the “more” button next to article list 
+> > 3. User should see the stock detail page with “news” tab
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user clicks the “more” button next to article list 
+> > Redirect to Detail page  with news tab activated
+> > user should see detail page with news tab
 > > ```  
 ### Detail page
 > **Story 1**
