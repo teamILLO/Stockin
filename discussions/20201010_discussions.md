@@ -53,8 +53,8 @@
   
 **Wooyoung**  
 - [ ] I finished writing Customer (Refer to proposal)  
-- [ ] I have integrated 4 components in My page to create 1 whole page design
-- [ ] I revised the flowchart so that it fully contains actions and pages related to My Page and Pre-login Page  
+- [x] I have integrated 4 components in My page to create 1 whole page design
+- [x] I revised the flowchart so that it fully contains actions and pages related to My Page and Pre-login Page  
 - [ ] I checked I have covered every possible action as a user story in the newly created Pre-Login Page  
 - [ ] I finished writing user stories for My Page and Pre-Login Page  
 - [ ] I checked that my user stories and Customer fulfill standards of grading guidelines  
