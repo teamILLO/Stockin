@@ -494,30 +494,128 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > user should see detail page with news tab
 > > ```  
 ### Detail page
+> **News tab**
 > **Story 1**
-> > **Feature:** WRITE HERE
+> > **Feature:** User wants to see another day noticeable news
 > >  
-> > **Actors:** WRITE HERE 
+> > **Actors:** Any users 
 > >  
-> > **Precondition:** WRITE HERE 
+> > **Precondition:** The user must be registered and logged in
 > >  
-> > **Trigger:** WRITE HERE 
+> > **Trigger:** User clicks date picker
 > >  
 > > **Scenario:**
 > > ```
-> > 1. WRITE HERE -(1)
+> > 1. User wants to see another day noticeable news
+> > 2. User clicks date picker, pick date user wants to see 
+> > 3. User should see picked date noticeable news
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) The user does not fill out all fields to create the Tour  
+> > (1) Nothing happens when user clicks same date
+> > (2) Nothing happens when user clicks future date that is yet to come
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters the detail page with news tab, provided news should represent current date in default
+> > When user clicks date picker
+> > User should see selected date report
+> >
+> > When user re-enters the detail page, news tab
+> > User should see same date news based on user history
 > > ```  
-
+> **Story 2**
+> > **Feature:** User wants to see news including specific keyword or sentence
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in
+> >  
+> > **Trigger:** User clicks input search
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to see news including specific keyword or sentence.
+> > 2. User clicks on the “search” input
+> > 3. User starts typing the keyword or sentence of the article
+> > 4. User sees articles produced by user input in same page
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens on empty input
+> > (2) No article list produced when there’s no article matches.
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given that the user types letter in the “search” input
+> > User should see produced list of article led by the input
+> > ```
+> **Story 3**
+> > **Feature:** User wants to read specific article in detail
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in
+> >  
+> > **Trigger:** User clicks the title of specific article
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to read specific article in detail
+> > 2. User clicks on the title of specific article 
+> > 3. User should be given new page with article link
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user clicks on the title of specific article
+> > User should be given new page with article link
+> > ```
+> **Story 4**
+> > **Feature:** User wants to see more news that is not represented in current page
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in
+> >  
+> > **Trigger:** User clicks article list navigator 
+> >  User clicks next vector button
+> > User clicks specific number button
+> >
+> > **Scenario:**
+> > ```
+> > 1. User wants to see more news that is not represented in current page
+> > 2. User clicks next vector button placed in bottom of the article list
+> > 3. User should be given next new article list based on current number of list
+> >
+> > 1. User wants to see more news that is not represented in current page
+> > 2. User clicks number button placed in bottom of the article list
+> > 3. User should be given new article list based on the number user clicked
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens if user clicks the next/prev vector button in end/start of the article list
+> > (2) Nothing happens if the user clicks the same number when user sees that number article list
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user clicks on the next/prev vector button
+> > User should be given new article list based on the button result
+> >
+> > When user clicks on the number button
+> >User should be given new article list based on the number user clicked
+> > ```
 ## **User Interface Requirements**<br />
 Describes any customer user interface requirements including graphical user interface requirements. Here you should have sketches or mockups for the main parts of the interface. To save time you may want to use scanned drawings of interface mockups here, instead of Photoshop drawings.
 
