@@ -61,7 +61,7 @@
   
 **Daun**  
 - [ ] I finished writing Project Abstract (Refer to proposal)  
-- [ ] I changed the design taking care of all 3 feedbacks given on previous meeting
+- [x] I changed the design taking care of all 3 feedbacks given on previous meeting
 - [ ] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
 - [ ] I checked I have covered every possible action as a user story in the Detail Page and revised version of My Page 
 - [ ] I finished writing user stories for Detail Page except for the News tab  
