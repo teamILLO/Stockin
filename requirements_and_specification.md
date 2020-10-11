@@ -10,7 +10,7 @@
 > Who:  Junhyeok Park  
 
 ## Project Abstract<br />
-**Stockin'** is a service that provides customers with a quick, at-a-glance organized information about stocks.
+**stockin'** is a service that provides customers with a quick, at-a-glance organized information about stocks. Customers are investors who have a difficult time selecting good stocks due to the wide variety of stock information.
 
 
 
