@@ -494,7 +494,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > user should see detail page with news tab
 > > ```  
 ### Detail page
-> **News tab**
+#### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
 > >  
