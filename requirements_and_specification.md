@@ -494,6 +494,32 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > user should see detail page with news tab
 > > ```  
 ### Detail page
+#### **Overview tab**
+> **Story 1**
+> > **Feature:** User can see score and overview of particular stock
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in
+> >  
+> > **Trigger:** User clicks on the specific stock title from other page
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User want to know detailed information about a particular stock.
+> > 2. User click name of a particular stock on main, recommendation, favorite page.
+> > 3. User gets redirected to detail stock page.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > 
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When a user clicks the title of a particular stock, it should be redirected to the detail page of that stock.
+> >
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
