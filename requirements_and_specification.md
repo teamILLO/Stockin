@@ -650,11 +650,68 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > >
 > **Story 2**
-> > **Feature:** Users can comment on stocks
+> > **Feature:** Users can post their on stocks
 > > 
 > > **Actors:** Any user
 > >
-
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in.
+> > The user must be already on stock detail page and Comment tab.
+> > ```
+> >
+> > **Trigger:** User enters the content of the comment and clicks the OK button
+> >
+> > **Scenario:**
+> > ```
+> > 1. User want to post their opinion about a specific stock.
+> > 2. User click the comment tab and then enter their opinion to the comment.
+> > 3. User click the OK button and the comment is posted.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > When user clicks the OK button with empty content, warning alert will
+> > ```
+> >
+> > **Acceptance Test:**
+> > ```
+> > User enters content and click the Ok button, then the comment should be posted.
+> > ```
+> >
+> **Story 3**
+> > **Feature:** Users can delete their comments.
+> > 
+> > **Actors:** Any user
+> >
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in.
+> > The user must be already on stock detail page and Comment tab.
+> > The comment that a user wants to delete must be a comment written by that user.
+> > ```
+> >
+> > **Trigger:** User click the delete button next to the comment that the user wants to delete.
+> > 
+> > **Scenario:**
+> > ```
+> > 1. User has posted comments on a specific stock.
+> > 2. Later, User want to delete the comment written by the user.
+> > 3. User enter the Comment tab, and then click the delete button next to the comment.
+> > 4. The comment is deleted and should not be rendered.
+> > ```
+> > 
+> > **Exceptions:** 
+> > ```
+> > There should be no delete button next to comment wriiten by other person.
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user click the delete button next to comment written by him,
+> > Then the comment should be removed and not be rendered.
+> > ```
+> >
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
