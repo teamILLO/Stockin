@@ -62,9 +62,9 @@
 **Daun**  
 - [ ] I finished writing Project Abstract (Refer to proposal)  
 - [x] I changed the design taking care of all 3 feedbacks given on previous meeting
-- [ ] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
+- [x] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
 - [ ] I checked I have covered every possible action as a user story in the Detail Page and revised version of My Page 
-- [ ] I finished writing user stories for Detail Page except for the News tab  
+- [x] I finished writing user stories for Detail Page except for the News tab  
 - [ ] I checked that my user stories and Project Abstract fulfill standards of grading guidelines  
   
 **Junhyeok**  
