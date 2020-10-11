@@ -10,8 +10,9 @@
 > Who:  Junhyeok Park  
 
 ## Project Abstract<br />
-A one paragraph summary (about 200 words) of what the software will do. (**Must include in the first version.**)
-**WRITE BELOW HERE**
+**Stockin'** is a service that provides customers with a quick, at-a-glance organized information about stocks.
+
+
 
 **Document Revision History**<br />
 Your first version of this document is version 1.0. When you evolve this document for future sprints of your project you will increment the minor version number (e.g., 1.1, 1.2, ...). We do not expect that you will have to increment the major version number in the course of this semester. For every version after the initial version, you should list a short bullet list with the main changes and extensions that you made to the document:
