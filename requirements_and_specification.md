@@ -514,11 +514,49 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Exceptions:** 
 > > ```
 > > None
-> > 
-> > 
+> > ```
+> >
 > > **Acceptance Test:**
 > > ```
 > > When a user clicks the title of a particular stock, it should be redirected to the detail page of that stock.
+> > ```
+> >
+> **Story 2**
+> > **Feature:** User can see past score and overview information of particular stock
+> >
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in
+> > The user must be already on stock detail page and overview tab.
+> >
+> > **Trigger:** User clicks on the calender button which is next to update date.
+> >
+> > **Scenario:**
+> > ```
+> > 1.Users want to know detailed stock information in the past or on a specific date.
+> > 2.Users click the calendar button which is next to the update date.
+> > 3.Calendar pop-up will appear, and users can choose specific date.
+> > 4.User gets detailed stock information on a specific date
+> > ```
+> > **Exceptions:** 
+> > ```
+> > User chooses a future date.
+> > ```
+> >
+> > **Acceptance Test:**
+> > ```
+> > When a user clicks a particular date, then the page should render the information of the particular date.
+> > If future date is chosen, warning alert will appear.
+> > ```
+> >
+#### **Price trends tab**
+> **Stroy 1**
+> > **Feature:** User can see the price trend of a specific stock.
+> > 
+> > **Actors:** Any users 
+> > 
+> > **Precondition:** The user must be registered and logged in.
+> > The user must be already on stock detail page and Price trends tab.
 > >
 #### **News tab**
 > **Story 1**
