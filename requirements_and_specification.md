@@ -584,7 +584,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > If user is already on the ‘시세동향’ tab, nothing is happen.
 > > ```
 > >
-#### **Financial state tab***
+#### **Financial state tab**
 > > **Stroy 1**
 > > ***Feature:*** User can see the financial state and comparison information of a specific stock.
 > > 
@@ -617,6 +617,44 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > If user is already on the Financial state tab, nothing is happen.
 > > ```
 > > 
+#### **Comment tab**
+> **Story 1**
+> > **Feature:** Users can view other people's opinions as comments.
+> >
+> > **Actors:** Any users 
+> >
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in.
+> > The user must be already on stock detail page.
+> > ```
+> >
+> > **Trigger:** User clicks the Comment tab on the stock detailed page.
+> > 
+> > **Scenario:**
+> > ```
+> > 1. User want to know other people's opinions or situation about the specific stock.
+> > 2. User clicks the Comment tab.
+> > 3. User can view other people's opinions as comments.
+> > ```
+> > 
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When a user clicks the  Comment tab, then the webpage should render the Comments of a specific stock.
+> > If user is already on the Comment tab, nothing is happen.
+> > ```
+> >
+> **Story 2**
+> > **Feature:** Users can comment on stocks
+> > 
+> > **Actors:** Any user
+> >
+
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
