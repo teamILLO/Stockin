@@ -526,17 +526,20 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Actors:** Any users 
 > >  
-> > **Precondition:** The user must be registered and logged in
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in
 > > The user must be already on stock detail page and overview tab.
+> > ```
 > >
 > > **Trigger:** User clicks on the calender button which is next to update date.
 > >
 > > **Scenario:**
 > > ```
-> > 1.Users want to know detailed stock information in the past or on a specific date.
-> > 2.Users click the calendar button which is next to the update date.
-> > 3.Calendar pop-up will appear, and users can choose specific date.
-> > 4.User gets detailed stock information on a specific date
+> > 1. Users want to know detailed stock information in the past or on a specific date.
+> > 2. Users click the calendar button which is next to the update date.
+> > 3. Calendar pop-up will appear, and users can choose specific date.
+> > 4. User gets detailed stock information on a specific date
 > > ```
 > > **Exceptions:** 
 > > ```
@@ -555,9 +558,65 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Actors:** Any users 
 > > 
-> > **Precondition:** The user must be registered and logged in.
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in.
 > > The user must be already on stock detail page and Price trends tab.
+> > ```
 > >
+> > **Trigger:** User clicks the Price trends tab on the stock detail page.
+> >
+> > **Scenario:**
+> > ```
+> > 1. Users want to know  the price trend of a specific stock.
+> > 2. Users click the tab ‘시세동향’ on the stock detail page.
+> > 3. Page renders the information of the price trend of a specific stock.
+> > ```
+> > 
+> > ***Exception:***
+> > ```
+> > None
+> > ```
+> >
+> > **Acceptance Test:**
+> > ```
+> > When a user clicks the  Price trends tab, then the webpage should render the information of the price trend of a specific stock.
+> > If user is already on the ‘시세동향’ tab, nothing is happen.
+> > ```
+> >
+#### **Financial state tab***
+> > **Stroy 1**
+> > ***Feature:*** User can see the financial state and comparison information of a specific stock.
+> > 
+> > **Actors:** Any users
+> > 
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in.
+> > The user must be already on stock detail page and Financial state tab.
+> > ```
+> >
+> > **Trigger:** User clicks the Financial state tab on the stock detail page.
+> >
+> > **Scenario:**
+> > ```
+> > 1. Users want to know  the financial state of a specific stock.
+> > 2. Or users alreay know about the financial information, but don't know how to interpret it.
+> > 3. User clicks the Financial state tab.
+> > 4. User can see the financial state and financial compare information which is easy to understand.
+> > ```
+> > 
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When a user clicks the  Financial state tab, then the webpage should render the financial statement of a specific stock.
+> > If user is already on the Financial state tab, nothing is happen.
+> > ```
+> > 
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
