@@ -712,6 +712,41 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then the comment should be removed and not be rendered.
 > > ```
 > >
+> **Story 4**
+> > **Feature:** Users can edit their comments.
+> > 
+> > **Actors:** Any user
+> >
+> > **Precondition:**
+> > ```
+> > The user must be registered and logged in.
+> > The user must be already on stock detail page and Comment tab.
+> > The comment that a user wants to edit must be a comment written by that user.
+> > ```
+> >
+> > **Trigger:** User click the edit button next to the comment that the user wants to delete.
+> > 
+> > **Scenario:**
+> > ```
+> > 1. User has posted comments on a specific stock.
+> > 2. Later, User want to eidt the comment written by the user.
+> > 3. User enter the Comment tab, and then click the edit button next to the comment.
+> > 4. User enters new content and then click the Ok button.
+> > 5. The comment is edited and should be rendered with revised comment.
+> > ```
+> > 
+> > **Exceptions:** 
+> > ```
+> > There should be no edit button next to comment wriiten by other person.
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user click the edit button next to comment written by him,
+> > Users enters new content of comment and click the Ok button.
+> > Then the comment content should be revised.
+> > ```
+> >
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
