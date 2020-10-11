@@ -586,7 +586,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 #### **Financial state tab**
 > > **Stroy 1**
-> > ***Feature:*** User can see the financial state and comparison information of a specific stock.
+> > **Feature:** User can see the financial state and comparison information of a specific stock.
 > > 
 > > **Actors:** Any users
 > > 
