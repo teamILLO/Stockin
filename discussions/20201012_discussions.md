@@ -1,12 +1,12 @@
 ## Personal TODO List
 ### If you have finished the task, please edit this file and fill x between \[ and \]
 **G1**  
-- [ ] I finished writing Competitive Landscape (Refer to proposal)  (Due Oct 14. 22:00)
-- [ ] I finished writing Customer (Refer to proposal)  (Due Oct 14. 22:00)
-- [ ] I wrote user stories on Pre-Login Page (Due Oct 14. 22:00) 
 - [x] I checked if the flowchart fully contains actions and pages related to Recommendation Page(or Report Page)  
 - [x] I finished writing user stories for News tab of Detail Page and Recommendation Page(or Report Page)  
 - [x] I checked that my user stories and Competitive Landscape fulfill standards of grading guidelines
+- [ ] I finished writing Competitive Landscape (Refer to proposal)  (Due Oct 14. 22:00)
+- [ ] I finished writing Customer (Refer to proposal)  (Due Oct 14. 22:00)
+- [ ] I wrote user stories on Pre-Login Page (Due Oct 14. 22:00) 
   
 **Wooyoung**  
 - [x] I have integrated 4 components in My page to create 1 whole page design
