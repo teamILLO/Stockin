@@ -33,9 +33,39 @@ Your first version of this document is version 1.0. When you evolve this documen
     * Those who have difficulty choosing stocks because there are numerous companies in the stock market
 
 ## **Competitive Landscape**<br />  
-Briefly identify the competitors in this market, and list the main ways in which your project is going to be different.
-(**Must include in the first version**)  
-**WRITE BELOW HERE**
+The most basic but most important information is the graph and Financial Statements, which is objective information in the stock market.
+Stockin' provides this with summarized information.
+This will reduce the time that users spend searching for this information.
+
+Also, Stockin’ provides news information.
+This is subjective information, but it is good information to be able to grasp public opinion and to understand the trends of the companies concerned.
+Stockin' categorizes positive and negative articles through NLP and ranks according to the degree of relevant articles to the enterprise.
+Eventually users quickly identify them.
+
+By scoring and recommending based on summarized information, users will be able to get help in selecting stocks.
+
+* **Competitive companies**
+
+  * **Kosho**
+    * An application-based platform that learns past stock price changes and predicts future stock price changes.
+    * Provides past stock price changes similar to the present as the basis for stock price change forecast
+    * For certain stocks, stock price change prediction is free, but stock recommendation is provided with a subscription fee
+
+  * **Robo-advisor**
+    * Services that make investment decisions and asset allocations through learned algorithms
+    * In Korea, most securities companies provide this service for a fee, and among startups, ‘Fint’ and ‘Aim’ are representative
+    * The user can know the investment progress of AI, but it does not provide the basis for selecting a stock or the judgment of AI for a specific stock
+
+
+Through deep learning, they decide where to sell and buy, thereby narrowing the user's judgment.
+However, there are so many factors that determine the price of stocks, and it is unpredictable.
+Stockin' helps users build know-how and make better judgments without reducing the width of their judgment.
+This will allow users to move on to the best judgment they are satisfied with.
+
+So, what's most distinct from other competitors is:
+  * Reduce the amount of time users spend searching for stock-related information.
+  * Do not narrow the user's judgment by processing objective information.
+  * The minimum analysis prediction makes it easier to choose among many stock items.
 
 ## **User Stories**<br />
 This section will include the specification for your project in the form of user stories. For each user story, you should have at least a Feature and one or more Scenarios, each of which can have one or more Acceptance Tests. Acceptance Tests list one or more acceptance tests with concrete values for the parameters, and concrete assertions that you will make to verify the postconditions. Each user story should also have a field called "Sprint" where you specify in which sprint you implemented or plan to implement this feature.
