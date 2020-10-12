@@ -23,7 +23,18 @@ Your first version of this document is version 1.0. When you evolve this documen
 ## **Customer**<br />
 A brief description of the customer for this software, both in general (the population who might eventually use such a system) and specifically for this document (the customer(s) who informed this document).  (**Must include in the first version**)  
 **WRITE BELOW HERE**
+* General Customer
+  * anyone who is already having stocks or is willing to start stock trade can be our services user. 
 
+* Specific Customer
+  * Beginner of stock market
+    * those who have difficulty in selecting, buying, and judging a stock based on a lot of information.
+
+  * People who don’t make a main job of stocks
+    * those who has an understanding of stocks but does not have time to grasp the information.
+
+  * People who have yet to decide which stock to choose
+    * those who have difficulty choosing stocks because there are numerous companies in the stock market.
 
 ## **Competitive Landscape**<br />  
 Briefly identify the competitors in this market, and list the main ways in which your project is going to be different.
