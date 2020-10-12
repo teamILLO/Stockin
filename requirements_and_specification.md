@@ -325,22 +325,219 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### My page
 > **Story 1**
-> > **Feature:** WRITE HERE
+> > **Feature:** user wants to change password 
 > >  
-> > **Actors:** WRITE HERE 
+> > **Actors:** any user
 > >  
-> > **Precondition:** WRITE HERE 
+> > **Precondition:** The user must be registered and logged in
 > >  
-> > **Trigger:** WRITE HERE 
+> > **Trigger:** User clicks on the "change password" button. 
 > >  
 > > **Scenario:**
 > > ```
-> > 1. WRITE HERE -(1)
+> > 1 . user want to change password 
+> > 2. User clicks on the “User Information” tab.
+> > 3. User clicks on the “change password” button.
+> > 4. Change password pop-up will appear, and the user puts a new password and clicks on the confirm button.
+> > 5. User's password changed.
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) WRITE HERE 
+> > User puts unavailable passwords. 
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+> **Story 2**
+> > **Feature:** user wants to change nickname
+> >  
+> > **Actors:** any user
+> >  
+> > **Precondition:** The user must be registered and logged in
+> >  
+> > **Trigger:** User clicks on the “Edit” button.
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User want to change nickname 
+> > 2. User clicks on the “User Information” tab.
+> > 3. User clicks on the “Edit” button.
+> > 4. User gets redirected to user information edit page
+> > 5. User puts new nickname in the nickname input and clicks on the confirm button.
+> > 6. User's nickname changed.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > User puts unavailable nicknames. 
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+> **Story 3**
+> > **Feature:** user wants to sign out
+> >  
+> > **Actors:** any user
+> >  
+> > **Precondition:** The user must be registered and logged in
+> >  
+> > **Trigger:** User clicks on the "sign out" button. 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User want to sign out.
+> > 2. User clicks on the “User Information” tab.
+> > 3. User clicks on the “sign out” button.
+> > 4. Sign out pop-up will appear, and the user can accept or dismiss the confirmation.
+> > 5. User clicks on the accept button, the user's information changes and redirect to pre-login page.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None 
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+> **Story 4**
+> > **Feature:**user want to see informations of all stocks in group
+> >  
+> > **Actors:** Any users 
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks on the right-pointing/left-pointing arrow placed inside the tab
+> >  
+> > **Scenario:**
+> > ```
+> > 1. The page at first show a quadrant chart of the stocks in the first group
+> > 2. User can see the chart of others when user clicks on the other group button.
+> > 3. User can see a table of the stocks in the first group when user clicks on the “shown by table” tab.
+> > 4. User can see the table of others when user clicks on the other group button.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > If user doesn’t have any group, both tab must show “browse stops to create a group” button to redirect to recommend page.
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```
+> **Story 5**
+> > **Feature:** user wants to make a new group within him or her favorites
+> >  
+> > **Actors:** any user
+> >  
+> > **Precondition:** The user must be registered, logged in, and have stocks in favorites
+> >  
+> > **Trigger:** User clicks on the “make new group” button in edit group page. 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User want to make a new group within him or her favorites
+> > 2. User clicks on the “edit group” button.
+> > 3. User clicks checkbox beside the stocks.
+> > 4. User clicks on the “make new group” button.
+> > 5. New group pop-up will appear, and the user can put new group name.
+> > 5. User clicks on the accept button, and redirect to my page, then new group appear in the page.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > If there is a group with the same name as the user set, make group name with (number).
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+> **Story 6**
+> > **Feature:** user wants to delete stocks within him or her favorites
+> >  
+> > **Actors:** any user
+> >  
+> > **Precondition:** The user must be registered, logged in, and have stocks in favorites
+> >  
+> > **Trigger:** User clicks on the “delete” button in edit group page.
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User want to delete stocks within him or her favorites
+> > 2. User clicks on the “edit group” button.
+> > 3. User clicks checkbox beside the stocks.
+> > 4. User clicks on the “delete” button.
+> > 5. Delete stock pop-up will appear, and the user can accept or dismiss the confirmation.
+> > 6. User clicks on the accept button, the user's favorites list changes and redirect to my page.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+> **Story 7**
+> > **Feature:** user wants to delete a group within him or her favorites
+> >  
+> > **Actors:** any user
+> >  
+> > **Precondition:** The user must be registered, logged in, and have stocks in favorites
+> >  
+> > **Trigger:** User clicks on the “Edit” button. 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to delete a group within him or her favorites
+> > 2. User clicks on the “edit group” button.
+> > 3. User clicks checkbox beside the group.
+> > 4. User clicks “delete” button.
+> > 5. Delete group pop-up will appear, and the user can accept or dismiss the confirmation.
+> > 6. User clicks on the accept button, the user's favorites list changes and redirect to my page.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > WRITE HERE
+> > ```  
+> **Story 8**
+> > **Feature:** user wants to add stocks to the group within him or her favorites
+> >  
+> > **Actors:** any user
+> >  
+> > **Precondition:** The user must be registered, logged in, and have stocks in favorites
+> >  
+> > **Trigger:** User clicks on the “add to group” button in edit group page. 
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User want to make a new group within him or her favorites
+> > 2. User clicks on the “edit group” button.
+> > 3. User clicks checkbox beside the stocks.
+> > 4. User clicks on the “add to group” button.
+> > 5. Select group pop-up will appear, and the user can choose one of the existing groups.
+> > 5. User clicks on the accept button, the user's favorites list changes and redirect to my page.
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > If a stock already exists in the selected group, take no action.
 > > ```
 > > 
 > > **Acceptance Test:**
