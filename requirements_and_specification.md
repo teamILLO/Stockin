@@ -25,17 +25,21 @@ Your first version of this document is version 1.0. When you evolve this documen
 * **General Customer**
 
   * People interested in stocks
+  
     * Those who is already having stocks or is willing to start stock trade
     
 * **Specific Customer**
 
   * Beginner of stock market
+  
     * Those who have difficulty in selecting, and buy(sell)ing a stock based on a lot of information
     
   * People who don’t make a main job of stocks
+  
     * Those who has an understanding of stocks but does not have time to grasp the information
     
   * People who have yet to decide which stock to choose
+  
     * Those who have difficulty choosing stocks because there are numerous companies in the stock market
 
 ## **Competitive Landscape**<br />  
