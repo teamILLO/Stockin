@@ -21,10 +21,10 @@ Your first version of this document is version 1.0. When you evolve this documen
        Rev. 1.0 YYYY-MM-DD - initial version
 
 ## **Customer**<br />
-* General Customer
+* **General Customer**
   * People interested in stocks
     * Those who is already having stocks or is willing to start stock trade
-* Specific Customer
+* **Specific Customer**
   * Beginner of stock market
     * Those who have difficulty in selecting, and buy(sell)ing a stock based on a lot of information
   * People who don’t make a main job of stocks
