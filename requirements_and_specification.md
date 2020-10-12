@@ -325,7 +325,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### My page
 > **Story 1**
-> > **Feature:** user wants to change password 
+> > **Feature:** User wants to change password 
 > >  
 > > **Actors:** any user
 > >  
@@ -357,7 +357,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Any member information must be not changed.
 > > ```  
 > **Story 2**
-> > **Feature:** user wants to change nickname
+> > **Feature:** User wants to change nickname
 > >  
 > > **Actors:** any user
 > >  
@@ -383,12 +383,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When there is a user with the same name as input,
-> > It should redirect edit page with warning messages.
+> > User should be redirected to edit page with warning messages.
 > > When the user moves to another page without pressing the confirm button,
 > > Any member information must be not changed.
 > > ```  
 > **Story 3**
-> > **Feature:** user wants to sign out
+> > **Feature:** User wants to sign out
 > >  
 > > **Actors:** any user
 > >  
@@ -401,7 +401,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 1. User want to sign out.
 > > 2. User clicks on the “User Information” tab.
 > > 3. User clicks on the “sign out” button.
-> > 4. It redirect to sign-out page and the user can accept or dismiss the confirmation.
+> > 4. User should be redirected to sign-out page and the user can accept or dismiss the confirmation.
 > > 5. User clicks on the accept button, the user's information changes and redirect to pre-login page.
 > > ```
 > >  
@@ -415,12 +415,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > When user clicks on the sign out button,
 > > User should be on sign-out page.
 > > When user clicks on the dismiss button on sign-out page,
-> > It should redirect to my page.
+> > User should be redirected to my page.
 > > When the user moves to another page without pressing the confirm button,
 > > Any member information must be not changed.
 > > ```  
 > **Story 4**
-> > **Feature:**user want to see informations of all stocks in group
+> > **Feature:** User want to see informations of all stocks in group
 > >  
 > > **Actors:** Any users 
 > >  
@@ -432,7 +432,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > 1. The page at first show a quadrant chart of the stocks in the first group
 > > 2. User can see the chart of others when user clicks on the other group button.
-> > 3. User can see a table of the stocks in the first group when user clicks on the “shown by table” tab.
+> > 3. User can see a table of the stocks in the first group when user clicks on the “favorites detail” tab.
 > > 4. User can see the table of others when user clicks on the other group button.
 > > ```
 > >  
@@ -443,10 +443,14 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters  my page, favorites summary tab should represent in default.
+> > When user clicks favorites summary / favorites detail tab 
+> > User should see selected tab
+> > When user doesn’t have any favorites, 
+> > User should see a button redirected to recommend page.
 > > ```
 > **Story 5**
-> > **Feature:** user wants to make a new group within him or her favorites
+> > **Feature:** User wants to make a new group within him or her favorites
 > >  
 > > **Actors:** any user
 > >  
@@ -471,10 +475,16 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters my page, favorites summary tab should represent in default.
+> > When user clicks on the edit button, 
+> > user should be on group edit page.
+> > When user checks some stocks and clicks on the “make new group” button,
+> > User should be redirected to favorite summary tab with new group.
+> > When user checks nothing,
+> > “make new group” button should be disabled.
 > > ```  
 > **Story 6**
-> > **Feature:** user wants to delete stocks within him or her favorites
+> > **Feature:** User wants to delete stocks within him or her favorites
 > >  
 > > **Actors:** any user
 > >  
@@ -499,7 +509,15 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters  my page, favorites summary tab should represent in default.
+> > When user clicks on the edit button, 
+> > user should be on group edit page.
+> > When user checks some stocks and clicks on the “delete” button,
+> > Pop-up windows should appear and ask the user whether or not to confirm.
+> > When user clicks on the “confirm” button,
+> > User should be redirected to favorite summary tab, and selected stocks should be seen invisible.
+> > When user checks nothing,
+> > “delete” button should be disabled.
 > > ```  
 > **Story 7**
 > > **Feature:** user wants to delete a group within him or her favorites
@@ -508,7 +526,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Precondition:** The user must be registered, logged in, and have stocks in favorites
 > >  
-> > **Trigger:** User clicks on the “Edit” button. 
+> > **Trigger:** User clicks on the “delete” button in edit group page. 
 > >  
 > > **Scenario:**
 > > ```
@@ -527,10 +545,18 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters  my page, favorites summary tab should represent in default.
+> > When user clicks on the edit button, 
+> > user should be on group edit page.
+> > When user checks some groups and clicks on the “delete” button,
+> > Pop-up windows should appear and ask the user whether or not to confirm.
+> > When user clicks on the “confirm” button,
+> > User should be redirected to favorite summary tab, and selected stocks should be seen invisible.
+> > When user checks nothing,
+> > “delete” button should be disabled.
 > > ```  
 > **Story 8**
-> > **Feature:** user wants to add stocks to the group within him or her favorites
+> > **Feature:** User wants to add stocks to the group within him or her favorites
 > >  
 > > **Actors:** any user
 > >  
@@ -555,7 +581,15 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > Given user first enters  my page, favorites summary tab should represent in default.
+> > When user clicks on the edit button, 
+> > user should be on group edit page.
+> > When user checks some groups and clicks on the “add to group” button,
+> > Pop-up windows should appear and ask the user the name of the new group.
+> > When user put new name and clicks on the “confirm” button,
+> > User should be redirected to favorite summary tab, and selected stocks should be seen invisible.
+> > When user checks nothing,
+> > “add to group” button should be disabled.
 > > ```  
 ### Report page
 > **Story 1**
