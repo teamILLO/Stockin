@@ -84,7 +84,6 @@ At the end of this section you should maintain a bullet list of user stories tha
 (**Must include in the first version, and must be expanded for future sprints**)
 
 ## User Stories  
-### Pre-login page  
 > **Story 0 (EXAMPLE)** **DO NOT DELETE THIS EXAMPLE**
 > > **Feature:** Create Tour
 > >  
@@ -113,29 +112,88 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > When the user clicks on the “Create Tour” Button
 > > Then the user should see “Your tour has been created” 
 > > ```
+### Pre-login page  
 > **Story 1**
-> > **Feature:** WRITE HERE
+> > **Feature:** User wants to sign in
 > >  
-> > **Actors:** WRITE HERE 
+> > **Actors:** Users who is not logged-in  
 > >  
-> > **Precondition:** WRITE HERE 
+> > **Precondition:** The user must be logged-out state  
 > >  
-> > **Trigger:** WRITE HERE 
+> > **Trigger:** User clicks sign in button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. WRITE HERE -(1)
+> > 1. User wants to sign in and use service
+> > 2. User clicks sign in button
+> > 3. Sign in page activate
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) The user does not fill out all fields to create the Tour  
+> > None
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
-> > ```  
+> > When user clicks on sign in button
+> > User should direct in sign in page
+> > ```
+> **Story 2**
+> > **Feature:** User wants to sign up
+> >  
+> > **Actors:** Users who is not logged-in  
+> >  
+> > **Precondition:** The user must be logged-out state  
+> >  
+> > **Trigger:** User clicks sign up button
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to sign up and wants to go main page
+> > 2. User clicks sign up button
+> > 3. Sign up page activate
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > None
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user clicks on sign up button
+> > User should direct in sign up page
+> > ```
+> **Story 3**
+> > **Feature:** User wants to know more about our service 
+> >  
+> > **Actors:** Users who is not logged-in  
+> >  
+> > **Precondition:** The user must be logged-out state  
+> >  
+> > **Trigger:** User is in pre-login page and can scroll it
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to know more about our service
+> > 2. User sees initial information of our service
+> > 3. User can scroll page and see more information according to the degree of scrolling -(1)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens when user reaches the end of list
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When user first enters to the pre-login page
+> > user should see introduce information about our page
+> >
+> > When user scrolls the page
+> > user should see more information of our service
+> > ```
 ### Post-login page (Main page)
 > **Story 1**
 > > **Feature:** Users can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
