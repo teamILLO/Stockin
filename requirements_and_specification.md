@@ -47,22 +47,21 @@ By scoring and recommending based on summarized information, users will be able 
 * **Competitive companies**
 
   * **Kosho**
-    * An application-based platform that learns past stock price changes and predicts future stock price changes.
-    * Provides past stock price changes similar to the present as the basis for stock price change forecast
-    * For certain stocks, stock price change prediction is free, but stock recommendation is provided with a subscription fee
+    * An application-based platform that learns past stock price changes and predicts future stock price changes
+    * Provides past stock price changes similar to the present as the basis for stock price change forecast
+    * For certain stocks, stock price change prediction is free, but stock recommendation is provided with a subscription fee
 
   * **Robo-advisor**
-    * Services that make investment decisions and asset allocations through learned algorithms
-    * In Korea, most securities companies provide this service for a fee, and among startups, ‘Fint’ and ‘Aim’ are representative
-    * The user can know the investment progress of AI, but it does not provide the basis for selecting a stock or the judgment of AI for a specific stock
-
+    * Services that make investment decisions and asset allocations through learned algorithms
+    * In Korea, most securities companies provide this service for a fee, and among startups, ‘Fint’ and ‘Aim’ are representative
+    * The user can know the investment progress of AI, but it does not provide the basis for selecting a stock or the judgment of AI for a specific stock
 
 Through deep learning, they decide where to sell and buy, thereby narrowing the user's judgment.
 However, there are so many factors that determine the price of stocks, and it is unpredictable.
 Stockin' helps users build know-how and make better judgments without reducing the width of their judgment.
 This will allow users to move on to the best judgment they are satisfied with.
 
-So, what's most distinct from other competitors is:
+So, what's most **distinct from other competitors** is:
   * Reduce the amount of time users spend searching for stock-related information.
   * Do not narrow the user's judgment by processing objective information.
   * The minimum analysis prediction makes it easier to choose among many stock items.
