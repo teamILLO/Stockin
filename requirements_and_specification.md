@@ -21,8 +21,6 @@ Your first version of this document is version 1.0. When you evolve this documen
        Rev. 1.0 YYYY-MM-DD - initial version
 
 ## **Customer**<br />
-A brief description of the customer for this software, both in general (the population who might eventually use such a system) and specifically for this document (the customer(s) who informed this document).  (**Must include in the first version**)  
-**WRITE BELOW HERE**
 * General Customer
   * anyone who is already having stocks or is willing to start stock trade can be our services user. 
 
