@@ -335,7 +335,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1 . user want to change password 
+> > 1. User want to change password 
 > > 2. User clicks on the “User Information” tab.
 > > 3. User clicks on the “change password” button.
 > > 4. Change password pop-up will appear, and the user puts a new password and clicks on the confirm button.
@@ -349,7 +349,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > When user types “text_A” in the pop-up,
+> > The user’s password should be changed by “text_A”.
+> > When the user types unavailable password(too short or unavailable character),
+> > the pop-up should show warning messages.
+> > When the user moves to another page without pressing the confirm button,
+> > Any member information must be not changed.
 > > ```  
 > **Story 2**
 > > **Feature:** user wants to change nickname
@@ -377,7 +382,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > When there is a user with the same name as input,
+> > It should redirect edit page with warning messages.
+> > When the user moves to another page without pressing the confirm button,
+> > Any member information must be not changed.
 > > ```  
 > **Story 3**
 > > **Feature:** user wants to sign out
@@ -393,7 +401,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 1. User want to sign out.
 > > 2. User clicks on the “User Information” tab.
 > > 3. User clicks on the “sign out” button.
-> > 4. Sign out pop-up will appear, and the user can accept or dismiss the confirmation.
+> > 4. It redirect to sign-out page and the user can accept or dismiss the confirmation.
 > > 5. User clicks on the accept button, the user's information changes and redirect to pre-login page.
 > > ```
 > >  
@@ -404,7 +412,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > WRITE HERE
+> > When user clicks on the sign out button,
+> > User should be on sign-out page.
+> > When user clicks on the dismiss button on sign-out page,
+> > It should redirect to my page.
+> > When the user moves to another page without pressing the confirm button,
+> > Any member information must be not changed.
 > > ```  
 > **Story 4**
 > > **Feature:**user want to see informations of all stocks in group
