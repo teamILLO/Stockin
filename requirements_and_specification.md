@@ -54,7 +54,7 @@ Eventually users quickly identify them.
 
 By scoring and recommending based on summarized information, users will be able to get help in selecting stocks.
 
-* **Competitive companies**
+* **Competitive market companies**
 
   * **Kosho**
     * An application-based platform that learns past stock price changes and predicts future stock price changes
