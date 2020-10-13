@@ -1073,7 +1073,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > The comment that a user wants to edit must be a comment written by that user.
 > > ```
 > >
-> > **Trigger:** User click the edit button next to the comment that the user wants to delete.
+> > **Trigger:** User click the edit button next to the comment that the user wants to edit.
 > > 
 > > **Scenario:**
 > > ```
