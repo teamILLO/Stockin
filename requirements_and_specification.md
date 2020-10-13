@@ -78,34 +78,6 @@ At the end of this section you should maintain a bullet list of user stories tha
 (**Must include in the first version, and must be expanded for future sprints**)
 
 ## User Stories  
-> **Story 0 (EXAMPLE)** **DO NOT DELETE THIS EXAMPLE**
-> > **Feature:** Create Tour
-> >  
-> > **Actors:** Traveler or Guide User  
-> >  
-> > **Precondition:** The traveler or the guide has to be a registered user and logged in  
-> >  
-> > **Trigger:** User clicks on the “Create Tour” button  
-> >  
-> > **Scenario:**
-> > ```
-> > 1. The page displays a map with all the map markers that the route that the user has created
-> > 2. On the left you can find buttons to access all the information of the tour such as: Name of
-> > the tour, begin and end times of the tour, description of the tour, description of the
-> > places of route, dates in which the tour is available, transportation means. -(1)  
-> > ```
-> >  
-> > **Exceptions:** 
-> > ```
-> > (1) The user does not fill out all fields to create the Tour  
-> > ```
-> > 
-> > **Acceptance Test:**
-> > ```
-> > Given the user has fill out all the required fields to create the tour
-> > When the user clicks on the “Create Tour” Button
-> > Then the user should see “Your tour has been created” 
-> > ```
 ### Pre-login page  
 > **Story 1**
 > > **Feature:** User wants to sign in
