@@ -194,6 +194,49 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > When user scrolls the page
 > > user should see more information of our service
 > > ```
+> >
+### Sign-in page
+> **Story 1**
+> > **Feature:** Users want to log in to the web.
+> >
+> > **Actors** Any users
+> >
+> > **Precondition:** The user must be logged-out state and a member of the service
+> >
+> > **Trigger:** After entering ID/PASSWORD, User clicks the sign-in button
+> >
+> > **Senario:**
+> > ```
+> > 1. User accesses the web
+> > 2. User want to logs in to user the service
+> > 3. User enters his id/password and clicks the sign-in button
+> > 4. User is logged in and redirected to the main page
+> > ```
+> >
+> > **Exceptions:** 
+> > ```
+> > (1) When user enters wrong id/password and clicks the sign-in button, warning message must be appeared.
+> > ```
+> >
+> > **Acceptance Test:**
+> > ```
+> > After entering id/password and clicking the sign-in button
+> > The user state must be logged in and redirected to Main-page
+> > ```
+> >
+> **Story 2**
+> > **Feature:** User forgets ID or password and wants to find it
+> >
+> > **Actors:** Any users
+> >
+> > **Precondition:** The user must be logged-out state and a member of the service
+> >
+> > **Trigger:** User clicks "Find ID Password" button
+> >
+> > **Scenario:**
+> > ```
+> >
+> > ```
 ### Post-login page (Main page)
 > **Story 1**
 > > **Feature:** Users can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
