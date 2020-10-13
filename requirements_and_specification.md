@@ -14,12 +14,6 @@
 In addition, **stokcin'** will not only provide predicted information about future stock prices, but will also disclose information created in the past to give users credibility. It will attract many customers by providing not only the score created by the service, but also raw objective data and a function to communicate with other users.
 
 
-
-**Document Revision History**<br />
-Your first version of this document is version 1.0. When you evolve this document for future sprints of your project you will increment the minor version number (e.g., 1.1, 1.2, ...). We do not expect that you will have to increment the major version number in the course of this semester. For every version after the initial version, you should list a short bullet list with the main changes and extensions that you made to the document:
-
-       Rev. 1.0 YYYY-MM-DD - initial version
-
 ## **Customer**<br />
 
 * **General Customer**
@@ -118,33 +112,33 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Actors:** Users who is not logged-in  
 > >  
-> > **Precondition:** The user must be logged-out state  
+> > **Precondition:** The user must be logged-out state and a member of the service 
 > >  
 > > **Trigger:** User clicks sign in button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to sign in and use service
-> > 2. User clicks sign in button
-> > 3. Sign in page activate
+> > 1. User wants to log-in and use the service
+> > 2. User enters own ID and password
+> > 3. User clicks log-in button
+> > 4. User is logged in and redirected to the main page
 > > ```
-> >  
 > > **Exceptions:** 
 > > ```
-> > None
+> > (1) When user enters wrong id/password and clicks the log-in button, warning message must be appeared.
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on sign in button
-> > User should direct in sign in page
+> > After entering id/password and clicking the sign-in button
+> > The user state must be logged in and redirected to main-page
 > > ```
 > **Story 2**
 > > **Feature:** User wants to sign up
 > >  
 > > **Actors:** Users who is not logged-in  
 > >  
-> > **Precondition:** The user must be logged-out state  
+> > **Precondition:** The user must be logged-out state and not a member of the service
 > >  
 > > **Trigger:** User clicks sign up button
 > >  
@@ -152,18 +146,21 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > 1. User wants to sign up and wants to go main page
 > > 2. User clicks sign up button
-> > 3. Sign up page activate
+> > 3. Sign up pop-up activate
+> > 4. User enters the ID/password which user want to use
+> > 5. User makes a own ID and Sign up pop-up disappear
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > None
+> > (1) User can't use ID which is already existed
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on sign up button
-> > User should direct in sign up page
+> > When user clicks on sign up button sign up pop-up must appear
+> > After the user creates an ID that did not exist
+> > sign up pop-up mush disappear and new member information should be created
 > > ```
 > **Story 3**
 > > **Feature:** User wants to know more about our service 
@@ -194,37 +191,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > When user scrolls the page
 > > user should see more information of our service
 > > ```
-> >
-### Sign-in page
-> **Story 1**
-> > **Feature:** Users want to log in to the web.
-> >
-> > **Actors** Any users
-> >
-> > **Precondition:** The user must be logged-out state and a member of the service
-> >
-> > **Trigger:** After entering ID/PASSWORD, User clicks the sign-in button
-> >
-> > **Senario:**
-> > ```
-> > 1. User accesses the web
-> > 2. User want to logs in to user the service
-> > 3. User enters his id/password and clicks the sign-in button
-> > 4. User is logged in and redirected to the main page
-> > ```
-> >
-> > **Exceptions:** 
-> > ```
-> > (1) When user enters wrong id/password and clicks the sign-in button, warning message must be appeared.
-> > ```
-> >
-> > **Acceptance Test:**
-> > ```
-> > After entering id/password and clicking the sign-in button
-> > The user state must be logged in and redirected to Main-page
-> > ```
-> >
-> **Story 2**
+> **Story 4**
 > > **Feature:** User forgets ID or password and wants to find it
 > >
 > > **Actors:** Any users
@@ -235,7 +202,23 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Scenario:**
 > > ```
+> > 1. User want to log-in but forgets own ID or password
+> > 2. User clicks "Find ID Password" button
+> > 3. User enters his/her information and finds ID/password
+> > 4. After that, User can log-in to the webpage
+> > ```
 > >
+> > **Exceptions:** 
+> > ```
+> > (1) When user tries to find ID/password which doesn't existed, it must notice it that it doesn't exist.
+> > (2) When user enters wrong his/her information, it must notice it that it is wrong.
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > User clicks "Find ID Password" button
+> > User enters correct his/her information
+> > User can know his/her ID/password information
 > > ```
 ### Post-login page (Main page)
 > **Story 1**
