@@ -20,9 +20,9 @@
 - [x] I changed the design taking care of all 3 feedbacks given on previous meeting
 - [x] I checked if the flowchart fully contains actions and pages related to Detail Page including News tab
 - [x] I finished writing user stories for Detail Page except for the News tab  
-- [ ] I designed Pre-Login Page (Due Oct 13. 22:00)  
-- [ ] I made a listup of user stories on Pre-Login Page and shared with **G1** (Due Oct 13. 22:00)  
-- [ ] I wrote user stories on Pre-Login Page (Due Oct 14. 22:00)   
+- [x] I designed Pre-Login Page (Due Oct 13. 22:00)  
+- [x] I made a listup of user stories on Pre-Login Page and shared with **G1** (Due Oct 13. 22:00)  
+- [x] I wrote user stories on Pre-Login Page (Due Oct 14. 22:00)   
 - [ ] I checked that my user stories and Project Abstract fulfill standards of grading guidelines (Due Oct 14. 22:00)  
   
 **Junhyeok**  
