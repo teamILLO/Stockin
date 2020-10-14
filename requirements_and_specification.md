@@ -1245,10 +1245,11 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > User should be given new article list based on the button result
 > >
 > > When user clicks on the number button
-> >User should be given new article list based on the number user clicked
+> > User should be given new article list based on the number user clicked
 > > ```
 ## **User Interface Requirements**<br />
-Describes any customer user interface requirements including graphical user interface requirements. Here you should have sketches or mockups for the main parts of the interface. To save time you may want to use scanned drawings of interface mockups here, instead of Photoshop drawings.
+![Sketch](https://user-images.githubusercontent.com/54826729/96042797-ed180100-0ea8-11eb-9689-0375e4ea151c.png)
+
 
 Just like for the User Stories section, you need to list here only the parts of the user interface that are applicable to the previous sprints and the current one.
 (**Must include in the first version, and must be expanded for future sprints**)
