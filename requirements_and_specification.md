@@ -840,6 +840,37 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Redirect to Detail page  with news tab activated
 > > user should see detail page with news tab
 > > ```  
+> **Story 6**
+> > **Feature:** User wants to see specific stock
+> >  
+> > **Actors:** Any users  
+> >  
+> > **Precondition:** The user must be registered and logged in 
+> >  
+> > **Trigger:** User clicks input search, sequentially clicks search result button
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User wants to find stocks through search
+> > 2. User clicks on the “search” input
+> > 3. User starts typing complete or partial name of the stock
+> > 4. User clicks on the “search result” button - (1)
+> > 5. User sees stock produced by user input in same page - (2)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens on empty input
+> > (2) No stock list produced when there’s no stock matches.
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > Given that the user types letter in the “search” input
+> > User clicks on the “search result” button
+> > User should see produced list of article led by the input
+> > ```  
+
 ### Detail page
 #### **Overview tab**
 > **Story 1**
