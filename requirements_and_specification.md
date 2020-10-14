@@ -1248,7 +1248,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > User should be given new article list based on the number user clicked
 > > ```
 ## **User Interface Requirements**<br />
-![Sketch (1)](https://user-images.githubusercontent.com/54826729/96044362-441ed580-0eab-11eb-9e2f-0537be42573f.png)
+![Sketch (2)](https://user-images.githubusercontent.com/54826729/96044802-f6ef3380-0eab-11eb-8572-4d9fb0d71843.png)
 
 
 Just like for the User Stories section, you need to list here only the parts of the user interface that are applicable to the previous sprints and the current one.
