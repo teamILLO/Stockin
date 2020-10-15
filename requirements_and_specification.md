@@ -695,18 +695,18 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### Report page
 > **Story 1**
-> > **Feature:** User wants to see rise / fall stocks
+> > **Feature:** User wants to switch and see to sell / to buy tab
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks rise / fall tab 
+> > **Trigger:** User clicks to sell / to buy tab 
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see rise / fall stocks
-> > 2. User clicks rise / fall tab, should immediately render selected tab
+> > 1. User wants to see to buy / to sell tab
+> > 2. User clicks to buy / to sell tab, should immediately render selected tab
 > > 3. User should see block list of selected tab
 > > ```
 > >  
@@ -717,15 +717,15 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters the report page, rise tab should represent in default.
-> > When user clicks rise / fall tab 
+> > Given user first enters the report page, to buy tab should represent in default.
+> > When user clicks to buy / to sell tab 
 > > User should see selected tab
 > >
 > > When user re-enters the report page
 > > User should see same tab, same stocks based on user history
 > > ```  
 > **Story 2**
-> > **Feature:** User wants to see another day recommendation
+> > **Feature:** User wants to see another day reports
 > >  
 > > **Actors:** Any users  
 > >  
@@ -735,7 +735,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see another day recommendation report
+> > 1. User wants to see another day recommend reports
 > > 2. User clicks date picker, pick date user wants to see 
 > > 3. User should see picked date report
 > > ```
@@ -811,7 +811,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > When user clicks the stock name in block component
 > > Redirect to Detail page and activated
-> > user should see detail page
+> > user should see Detail page
 > > ```  
 > **Story 5**
 > > **Feature:** User wants to see more analysed News in detail
@@ -820,13 +820,13 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** In block component, user clicks the “more” button next to article list 
+> > **Trigger:** In block component, user clicks the “arrow vector” button next to article list 
 > >  
 > > **Scenario:**
 > > ```
 > > 1. User wants to see see analysed News in detail 
-> > 2. User clicks the “more” button next to article list 
-> > 3. User should see the stock detail page with “news” tab
+> > 2. User clicks the “arrow vector” button next to article list 
+> > 3. User should see the Detail page with “News” tab
 > > ```
 > >  
 > > **Exceptions:** 
@@ -836,9 +836,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks the “more” button next to article list 
-> > Redirect to Detail page  with news tab activated
-> > user should see detail page with news tab
+> > When user clicks the “arrow vector” button next to article list 
+> > Redirect to Detail page  with "News" tab activated
+> > user should see Detail page with "News" tab
 > > ```  
 > **Story 6**
 > > **Feature:** User wants to see specific stock
@@ -847,12 +847,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks input search, sequentially clicks search result button
+> > **Trigger:** User clicks input "search box", sequentially clicks "search result" button
 > >  
 > > **Scenario:**
 > > ```
 > > 1. User wants to find stocks through search
-> > 2. User clicks on the “search” input
+> > 2. User clicks on the “search box” input
 > > 3. User starts typing complete or partial name of the stock
 > > 4. User clicks on the “search result” button - (1)
 > > 5. User sees stock produced by user input in same page - (2)
@@ -866,7 +866,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given that the user types letter in the “search” input
+> > Given that the user types letter in the “search box” input
 > > User clicks on the “search result” button
 > > User should see produced list of article led by the input
 > > ```  
