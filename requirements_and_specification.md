@@ -695,13 +695,13 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### Report page
 > **Story 1**
-> > **Feature:** User wants to switch and see to sell / to buy tab
+> > **Feature:** User wants to switch and see to buy / to sell tab
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks to sell / to buy tab 
+> > **Trigger:** User clicks to buy / to sell tab 
 > >  
 > > **Scenario:**
 > > ```
