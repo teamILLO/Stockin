@@ -1,5 +1,5 @@
 # stockin': Requirements and Specification
-(Borrowed and Adapted from UCB CS169)
+
 
 ## Document Revision History
    Rev. 1.0 2020-10-17 - initial version
@@ -1214,3 +1214,5 @@ The goal of our service is to efficiently provide all the information that can h
 ## **User Interface Requirements**<br />
 ![Sketch (2)](https://user-images.githubusercontent.com/54826729/96044802-f6ef3380-0eab-11eb-8572-4d9fb0d71843.png)
 
+
+This document was written with reference to UCB CS169
