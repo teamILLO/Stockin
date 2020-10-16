@@ -5,8 +5,8 @@
    Rev. 1.0 2020-10-17 - initial version
 
 ## Project Abstract<br />
-**stockin'** is a service that provides customers with a quick, at-a-glance organized information about stocks. Customers are investors who have a difficult time selecting good stocks due to the wide variety of stock information. The service analyzes graphs and financial statements and converts them into scores for easy visual viewing, So allowing customers to choose stocks that are good to invest without spending much time on.
-In addition, **stokcin'** will not only provide predicted information about future stock prices, but will also disclose information created in the past to give users credibility. It will attract many customers by providing not only the score created by the service, but also raw objective data and a function to communicate with other users.
+**stockin'** is a service that provides customers with a quick, at-a-glance organized information about stocks. Customers are investors who have a difficult time selecting good stocks overwhelmed by tremendous amount of stock information. The service analyzes graphs and financial statements and converts them into scores for easy visual viewing, allowing customers to choose stocks that are good to invest without spending much time on.
+In addition, **stockin'** will not only provide predicted information about future stock prices, but will also provide information created in the past to give users credibility. It will attract many customers by providing not only the score created by the service, but also raw objective data and a feature to communicate with other users.
 
 
 ## **Customer**<br />
