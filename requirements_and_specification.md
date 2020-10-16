@@ -1140,10 +1140,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see news including specific keyword or sentence.
-> > 2. User clicks on the “search” input
-> > 3. User starts typing the keyword or sentence of the article
-> > 4. User sees articles produced by user input in same page
+> > 1. User clicks on the “search” input
+> > 2. User starts typing the keyword or sentence of the article
+> > 3. User sees articles produced by user input in same page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -1168,9 +1167,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to read specific article in detail
-> > 2. User clicks on the title of specific article 
-> > 3. User should be given new page with article link
+> > 1. User clicks on the title of specific article 
+> > 2. User should be given new page with article link
 > > ```
 > >  
 > > **Exceptions:** 
@@ -1191,18 +1189,13 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Precondition:** The user must be registered and logged in
 > >  
 > > **Trigger:** User clicks article list navigator 
-> >  User clicks next vector button
+> > User clicks next vector button
 > > User clicks specific number button
 > >
 > > **Scenario:**
 > > ```
-> > 1. User wants to see more news that is not represented in current page
-> > 2. User clicks next vector button placed in bottom of the article list
-> > 3. User should be given next new article list based on current number of list
-> >
-> > 1. User wants to see more news that is not represented in current page
-> > 2. User clicks number button placed in bottom of the article list
-> > 3. User should be given new article list based on the number user clicked
+> > 1. User clicks next vector button or number button placed in bottom of the article list
+> > 2. User should be given next new article list based on current number of list
 > > ```
 > >  
 > > **Exceptions:** 
@@ -1213,11 +1206,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on the next/prev vector button
+> > When user clicks on the next/prev vector button or number button
 > > User should be given new article list based on the button result
-> >
-> > When user clicks on the number button
-> > User should be given new article list based on the number user clicked
 > > ```
 ## **User Interface Requirements**<br />
 ![Sketch (2)](https://user-images.githubusercontent.com/54826729/96044802-f6ef3380-0eab-11eb-8572-4d9fb0d71843.png)
