@@ -14,7 +14,7 @@ In general,
 
  * people who are going to buy or sell stocks
  
-More Specifically, 
+More specifically, 
 
  * people who want to see the stock price graph, price fluctuation table, stock statement, and news information of the stock
  * people who want to see the results of graph & news analysis
