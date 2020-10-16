@@ -177,7 +177,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 ### Post-login page (Main page)
 > **Story 1**
-> > **Feature:** Users can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
+> > **Feature:** User can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
 > >  
 > > **Actors:** Any users 
 > >  
@@ -206,7 +206,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then user should see new prediction in left/right direction that was hidden previously
 > > ```
 > **Story 2**
-> > **Feature:** Users can see more highly scored stocks by being redirected to Recommendation Page 
+> > **Feature:** User can see more highly scored stocks by being redirected to Recommendation Page 
 > >  
 > > **Actors:** Any users 
 > >  
@@ -234,7 +234,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > And the tab in the Recommendtion Page should be properly active regarding to which show-more button is clicked on
 > > ```  
 > **Story 3**
-> > **Feature:** Users can get more information about the stock by clicking the stock
+> > **Feature:** User can get more information about the stock by clicking the stock
 > >  
 > > **Actors:** Any users 
 > >  
@@ -259,7 +259,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then user should be on Detail Page of the corresponding stock
 > > ```  
 > **Story 4**
-> > **Feature:** Users can switch between Daily Report tab and My Interests tab
+> > **Feature:** User can switch between Daily Report tab and My Interests tab
 > >  
 > > **Actors:** Any users 
 > >  
@@ -285,7 +285,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then the target tab should be activated
 > > ```  
 > **Story 5**
-> > **Feature:** Users can go to My Page anytime
+> > **Feature:** User can go to My Page anytime
 > >  
 > > **Actors:** Any users 
 > >  
@@ -310,7 +310,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then the user should be redirected to My Page
 > > ```  
 > **Story 6**
-> > **Feature:** Users can logout anytime
+> > **Feature:** User can logout anytime
 > >  
 > > **Actors:** Any users 
 > >  
@@ -335,7 +335,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then the user should be on My Page
 > > ```  
 > **Story 7**
-> > **Feature:** Users can search for recently searched stock
+> > **Feature:** User can search for recently searched stock
 > >  
 > > **Actors:** Any users 
 > >  
@@ -366,7 +366,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > User should be on Detail Page of the corresponding stock
 > > ```  
 > **Story 8**
-> > **Feature:** Users can search for a specific stock they want to get information about
+> > **Feature:** User can search for a specific stock they want to get information about
 > >  
 > > **Actors:** Any users 
 > >  
@@ -672,7 +672,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```  
 ### Report page
 > **Story 1**
-> > **Feature:** Users can switch and see "To Buy / To Sell" tab
+> > **Feature:** User can switch and see "To Buy / To Sell" tab
 > >  
 > > **Actors:** Any users  
 > >  
