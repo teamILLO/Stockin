@@ -1,5 +1,3 @@
-# **Please check the grading guidelines before revising the layout**
-
 # stockin': Requirements and Specification
 (Borrowed and Adapted from UCB CS169)
 
@@ -57,13 +55,6 @@ The goal of our service is to efficiently provide all the information that can h
   * The basic information of stocks is provided by both summary and detail. Through this, user can reduce the amount of time users spend searching for stock-related information.
 
   * Based on the information analyzed through machine learning, scores are given and stocks are recommended through it.
-
-## **User Stories**<br />
-This section will include the specification for your project in the form of user stories. For each user story, you should have at least a Feature and one or more Scenarios, each of which can have one or more Acceptance Tests. Acceptance Tests list one or more acceptance tests with concrete values for the parameters, and concrete assertions that you will make to verify the postconditions. Each user story should also have a field called "Sprint" where you specify in which sprint you implemented or plan to implement this feature.
-You should list only the user stories for the previous sprints and those for the current sprint.
-
-At the end of this section you should maintain a bullet list of user stories that you plan to get to in future sprints, with only minimal detail for each such story. We expect that in future sprints some of these items will be promoted to full fledged user stories.
-(**Must include in the first version, and must be expanded for future sprints**)
 
 ## User Stories  
 ### Pre-login page  
@@ -1202,30 +1193,3 @@ At the end of this section you should maintain a bullet list of user stories tha
 ## **User Interface Requirements**<br />
 ![Sketch (2)](https://user-images.githubusercontent.com/54826729/96044802-f6ef3380-0eab-11eb-8572-4d9fb0d71843.png)
 
-
-Just like for the User Stories section, you need to list here only the parts of the user interface that are applicable to the previous sprints and the current one.
-(**Must include in the first version, and must be expanded for future sprints**)
-
-
-**Requirements grading guidelines:**<br />
-These are the grading guidelines that staff will use to evaluate your document.
-
-
-| Max Points | Content |
-|------------|---------|
-| 5 | Do the requirements state the customers needs? |
-| 5 | Competitive analysis |
-| 5 | Do the requirements avoid specifying a design (customer-specified design elements are allowed) ? |
-| 5 | Do you believe all parts are possible to implement? |
-| 5 | Is the project scope big enough? |
-|   | **Completeness** |
-| 20| Are the user stories written in sufficient detail to allow for design and planning? |
-| 5 | Do the user stories have acceptance tests ? |
-| 5 | Do the user stories mention error conditions and required behavior ? |
-| 5 | Are there sufficient user stories for the first iteration? |
-| 5 | Is there a discussion of the stories for future iterations ? |
-| 20 | Are the User Interface Requirements given with some detail? Are there some sketches, mockups?|
-| | **Clarity** |
-| 5 | Is the document carefully written, without typos and grammatical errors? |
-| 5 | Is each part of the document in agreement with all other parts? |
-| 5 | Are all items clear and not ambiguous? (Minor document readability issues should be handled off-line, not in the review, e.g. spelling, grammar, and organization).|
