@@ -1212,7 +1212,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should be given new article list based on the button result
 > > ```
 ## **User Interface Requirements**<br />
-![Sketch (2)](https://user-images.githubusercontent.com/54826729/96044802-f6ef3380-0eab-11eb-8572-4d9fb0d71843.png)
+![Sketch](https://user-images.githubusercontent.com/13393489/96294613-9dac0f00-1027-11eb-8241-d4559f04c475.png)
 
 
 This document was written with reference to UCB CS169
