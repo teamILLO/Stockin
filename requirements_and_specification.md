@@ -57,7 +57,7 @@ The goal of our service is to efficiently provide all the information that can h
   * Based on the information analyzed through machine learning, scores are given and stocks are recommended through it.
 
 ## User Stories  
-### Pre-login page  
+### Pre-login page 
 > **Story 1**
 > > **Feature:** User can sign in
 > >  
@@ -83,6 +83,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user enters id/password and clicks the sign-in button
 > > Then user should be logged in state and redirected to main-page
 > > ```
+> > **Sprint: 2**
 > **Story 2**
 > > **Feature:** User can sign up
 > >  
@@ -113,6 +114,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user enters ID user want to make and clicks the “OK” button
 > > Then “Sign Up” pop-up should be disappeared and new member information should be created
 > > ```
+> > **Sprint: 2**  
 > **Story 3**
 > > **Feature:** User can know more about our service 
 > >  
@@ -141,6 +143,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on “About_Us” or “Preview” tab
 > > Then page should render the information corresponding to the tab
 > > ```
+> > **Sprint: 2**
 > **Story 4**
 > > **Feature:** User forgets ID or password and wants to find it
 > >
@@ -168,6 +171,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on “the Find ID Password" button and enters correct his/her information
 > > Then user can know his/her ID/password information
 > > ```
+> > **Sprint: 2**
 
 ### Post-login page (Main page)
 > **Story 1**
@@ -199,6 +203,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks left-pointing/right-pointing button
 > > Then user should see new prediction in left/right direction that was hidden previously
 > > ```
+> > **Sprint: 4**
 > **Story 2**
 > > **Feature:** User can see more highly scored stocks by being redirected to Recommendation Page 
 > >  
@@ -227,6 +232,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should be redirected to Recommendation Page
 > > And the tab in the Recommendtion Page should be properly active regarding to which show-more button is clicked on
 > > ```  
+> > **Sprint: 4**
 > **Story 3**
 > > **Feature:** User can get more information about the stock by clicking the stock
 > >  
@@ -252,6 +258,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the stock that he/she wants to get more information about
 > > Then user should be on Detail Page of the corresponding stock
 > > ```  
+> > **Sprint: 4**
 > **Story 4**
 > > **Feature:** User can switch between Daily Report tab and My Interests tab
 > >  
@@ -278,6 +285,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the target tab
 > > Then the target tab should be activated
 > > ```  
+> > **Sprint: 4**
 > **Story 5**
 > > **Feature:** User can go to My Page anytime
 > >  
@@ -303,6 +311,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the mypage button
 > > Then the user should be redirected to My Page
 > > ```  
+> > **Sprint: 2**
 > **Story 6**
 > > **Feature:** User can logout anytime
 > >  
@@ -328,6 +337,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the mypage button
 > > Then the user should be on My Page
 > > ```  
+> > **Sprint: 2**
 > **Story 7**
 > > **Feature:** User can search for recently searched stock
 > >  
@@ -359,6 +369,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on the name of one of the recently searched stocks
 > > User should be on Detail Page of the corresponding stock
 > > ```  
+> > **Sprint: 3**
 > **Story 8**
 > > **Feature:** User can search for a specific stock they want to get information about
 > >  
@@ -396,6 +407,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on the name of one of the suggested input
 > > User should be on Detail Page of the corresponding stock
 > > ```  
+> > **Sprint: 4**
 ### My page
 > **Story 1**
 > > **Feature:** User wants to change password 
