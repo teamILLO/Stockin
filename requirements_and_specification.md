@@ -47,10 +47,17 @@ By scoring and recommending based on summarized information, users will be able 
     * Provides past stock price changes similar to the present as the basis for stock price change forecast
     * For certain stocks, stock price change prediction is free, but stock recommendation is provided with a subscription fee
 
-  * **Robo-advisor**
-    * Services that make investment decisions and asset allocations through learned algorithms
-    * In Korea, most securities companies provide this service for a fee, and among startups, ‘Fint’ and ‘Aim’ are representative
-    * The user can know the investment progress of AI, but it does not provide the basis for selecting a stock or the judgment of AI for a specific stock
+  * **Aim** 
+    * Provides investment portfolio that reflects investors' propensity to invest (e.g. asset composition, risk tolerance)
+    * Similar form to a fund, an investor's capital is distributed by allocating assets to stocks, bond, etc.
+    * No detailed investment information is provided to investors
+
+  * **증권플러스** 
+    * Provides basic graph of stock, and a summary of the rate of fluctuation
+    * Provides news that may affect the entire stock market and news that related to specific stocks.
+    * Instead of relying on AI, information is provided by the user's participation.
+    * Provides stock trade information of high-yield users and their recommendations for a fee.
+
 
 Through deep learning, they decide where to sell and buy, thereby narrowing the user's judgment.
 However, there are so many factors that determine the price of stocks, and it is unpredictable.
