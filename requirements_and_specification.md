@@ -671,20 +671,20 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > “add to group” button should be disabled.
 > > ```  
 ### Report page
+### Report page
 > **Story 1**
-> > **Feature:** User wants to switch and see to buy / to sell tab
+> > **Feature:** Users can switch and see to buy / to sell tab
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks to buy / to sell tab 
+> > **Trigger:** User clicks on the “To buy / To sell” tab
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see to buy / to sell tab
-> > 2. User clicks to buy / to sell tab, should immediately render selected tab
-> > 3. User should see block list of selected tab
+> > 1. User clicks “To buy / To sell” tab
+> > 2. “To buy / To sell” tab is activated - (1)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -694,27 +694,26 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters the report page, to buy tab should represent in default.
-> > When user clicks to buy / to sell tab 
-> > User should see selected tab
+> > Given that user first enters the report page, to buy tab should represent in default
+> > When the user clicks “To buy / To sell” tab 
+> > Then user should see selected tab
 > >
-> > When user re-enters the report page
-> > User should see same tab, same stocks based on user history
+> > When the user re-enters the report page
+> > Then user should see same tab, same stocks based on user history
 > > ```  
 > **Story 2**
-> > **Feature:** User wants to see another day reports
+> > **Feature:** User can see another day reports
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks date picker
+> > **Trigger:** User clicks on the date picker
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see another day recommend reports
-> > 2. User clicks date picker, pick date user wants to see 
-> > 3. User should see picked date report
+> > 1. User clicks date picker, pick date user wants to see
+> > 2. User gets redirected to picked date report - (1), (2)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -725,15 +724,15 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters the report page, report should represent current date in default
-> > When user clicks date picker
-> > User should see selected date report
+> > Given that user first enters the report page, report should represent current date in default
+> > When the user clicks date picker
+> > Then user should see selected date report
 > >
-> > When user re-enters the report  page
-> > User should see same date based on user history
+> > When the user re-enters the report  page
+> > Then user should see same date based on user history
 > > ```  
 > **Story 3**
-> > **Feature:** User wants to see more stocks of  block list
+> > **Feature:** User can see more stocks of  block list
 > >  
 > > **Actors:** Any users  
 > >  
@@ -743,9 +742,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see more stocks of block list
-> > 2. User scrolls the block list
-> > 3. User should see stocks according to degree of scrolling
+> > 1. User scrolls the block list
+> > 2. User should see stocks according to degree of scrolling - (1), (2)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -756,26 +754,25 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters the report page, report should represent current date in default
-> > When user clicks date picker
-> > User should see selected date report
+> > Given that user first enters the report page, top of the list should represent in default
+> > When the user scrolls the page
+> > Then user should see more stock blocks according to the degree of scrolling
 > >
-> > When user re-enters the report  page
-> > User should see same scrolled list based on user history
+> > When the user re-enters the report  page
+> > Then user should see same scrolled list based on history
 > > ```  
 > **Story 4**
-> > **Feature:** User wants to see specific stock in detail
+> > **Feature:** User can see specific stock in detail
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks the stock name in block component
+> > **Trigger:** User clicks the “Stock Name” link button in block component
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see specific stock in detail
-> > 2. User clicks the stock name in block component
+> > 1. User clicks on the “Stock Name” link button in block component
 > > 3. User should see the stock detail page
 > > ```
 > >  
@@ -786,24 +783,22 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks the stock name in block component
-> > Redirect to Detail page and activated
-> > user should see Detail page
+> > When the user clicks on the “Stock Name” link button in block component
+> > Then user should be redirected to detail page
 > > ```  
 > **Story 5**
-> > **Feature:** User wants to see more analysed News in detail
+> > **Feature:** User can see more analysed News in detail
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** In block component, user clicks the “arrow vector” button next to article list 
+> > **Trigger:** User clicks on the “Arrow Vector” button next to the article list 
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see see analysed News in detail 
-> > 2. User clicks the “arrow vector” button next to article list 
-> > 3. User should see the Detail page with “News” tab
+> > 1. User clicks the “Arrow Vector” button next to the article list 
+> > 2. User should see the detail page with “News” tab
 > > ```
 > >  
 > > **Exceptions:** 
@@ -813,26 +808,24 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks the “arrow vector” button next to article list 
-> > Redirect to Detail page  with "News" tab activated
-> > user should see Detail page with "News" tab
+> > When the user clicks the “arrow vector” button next to article list 
+> > Then user should be redireced to the detail page  with "News" tab
 > > ```  
 > **Story 6**
-> > **Feature:** User wants to see specific stock
+> > **Feature:** User can see specific stock
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks input "search box", sequentially clicks "search result" button
+> > **Trigger:** User clicks on the “Search Box" input, sequentially clicks on the  “Search Result" button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to find stocks through search
-> > 2. User clicks on the “search box” input
-> > 3. User starts typing complete or partial name of the stock
-> > 4. User clicks on the “search result” button - (1)
-> > 5. User sees stock produced by user input in same page - (2)
+> > 1. User clicks on the “Search Box” input
+> > 2. User starts typing complete or partial name of the stock
+> > 3. User clicks on the “Search Result” button - (1)
+> > 4. User sees stock produced by input in the same page - (2)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -844,10 +837,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > Given that the user types letter in the “search box” input
-> > User clicks on the “search result” button
-> > User should see produced list of article led by the input
+> > When the user clicks on the “Search Result” button
+> > Then user should see produced list of article led by the input
 > > ```  
-
 ### Detail page
 #### **Overview tab**
 > **Story 1**
