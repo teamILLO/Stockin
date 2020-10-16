@@ -452,6 +452,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user moves to another page without pressing the confirm button
 > > Then any member information must be not changed
 > > ```  
+> > **Sprint: 2**  
 > **Story 2**
 > > **Feature:** User wants to change nickname
 > >  
@@ -483,6 +484,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user moves to another page without pressing the confirm button
 > > Then any member information must be not changed
 > > ```  
+> > **Sprint: 2**  
 > **Story 3**
 > > **Feature:** User wants to sign out
 > >  
@@ -516,6 +518,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user moves to another page without pressing the confirm button
 > > Then any member information must be not changed
 > > ```  
+> > **Sprint: 2**  
 > **Story 4**
 > > **Feature:** User want to see informations of all stocks in group
 > >  
@@ -547,6 +550,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user doesn’t have any favorites, 
 > > Then user should see a button redirected to recommend page
 > > ```
+> > **Sprint: 5**  
 > **Story 5**
 > > **Feature:** User wants to make a new group within him or her favorites
 > >  
@@ -582,6 +586,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user checks nothing
 > > Then “make new group” button should be disabled
 > > ```  
+> > **Sprint: 4**  
 > **Story 6**
 > > **Feature:** User wants to delete stocks within him or her favorites
 > >  
@@ -620,6 +625,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user checks nothing
 > > Then “delete” button should be disabled
 > > ```  
+> > **Sprint: 4**  
 > **Story 7**
 > > **Feature:** User wants to delete a group within him or her favorites
 > >  
@@ -656,7 +662,8 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > When user checks nothing
 > > Then “delete” button should be disabled
-> > ```  
+> > ```
+> > **Sprint: 4**  
 > **Story 8**
 > > **Feature:** User wants to add stocks to the group within him or her favorites
 > >  
@@ -695,6 +702,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user checks nothing
 > > Then “add to group” button should be disabled
 > > ```  
+> > **Sprint: 4**  
 ### Report page
 > **Story 1**
 > > **Feature:** User wants to switch and see "To Buy / To Sell" tab
