@@ -863,7 +863,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 ### Detail page
 #### **Overview tab**
 > **Story 1**
-> > **Feature:** User can see score and overview of particular stock
+> > **Feature:** User want to see score and overview of particular stock
 > >  
 > > **Actors:** Any users 
 > >  
@@ -873,9 +873,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User want to know detailed information about a particular stock.
-> > 2. User click name of a particular stock on main, recommendation, favorite page.
-> > 3. User gets redirected to detail stock page.
+> > 1. User click title of a particular stock on the other page
+> > 2. User gets redirected to detail stock page.
+> > 3. User can see the overview information of the stock clicked
 > > ```
 > >  
 > > **Exceptions:** 
@@ -885,59 +885,58 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Acceptance Test:**
 > > ```
-> > When a user clicks the title of a particular stock, it should be redirected to the detail page of that stock.
+> > When a user clicks the title of a particular stock
+> > it should be redirected to the detail page of that stock
 > > ```
 > >
 > **Story 2**
-> > **Feature:** User can see past score and overview information of particular stock
+> > **Feature:** User want to see past score and overview information of particular stock
 > >
 > > **Actors:** Any users 
 > >  
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in
-> > The user must be already on stock detail page and overview tab.
+> > The user must be already on stock detail page and overview tab
 > > ```
 > >
-> > **Trigger:** User clicks on the calender button which is next to update date.
+> > **Trigger:** User clicks on the calendar button which is next to update date
 > >
 > > **Scenario:**
 > > ```
-> > 1. Users want to know detailed stock information in the past or on a specific date.
-> > 2. Users click the calendar button which is next to the update date.
-> > 3. Calendar pop-up will appear, and users can choose specific date.
-> > 4. User gets detailed stock information on a specific date
+> > 1. Users click the calendar button which is next to the update-date
+> > 2. Calendar pop-up will appear, and users can choose specific date
+> > 3. User gets detailed stock information on a specific date
 > > ```
 > > **Exceptions:** 
 > > ```
-> > User chooses a future date.
+> > User should not choose a future date.
 > > ```
 > >
 > > **Acceptance Test:**
 > > ```
-> > When a user clicks a particular date, then the page should render the information of the particular date.
-> > If future date is chosen, warning alert will appear.
+> > Given user already click the calendar button and Calendar pop-up appeared
+> > When user clicks specific date on Calendar
+> > the page should render the overview information of the particular date
 > > ```
-> >
 #### **Price trends tab**
 > **Stroy 1**
-> > **Feature:** User can see the price trend of a specific stock.
+> > **Feature:** User want to see the price trend of a specific stock.
 > > 
 > > **Actors:** Any users 
 > > 
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in.
-> > The user must be already on stock detail page and Price trends tab.
+> > The user must be already on stock detail page and Price trends tab
 > > ```
 > >
-> > **Trigger:** User clicks the Price trends tab on the stock detail page.
+> > **Trigger:** User clicks the Price trends tab on the stock detail page
 > >
 > > **Scenario:**
 > > ```
-> > 1. Users want to know  the price trend of a specific stock.
-> > 2. Users click the tab ‘시세동향’ on the stock detail page.
-> > 3. Page renders the information of the price trend of a specific stock.
+> > 1. Users click the Price-trends tab on the stock detail page.
+> > 2. Page renders the information of the price trend of a specific stock
 > > ```
 > > 
 > > ***Exception:***
@@ -947,30 +946,28 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Acceptance Test:**
 > > ```
-> > When a user clicks the  Price trends tab, then the webpage should render the information of the price trend of a specific stock.
-> > If user is already on the ‘시세동향’ tab, nothing is happen.
+> > Given user is already on stock_detail page and not on Price-trends tab 
+> > When a user clicks the  Price-trends tab
+> > Page should render the information of the price trend of a specific stock
 > > ```
-> >
 #### **Financial state tab**
 > **Stroy 1**
-> > **Feature:** User can see the financial state and comparison information of a specific stock.
+> > **Feature:** User want to see the financial state and comparison information of a specific stock
 > > 
 > > **Actors:** Any users
 > > 
 > > **Precondition:**
 > > ```
-> > The user must be registered and logged in.
-> > The user must be already on stock detail page and Financial state tab.
+> > The user must be registered and logged in
+> > The user must be already on stock detail page and Financial state tab
 > > ```
 > >
-> > **Trigger:** User clicks the Financial state tab on the stock detail page.
+> > **Trigger:** User clicks the Financial state tab on the stock detail page
 > >
 > > **Scenario:**
 > > ```
-> > 1. Users want to know  the financial state of a specific stock.
-> > 2. Or users alreay know about the financial information, but don't know how to interpret it.
-> > 3. User clicks the Financial state tab.
-> > 4. User can see the financial state and financial compare information which is easy to understand.
+> > 1. User clicks the Financial state tab
+> > 2. User can see the financial state and financial compare information which is easy to understand
 > > ```
 > > 
 > > **Exceptions:** 
@@ -980,29 +977,29 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When a user clicks the  Financial state tab, then the webpage should render the financial statement of a specific stock.
-> > If user is already on the Financial state tab, nothing is happen.
+> > Given user is already on stock_detail page and not on Financial-state tab 
+> > When a user clicks the  Financial-state tab, 
+> > Page should render the financial statement of a specific stock
 > > ```
 > > 
 #### **Comment tab**
 > **Story 1**
-> > **Feature:** Users can view other people's opinions as comments.
+> > **Feature:** Users want to see other people's opinions
 > >
 > > **Actors:** Any users 
 > >
 > > **Precondition:**
 > > ```
-> > The user must be registered and logged in.
-> > The user must be already on stock detail page.
+> > The user must be registered and logged in
+> > The user must be already on stock detail page
 > > ```
 > >
-> > **Trigger:** User clicks the Comment tab on the stock detailed page.
+> > **Trigger:** User clicks the Comment tab on the stock detailed page
 > > 
 > > **Scenario:**
 > > ```
-> > 1. User want to know other people's opinions or situation about the specific stock.
-> > 2. User clicks the Comment tab.
-> > 3. User can view other people's opinions as comments.
+> > 1. User clicks the Comments tab.
+> > 2. User can see other people's opinions as comments
 > > ```
 > > 
 > > **Exceptions:** 
@@ -1012,30 +1009,30 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When a user clicks the  Comment tab, then the webpage should render the Comments of a specific stock.
-> > If user is already on the Comment tab, nothing is happen.
+> > Given user is already on stock_detail page and not on Comments tab 
+> > When a user clicks the  Comments tab
+> > Page should render the Comments of a specific stock
 > > ```
 > >
 > **Story 2**
-> > **Feature:** Users can post their on stocks
+> > **Feature:** Users want to post comments to a specific stock
 > > 
 > > **Actors:** Any user
 > >
 > > **Precondition:**
 > > ```
-> > The user must be registered and logged in.
-> > The user must be already on stock detail page and Comment tab.
+> > The user must be registered and logged in
+> > The user must be already on stock detail page and Comment tab
 > > ```
 > >
 > > **Trigger:** User enters the content of the comment and clicks the OK button
 > >
 > > **Scenario:**
 > > ```
-> > 1. User want to post their opinion about a specific stock.
-> > 2. User click the comment tab and then enter their opinion to the comment.
-> > 3. User click the OK button and the comment is posted.
+> > 1. User enters their opinion to the comment
+> > 2. User click the OK button 
+> > 3. New comment is posted
 > > ```
-> >  
 > > **Exceptions:** 
 > > ```
 > > When user clicks the OK button with empty content, warning alert will
@@ -1043,75 +1040,70 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Acceptance Test:**
 > > ```
-> > User enters content and click the Ok button, then the comment should be posted.
+> > User enters content and click the Ok button, then the comment should be posted
 > > ```
-> >
 > **Story 3**
-> > **Feature:** Users can delete their comments.
+> > **Feature:** Users want to delete their comment
 > > 
 > > **Actors:** Any user
 > >
 > > **Precondition:**
 > > ```
-> > The user must be registered and logged in.
-> > The user must be already on stock detail page and Comment tab.
-> > The comment that a user wants to delete must be a comment written by that user.
+> > The user must be registered and logged in
+> > The user must be already on stock detail page and Comment tab
+> > The comment that a user wants to delete must be written by that user
 > > ```
 > >
 > > **Trigger:** User click the delete button next to the comment that the user wants to delete.
 > > 
 > > **Scenario:**
 > > ```
-> > 1. User has posted comments on a specific stock.
-> > 2. Later, User want to delete the comment written by the user.
-> > 3. User enter the Comment tab, and then click the delete button next to the comment.
-> > 4. The comment is deleted and should not be rendered.
+> > 1. User has posted comments on a specific stock
+> > 2. User clicks the delete button next to the comment 
+> > 3. The comment is deleted and not rendered
 > > ```
-> > 
+> >
 > > **Exceptions:** 
 > > ```
-> > There should be no delete button next to comment wriiten by other person.
+> > User can not delete the comments written by other people
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user click the delete button next to comment written by him,
-> > Then the comment should be removed and not be rendered.
+> > When user clicks the delete button next to comment written by him/her
+> > Then the comment should be removed and not be rendered
 > > ```
-> >
 > **Story 4**
-> > **Feature:** Users can edit their comments.
+> > **Feature:** Users want to edit their comments
 > > 
 > > **Actors:** Any user
 > >
 > > **Precondition:**
 > > ```
-> > The user must be registered and logged in.
-> > The user must be already on stock detail page and Comment tab.
-> > The comment that a user wants to edit must be a comment written by that user.
+> > The user must be registered and logged in
+> > The user must be already on stock detail page and Comment tab
+> > The comment that a user wants to edit must be written by that user
 > > ```
 > >
 > > **Trigger:** User click the edit button next to the comment that the user wants to edit.
 > > 
 > > **Scenario:**
 > > ```
-> > 1. User has posted comments on a specific stock.
-> > 2. Later, User want to eidt the comment written by the user.
-> > 3. User enter the Comment tab, and then click the edit button next to the comment.
-> > 4. User enters new content and then click the Ok button.
-> > 5. The comment is edited and should be rendered with revised comment.
+> > 1. User has posted comments on a specific stock
+> > 2. User clicks the edit button next to the comment
+> > 3. User enters new content and then click the Ok button
+> > 4. The comment is edited and rendered with revised comment
 > > ```
 > > 
 > > **Exceptions:** 
 > > ```
-> > There should be no edit button next to comment wriiten by other person.
+> > There should be no edit button next to comment wriiten by other person
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user click the edit button next to comment written by him,
-> > Users enters new content of comment and click the Ok button.
-> > Then the comment content should be revised.
+> > When user clicks the edit button next to comment written by him/her and enters new content of comment and click the OK button
+> > the comment content should be revised
 > > ```
 > >
 #### **News tab**
@@ -1126,15 +1118,14 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to see another day noticeable news
-> > 2. User clicks date picker, pick date user wants to see 
-> > 3. User should see picked date noticeable news
+> > 1. User clicks the News tab.
+> > 2. User can the news about the specific stock
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) Nothing happens when user clicks same date
-> > (2) Nothing happens when user clicks future date that is yet to come
+> > Nothing happens when user clicks same date
+> > Nothing happens when user clicks future date that is yet to come
 > > ```
 > > 
 > > **Acceptance Test:**
