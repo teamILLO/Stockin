@@ -2,10 +2,7 @@
 (Borrowed and Adapted from UCB CS169)
 
 ## Document Revision History
-**Rev. 1.0**
-> When: Oct 11, 2020  
-> What: Created Document Layout  
-> Who:  Junhyeok Park  
+   Rev. 1.0 2020-10-17 - initial version
 
 ## Project Abstract<br />
 **stockin'** is a service that provides customers with a quick, at-a-glance organized information about stocks. Customers are investors who have a difficult time selecting good stocks due to the wide variety of stock information. The service analyzes graphs and financial statements and converts them into scores for easy visual viewing, So allowing customers to choose stocks that are good to invest without spending much time on.
