@@ -54,9 +54,9 @@ By scoring and recommending based on summarized information, users will be able 
 
   * **증권플러스** 
     * Provides basic graph of stock, and a summary of the rate of fluctuation
-    * Provides news that may affect the entire stock market and news that related to specific stocks.
-    * Instead of relying on AI, information is provided by the user's participation.
-    * Provides stock trade information of high-yield users and their recommendations for a fee.
+    * Provides news that may affect the entire stock market and news that related to specific stocks
+    * Instead of relying on AI, information is provided by the user's participation
+    * Provides stock trade information of high-yield users and their recommendations for a fee
 
 
 Through deep learning, they decide where to sell and buy, thereby narrowing the user's judgment.
