@@ -68,7 +68,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 ## User Stories  
 ### Pre-login page  
 > **Story 1**
-> > **Feature:** User wants to sign in
+> > **Feature:** User can sign in
 > >  
 > > **Actors:** Any users
 > >  
@@ -79,8 +79,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Scenario:**
 > > ```
 > > 1. User enters own ID and password
-> > 2. User clicks log-in button
-> > 3. User is logged in and redirected to the main page
+> > 2. User clicks on the “Log-In” button
+> > 3. If ID and password is valid, User should be logged in and redirected to the main page - (1)
 > > ```
 > > **Exceptions:** 
 > > ```
@@ -89,24 +89,24 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user enters id/password and clicks the sign-in button
-> > User should be logged in state and redirected to main-page
+> > When the user enters id/password and clicks the sign-in button
+> > Then user should be logged in state and redirected to main-page
 > > ```
 > **Story 2**
-> > **Feature:** User wants to sign up
+> > **Feature:** User can sign up
 > >  
 > > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be logged-out state and not a member of the service
 > >  
-> > **Trigger:** User clicks sign up button
+> > **Trigger:** User clicks on the “Sign Up” button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks sign up button
-> > 2. Sign up pop-up activate
+> > 1. User clicks on the “Sign Up” button
+> > 2. “Sign Up” pop-up activate
 > > 3. User enters the ID/password which user want to use
-> > 4. User makes a own ID and Sign up pop-up disappear
+> > 4. User makes a own ID and “Sign Up” pop-up disappears - (1)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -116,13 +116,14 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on sign up button
-> > sign up pop-up should be appeared
-> > When user enters ID user want to make and clicks the OK button
-> > sign up pop-up should be disappeared and new member information should be created
+> > When the user clicks on “Sign Up” button
+> > Then “Sign Up” pop-up should be appeared
+> >
+> > When the user enters ID user want to make and clicks the “OK” button
+> > “Sign Up” pop-up should be disappeared and new member information should be created
 > > ```
 > **Story 3**
-> > **Feature:** User wants to know more about our service 
+> > **Feature:** User can know more about our service 
 > >  
 > > **Actors:** Any users
 > >  
@@ -133,7 +134,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Scenario:**
 > > ```
 > > 1. User sees overview information of our service on
-> > 2. User can scroll page and see more information according to the degree of scrolling 
+> > 2. User can scroll page and see more information according to the degree of scrolling - (1)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -143,10 +144,11 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When you access the site without log-in
-> > Initial page should show the overview information of our service
-> > When user clicks About_us or Preview tab
-> > Page should render the information corresponding to the tab
+> > When the user accesses the site without log-in
+> > Then Initial page should show the overview information of our service
+> > 
+> > When the user clicks on “About_Us” or “Preview” tab
+> > Then page should render the information corresponding to the tab
 > > ```
 > **Story 4**
 > > **Feature:** User forgets ID or password and wants to find it
@@ -155,12 +157,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Precondition:** The user must be logged-out state and a member of the service
 > >
-> > **Trigger:** User clicks "Find ID Password" button
+> > **Trigger:** User clicks on the “Find ID Password" button
 > >
 > > **Scenario:**
 > > ```
-> > 1. User clicks "Find ID Password" button
-> > 2. User enters his/her information and finds ID/password
+> > 1. User clicks on the "Find ID Password" button
+> > 2. User enters his/her information and finds ID/password - (1), (2)
 > > 3. After that, User can log-in to the webpage
 > > ```
 > >
@@ -172,9 +174,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When User clicks "Find ID Password" button and enters correct his/her information
-> > User can know his/her ID/password information
+> > When the user clicks on “the Find ID Password" button and enters correct his/her information
+> > Then user can know his/her ID/password information
 > > ```
+
 ### Post-login page (Main page)
 > **Story 1**
 > > **Feature:** User can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
