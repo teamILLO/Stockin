@@ -27,7 +27,7 @@ can be our potential customers.
 * **Market Competitors**
 
   * **Kosho**
-    * An application-based platform that learns past stock price changes and predicts future stock price changes
+    * An application-based platform that learns from past stock price changes and predicts future stock price changes
     * Provides past stock price changes similar to the present as the basis for stock price change forecast
     * For certain stocks, stock price change prediction is free, but stock recommendation is provided with a subscription fee
 
@@ -38,20 +38,20 @@ can be our potential customers.
 
   * **증권플러스** 
     * Provides basic graph of stock, and a summary of the rate of fluctuation
-    * Provides news that may affect the entire stock market and news that related to specific stocks
+    * Provides news that may affect the entire stock market and news that is related to specific stocks
     * Instead of relying on AI, information is provided by the user's participation
     * Provides stock trade information of high-yield users and their recommendations for a fee
 
 * **Our Strength**
 
-  * Our services do not delegate investment. User directly do the investing.
+  * Our services do not delegate investment. User directly does the investing.
 The goal of our service is to efficiently provide all the information that can help user’s investment.
 
-  * Our service does not show information abstractly. In other words, it provides all the information of the graph and news analyzed through machine learning.
+  * Our service does not show information abstractly. Rather, it provides all the information of the graph and news analyzed through machine learning.
 
-  * The basic information of stocks is provided by both summary and detail. Through this, user can reduce the amount of time users spend searching for stock-related information.
+  * The basic information of stocks is provided by both summary and detail. Through this, user can reduce the amount of time spent searching for stock-related information.
 
-  * Based on the information analyzed through machine learning, scores are given and stocks are recommended through it.
+  * Based on the information analyzed through machine learning, stocks are scored and recommended through those scores.
 
 ## User Stories  
 ### Pre-login page 
