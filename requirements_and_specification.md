@@ -62,12 +62,12 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Precondition:** The user must be registered and logged out
 > >  
-> > **Trigger:** User clicks sign in button
+> > **Trigger:** User clicks on the "Login" button
 > >  
 > > **Scenario:**
 > > ```
 > > 1. User enters own ID and password
-> > 2. User clicks on the “Log-In” button
+> > 2. User clicks on the “Login” button
 > > 3. If ID and password is valid, User should be logged in and redirected to the main page - (1)
 > > ```
 > > **Exceptions:** 
@@ -78,7 +78,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Acceptance Test:**
 > > ```
 > > When the user enters id/password and clicks the sign-in button
-> > Then user should be logged in state and redirected to main-page
+> > Then user should be logged in
+> > And user should be redirected to main-page
 > > ```
 > > **Sprint: 2**
 > **Story 2**
@@ -93,14 +94,14 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Scenario:**
 > > ```
 > > 1. User clicks on the “Sign Up” button
-> > 2. “Sign Up” pop-up activate
+> > 2. “Sign Up” pop-up activates
 > > 3. User enters the ID/password which user want to use
-> > 4. User makes a own ID and “Sign Up” pop-up disappears - (1)
+> > 4. User makes his/her own ID and “Sign Up” pop-up disappears - (1)
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) User can't use ID which is already existed
+> > (1) User can't use ID which already exists
 > > ```
 > > 
 > > **Acceptance Test:**
