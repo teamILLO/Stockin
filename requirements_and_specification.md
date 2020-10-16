@@ -72,7 +72,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Actors:** Any users
 > >  
-> > **Precondition:** The user must be logged-out state and a member of the service 
+> > **Precondition:** The user must be registered and logged out
 > >  
 > > **Trigger:** User clicks sign in button
 > >  
@@ -97,7 +97,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Actors:** Any users
 > >  
-> > **Precondition:** The user must be logged-out state and not a member of the service
+> > **Precondition:** The user must be unregistered and logged out
 > >  
 > > **Trigger:** User clicks on the “Sign Up” button
 > >  
@@ -127,7 +127,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Actors:** Any users
 > >  
-> > **Precondition:** The user must be logged-out state  
+> > **Precondition:** The user must be logged-out
 > >  
 > > **Trigger:** User is in pre-login page and can scroll it
 > >  
@@ -155,7 +155,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Actors:** Any users
 > >
-> > **Precondition:** The user must be logged-out state and a member of the service
+> > **Precondition:** The user must be registered and logged out
 > >
 > > **Trigger:** User clicks on the “Find ID Password" button
 > >
