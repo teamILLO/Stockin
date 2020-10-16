@@ -56,7 +56,7 @@ The goal of our service is to efficiently provide all the information that can h
 ## User Stories  
 ### Pre-login page 
 > **Story 1**
-> > **Feature:** User can sign in
+> > **Feature:** User wants to sign in
 > >  
 > > **Actors:** Any users
 > >  
@@ -84,7 +84,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 2**
 >
 > **Story 2**
-> > **Feature:** User can sign up
+> > **Feature:** User wants to sign up
 > >  
 > > **Actors:** Any users
 > >  
@@ -116,7 +116,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 2**  
 >
 > **Story 3**
-> > **Feature:** User can know more about our service 
+> > **Feature:** User wants to know more about our service 
 > >  
 > > **Actors:** Any users
 > >  
@@ -176,7 +176,7 @@ The goal of our service is to efficiently provide all the information that can h
 
 ### Post-login page (Main page)
 > **Story 1**
-> > **Feature:** User can surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
+> > **Feature:** User wants to surf among top 5 predicted-to-rise/predicted-to-fall stocks without redirection
 > >  
 > > **Actors:** Any users 
 > >  
@@ -207,7 +207,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**
 >
 > **Story 2**
-> > **Feature:** User can see more highly scored stocks by being redirected to Recommendation Page 
+> > **Feature:** User wants to see more highly scored stocks by being redirected to Recommendation Page 
 > >  
 > > **Actors:** Any users 
 > >  
@@ -237,7 +237,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**
 >
 > **Story 3**
-> > **Feature:** User can get more information about the stock by clicking the stock
+> > **Feature:** User wants to get more information about the stock by clicking the stock
 > >  
 > > **Actors:** Any users 
 > >  
@@ -264,7 +264,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**
 >
 > **Story 4**
-> > **Feature:** User can switch between Daily Report tab and My Interests tab
+> > **Feature:** User wants to switch between Daily Report tab and My Interests tab
 > >  
 > > **Actors:** Any users 
 > >  
@@ -292,7 +292,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**
 >
 > **Story 5**
-> > **Feature:** User can go to My Page anytime
+> > **Feature:** User wants to go to My Page anytime
 > >  
 > > **Actors:** Any users 
 > >  
@@ -319,7 +319,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 2**
 >
 > **Story 6**
-> > **Feature:** User can logout anytime
+> > **Feature:** User wants to logout anytime
 > >  
 > > **Actors:** Any users 
 > >  
@@ -346,7 +346,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 2**
 >
 > **Story 7**
-> > **Feature:** User can search for recently searched stock
+> > **Feature:** User wants to search for recently searched stock
 > >  
 > > **Actors:** Any users 
 > >  
@@ -379,7 +379,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 3**
 >
 > **Story 8**
-> > **Feature:** User can search for a specific stock they want to get information about
+> > **Feature:** User wants to search for a specific stock they want to get information about
 > >  
 > > **Actors:** Any users 
 > >  
@@ -421,82 +421,83 @@ The goal of our service is to efficiently provide all the information that can h
 > **Story 1**
 > > **Feature:** User wants to change password 
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered and logged in
 > >  
-> > **Trigger:** User clicks on the "change password" button. 
+> > **Trigger:** User clicks on the "change password" button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User want to change password 
-> > 2. User clicks on the “User Information” tab.
-> > 3. User clicks on the “change password” button.
-> > 4. Change password pop-up will appear, and the user puts a new password and clicks on the confirm button.
-> > 5. User's password changed.
+> > 1. User clicks on the “User Information” tab
+> > 2. User clicks on the “change password” button
+> > 3. Change password pop-up will appear
+> > 4. User puts a new password and clicks on the confirm button - (1)
+> > 4. User's password changed
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > User puts unavailable passwords. 
+> > (1) User puts unavailable passwords
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user types “text_A” in the pop-up,
-> > The user’s password should be changed by “text_A”.
-> > When the user types unavailable password(too short or unavailable character),
-> > the pop-up should show warning messages.
-> > When the user moves to another page without pressing the confirm button,
-> > Any member information must be not changed.
+> > When user types “text_A” in the pop-up
+> > The user’s password should be changed by “text_A”
+> >
+> > When the user types unavailable password(too short or unavailable character)
+> > Then the pop-up should show warning messages
+> >
+> > When the user moves to another page without pressing the confirm button
+> > Then any member information must be not changed
 > > ```  
 > **Story 2**
 > > **Feature:** User wants to change nickname
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered and logged in
 > >  
-> > **Trigger:** User clicks on the “Edit” button.
+> > **Trigger:** User clicks on the “Edit” button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User want to change nickname 
-> > 2. User clicks on the “User Information” tab.
-> > 3. User clicks on the “Edit” button.
-> > 4. User gets redirected to user information edit page
-> > 5. User puts new nickname in the nickname input and clicks on the confirm button.
-> > 6. User's nickname changed.
+> > 1. User clicks on the “User Information” tab
+> > 2. User clicks on the “Edit” button
+> > 3. User gets redirected to user information edit page
+> > 4. User puts new nickname in the nickname input and clicks on the confirm button - (1)
+> > 5. User's nickname changed
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > User puts unavailable nicknames. 
+> > (1) User puts unavailable nicknames
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When there is a user with the same name as input,
-> > User should be redirected to edit page with warning messages.
-> > When the user moves to another page without pressing the confirm button,
-> > Any member information must be not changed.
+> > When there is a user with the same name as input
+> > Then user should be redirected to edit page with warning messages
+> > 
+> > When the user moves to another page without pressing the confirm button
+> > Then any member information must be not changed
 > > ```  
 > **Story 3**
 > > **Feature:** User wants to sign out
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered and logged in
 > >  
-> > **Trigger:** User clicks on the "sign out" button. 
+> > **Trigger:** User clicks on the "sign out" button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User want to sign out.
-> > 2. User clicks on the “User Information” tab.
-> > 3. User clicks on the “sign out” button.
-> > 4. User should be redirected to sign-out page and the user can accept or dismiss the confirmation.
-> > 5. User clicks on the accept button, the user's information changes and redirect to pre-login page.
+> > 1. User clicks on the “User Information” tab
+> > 2. User clicks on the “sign out” button
+> > 3. User should be redirected to sign-out page and the user can accept or dismiss the confirmation
+> > 4. User clicks on the accept button, the user's information changes and redirect to pre-login page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -506,12 +507,14 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on the sign out button,
-> > User should be on sign-out page.
-> > When user clicks on the dismiss button on sign-out page,
-> > User should be redirected to my page.
-> > When the user moves to another page without pressing the confirm button,
-> > Any member information must be not changed.
+> > When user clicks on the sign out button
+> > Then user should be on sign-out page
+> >
+> > When user clicks on the dismiss button on sign-out page
+> > Then user should be redirected to my page
+> >
+> > When the user moves to another page without pressing the confirm button
+> > Then any member information must be not changed
 > > ```  
 > **Story 4**
 > > **Feature:** User want to see informations of all stocks in group
@@ -525,75 +528,77 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Scenario:**
 > > ```
 > > 1. The page at first show a quadrant chart of the stocks in the first group
-> > 2. User can see the chart of others when user clicks on the other group button.
-> > 3. User can see a table of the stocks in the first group when user clicks on the “favorites detail” tab.
-> > 4. User can see the table of others when user clicks on the other group button.
+> > 2. User can see the chart of others when user clicks on the other group button
+> > 3. User can see a table of the stocks in the first group when user clicks on the “favorites detail” tab
+> > 4. User can see the table of others when user clicks on the other group button
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > If user doesn’t have any group, both tab must show “browse stops to create a group” button to redirect to recommend page.
+> > If user doesn’t have any group, both tab must show “browse stops to create a group” button to redirect to recommend page
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters  my page, favorites summary tab should represent in default.
+> > Given user first enters  my page, favorites summary tab should represent in default
 > > When user clicks favorites summary / favorites detail tab 
-> > User should see selected tab
+> > Then user should see selected tab
+> >
 > > When user doesn’t have any favorites, 
-> > User should see a button redirected to recommend page.
+> > Then user should see a button redirected to recommend page
 > > ```
 > **Story 5**
 > > **Feature:** User wants to make a new group within him or her favorites
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered, logged in, and have stocks in favorites
 > >  
-> > **Trigger:** User clicks on the “make new group” button in edit group page. 
+> > **Trigger:** User clicks on the “make new group” button in edit group page.
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User want to make a new group within him or her favorites
-> > 2. User clicks on the “edit group” button.
-> > 3. User clicks checkbox beside the stocks.
-> > 4. User clicks on the “make new group” button.
-> > 5. New group pop-up will appear, and the user can put new group name.
-> > 5. User clicks on the accept button, and redirect to my page, then new group appear in the page.
+> > 1. User clicks on the “edit group” button
+> > 2. User clicks checkbox beside the stocks
+> > 3. User clicks on the “make new group” button
+> > 4. New group pop-up will appear
+> > 5. User puts new group name and clicks on the accept button - (1)
+> > 6. User gets redirect to my page, then new group appear in the page
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > If there is a group with the same name as the user set, make group name with (number).
+> > (1) If there is a group with the same name as the user set, show warning and make group name with (number)
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters my page, favorites summary tab should represent in default.
-> > When user clicks on the edit button, 
-> > user should be on group edit page.
-> > When user checks some stocks and clicks on the “make new group” button,
-> > User should be redirected to favorite summary tab with new group.
-> > When user checks nothing,
-> > “make new group” button should be disabled.
+> > When user clicks on the edit button
+> > Then user should be on group edit page
+> >
+> > When user checks some stocks and clicks on the “make new group” button
+> > Then user should be redirected to favorite summary tab with new group
+> >
+> > When user checks nothing
+> > Then “make new group” button should be disabled
 > > ```  
 > **Story 6**
 > > **Feature:** User wants to delete stocks within him or her favorites
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered, logged in, and have stocks in favorites
 > >  
-> > **Trigger:** User clicks on the “delete” button in edit group page.
+> > **Trigger:** User clicks on the “delete” button in edit group page
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User want to delete stocks within him or her favorites
-> > 2. User clicks on the “edit group” button.
-> > 3. User clicks checkbox beside the stocks.
-> > 4. User clicks on the “delete” button.
-> > 5. Delete stock pop-up will appear, and the user can accept or dismiss the confirmation.
-> > 6. User clicks on the accept button, the user's favorites list changes and redirect to my page.
+> > 1. User clicks on the “edit group” button
+> > 2. User clicks checkbox beside the stocks
+> > 3. User clicks on the “delete” button
+> > 4. Delete stock pop-up will appear, and the user can accept or dismiss the confirmation
+> > 5. User clicks on the accept button
+> > 6. the user's favorites list changes and get redirected to my page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -603,33 +608,34 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters  my page, favorites summary tab should represent in default.
-> > When user clicks on the edit button, 
-> > user should be on group edit page.
-> > When user checks some stocks and clicks on the “delete” button,
-> > Pop-up windows should appear and ask the user whether or not to confirm.
-> > When user clicks on the “confirm” button,
-> > User should be redirected to favorite summary tab, and selected stocks should be seen invisible.
-> > When user checks nothing,
-> > “delete” button should be disabled.
+> > When user clicks on the edit button
+> > Then user should be on group edit page
+> >
+> > When user checks some stocks and clicks on the “delete” button
+> > Then pop-up windows should appear and ask the user whether or not to confirm
+> >
+> > When user clicks on the “confirm” button
+> > Then user should be redirected to favorite summary tab, and selected stocks should be seen invisible
+> >
+> > When user checks nothing
+> > Then “delete” button should be disabled
 > > ```  
 > **Story 7**
-> > **Feature:** user wants to delete a group within him or her favorites
+> > **Feature:** User wants to delete a group within him or her favorites
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered, logged in, and have stocks in favorites
 > >  
-> > **Trigger:** User clicks on the “delete” button in edit group page. 
+> > **Trigger:** User clicks on the “delete” button in edit group page
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to delete a group within him or her favorites
-> > 2. User clicks on the “edit group” button.
-> > 3. User clicks checkbox beside the group.
-> > 4. User clicks “delete” button.
-> > 5. Delete group pop-up will appear, and the user can accept or dismiss the confirmation.
-> > 6. User clicks on the accept button, the user's favorites list changes and redirect to my page.
+> > 1. User clicks on the “edit group” button
+> > 2. User clicks checkbox beside the group
+> > 3. User clicks “delete” button
+> > 4. Delete group pop-up will appear, and the user can accept or dismiss the confirmation
+> > 5. User clicks on the accept button, the user's favorites list changes and redirect to my page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -639,55 +645,59 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters  my page, favorites summary tab should represent in default.
-> > When user clicks on the edit button, 
-> > user should be on group edit page.
-> > When user checks some groups and clicks on the “delete” button,
-> > Pop-up windows should appear and ask the user whether or not to confirm.
-> > When user clicks on the “confirm” button,
-> > User should be redirected to favorite summary tab, and selected stocks should be seen invisible.
-> > When user checks nothing,
-> > “delete” button should be disabled.
+> > When user clicks on the edit button
+> > Then user should be on group edit page
+> >
+> > When user checks some groups and clicks on the “delete” button
+> > Then pop-up windows should appear and ask the user whether or not to confirm
+> >
+> > When user clicks on the “confirm” button
+> > Then user should be redirected to favorite summary tab, and selected stocks should be seen invisible
+> >
+> > When user checks nothing
+> > Then “delete” button should be disabled
 > > ```  
 > **Story 8**
 > > **Feature:** User wants to add stocks to the group within him or her favorites
 > >  
-> > **Actors:** any user
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be registered, logged in, and have stocks in favorites
 > >  
-> > **Trigger:** User clicks on the “add to group” button in edit group page. 
-> >  
+> > **Trigger:** User clicks on the “add to group” button in edit group page
+> > 
 > > **Scenario:**
 > > ```
-> > 1. User want to make a new group within him or her favorites
-> > 2. User clicks on the “edit group” button.
-> > 3. User clicks checkbox beside the stocks.
-> > 4. User clicks on the “add to group” button.
-> > 5. Select group pop-up will appear, and the user can choose one of the existing groups.
-> > 5. User clicks on the accept button, the user's favorites list changes and redirect to my page.
+> > 1. User clicks on the “edit group” button
+> > 2. User clicks checkbox beside the stocks
+> > 3. User clicks on the “add to group” button
+> > 4. Select group pop-up will appear, and the user can choose one of the existing groups
+> > 5. User select a group and clicks on the accept button - (1)
+> > 6. The user's favorites list changes and redirect to my page
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > If a stock already exists in the selected group, take no action.
+> > (1) If a stock already exists in the selected group, take no action
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters  my page, favorites summary tab should represent in default.
-> > When user clicks on the edit button, 
-> > user should be on group edit page.
-> > When user checks some groups and clicks on the “add to group” button,
-> > Pop-up windows should appear and ask the user the name of the new group.
-> > When user put new name and clicks on the “confirm” button,
-> > User should be redirected to favorite summary tab, and selected stocks should be seen invisible.
-> > When user checks nothing,
-> > “add to group” button should be disabled.
+> > When user clicks on the edit button
+> > Then user should be on group edit page
+> >
+> > When user checks some groups and clicks on the “add to group” button
+> > Then pop-up windows should appear and ask the user the name of the new group
+> >
+> > When user put new name and clicks on the “confirm” button
+> > Then user should be redirected to favorite summary tab, and selected stocks should be seen invisible
+> >
+> > When user checks nothing
+> > Then “add to group” button should be disabled
 > > ```  
 ### Report page
 > **Story 1**
-> > **Feature:** User can switch and see "To Buy / To Sell" tab
+> > **Feature:** User wants to switch and see "To Buy / To Sell" tab
 > >  
 > > **Actors:** Any users  
 > >  
@@ -715,10 +725,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user re-enters the report page
 > > Then user should see same tab, same stocks based on user history
 > > ```  
-> > **Sprint: 5**
->
 > **Story 2**
-> > **Feature:** User can see another day reports
+> > **Feature:** User wants to see another day reports
 > >  
 > > **Actors:** Any users  
 > >  
@@ -746,11 +754,9 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > When the user re-enters the report  page
 > > Then user should see same date based on user history
-> > ``` 
-> > **Sprint: 5**
->
+> > ```  
 > **Story 3**
-> > **Feature:** User can see more stocks of  block list
+> > **Feature:** User wants to see more stocks of  block list
 > >  
 > > **Actors:** Any users  
 > >  
@@ -778,11 +784,9 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > When the user re-enters the report  page
 > > Then user should see same scrolled list based on history
-> > ``` 
-> > **Sprint: 5**
->
+> > ```  
 > **Story 4**
-> > **Feature:** User can see specific stock in detail
+> > **Feature:** User wants to see specific stock in detail
 > >  
 > > **Actors:** Any users  
 > >  
@@ -806,10 +810,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on the “Stock Name” link button in block component
 > > Then user should be redirected to detail page
 > > ```  
-> > **Sprint: 5**
->
 > **Story 5**
-> > **Feature:** User can see more analysed News in detail
+> > **Feature:** User wants to see more analysed News in detail
 > >  
 > > **Actors:** Any users  
 > >  
@@ -833,10 +835,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the “arrow vector” button next to article list 
 > > Then user should be redireced to the detail page  with "News" tab
 > > ```  
-> > **Sprint: 5**
->
 > **Story 6**
-> > **Feature:** User can search specific stocks
+> > **Feature:** User wants to see specific stock
 > >  
 > > **Actors:** Any users  
 > >  
@@ -849,7 +849,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 1. User clicks on the “Search Box” input
 > > 2. User starts typing complete or partial name of the stock
 > > 3. User clicks on the “Search Result” button - (1)
-> > 4. User sees results produced by input in the same page - (2)
+> > 4. User sees stock produced by input in the same page - (2)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -862,10 +862,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > Given that the user types letter in the “search box” input
 > > When the user clicks on the “Search Result” button
-> > Then user should see search results produced list of article led by the input
+> > Then user should see produced list of article led by the input
 > > ```  
-> > **Sprint: 5**
->
 ### Detail page
 #### **Overview tab**
 > **Story 1**
@@ -1049,7 +1047,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > User enters content and click the Ok button, then the comment should be posted
 > > ```
 > **Story 3**
-> > **Feature:** Users want to delete their comment
+> > **Feature:** User wants to delete their comment
 > > 
 > > **Actors:** Any user
 > >
@@ -1060,7 +1058,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > The comment that a user wants to delete must be written by that user
 > > ```
 > >
-> > **Trigger:** User click the delete button next to the comment that the user wants to delete.
+> > **Trigger:** User clicks the delete button next to the comment that the user wants to delete.
 > > 
 > > **Scenario:**
 > > ```
@@ -1224,7 +1222,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should be given new article list based on the button result
 > > ```
 ## **User Interface Requirements**<br />
-![Sketch](https://user-images.githubusercontent.com/13393489/96294613-9dac0f00-1027-11eb-8241-d4559f04c475.png)
+![Sketch](https://user-images.githubusercontent.com/13393489/96294999-317ddb00-1028-11eb-9a0c-f744f14dc8b1.jpg)
 
 
 This document was written with reference to UCB CS169
