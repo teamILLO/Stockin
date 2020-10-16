@@ -29,18 +29,7 @@ More Specifically,
 can be our potential customers.
 
 ## **Competitive Landscape**<br />  
-The most basic but most important information is the graph and Financial Statements, which is objective information in the stock market.
-Stockin' provides this with summarized information.
-This will reduce the time that users spend searching for this information.
-
-Also, Stockin’ provides news information.
-This is subjective information, but it is good information to be able to grasp public opinion and to understand the trends of the companies concerned.
-Stockin' categorizes positive and negative articles through NLP and ranks according to the degree of relevant articles to the enterprise.
-Eventually users quickly identify them.
-
-By scoring and recommending based on summarized information, users will be able to get help in selecting stocks.
-
-* **Competitive market companies**
+* **Market Competitors**
 
   * **Kosho**
     * An application-based platform that learns past stock price changes and predicts future stock price changes
@@ -58,11 +47,16 @@ By scoring and recommending based on summarized information, users will be able 
     * Instead of relying on AI, information is provided by the user's participation
     * Provides stock trade information of high-yield users and their recommendations for a fee
 
+* **Our Strength**
 
-Through deep learning, they decide where to sell and buy, thereby narrowing the user's judgment.
-However, there are so many factors that determine the price of stocks, and it is unpredictable.
-Stockin' helps users build know-how and make better judgments without reducing the width of their judgment.
-This will allow users to move on to the best judgment they are satisfied with.
+  * Our services do not delegate investment. User directly do the investing.
+The goal of our service is to efficiently provide all the information that can help user’s investment.
+
+  * Our service does not show information abstractly. In other words, it provides all the information of the graph and news analyzed through machine learning.
+
+  * The basic information of stocks is provided by both summary and detail. Through this, user can reduce the amount of time users spend searching for stock-related information.
+
+  * Based on the information analyzed through machine learning, scores are given and stocks are recommended through it.
 
 So, what's most **distinct from other competitors** is:
   * Reduce the amount of time users spend searching for stock-related information.
