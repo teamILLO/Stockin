@@ -671,19 +671,18 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > “add to group” button should be disabled.
 > > ```  
 ### Report page
-### Report page
 > **Story 1**
-> > **Feature:** Users can switch and see to buy / to sell tab
+> > **Feature:** Users can switch and see "To Buy / To Sell" tab
 > >  
 > > **Actors:** Any users  
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks on the “To buy / To sell” tab
+> > **Trigger:** User clicks on the “To Buy / To Sell” tab
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks “To buy / To sell” tab
+> > 1. User clicks “To Buy / To Sell” tab
 > > 2. “To buy / To sell” tab is activated - (1)
 > > ```
 > >  
@@ -695,7 +694,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > Given that user first enters the report page, to buy tab should represent in default
-> > When the user clicks “To buy / To sell” tab 
+> > When the user clicks “To Buy / To Sell” tab 
 > > Then user should see selected tab
 > >
 > > When the user re-enters the report page
