@@ -120,7 +120,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > Then “Sign Up” pop-up should be appeared
 > >
 > > When the user enters ID user want to make and clicks the “OK” button
-> > “Sign Up” pop-up should be disappeared and new member information should be created
+> > Then “Sign Up” pop-up should be disappeared and new member information should be created
 > > ```
 > **Story 3**
 > > **Feature:** User can know more about our service 
