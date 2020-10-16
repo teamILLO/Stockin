@@ -58,11 +58,6 @@ The goal of our service is to efficiently provide all the information that can h
 
   * Based on the information analyzed through machine learning, scores are given and stocks are recommended through it.
 
-So, what's most **distinct from other competitors** is:
-  * Reduce the amount of time users spend searching for stock-related information.
-  * Do not narrow the user's judgment by processing objective information.
-  * The minimum analysis prediction makes it easier to choose among many stock items.
-
 ## **User Stories**<br />
 This section will include the specification for your project in the form of user stories. For each user story, you should have at least a Feature and one or more Scenarios, each of which can have one or more Acceptance Tests. Acceptance Tests list one or more acceptance tests with concrete values for the parameters, and concrete assertions that you will make to verify the postconditions. Each user story should also have a field called "Sprint" where you specify in which sprint you implemented or plan to implement this feature.
 You should list only the user stories for the previous sprints and those for the current sprint.
