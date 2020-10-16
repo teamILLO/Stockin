@@ -15,26 +15,18 @@ In addition, **stokcin'** will not only provide predicted information about futu
 
 
 ## **Customer**<br />
+In general,
 
-* **General Customer**
+ * people who are going to buy or sell stocks
+ 
+More Specifically, 
 
-  * People interested in stocks
-  
-    * Those who is already having stocks or is willing to start stock trade
-    
-* **Specific Customer**
-
-  * Beginner of stock market
-  
-    * Those who have difficulty in selecting, and buy(sell)ing a stock based on a lot of information
-    
-  * People who don’t make a main job of stocks
-  
-    * Those who has an understanding of stocks but does not have time to grasp the information
-    
-  * People who have yet to decide which stock to choose
-  
-    * Those who have difficulty choosing stocks because there are numerous companies in the stock market
+ * people who want to see the stock price graph, price fluctuation table, stock statement, and news information of the stock
+ * people who want to see the results of graph & news analysis
+ * people who want to know the score of stock calculated by graph & news analysis
+ * people who would like to see recommendation based on the score of the stocks
+ 
+can be our potential customers.
 
 ## **Competitive Landscape**<br />  
 The most basic but most important information is the graph and Financial Statements, which is objective information in the stock market.
