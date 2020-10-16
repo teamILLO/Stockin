@@ -868,7 +868,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When a user clicks the title of a particular stock
-> > it should be redirected to the detail page of that stock
+> > Then it should be redirected to the detail page of that stock
 > > ```
 > >
 > **Story 2**
@@ -899,7 +899,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given user already click the calendar button and Calendar pop-up appeared
 > > When user clicks specific date on Calendar
-> > the page should render the overview information of the particular date
+> > Then the page should render the overview information of the particular date
 > > ```
 #### **Price trends tab**
 > **Stroy 1**
@@ -930,7 +930,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given user is already on stock_detail page and not on Price-trends tab 
 > > When a user clicks the  Price-trends tab
-> > Page should render the information of the price trend of a specific stock
+> > Then page should render the information of the price trend of a specific stock
 > > ```
 #### **Financial state tab**
 > **Stroy 1**
@@ -961,7 +961,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given user is already on stock_detail page and not on Financial-state tab 
 > > When a user clicks the  Financial-state tab, 
-> > Page should render the financial statement of a specific stock
+> > Then page should render the financial statement of a specific stock
 > > ```
 > > 
 #### **Comment tab**
@@ -993,7 +993,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given user is already on stock_detail page and not on Comments tab 
 > > When a user clicks the  Comments tab
-> > Page should render the Comments of a specific stock
+> > Then page should render the Comments of a specific stock
 > > ```
 > >
 > **Story 2**
@@ -1114,10 +1114,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given user first enters the detail page with news tab, provided news should represent current date in default
 > > When user clicks date picker
-> > User should see selected date report
+> > Then user should see selected date report
 > >
 > > When user re-enters the detail page, news tab
-> > User should see same date news based on user history
+> > Then user should see same date news based on user history
 > > ```  
 > **Story 2**
 > > **Feature:** User wants to see news including specific keyword or sentence
@@ -1144,7 +1144,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > Given that the user types letter in the “search” input
-> > User should see produced list of article led by the input
+> > Then user should see produced list of article led by the input
 > > ```
 > **Story 3**
 > > **Feature:** User wants to read specific article in detail
@@ -1169,7 +1169,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When user clicks on the title of specific article
-> > User should be given new page with article link
+> > Then user should be given new page with article link
 > > ```
 > **Story 4**
 > > **Feature:** User wants to see more news that is not represented in current page
@@ -1197,7 +1197,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When user clicks on the next/prev vector button or number button
-> > User should be given new article list based on the button result
+> > Then user should be given new article list based on the button result
 > > ```
 ## **User Interface Requirements**<br />
 ![Sketch (2)](https://user-images.githubusercontent.com/54826729/96044802-f6ef3380-0eab-11eb-8572-4d9fb0d71843.png)
