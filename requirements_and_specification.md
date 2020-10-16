@@ -715,6 +715,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user re-enters the report page
 > > Then user should see same tab, same stocks based on user history
 > > ```  
+> > **Sprint: 5**
+>
 > **Story 2**
 > > **Feature:** User can see another day reports
 > >  
@@ -744,7 +746,9 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > When the user re-enters the report  page
 > > Then user should see same date based on user history
-> > ```  
+> > ``` 
+> > **Sprint: 5**
+>
 > **Story 3**
 > > **Feature:** User can see more stocks of  block list
 > >  
@@ -774,7 +778,9 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > When the user re-enters the report  page
 > > Then user should see same scrolled list based on history
-> > ```  
+> > ``` 
+> > **Sprint: 5**
+>
 > **Story 4**
 > > **Feature:** User can see specific stock in detail
 > >  
@@ -800,6 +806,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on the “Stock Name” link button in block component
 > > Then user should be redirected to detail page
 > > ```  
+> > **Sprint: 5**
+>
 > **Story 5**
 > > **Feature:** User can see more analysed News in detail
 > >  
@@ -825,8 +833,10 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the “arrow vector” button next to article list 
 > > Then user should be redireced to the detail page  with "News" tab
 > > ```  
+> > **Sprint: 5**
+>
 > **Story 6**
-> > **Feature:** User can see specific stock
+> > **Feature:** User can search specific stocks
 > >  
 > > **Actors:** Any users  
 > >  
@@ -839,7 +849,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 1. User clicks on the “Search Box” input
 > > 2. User starts typing complete or partial name of the stock
 > > 3. User clicks on the “Search Result” button - (1)
-> > 4. User sees stock produced by input in the same page - (2)
+> > 4. User sees results produced by input in the same page - (2)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -852,8 +862,10 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > Given that the user types letter in the “search box” input
 > > When the user clicks on the “Search Result” button
-> > Then user should see produced list of article led by the input
+> > Then user should see search results produced list of article led by the input
 > > ```  
+> > **Sprint: 5**
+>
 ### Detail page
 #### **Overview tab**
 > **Story 1**
