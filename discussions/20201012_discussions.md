@@ -33,8 +33,8 @@
 - [x] I checked if the flowchart fully contains actions and pages related to Post-login Page(or Main Page)   
 - [x] I finished writing user stories for Post-login Page(or Main Page)  
 - [x] I checked that my user stories fulfill standards of grading guidelines
-- [ ] I finished changing design of Main Page to the template created by Wooyoung (Due Oct 14. 22:00)
-- [ ] I reorganized flowchart to complete flowchart as a final (Due Oct 15. 12:00)
+- [x] I finished changing design of Main Page to the template created by Wooyoung (Due Oct 14. 22:00)
+- [x] I reorganized flowchart to complete flowchart as a final (Due Oct 15. 12:00)
 - [ ] I checked if there are any grammar errors in the overall document (Due Oct 15. 12:00)
 
 ## Next Agenda
