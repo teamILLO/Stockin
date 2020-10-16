@@ -220,7 +220,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given that the user is not currently seeing the leftmost or rightmost prediction of the list
 > > When the user clicks left-pointing/right-pointing button
-> > User should see new prediction in left/right direction that was hidden previously
+> > Then user should see new prediction in left/right direction that was hidden previously
 > > ```
 > **Story 2**
 > > **Feature:** Users can see more highly scored stocks by being redirected to Recommendation Page 
@@ -233,10 +233,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User surfed among top 5 highly scored stocks and wants to know about other highly scored stocks.
-> > 2. User clicks the show-more button
-> > 3. User gets redirected to Recommendation Page
-> > 4. Depending on which show-more button is clicked, tab to be initially selected on Recommendation Page will be decided.
+> > 1. User clicks the show-more button
+> > 2. User gets redirected to Recommendation Page
+> > 3. Depending on which show-more button is clicked, tab to be initially selected on Recommendation Page will be decided.
 > > ```
 > >  
 > > **Exceptions:** 
@@ -246,9 +245,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
+> > Given that user is at the rightmost part of the list
 > > When the user clicks the show-more button
-> > User should be redirected to Recommendation Page
-> > The tab in the Recommendtion Page should be properly active regarding to which show-more button is clicked on
+> > Then user should be redirected to Recommendation Page
+> > And the tab in the Recommendtion Page should be properly active regarding to which show-more button is clicked on
 > > ```  
 > **Story 3**
 > > **Feature:** Users can get more information about the stock by clicking the stock
@@ -261,9 +261,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User surfed among top 5 highly scored stocks and wants to know about one of the stocks
-> > 2. User clicks on the corresponding stock
-> > 3. User gets redirected to Detail Page of the corresponding stock
+> > 1. User clicks on one of the top 5 stocks
+> > 2. User gets redirected to Detail Page of the corresponding stock
 > > ```
 > >  
 > > **Exceptions:** 
@@ -274,7 +273,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When the user clicks the stock that he/she wants to get more information about
-> > User should be on Detail Page of the corresponding stock
+> > Then user should be on Detail Page of the corresponding stock
 > > ```  
 > **Story 4**
 > > **Feature:** Users can switch between Daily Report tab and My Interests tab
@@ -287,9 +286,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to get information from Daily Report/My Interests tab
-> > 2. User clicks on the "Daily Report" or "My Interests" tab
-> > 3. Daily Report/My Interests tab is activated - (1)
+> > 1. User clicks on the "Daily Report" or "My Interests" tab
+> > 2. Daily Report/My Interests tab is activated - (1)
 > > ```
 > >  
 > > **Exceptions:** 
@@ -301,7 +299,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given that the target tab is different from current tab
 > > When the user clicks the target tab
-> > The target tab should be activated
+> > Then the target tab should be activated
 > > ```  
 > **Story 5**
 > > **Feature:** Users can go to My Page anytime
@@ -314,9 +312,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to do some jobs related to his/her account at the mypage
-> > 2. User clicks on the "Mypage" button
-> > 3. User gets redirected to My Page
+> > 1. User clicks on the "Mypage" button
+> > 2. User gets redirected to My Page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -327,7 +324,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When the user clicks the mypage button
-> > User should be redirected to My Page
+> > Then the user should be redirected to My Page
 > > ```  
 > **Story 6**
 > > **Feature:** Users can logout anytime
@@ -340,9 +337,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User finished getting information from stockin' and wants to logout
-> > 2. User clicks on the "Logout" button
-> > 3. User gets redirected to Pre-login Page
+> > 1. User clicks on the "Logout" button
+> > 2. User gets redirected to Pre-login Page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -353,7 +349,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > **Acceptance Test:**
 > > ```
 > > When the user clicks the mypage button
-> > User should be on My Page
+> > Then the user should be on My Page
 > > ```  
 > **Story 7**
 > > **Feature:** Users can search for recently searched stock
@@ -366,11 +362,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to search for a recently searched stock
-> > 2. User clicks on the "Search" input
-> > 3. User sees what he/she recently searched - (1)
-> > 4. User clicks on the name of the stock
-> > 5. User gets redirected to the Detail Page of the corresponding stock
+> > 1. User clicks on the "Search" input
+> > 2. User sees what he/she recently searched - (1)
+> > 3. User clicks on the name of the stock
+> > 4. User gets redirected to the Detail Page of the corresponding stock
 > > ```
 > >  
 > > **Exceptions:** 
@@ -382,7 +377,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > ```
 > > Given that the user has history of searching
 > > When the user clicks on the "Search" input
-> > User should see what he/she has recently searched
+> > Then theser should see what he/she has recently searched
 > >   
 > > When the user clicks on the name of one of the recently searched stocks
 > > User should be on Detail Page of the corresponding stock
@@ -398,13 +393,12 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to search for a specific stock
-> > 2. User clicks on the "Search" input
-> > 3. User sees what he/she recently searched, but none of them matches what he/she wants to search for - (1)
-> > 4. User starts typing the name of the specific stock
-> > 5. User sees suggested stocks during typing, and finds what he/she was searching for - (2)
-> > 6. User clicks on the name of the stock
-> > 7. User gets redirected to the Detail Page of the corresponding stock
+> > 1. User clicks on the "Search" input
+> > 2. User sees what he/she recently searched, but none of them matches what he/she wants to search for - (1)
+> > 3. User starts typing the name of the specific stock
+> > 4. User sees suggested stocks during typing, and finds what he/she was searching for - (2)
+> > 5. User clicks on the name of the stock
+> > 6. User gets redirected to the Detail Page of the corresponding stock
 > > ```
 > >  
 > > **Exceptions:** 
