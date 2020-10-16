@@ -82,7 +82,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > **Story 1**
 > > **Feature:** User wants to sign in
 > >  
-> > **Actors:** Users who is not logged-in  
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be logged-out state and a member of the service 
 > >  
@@ -90,10 +90,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to log-in and use the service
-> > 2. User enters own ID and password
-> > 3. User clicks log-in button
-> > 4. User is logged in and redirected to the main page
+> > 1. User enters own ID and password
+> > 2. User clicks log-in button
+> > 3. User is logged in and redirected to the main page
 > > ```
 > > **Exceptions:** 
 > > ```
@@ -102,13 +101,13 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > After entering id/password and clicking the sign-in button
-> > The user state must be logged in and redirected to main-page
+> > When user enters id/password and clicks the sign-in button
+> > User should be logged in state and redirected to main-page
 > > ```
 > **Story 2**
 > > **Feature:** User wants to sign up
 > >  
-> > **Actors:** Users who is not logged-in  
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be logged-out state and not a member of the service
 > >  
@@ -116,11 +115,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to sign up and wants to go main page
-> > 2. User clicks sign up button
-> > 3. Sign up pop-up activate
-> > 4. User enters the ID/password which user want to use
-> > 5. User makes a own ID and Sign up pop-up disappear
+> > 1. User clicks sign up button
+> > 2. Sign up pop-up activate
+> > 3. User enters the ID/password which user want to use
+> > 4. User makes a own ID and Sign up pop-up disappear
 > > ```
 > >  
 > > **Exceptions:** 
@@ -130,14 +128,15 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on sign up button sign up pop-up must appear
-> > After the user creates an ID that did not exist
-> > sign up pop-up mush disappear and new member information should be created
+> > When user clicks on sign up button
+> > sign up pop-up should be appeared
+> > When user enters ID user want to make and clicks the OK button
+> > sign up pop-up should be disappeared and new member information should be created
 > > ```
 > **Story 3**
 > > **Feature:** User wants to know more about our service 
 > >  
-> > **Actors:** Users who is not logged-in  
+> > **Actors:** Any users
 > >  
 > > **Precondition:** The user must be logged-out state  
 > >  
@@ -145,9 +144,8 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User wants to know more about our service
-> > 2. User sees initial information of our service
-> > 3. User can scroll page and see more information according to the degree of scrolling -(1)
+> > 1. User sees overview information of our service on
+> > 2. User can scroll page and see more information according to the degree of scrolling 
 > > ```
 > >  
 > > **Exceptions:** 
@@ -157,11 +155,10 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user first enters to the pre-login page
-> > user should see introduce information about our page
-> >
-> > When user scrolls the page
-> > user should see more information of our service
+> > When you access the site without log-in
+> > Initial page should show the overview information of our service
+> > When user clicks About_us or Preview tab
+> > Page should render the information corresponding to the tab
 > > ```
 > **Story 4**
 > > **Feature:** User forgets ID or password and wants to find it
@@ -174,10 +171,9 @@ At the end of this section you should maintain a bullet list of user stories tha
 > >
 > > **Scenario:**
 > > ```
-> > 1. User want to log-in but forgets own ID or password
-> > 2. User clicks "Find ID Password" button
-> > 3. User enters his/her information and finds ID/password
-> > 4. After that, User can log-in to the webpage
+> > 1. User clicks "Find ID Password" button
+> > 2. User enters his/her information and finds ID/password
+> > 3. After that, User can log-in to the webpage
 > > ```
 > >
 > > **Exceptions:** 
@@ -188,8 +184,7 @@ At the end of this section you should maintain a bullet list of user stories tha
 > > 
 > > **Acceptance Test:**
 > > ```
-> > User clicks "Find ID Password" button
-> > User enters correct his/her information
+> > When User clicks "Find ID Password" button and enters correct his/her information
 > > User can know his/her ID/password information
 > > ```
 ### Post-login page (Main page)
