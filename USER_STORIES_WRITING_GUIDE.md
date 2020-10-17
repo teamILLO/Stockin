@@ -35,3 +35,21 @@ That is, every component name should be the same as the UI design in Figma.
 If you are not sure of the name of the button/tab/other stuffs, please go to Figma and find answer.
 If the component is not named, please name yourself and change the component name in Figma by yourself.
 ```
+
+#### 6. You should show where the exception has occurred by numbering
+##### Bad Example
+```
+Scenario
+1. I ate a pie
+
+Exceptions
+Pie can be actually pi, a number
+```
+##### Good Example
+```
+Scenario
+1. I ate a pie - (1)
+
+Exceptions
+(1) Pie can be actually pi, a number
+```
