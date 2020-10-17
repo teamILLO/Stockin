@@ -453,6 +453,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then any member information must be not changed
 > > ```  
 > > **Sprint: 2**  
+> >
 > **Story 2**
 > > **Feature:** User wants to change nickname
 > >  
@@ -484,7 +485,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user moves to another page without pressing the confirm button
 > > Then any member information must be not changed
 > > ```  
-> > **Sprint: 2**  
+> > **Sprint: 2** 
+> >
 > **Story 3**
 > > **Feature:** User wants to sign out
 > >  
@@ -519,6 +521,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then any member information must be not changed
 > > ```  
 > > **Sprint: 2**  
+> >
 > **Story 4**
 > > **Feature:** User want to see informations of all stocks in group
 > >  
@@ -551,6 +554,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should see a button redirected to recommend page
 > > ```
 > > **Sprint: 5**  
+> >
 > **Story 5**
 > > **Feature:** User wants to make a new group within him or her favorites
 > >  
@@ -587,6 +591,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then “make new group” button should be disabled
 > > ```  
 > > **Sprint: 4**  
+> >
 > **Story 6**
 > > **Feature:** User wants to delete stocks within him or her favorites
 > >  
@@ -626,6 +631,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then “delete” button should be disabled
 > > ```  
 > > **Sprint: 4**  
+> >
 > **Story 7**
 > > **Feature:** User wants to delete a group within him or her favorites
 > >  
@@ -664,6 +670,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then “delete” button should be disabled
 > > ```
 > > **Sprint: 4**  
+> >
 > **Story 8**
 > > **Feature:** User wants to add stocks to the group within him or her favorites
 > >  
@@ -901,6 +908,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then it should be redirected to the detail page of that stock
 > > ```
 > > **Sprint: 4**
+> >
 > **Story 2**
 > > **Feature:** User want to see past score and overview information of particular stock
 > >
@@ -1028,6 +1036,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then page should render the Comments of a specific stock
 > > ```
 > > **Sprint: 3**
+> >
 > **Story 2**
 > > **Feature:** Users want to post comments to a specific stock
 > > 
@@ -1057,6 +1066,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > User enters content and click the Ok button, then the comment should be posted
 > > ```
 > > **Sprint: 3**
+> >
 > **Story 3**
 > > **Feature:** User wants to delete their comment
 > > 
@@ -1089,6 +1099,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then the comment should be removed and not be rendered
 > > ```
 > > **Sprint: 3**
+> >
 > **Story 4**
 > > **Feature:** Users want to edit their comments
 > > 
@@ -1154,6 +1165,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should see same date news based on user history
 > > ```  
 > > **Sprint: 3**
+> >
 > **Story 2**
 > > **Feature:** User wants to see news including specific keyword or sentence
 > >  
@@ -1182,6 +1194,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should see produced list of article led by the input
 > > ```
 > > **Sprint: 3**
+> >
 > **Story 3**
 > > **Feature:** User wants to read specific article in detail
 > >  
@@ -1208,6 +1221,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should be given new page with article link
 > > ```
 > > **Sprint: 2**
+> >
 > **Story 4**
 > > **Feature:** User wants to see more news that is not represented in current page
 > >  
