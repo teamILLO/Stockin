@@ -7,7 +7,7 @@
 detail page, stock detail page, detail stock page, stock detailed page, stock_detail page >> Detail Page
 ```
 
-#### 2. Buttons, Tabs, and other components that show text when rendered must be written in the following form:
+#### 2. Buttons, tabs, and other components that show text when rendered must be written in the following form:
 ```
 "<TEXT THAT COMPONENT SHOWS>" <component_type>
 
