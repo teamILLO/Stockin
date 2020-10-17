@@ -96,7 +96,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > 1. User clicks on the “Sign Up” button
 > > 2. “Sign Up” pop-up activates
-> > 3. User enters the ID/password which user want to use
+> > 3. User enters the ID/password which user wants to use
 > > 4. User makes his/her own ID and “Sign Up” pop-up disappears - (1)
 > > ```
 > >  
@@ -110,38 +110,39 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on “Sign Up” button
 > > Then “Sign Up” pop-up should be appeared
 > >
-> > When the user enters ID user want to make and clicks the “OK” button
+> > When the user enters ID user wants to make and clicks on the “OK” button
 > > Then “Sign Up” pop-up should be disappeared and new member information should be created
 > > ```
 > > **Sprint: 2**  
 >
 > **Story 3**
-> > **Feature:** User wants to know more about our service 
+> > **Feature:** User wants to know more about our service
 > >  
 > > **Actors:** Any users
 > >  
-> > **Precondition:** The user must be logged-out
+> > **Precondition:** The user must be logged-out and in Pre-login Page
 > >  
-> > **Trigger:** User is in pre-login page and can scroll it
+> > **Trigger:** User scrolls
 > >  
 > > **Scenario:**
 > > ```
 > > 1. User sees overview information of our service on
-> > 2. User can scroll page and see more information according to the degree of scrolling - (1)
+> > 2. User can scroll page and see more information according to the degree of scrolling - (1) (2)
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) Nothing happens when user reaches the end of list
+> > (1) Nothing happens when user reaches the end of list and scrolls down
+> > (2) Nothing happens when user reaches the top of list and scrolls up
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user accesses the site without log-in
-> > Then Initial page should show the overview information of our service
+> > When the user accesses the site without login
+> > Then Pre-login Page should show the overview information of our service
 > > 
-> > When the user clicks on “About_Us” or “Preview” tab
-> > Then page should render the information corresponding to the tab
+> > When the user clicks on “About Us” or “Preview” tab
+> > Then Pre-login Page should render the information corresponding to the tab
 > > ```
 > > **Sprint: 2**
 >
@@ -158,18 +159,18 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > 1. User clicks on the "Find ID Password" button
 > > 2. User enters his/her information and finds ID/password - (1), (2)
-> > 3. After that, User can log-in to the webpage
+> > 3. After that, user can login to the webpage
 > > ```
 > >
 > > **Exceptions:** 
 > > ```
-> > (1) When user tries to find ID/password which doesn't existed, it must notice it that it doesn't exist.
-> > (2) When user enters wrong his/her information, it must notice it that it is wrong.
+> > (1) When user tries to find ID/password which doesn't existed, user should be noticed that it doesn't exist.
+> > (2) When user enters wrong his/her information, user should be noticed that it is wrong.
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user clicks on “the Find ID Password" button and enters correct his/her information
+> > When the user clicks on the "Find ID Password" button and enters correct information
 > > Then user can know his/her ID/password information
 > > ```
 > > **Sprint: 2**
@@ -433,7 +434,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 2. User clicks on the “change password” button
 > > 3. Change password pop-up will appear
 > > 4. User puts a new password and clicks on the confirm button - (1)
-> > 4. User's password changed
+> > 4. User's password is changed
 > > ```
 > >  
 > > **Exceptions:** 
