@@ -470,7 +470,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 2. User clicks on the “Edit” button
 > > 3. User gets redirected to user information edit page
 > > 4. User puts new nickname in the nickname input and clicks on the confirm button - (1)
-> > 5. User's nickname changed
+> > 5. User's nickname is changed
 > > ```
 > >  
 > > **Exceptions:** 
@@ -484,7 +484,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should be redirected to edit page with warning messages
 > > 
 > > When the user moves to another page without pressing the confirm button
-> > Then any member information must be not changed
+> > Then any member information should not be changed
 > > ```  
 > > **Sprint: 2** 
 > >
@@ -524,7 +524,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 2**  
 > >
 > **Story 4**
-> > **Feature:** User want to see informations of all stocks in group
+> > **Feature:** User want to see information of all stocks in group
 > >  
 > > **Actors:** Any users 
 > >  
@@ -542,22 +542,22 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Exceptions:** 
 > > ```
-> > If user doesn’t have any group, both tab must show “browse stops to create a group” button to redirect to recommend page
+> > If user doesn’t have any group, both tab must show “browse stops to create a group” button to redirect to Report Page
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters  my page, favorites summary tab should represent in default
+> > Given user enters my page, favorites summary tab should represent in default
 > > When user clicks favorites summary / favorites detail tab 
 > > Then user should see selected tab
 > >
 > > When user doesn’t have any favorites, 
-> > Then user should see a button redirected to recommend page
+> > Then user should see a button redirected to Report Page
 > > ```
 > > **Sprint: 5**  
 > >
 > **Story 5**
-> > **Feature:** User wants to make a new group within him or her favorites
+> > **Feature:** User wants to make a new group within his or her favorites
 > >  
 > > **Actors:** Any users
 > >  
@@ -572,7 +572,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 3. User clicks on the “make new group” button
 > > 4. New group pop-up will appear
 > > 5. User puts new group name and clicks on the accept button - (1)
-> > 6. User gets redirect to my page, then new group appear in the page
+> > 6. User gets redirected to My Page, then new group appears in the page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -594,7 +594,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**  
 > >
 > **Story 6**
-> > **Feature:** User wants to delete stocks within him or her favorites
+> > **Feature:** User wants to delete stocks within his or her favorites
 > >  
 > > **Actors:** Any users
 > >  
@@ -607,9 +607,9 @@ The goal of our service is to efficiently provide all the information that can h
 > > 1. User clicks on the “edit group” button
 > > 2. User clicks checkbox beside the stocks
 > > 3. User clicks on the “delete” button
-> > 4. Delete stock pop-up will appear, and the user can accept or dismiss the confirmation
+> > 4. Delete stock pop-up will appear, and the user can accept or cancel the confirmation
 > > 5. User clicks on the accept button
-> > 6. the user's favorites list changes and get redirected to my page
+> > 6. User's favorites list changes and gets redirected to my page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -626,7 +626,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then pop-up windows should appear and ask the user whether or not to confirm
 > >
 > > When user clicks on the “confirm” button
-> > Then user should be redirected to favorite summary tab, and selected stocks should be seen invisible
+> > Then user should be redirected to favorite summary tab, and selected stocks should be invisible
 > >
 > > When user checks nothing
 > > Then “delete” button should be disabled
@@ -634,7 +634,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**  
 > >
 > **Story 7**
-> > **Feature:** User wants to delete a group within him or her favorites
+> > **Feature:** User wants to delete a group within his or her favorites
 > >  
 > > **Actors:** Any users
 > >  
@@ -648,7 +648,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 2. User clicks checkbox beside the group
 > > 3. User clicks “delete” button
 > > 4. Delete group pop-up will appear, and the user can accept or dismiss the confirmation
-> > 5. User clicks on the accept button, the user's favorites list changes and redirect to my page
+> > 5. User clicks on the accept button, the user's favorites list changes and gets redirected to my page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -658,14 +658,14 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks on the edit button
+> > When user clicks on the "edit" button
 > > Then user should be on group edit page
 > >
 > > When user checks some groups and clicks on the “delete” button
-> > Then pop-up windows should appear and ask the user whether or not to confirm
+> > Then pop-up window should appear and ask the user whether or not to confirm
 > >
 > > When user clicks on the “confirm” button
-> > Then user should be redirected to favorite summary tab, and selected stocks should be seen invisible
+> > Then user should be redirected to favorite summary tab, and selected stocks should be invisible
 > >
 > > When user checks nothing
 > > Then “delete” button should be disabled
@@ -673,7 +673,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 4**  
 > >
 > **Story 8**
-> > **Feature:** User wants to add stocks to the group within him or her favorites
+> > **Feature:** User wants to add stocks to the group within his or her favorites
 > >  
 > > **Actors:** Any users
 > >  
