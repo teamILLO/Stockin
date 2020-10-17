@@ -813,7 +813,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Scenario:**
 > > ```
 > > 1. User clicks on the “Stock Name” link button in block component
-> > 3. User should see the stock detail page
+> > 2. User should see the stock detail page
 > > ```
 > >  
 > > **Exceptions:** 
@@ -894,7 +894,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Scenario:**
 > > ```
 > > 1. User click title of a particular stock on the other page
-> > 2. User gets redirected to detail stock page.
+> > 2. User gets redirected to Detail Page.
 > > 3. User can see the overview information of the stock clicked
 > > ```
 > >  
@@ -906,7 +906,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Acceptance Test:**
 > > ```
 > > When a user clicks the title of a particular stock
-> > Then it should be redirected to the detail page of that stock
+> > Then it should be redirected to the Detail Page of that stock
 > > ```
 > > **Sprint: 4**
 > >
@@ -918,7 +918,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in
-> > The user must be already on stock detail page and overview tab
+> > The user must be already on Detail Page and overview tab
 > > ```
 > >
 > > **Trigger:** User clicks on the calendar button which is next to update date
@@ -926,12 +926,12 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Scenario:**
 > > ```
 > > 1. Users click the calendar button which is next to the update-date
-> > 2. Calendar pop-up will appear, and users can choose specific date
+> > 2. Calendar pop-up will appear, and users can choose specific date - (1)
 > > 3. User gets detailed stock information on a specific date
 > > ```
 > > **Exceptions:** 
 > > ```
-> > User should not choose a future date.
+> > (1) User should not choose a future date.
 > > ```
 > >
 > > **Acceptance Test:**
@@ -950,7 +950,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in.
-> > The user must be already on stock detail page and Price trends tab
+> > The user must be already on Detail page and Price trends tab
 > > ```
 > >
 > > **Trigger:** User clicks the Price trends tab on the stock detail page
@@ -968,7 +968,7 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > **Acceptance Test:**
 > > ```
-> > Given user is already on stock_detail page and not on Price-trends tab 
+> > Given user is already on Detail Page and not on Price-trends tab 
 > > When a user clicks the  Price-trends tab
 > > Then page should render the information of the price trend of a specific stock
 > > ```
@@ -982,7 +982,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in
-> > The user must be already on stock detail page and Financial state tab
+> > The user must be already on Detail Page and Financial state tab
 > > ```
 > >
 > > **Trigger:** User clicks the Financial state tab on the stock detail page
@@ -1000,8 +1000,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user is already on stock_detail page and not on Financial-state tab 
-> > When a user clicks the  Financial-state tab, 
+> > Given user is already on Detail Page and not on Financial-state tab 
+> > When a user clicks the Financial-state tab, 
 > > Then page should render the financial statement of a specific stock
 > > ```
 > > **Sprint: 3**
@@ -1014,10 +1014,10 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in
-> > The user must be already on stock detail page
+> > The user must be already on Detail Page
 > > ```
 > >
-> > **Trigger:** User clicks the Comment tab on the stock detailed page
+> > **Trigger:** User clicks the Comment tab on the Detail Page
 > > 
 > > **Scenario:**
 > > ```
@@ -1032,9 +1032,9 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user is already on stock_detail page and not on Comments tab 
-> > When a user clicks the  Comments tab
-> > Then page should render the Comments of a specific stock
+> > Given user is already on Detail page and not on Comments tab 
+> > When a user clicks the Comments tab
+> > Then Detail Page should render the comments of a specific stock
 > > ```
 > > **Sprint: 3**
 > >
@@ -1046,7 +1046,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in
-> > The user must be already on stock detail page and Comment tab
+> > The user must be already on Detail Page and Comment tab
 > > ```
 > >
 > > **Trigger:** User enters the content of the comment and clicks the OK button
@@ -1054,17 +1054,17 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Scenario:**
 > > ```
 > > 1. User enters their opinion to the comment
-> > 2. User click the OK button 
+> > 2. User click the OK button - (1)
 > > 3. New comment is posted
 > > ```
 > > **Exceptions:** 
 > > ```
-> > When user clicks the OK button with empty content, warning alert will
+> > (1) When user clicks the "OK" button with empty content, warning alert will appear
 > > ```
 > >
 > > **Acceptance Test:**
 > > ```
-> > User enters content and click the Ok button, then the comment should be posted
+> > User enters content and click the "OK" button, then the comment should be posted
 > > ```
 > > **Sprint: 3**
 > >
@@ -1080,23 +1080,23 @@ The goal of our service is to efficiently provide all the information that can h
 > > The comment that a user wants to delete must be written by that user
 > > ```
 > >
-> > **Trigger:** User clicks the delete button next to the comment that the user wants to delete.
+> > **Trigger:** User clicks the "Delete" button next to the comment that the user wants to delete.
 > > 
 > > **Scenario:**
 > > ```
 > > 1. User has posted comments on a specific stock
-> > 2. User clicks the delete button next to the comment 
+> > 2. User clicks the "Delete" button next to the comment - (1) 
 > > 3. The comment is deleted and not rendered
 > > ```
 > >
 > > **Exceptions:** 
 > > ```
-> > User can not delete the comments written by other people
+> > (1) "Delete" button does not appear to the comments written by other people
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks the delete button next to comment written by him/her
+> > When user clicks the "Delete" button next to comment written by him/her
 > > Then the comment should be removed and not be rendered
 > > ```
 > > **Sprint: 3**
@@ -1109,28 +1109,28 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Precondition:**
 > > ```
 > > The user must be registered and logged in
-> > The user must be already on stock detail page and Comment tab
+> > The user must be already on Detail Page and Comment tab
 > > The comment that a user wants to edit must be written by that user
 > > ```
 > >
-> > **Trigger:** User click the edit button next to the comment that the user wants to edit.
+> > **Trigger:** User click the "Edit" button next to the comment that the user wants to edit.
 > > 
 > > **Scenario:**
 > > ```
 > > 1. User has posted comments on a specific stock
-> > 2. User clicks the edit button next to the comment
+> > 2. User clicks the "Edit" button next to the comment
 > > 3. User enters new content and then click the Ok button
 > > 4. The comment is edited and rendered with revised comment
 > > ```
 > > 
 > > **Exceptions:** 
 > > ```
-> > There should be no edit button next to comment wriiten by other person
+> > There should be no "Edit" button next to comment wriiten by other person
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When user clicks the edit button next to comment written by him/her and enters new content of comment and click the OK button
+> > When user clicks the "Edit" button next to comment written by him/her and enters new content of comment and click the "OK" button
 > > the comment content should be revised
 > > ```
 > > **Sprint: 3**
@@ -1158,11 +1158,11 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given user first enters the detail page with news tab, provided news should represent current date in default
+> > Given user first enters the Detail Page with news tab, provided news should represent current date in default
 > > When user clicks date picker
 > > Then user should see selected date report
 > >
-> > When user re-enters the detail page, news tab
+> > When user re-enters the Detail Page, news tab
 > > Then user should see same date news based on user history
 > > ```  
 > > **Sprint: 3**
@@ -1203,7 +1203,7 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Precondition:** The user must be registered and logged in
 > >  
-> > **Trigger:** User clicks the title of specific article
+> > **Trigger:** User clicks on the title of specific article
 > >  
 > > **Scenario:**
 > > ```
