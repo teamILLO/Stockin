@@ -72,12 +72,12 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > **Exceptions:** 
 > > ```
-> > (1) When user enters wrong id/password and clicks the log-in button, warning message must be appeared.
+> > (1) When user enters wrong id/password and clicks on the "Login" button, warning message must be appeared.
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user enters id/password and clicks the sign-in button
+> > When the user enters id/password and clicks on the "Login" button
 > > Then user should be logged in
 > > And user should be redirected to main-page
 > > ```
