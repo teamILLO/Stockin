@@ -900,7 +900,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When a user clicks the title of a particular stock
 > > Then it should be redirected to the detail page of that stock
 > > ```
-> >
+> > Sprint: 4
 > **Story 2**
 > > **Feature:** User want to see past score and overview information of particular stock
 > >
@@ -931,6 +931,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks specific date on Calendar
 > > Then the page should render the overview information of the particular date
 > > ```
+> > Sprint: 3
 #### **Price trends tab**
 > **Stroy 1**
 > > **Feature:** User want to see the price trend of a specific stock.
@@ -962,6 +963,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When a user clicks the  Price-trends tab
 > > Then page should render the information of the price trend of a specific stock
 > > ```
+> > Sprint: 2
 #### **Financial state tab**
 > **Stroy 1**
 > > **Feature:** User want to see the financial state and comparison information of a specific stock
@@ -993,7 +995,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When a user clicks the  Financial-state tab, 
 > > Then page should render the financial statement of a specific stock
 > > ```
-> > 
+> > Sprint: 3
 #### **Comment tab**
 > **Story 1**
 > > **Feature:** Users want to see other people's opinions
@@ -1025,7 +1027,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When a user clicks the  Comments tab
 > > Then page should render the Comments of a specific stock
 > > ```
-> >
+> > Sprint: 3
 > **Story 2**
 > > **Feature:** Users want to post comments to a specific stock
 > > 
@@ -1085,6 +1087,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks the delete button next to comment written by him/her
 > > Then the comment should be removed and not be rendered
 > > ```
+> > Sprint: 3
 > **Story 4**
 > > **Feature:** Users want to edit their comments
 > > 
@@ -1117,7 +1120,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks the edit button next to comment written by him/her and enters new content of comment and click the OK button
 > > the comment content should be revised
 > > ```
-> >
+> > Sprint: 3
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
@@ -1149,6 +1152,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user re-enters the detail page, news tab
 > > Then user should see same date news based on user history
 > > ```  
+> > Sprint: 3
 > **Story 2**
 > > **Feature:** User wants to see news including specific keyword or sentence
 > >  
@@ -1176,6 +1180,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > Given that the user types letter in the “search” input
 > > Then user should see produced list of article led by the input
 > > ```
+> > Sprint: 3
 > **Story 3**
 > > **Feature:** User wants to read specific article in detail
 > >  
@@ -1201,6 +1206,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks on the title of specific article
 > > Then user should be given new page with article link
 > > ```
+> > Sprint: 2
 > **Story 4**
 > > **Feature:** User wants to see more news that is not represented in current page
 > >  
@@ -1229,6 +1235,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks on the next/prev vector button or number button
 > > Then user should be given new article list based on the button result
 > > ```
+> > Sprint: 2
 ## **User Interface Requirements**<br />
 ![Sketch](https://user-images.githubusercontent.com/13393489/96294999-317ddb00-1028-11eb-9a0c-f744f14dc8b1.jpg)
 
