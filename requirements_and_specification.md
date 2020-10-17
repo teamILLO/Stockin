@@ -1253,7 +1253,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > **Sprint: 2**
 ## **User Interface Requirements**<br />
-![Sketch](https://user-images.githubusercontent.com/13393489/96294999-317ddb00-1028-11eb-9a0c-f744f14dc8b1.jpg)
+![Sketch (3)](https://user-images.githubusercontent.com/54826729/96331273-f2d33980-1096-11eb-9bfb-7191aa0cc66f.png)
 
 
 This document was written with reference to UCB CS169
