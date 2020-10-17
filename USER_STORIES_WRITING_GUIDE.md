@@ -14,7 +14,7 @@ detail page, stock detail page, detail stock page, stock detailed page, stock_de
 ex) "Login" button, "Preview" tab
 ```
 
-#### 3. Buttons, Tabs, and other components that do not show text when rendered must be written in the following form:
+#### 3. Buttons, tabs, and other components that do not show text when rendered must be written in the following form:
 ```
 <NAME_OF_COMPONENT> <component_type>
 
