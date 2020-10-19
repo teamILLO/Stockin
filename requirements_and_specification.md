@@ -984,7 +984,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When a user clicks the  Price-trends tab
 > > Then page should render the information of the price trend of a specific stock
 > > ```
-> > **Sprint: 2**
+> > **Sprint: 3**
 #### **Financial state tab**
 > **Stroy 1**
 > > **Feature:** User want to see the financial state and comparison information of a specific stock
@@ -1233,7 +1233,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks on the title of specific article
 > > Then user should be given new page with article link
 > > ```
-> > **Sprint: 2**
+> > **Sprint: 3**
 > >
 > **Story 4**
 > > **Feature:** User wants to see more news that is not represented in current page
@@ -1263,7 +1263,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks on the next/prev vector button or number button
 > > Then user should be given new article list based on the button result
 > > ```
-> > **Sprint: 2**
+> > **Sprint: 3**
 ## **User Interface Requirements**<br />
 ![Sketch (3)](https://user-images.githubusercontent.com/54826729/96331273-f2d33980-1096-11eb-9bfb-7191aa0cc66f.png)
 
