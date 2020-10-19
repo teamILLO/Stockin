@@ -1048,7 +1048,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When a user clicks the Comments tab
 > > Then Detail Page should render the comments of a specific stock
 > > ```
-> > **Sprint: 3**
+> > **Sprint: 2**
 > >
 > **Story 2**
 > > **Feature:** Users want to post comments to a specific stock
@@ -1078,7 +1078,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > User enters content and click the "OK" button, then the comment should be posted
 > > ```
-> > **Sprint: 3**
+> > **Sprint: 2**
 > >
 > **Story 3**
 > > **Feature:** User wants to delete their comment
@@ -1111,7 +1111,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks the "Delete" button next to comment written by him/her
 > > Then the comment should be removed and not be rendered
 > > ```
-> > **Sprint: 3**
+> > **Sprint: 2**
 > >
 > **Story 4**
 > > **Feature:** Users want to edit their comments
@@ -1145,7 +1145,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When user clicks the "Edit" button next to comment written by him/her and enters new content of comment and click the "OK" button
 > > the comment content should be revised
 > > ```
-> > **Sprint: 3**
+> > **Sprint: 2**
 #### **News tab**
 > **Story 1**
 > > **Feature:** User wants to see another day noticeable news
