@@ -859,7 +859,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks the “arrow vector” button next to article list 
 > > Then user should be redireced to the detail page  with "News" tab
 > > ```  
-> > **Sprint: 5**  
+> > **Sprint: 3**  
 > >
 > **Story 6**
 > > **Feature:** User wants to see specific stock
