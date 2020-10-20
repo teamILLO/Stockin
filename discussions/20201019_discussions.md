@@ -56,8 +56,8 @@
 - [ ] API listup
 
 3. G1 >> Good Guy
-- [ ] My Page Frontend Relations
-- [ ] API listup
+- [X] My Page Frontend Relations
+- [X] API listup
 
 4. Wooyoung >> **Heavy Drinker**
 - [ ] Detail Page Frontend Relations
