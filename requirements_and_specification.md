@@ -153,11 +153,11 @@ The goal of our service is to efficiently provide all the information that can h
 > >
 > > **Precondition:** The user must be registered and logged out
 > >
-> > **Trigger:** User clicks on the “Find email/Password" button
+> > **Trigger:** User clicks on the “Find Email/Password" button
 > >
 > > **Scenario:**
 > > ```
-> > 1. User clicks on the "Find email/Password" button
+> > 1. User clicks on the "Find Email/Password" button
 > > 2. User enters his/her information and finds email/password - (1), (2)
 > > 3. After that, user can login to the webpage
 > > ```
@@ -170,7 +170,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user clicks on the "Find email/Password" button and enters correct information
+> > When the user clicks on the "Find Email/Password" button and enters correct information
 > > Then user can know his/her email/password information
 > > ```
 > > **Sprint: 2**
