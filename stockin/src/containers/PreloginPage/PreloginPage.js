@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
+import CircularPercentage from '../../components/CircularPercentage/CircularPercentage';
+import HalfCircularScore from '../../components/HalfCircularScore/HalfCircularScore';
 
 //TODO: password find feature
 const PreloginPage = (props) => {
@@ -62,6 +64,7 @@ const PreloginPage = (props) => {
         </button>
       </div>
       {selectedTab}
+      <HalfCircularScore score={641} maxScore={1000} />
     </div>
   );
 };
