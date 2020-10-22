@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
 
-const ReportPage = (props) => {
+const AboutUsPage = (props) => {
   return (
     <div>
       <Header history={props.history} />
@@ -9,4 +9,4 @@ const ReportPage = (props) => {
   );
 };
 
-export default ReportPage;
+export default AboutUsPage;
