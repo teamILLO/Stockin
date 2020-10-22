@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import PreloginPage from './containers/PreloginPage/PreloginPage';
+import MainPage from './containers/MainPage/MainPage';
+import ReportPage from './containers/ReportPage/ReportPage';
+import MyPage from './containers/MyPage/MyPage';
+import DetailPage from './containers/DetailPage/DetailPage';
 
-function App() {
+function App(props) {
   return (
+  <ConnectedRouter history={props.history}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+          <Route path='/prelogin' exact component={PreloginPage} />
+          <Route path='/main' exact component={MainPage} />
+          <Route path='/report' exact component={ReportPage} />
+          <Route path='/mypage' exact component={MyPage} />
+          <Route path='/detail/:id' exact component={DetailPage} />
+          <Redirect exact from='/' to='prelogin' />
+          <Route render={() => <h1>Not Found</h1>} />
+      </Switch>
     </div>
+  </ConnectedRouter>
   );
 }
 
