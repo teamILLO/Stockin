@@ -723,19 +723,19 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks “To Buy / To Sell” tab
+> > 1. User clicks on the “To Buy / To Sell” tab
 > > 2. “To buy / To sell” tab is activated - (1)
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) Nothing happens when user clicks same tab
+> > (1) Nothing happens when user clicks on the same tab
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
 > > Given that user first enters the report page, to buy tab should represent in default
-> > When the user clicks “To Buy / To Sell” tab 
+> > When the user clicks on the “To Buy / To Sell” tab 
 > > Then user should see selected tab
 > >
 > > When the user re-enters the report page
@@ -750,24 +750,24 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks on the date picker
+> > **Trigger:** User clicks on the calendar button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks date picker, pick date user wants to see
+> > 1. User clicks on the calendar button, pick date user wants to see
 > > 2. User gets redirected to picked date report - (1), (2)
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) Nothing happens when user clicks same date
-> > (2) Nothing happens when user clicks future date that is yet to come
+> > (1) Nothing happens when user clicks on the same date
+> > (2) Nothing happens when user clicks on the future date that is yet to come
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
 > > Given that user first enters the report page, report should represent current date in default
-> > When the user clicks date picker
+> > When the user clicks calendar button
 > > Then user should see selected date report
 > >
 > > When the user re-enters the report  page
@@ -814,11 +814,11 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks the “Stock Name” link button in block component
+> > **Trigger:** User clicks on the “Stock Name” button in block component
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks on the “Stock Name” link button in block component
+> > 1. User clicks on the “Stock Name” button in block component
 > > 2. User should see the stock detail page
 > > ```
 > >  
@@ -829,7 +829,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user clicks on the “Stock Name” link button in block component
+> > When the user clicks on the “Stock Name” button in block component
 > > Then user should be redirected to detail page
 > > ```  
 > > **Sprint: 5**  
@@ -841,11 +841,11 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks on the “Arrow Vector” button next to the article list 
+> > **Trigger:** User clicks on the right-arrow button next to the article list 
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks the “Arrow Vector” button next to the article list 
+> > 1. User clicks the right-arrow button next to the article list 
 > > 2. User should see the detail page with “News” tab
 > > ```
 > >  
@@ -856,7 +856,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user clicks the “arrow vector” button next to article list 
+> > When the user clicks the right-arrow button next to article list 
 > > Then user should be redireced to the detail page  with "News" tab
 > > ```  
 > > **Sprint: 3**  
@@ -868,13 +868,13 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Precondition:** The user must be registered and logged in 
 > >  
-> > **Trigger:** User clicks on the “Search Box" input, sequentially clicks on the  “Search Result" button
+> > **Trigger:** User clicks on the search box input, sequentially clicks on the search result button
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User clicks on the “Search Box” input
+> > 1. User clicks on the search box input
 > > 2. User starts typing complete or partial name of the stock
-> > 3. User clicks on the “Search Result” button - (1)
+> > 3. User clicks on the search result button - (1)
 > > 4. User sees stock produced by input in the same page - (2)
 > > ```
 > >  
@@ -886,8 +886,8 @@ The goal of our service is to efficiently provide all the information that can h
 > > 
 > > **Acceptance Test:**
 > > ```
-> > Given that the user types letter in the “search box” input
-> > When the user clicks on the “Search Result” button
+> > Given that the user types letter in the search box input
+> > When the user clicks on the search result button
 > > Then user should see produced list of article led by the input
 > > ```  
 > > **Sprint: 5**  
