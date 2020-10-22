@@ -70,6 +70,7 @@ typings/
 
 # production
 /build
+/public
 
 # misc
 _db.json
