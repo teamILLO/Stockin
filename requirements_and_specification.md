@@ -66,18 +66,18 @@ The goal of our service is to efficiently provide all the information that can h
 > >  
 > > **Scenario:**
 > > ```
-> > 1. User enters own ID and password
+> > 1. User enters own email and password
 > > 2. User clicks on the “Login” button
-> > 3. If ID and password is valid, User should be logged in and redirected to the main page - (1)
+> > 3. If email and password is valid, User should be logged in and redirected to the main page - (1)
 > > ```
 > > **Exceptions:** 
 > > ```
-> > (1) When user enters wrong id/password and clicks on the "Login" button, warning message must be appeared.
+> > (1) When user enters wrong email/password and clicks on the "Login" button, warning message must be appeared.
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user enters id/password and clicks on the "Login" button
+> > When the user enters email/password and clicks on the "Login" button
 > > Then user should be logged in
 > > And user should be redirected to main-page
 > > ```
@@ -96,13 +96,13 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > 1. User clicks on the “Sign Up” button
 > > 2. “Sign Up” pop-up activates
-> > 3. User enters the ID/password which user wants to use
-> > 4. User makes his/her own ID and “Sign Up” pop-up disappears - (1)
+> > 3. User enters the email/password which user wants to use
+> > 4. User makes his/her own email and “Sign Up” pop-up disappears - (1)
 > > ```
 > >  
 > > **Exceptions:** 
 > > ```
-> > (1) User can't use ID which already exists
+> > (1) User can't use email which already exists
 > > ```
 > > 
 > > **Acceptance Test:**
@@ -110,7 +110,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > When the user clicks on “Sign Up” button
 > > Then “Sign Up” pop-up should be appeared
 > >
-> > When the user enters ID user wants to make and clicks on the “OK” button
+> > When the user enters email user wants to make and clicks on the “OK” button
 > > Then “Sign Up” pop-up should be disappeared and new member information should be created
 > > ```
 > > **Sprint: 2**  
@@ -147,31 +147,31 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 2**
 >
 > **Story 4**
-> > **Feature:** User forgets ID or password and wants to find it
+> > **Feature:** User forgets email or password and wants to find it
 > >
 > > **Actors:** Any users
 > >
 > > **Precondition:** The user must be registered and logged out
 > >
-> > **Trigger:** User clicks on the “Find ID Password" button
+> > **Trigger:** User clicks on the “Find email/Password" button
 > >
 > > **Scenario:**
 > > ```
-> > 1. User clicks on the "Find ID Password" button
-> > 2. User enters his/her information and finds ID/password - (1), (2)
+> > 1. User clicks on the "Find email/Password" button
+> > 2. User enters his/her information and finds email/password - (1), (2)
 > > 3. After that, user can login to the webpage
 > > ```
 > >
 > > **Exceptions:** 
 > > ```
-> > (1) When user tries to find ID/password which doesn't existed, user should be noticed that it doesn't exist.
+> > (1) When user tries to find email/password which doesn't existed, user should be noticed that it doesn't exist.
 > > (2) When user enters wrong his/her information, user should be noticed that it is wrong.
 > > ```
 > > 
 > > **Acceptance Test:**
 > > ```
-> > When the user clicks on the "Find ID Password" button and enters correct information
-> > Then user can know his/her ID/password information
+> > When the user clicks on the "Find email/Password" button and enters correct information
+> > Then user can know his/her email/password information
 > > ```
 > > **Sprint: 2**
 
