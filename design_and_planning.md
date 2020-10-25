@@ -2,11 +2,12 @@
 
 ## Document Revision History
    Rev. 1.0 YYYY-MM-DD - initial version
-   
+
 ## System Architecture<br />
 Here you should describe the **high-level architecture** of your system: the major pieces and how they fit together. Use graphical notations as much as possible in preference to English sentences. For example, you could describe the architecture using UML, if your system lends itself to these descriptions. Try to use standard architectural elements (e.g., pipe-and-filter, client-server, event-based, model-view-controller). Make sure to describe the major interfaces between components, which you will describe in more detail in the "Design details" section below.
+
 ***
-## Design Details<br />
+## Design Details(When finished, erase this)<br />
 In this section go those important facets that are not at the level of “architecture,” such as descriptions of critical algorithms, protocols, and key invariants. Also, wherever possible items should be linked back to your specification. Ideally, you can match up everything in the specification with where it is implemented in the design.
 
 We expect that once this document is completed you will split into subteams to implement the various major components. To be ready for such a split, you need to have a precise idea of how the components are interacting, and how you are going to start implementing them. A complete class-level design might not be always possible so early, but you need to specify at least the API among the major components. Use UML when appropriate.
@@ -16,21 +17,20 @@ If there are messages sent between clients and servers, you should identify **wh
 We expect to see a more refined design for the features to be included in the current sprint, and perhaps a more rough design for the features to be implemented in future sprints.  
 
 If you have considered alternative designs, please describe briefly your reasons for choosing the final design.
+***
 
 ## Model
 **Write Here**
 
-***
 ## View
 **Write Here**
 
-***
 ## Controller
 **Write Here**
 
-***
 ## Implementation Details
 ### Frontend design
+**Write Here**
 
 ### Backend design
 Write down Django API for our application.
@@ -41,6 +41,14 @@ Write down Django API for our application.
 | | ``` api/ ``` | X | X | X | X |
 | | ``` api/ ``` | X | X | X | X |
 
+#### ``` api/signup/ ```
+- POST
+   * require json : ``` {"username": string, "password": string, "nickname": string} ```
+   * (additional) json : ``` {"phone_number": string, "age": int, "gender": string} ```
+   * return json : ``` {"id": id, "username": string, "phone_number": string, "age": int, "gender": string, "number_of_reviews": int, "number_of_friends": int, "nickname": string} ```
+   * KeyError : status 400
+   * Success : status 201
+- NotAllowedMethod : status 405
 
 #### ``` api/signup/ ```
 - POST
@@ -51,14 +59,7 @@ Write down Django API for our application.
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/signup_dupcheck/ ```
-- POST
-   * require json : ``` {"useraname": string, "nickname": string} ```
-   * return json : ``` {"id": id, "id2": id} ```
-   * KeyError : status 400
-   * Success : status 200
-- NotAllowedMethod : status 405
-
+**Write Here**
 
 ## Implementation Plan
 Break down each user story described in your requirements document into programming tasks. Determine the difficulty of each task, and try to estimate the number of developer-days that the tasks should take. Try to also determine dependencies among tasks. Then, you should list all of the tasks to be done in the current sprint, a preliminary assignment of tasks to people in the group, estimates of the time for each task, dependencies between tasks, and a preliminary division into sprints (e.g., which features are implemented in the first sprint, second sprint, and so on). The plan should be designed to get some prototype system running as quickly as possible and then growing towards to the full project over a sequence of sprints. Please pay extra attention to the dependency relationships between tasks; you will almost certainly run into the situation where one bit isn't done but everything else is waiting for it. In that case, you want to know exactly where resources need to go, and how urgent each bit is (hint: NOT proportional to its size or importance in the whole system).
@@ -80,6 +81,9 @@ Consider the following kinds of testing:
 - **Functional testing**: What APIs you plan to test? How will you test them? What tools you will use? Will you write mocks?<br />
 - **Acceptance & integration testing**: how do you plan to test the user interface and scenarios?<br />
 
+**Write Here**
+
+***
 ## Registering Issues<br />
 You have to register Github issues regarding tasks for design, implementation, and testing and mark them with milestones.
 
@@ -110,3 +114,4 @@ These are the grading guidelines that staff will use to evaluate your document.
 | 5 | Is the document making good use of semi-formal notation (UML, diagrams, etc) |
 | 4 | Is the document identifying common architectural or design patterns, where appropriate? |
 | 4 | Is the document carefully written, without typos and grammatical errors? |
+***
