@@ -32,6 +32,8 @@ If you have considered alternative designs, please describe briefly your reasons
 ### Frontend design
 **Write Here**
 
+https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<br/>
+
 ### Backend design
 Write down Django API for our application.
 
