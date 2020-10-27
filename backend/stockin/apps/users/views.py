@@ -22,7 +22,7 @@ def signup(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
-## Login views
+        
 def signin(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())

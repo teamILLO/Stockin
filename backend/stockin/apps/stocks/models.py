@@ -5,26 +5,23 @@ from django.db import models
 class Stock(models.Model):
     title = models.CharField(max_length=200)                    #종목이름
     code = models.CharField(max_length=200)                     #종목코드
-    sector = models.CharField(max_length=200, null=True)        #업종
+    sector = models.CharField(max_length=200, null=True, blank=True)        #업종
 
-    price = models.IntegerField(null=True)                      #현재가
-    highestPrice = models.IntegerField(null=True)               #고가
-    lowestPrice = models.IntegerField(null=True)                #저가
-    tradeVolume = models.IntegerField(null=True)                #거래량
-    tradeValue = models.BigIntegerField(null=True)              #거래대금
+    price = models.IntegerField(null=True, blank=True)                      #현재가
+    highestPrice = models.IntegerField(null=True, blank=True)               #고가
+    lowestPrice = models.IntegerField(null=True, blank=True)                #저가
+    tradeVolume = models.IntegerField(null=True, blank=True)                #거래량
+    tradeValue = models.BigIntegerField(null=True, blank=True)              #거래대금
 
-    startPrice = models.IntegerField(null=True)                 #시작가
-    yesterdayPrice = models.IntegerField(null=True)             #전가
+    startPrice = models.IntegerField(null=True, blank=True)                 #시작가
+    yesterdayPrice = models.IntegerField(null=True, blank=True)             #전가
 
-    amount = models.IntegerField(null=True)                     #상장주식수
-    isKOSPI = models.BooleanField(null=True)                    #is코스피?   코스피|코스닥
+    amount = models.IntegerField(null=True, blank=True)                     #상장주식수
+    isKOSPI = models.BooleanField(null=True, blank=True)                    #is코스피?   코스피|코스닥
 
 
     def __str__(self):
         return self.title
-    
-    
-
 
 
 class StockHistory(models.Model):

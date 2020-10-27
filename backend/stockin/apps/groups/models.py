@@ -8,9 +8,11 @@ UserModel = get_user_model()
 class Group(models.Model):
     user = models.ForeignKey(
         UserModel,
+        null=True,
         on_delete=models.CASCADE,
         related_name='group_of_user',
     )
     name = models.CharField(max_length=64, default='default')
+    stocks = models.ManyToManyField(Stock)
 
 
