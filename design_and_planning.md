@@ -33,7 +33,9 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
 - If the user clicks on linked-in icon, he/she is navigated to the linked-in page of the team.
 - If the user clicks on Home button, he/she is navigated to Main Page.
-- If the user clicks on repo
+- If the user clicks on Report button, he/she is navigated to Report Page.
+- If the user clicks on My Page button, he/she is navigated to My Page.
+- If the user clicks on About Us button, he/she is navigated to AboutUs Page.
 
 #### 1. Prelogin page
 - Left half lets user sign in with his/her account
@@ -58,9 +60,6 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user enters some text on the search input, related results appear on the bottom.
 - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 - Footer is displayed on the bottom.
-
-
-
 
 
 ## Controller
