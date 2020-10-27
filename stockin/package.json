@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^4.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "connected-react-router": "^6.8.0",
-    "history": "^5.0.0",
+    "history": "^4.10.1",
     "react": "^17.0.1",
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^17.0.1",
@@ -19,13 +18,14 @@
     "reactstrap": "^8.6.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^2.0.1",
     "use-react-router": "^1.0.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +41,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^5.7.0",
+    "@semantic-ui-react/craco-less": "^1.2.1",
+    "semantic-ui-less": "^2.4.1"
   }
 }

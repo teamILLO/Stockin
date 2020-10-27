@@ -7,7 +7,7 @@ const DetailData = (props) => {
     <div>
       <h1 className="detailName">{props.name}</h1>
       <h4 className="detailCode">{props.code}</h4>
-      <button className="detailInterest" onclick={() => onClickInterest()}>
+      <button className="detailInterest" onClick={() => onClickInterest()}>
         star
       </button>
       <div>detail graph</div>

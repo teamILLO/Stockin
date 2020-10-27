@@ -6,7 +6,7 @@ import DetailNews from '../../components/Detail/DetailNews/DetailNews';
 import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailPriceTrends';
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
-import { Tabs, Tab } from '@material-ui/core';
+// import { Tabs, Tab } from '@material-ui/core';
 
 const DetailPage = (props) => {
   const [value, setValue] = React.useState(2);
@@ -41,7 +41,7 @@ const DetailPage = (props) => {
     <div className="DetailPage">
       <Header history={props.history} />
       <DetailData name={props.name} code={props.code} />
-      <Tabs
+      {/* <Tabs
         value={value}
         indicatorColor="primary"
         textColor="primary"
@@ -53,7 +53,7 @@ const DetailPage = (props) => {
         <Tab label="Price Trends" />
         <Tab label="Financial state" />
         <Tab label="Comments" />
-      </Tabs>
+      </Tabs> */}
       {currentTab}
     </div>
   );
