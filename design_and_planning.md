@@ -29,7 +29,7 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user clicks on My Page button, he/she is navigated to My Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
 - If the user enters some text on the search input, related results appear on the bottom.
-- If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.<br/>
+- If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.  
 **FOOTER**
 - If the user clicks on twitter icon, he/she is navigated to the twitter page of the team.
 - If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
