@@ -23,7 +23,23 @@ If you have considered alternative designs, please describe briefly your reasons
 **Write Here**
 
 ## View
-**Write Here**
+#### 1. Prelogin page
+- Left half lets user sign in with his/her account
+   - If the user clicks on Login button, user is navigated to Main Page.
+   - If the user clicks on Sign Up button, Sign Up Modal shows up.
+- Right half displays introduction of the service
+   - Introductory explanation of stockin' is displayed as a default.
+   - If the user clicks on STOCKIN button, introductory explanation of stockin' is displayed on the right side.
+   - If the user clicks on About us button, brief introduction of team 15 is displayed on the right side.
+   - If the user clicks on Preview button, peek view of the service is displayed on the right side.
+
+#### 2. Main Page
+- Shows user brief report on the stock market as a whole as a default.
+- Brief report of the few selected stocks is displayed as a clickable component.
+- If the user clicks on Daily Report button, brief report on the stock market as a whole is displayed.
+- If the user clicks on My Interests button, brief report on the selected stocks is displayed.
+
+
 
 ## Controller
 **Write Here**
