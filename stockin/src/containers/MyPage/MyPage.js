@@ -5,6 +5,7 @@ const MyPage = (props) => {
   return (
     <div>
       <Header history={props.history} />
+      <div>MyPage</div>
     </div>
   );
 };
