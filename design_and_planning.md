@@ -50,7 +50,7 @@ If you have considered alternative designs, please describe briefly your reasons
    - If the user clicks on Preview button, peek view of the service is displayed on the right side.
 
 #### 2. Main Page
-- Header 1 is displayed on the top.
+- **HEADER 1** is displayed on the top.
 - As a default, brief report on the stock market as a whole is displayed below the header.
 - Brief report of the few selected stocks is displayed as a clickable component.
 - If the user clicks on Daily Report button, brief report on the stock market as a whole is displayed.
@@ -59,10 +59,10 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user clicks on My Interests button, brief report on the selected stocks is displayed.
    - To-rise stocks are displayed on the top row, and to-fall stocks are displayed on the bottom row.
    - If the user clicks on one of the clickable components, he/she is navigated to corresponding Detail Page.
-- Footer is displayed on the bottom.
+- **FOOTER** is displayed on the bottom.
 
 #### 3. Report Page
-- Header 1 is displayed on the top.
+- **HEADER 1** is displayed on the top.
 - Right below the header, time when the information was lastly updated is displayed.
 - Below the time, as a default, slightly elaborated information about to-rise stocks is displayed.
    - To-rise stocks are sorted in an ascending order of ranking based on scores by ML trained model.
@@ -82,7 +82,7 @@ If you have considered alternative designs, please describe briefly your reasons
    - score of the stock
    - news analysis result of the stock
    - text 'noticeable news' of the stock
-- Footer is displayed on the bottom.
+- **FOOTER** is displayed on the bottom.
 
 ## Controller
 **Write Here**
