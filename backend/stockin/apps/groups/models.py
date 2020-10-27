@@ -14,17 +14,3 @@ class Group(models.Model):
     name = models.CharField(max_length=64, default='default')
 
 
-class GroupStock(models.Model):
-    group = models.ForeignKey(
-        Group,
-        on_delete=models.CASCADE,
-        related_name='groupmodel_of_user',
-    )
-
-    stock = models.ForeignKey(
-        Stock,
-        on_delete=models.CASCADE,
-        related_name='stock_of_user',
-    )
-
-
