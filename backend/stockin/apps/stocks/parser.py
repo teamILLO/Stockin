@@ -1,8 +1,15 @@
-import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stock.settings')
+import os,sys
+from pathlib import Path
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(BASE_DIR)
+# for a in sys.path:
+#     print(a)
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings.development')
 import django
 django.setup()
-from .models import Stock, StockHistory
+from apps.stocks.models import Stock, StockHistory
 
 import pandas as pd
 import requests
@@ -18,12 +25,12 @@ from django import db
 
 
 
-
+#처음 스타팅용
 def initialStockAdd():
-    driver = webdriver.PhantomJS('./phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
+    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
     driver.implicitly_wait(3)
 
-    code_title = pd.read_excel('stock-Excel/KOSPI.xls')[['종목코드', '기업명']]
+    code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSPI.xls'))[['종목코드', '기업명']]
     code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
     
     for stock in code_title.iloc:
@@ -39,7 +46,7 @@ def initialStockAdd():
             Stock(title=title,code=code).save()
         
     
-    code_title = pd.read_excel('stock-Excel/KOSDAQ.xls')[['종목코드', '기업명']]
+    code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSDAQ.xls'))[['종목코드', '기업명']]
     code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
 
     for stock in code_title.iloc:
@@ -82,7 +89,7 @@ def stockUpdate_(stock):
     stock.save()
 
 
-
+# 실시간 주가 업데이트용
 def stockUpdate(process=32):
     # start = time.time()
 
@@ -101,6 +108,7 @@ def stockUpdate(process=32):
     # print('time: ' , time.time()-start)
 
 
+#손보는중
 def beforeMarketUpdate(stock):
     price = stock.price
     stock.highestPrice = price
@@ -146,6 +154,7 @@ def pastStockHistory_(stock):
         )
 
 
+# 과거 주가 기록 가져오는용
 def pastStockHistory(process=32):
     stocks = Stock.objects.all()
    
@@ -166,7 +175,7 @@ def pastStockHistory(process=32):
         
 
     
-
+# 크롤링 실험해볼려면 아래에서
 
 if __name__ == '__main__':
     # driver = webdriver.PhantomJS('./phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
@@ -178,9 +187,9 @@ if __name__ == '__main__':
 
 
 
-    # start = time.time()
-    # initialStockAdd()
-    # print('time: ' , time.time()-start)
+    start = time.time()
+    initialStockAdd()
+    print('time: ' , time.time()-start)
 
     # start = time.time()
     # stockHistoryUpdate()
@@ -190,4 +199,4 @@ if __name__ == '__main__':
 
     # s = Stock.objects.get(title='힘스')
     # stockHistory(s)
-    pass
+    

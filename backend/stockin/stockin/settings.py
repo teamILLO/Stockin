@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'groups.apps.GroupsConfig',
