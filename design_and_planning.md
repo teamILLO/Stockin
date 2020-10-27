@@ -61,6 +61,14 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 - Footer is displayed on the bottom.
 
+#### 3. Report Page
+- Header 1 is displayed on the top.
+- Right below the header, time when the information was lastly updated is displayed.
+- Below the time, as a default, slightly elaborated information about to-rise stocks is displayed.
+   - To-rise stocks are sorted in an ascending order of ranking based on scores by ML trained model.
+- If user clicks on To-rise button, slightly elaborated information of stocks estimated to show a rise is shown.
+- If user clicks on To-fall button, slightly elaborated information of stocks estimated to show a fall is shown.
+- Footer is displayed on the bottom.
 
 ## Controller
 **Write Here**
