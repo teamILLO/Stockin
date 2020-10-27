@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-class Stock (models.Model):
+class Stock(models.Model):
     title = models.CharField(max_length=200)                    #종목이름
     code = models.CharField(max_length=200)                     #종목코드
     sector = models.CharField(max_length=200, null=True)        #업종
