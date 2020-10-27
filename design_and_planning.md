@@ -23,6 +23,18 @@ If you have considered alternative designs, please describe briefly your reasons
 **Write Here**
 
 ## View
+#### 0. Headers and footers
+**HEADER 1**
+- If the user clicks on Report button, he/she is navigated to Report Page.
+- If the user clicks on My Page button, he/she is navigated to My Page.
+- If the user clicks on Logout button, he/she is navigated to Prelogin Page.
+**FOOTER**
+- If the user clicks on twitter icon, he/she is navigated to the twitter page of the team.
+- If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
+- If the user clicks on linked-in icon, he/she is navigated to the linked-in page of the team.
+- If the user clicks on Home button, he/she is navigated to Main Page.
+- If the user clicks on repo
+
 #### 1. Prelogin page
 - Left half lets user sign in with his/her account
    - If the user clicks on Login button, user is navigated to Main Page.
@@ -34,10 +46,20 @@ If you have considered alternative designs, please describe briefly your reasons
    - If the user clicks on Preview button, peek view of the service is displayed on the right side.
 
 #### 2. Main Page
-- Shows user brief report on the stock market as a whole as a default.
+- Header 1 is displayed on the top.
+- As a default, brief report on the stock market as a whole is displayed below the header.
 - Brief report of the few selected stocks is displayed as a clickable component.
 - If the user clicks on Daily Report button, brief report on the stock market as a whole is displayed.
+   - To-rise stocks are displayed on the top row, and to-fall stocks are displayed on the bottom row.
+   - If the user clicks on one of the clickable components, he/she is navigated to corresponding Detail Page.
 - If the user clicks on My Interests button, brief report on the selected stocks is displayed.
+   - To-rise stocks are displayed on the top row, and to-fall stocks are displayed on the bottom row.
+   - If the user clicks on one of the clickable components, he/she is navigated to corresponding Detail Page.
+- If the user enters some text on the search input, related results appear on the bottom.
+- If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
+- Footer is displayed on the bottom.
+
+
 
 
 
