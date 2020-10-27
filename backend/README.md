@@ -20,7 +20,7 @@ It is same to `python manage.py runserverer`
 ### 3. Create and run the migrations:
 #### `python manage.py makemigrations && python manage.py migrate`
 
-### 3. Sync the DB
+### 4. Sync the DB
 #### `manage.py migrate --run-syncdb`
 
 
