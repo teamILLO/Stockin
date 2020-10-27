@@ -28,6 +28,8 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user clicks on Report button, he/she is navigated to Report Page.
 - If the user clicks on My Page button, he/she is navigated to My Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
+- If the user enters some text on the search input, related results appear on the bottom.
+- If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 **FOOTER**
 - If the user clicks on twitter icon, he/she is navigated to the twitter page of the team.
 - If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
@@ -57,8 +59,6 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user clicks on My Interests button, brief report on the selected stocks is displayed.
    - To-rise stocks are displayed on the top row, and to-fall stocks are displayed on the bottom row.
    - If the user clicks on one of the clickable components, he/she is navigated to corresponding Detail Page.
-- If the user enters some text on the search input, related results appear on the bottom.
-- If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 - Footer is displayed on the bottom.
 
 #### 3. Report Page
@@ -66,8 +66,15 @@ If you have considered alternative designs, please describe briefly your reasons
 - Right below the header, time when the information was lastly updated is displayed.
 - Below the time, as a default, slightly elaborated information about to-rise stocks is displayed.
    - To-rise stocks are sorted in an ascending order of ranking based on scores by ML trained model.
-- If user clicks on To-rise button, slightly elaborated information of stocks estimated to show a rise is shown.
-- If user clicks on To-fall button, slightly elaborated information of stocks estimated to show a fall is shown.
+- If the user clicks on To-rise button, slightly elaborated information of stocks estimated to show a rise is shown.
+- If the user clicks on To-fall button, slightly elaborated information of stocks estimated to show a fall is shown.
+- If the user enters some text on the search input, related results appear on the bottom.
+- If the user clicks on one of the results, slightly elaborated information of corresponding stock is displayed instead of sorted information of stocks in an ascending order.
+- If the user clicks on the calendar icon, DatePicker popup shows up, showing current month's calendar.
+   - If the user clicks on a certain date, report page of the date is displayed.
+   - If the user clicks on the right-arrow button, next month's calendar is displayed on the popup.
+   - If the user clicks on the left-arrow button, previous month's calendar is displayed on the popup.
+   - If the user clicks on Today button, report page of today is displayed.
 - Footer is displayed on the bottom.
 
 ## Controller
