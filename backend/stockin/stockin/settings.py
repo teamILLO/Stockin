@@ -31,10 +31,11 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# stock이 제일 위에가게 해주셈
 INSTALLED_APPS = [
+    'stocks.apps.StocksConfig',
     'users.apps.UsersConfig',
     'groups.apps.GroupsConfig',
-    'stocks.apps.StocksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -6,7 +6,7 @@ sys.path.append(BASE_DIR)
 # for a in sys.path:
 #     print(a)
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings.development')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings')
 import django
 django.setup()
 from apps.stocks.models import Stock, StockHistory
@@ -40,10 +40,10 @@ def initialStockAdd():
             Stock.objects.get(code=code)
         except:
             driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
-            time.sleep(2)
+            time.sleep(1)
             sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
             Stock(title = title, code=code, sector=sector, isKOSPI=True).save()
-            Stock(title=title,code=code).save()
+            
         
     
     code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSDAQ.xls'))[['종목코드', '기업명']]
@@ -56,10 +56,10 @@ def initialStockAdd():
             Stock.objects.get(code=code)
         except:
             driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
-            time.sleep(3)
+            time.sleep(1)
             sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
             Stock(title = title, code=code, sector=sector, isKOSPI=False).save()
-            Stock(title=title,code=code).save()
+            
     
 
 
