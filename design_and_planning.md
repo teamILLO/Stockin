@@ -75,6 +75,13 @@ If you have considered alternative designs, please describe briefly your reasons
    - If the user clicks on the right-arrow button, next month's calendar is displayed on the popup.
    - If the user clicks on the left-arrow button, previous month's calendar is displayed on the popup.
    - If the user clicks on Today button, report page of today is displayed.
+- If the user clicks on the following parts of a stock, he/she is navigated to Detail Page of the corresponding stock.
+   - name of the stock
+   - ranking of the stock
+   - graph image of the stock
+   - score of the stock
+   - news analysis result of the stock
+   - text 'noticeable news' of the stock
 - Footer is displayed on the bottom.
 
 ## Controller
