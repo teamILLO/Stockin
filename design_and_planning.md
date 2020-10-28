@@ -29,12 +29,25 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ## View
 #### 0. Headers and footers
+##### HEADER
+- **HEADER** is composed of **HEADER 1** and **HEADER 2**.
+- **HEADER 1** is displayed when user is at the top of the page as a default.
+- **HEADER 2** is displayed, when user scrolls down from the top page.
 ##### HEADER 1
+- If the user clicks on the logo image, he/she is navigated to Main Page.
 - If the user clicks on Report button, he/she is navigated to Report Page.
 - If the user clicks on My Page button, he/she is navigated to My Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
 - If the user enters some text on the search input, related results appear on the bottom.
-- If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.  
+   - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
+##### HEADER 2
+- If the user clicks on the logo image, he/she is navigated to Main Page.
+- If the user clicks on Report button, he/she is navigated to Report Page.
+- If the user clicks on My Page button, he/she is navigated to My Page.
+- If the user clicks on About Us button, he/she is navigated to AboutUs Page.
+- If the user clicks on Logout button, he/she is navigated to Prelogin Page.
+- If the user enters some text on the search input, related results appear on the bottom.
+   - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 ##### FOOTER
 - If the user clicks on twitter icon, he/she is navigated to the twitter page of the team.
 - If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
@@ -56,6 +69,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 #### 2. Main Page
 - **HEADER 1** is displayed on the top.
+   - At Main Page, page scroll is disabled, thus **HEADER 1** is always displayed.
 - As a default, brief report on the stock market as a whole is displayed below the header.
 - Brief report of the few selected stocks is displayed as a clickable component.
 - If the user clicks on Daily Report button, brief report on the stock market as a whole is displayed.
@@ -67,14 +81,14 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - **FOOTER** is displayed on the bottom.
 
 #### 3. Report Page
-- **HEADER 1** is displayed on the top.
+- **HEADER** is displayed on the top.
 - Right below the header, time when the information was lastly updated is displayed.
 - Below the time, as a default, slightly elaborated information about to-rise stocks is displayed.
    - To-rise stocks are sorted in an ascending order of ranking based on scores by ML trained model.
 - If the user clicks on To-rise button, slightly elaborated information of stocks estimated to show a rise is shown.
 - If the user clicks on To-fall button, slightly elaborated information of stocks estimated to show a fall is shown.
 - If the user enters some text on the search input, related results appear on the bottom.
-- If the user clicks on one of the results, slightly elaborated information of corresponding stock is displayed instead of sorted information of stocks in an ascending order.
+   - If the user clicks on one of the results, slightly elaborated information of corresponding stock is displayed instead of sorted information of stocks in an ascending order.
 - If the user clicks on the calendar icon, DatePicker popup shows up, showing current month's calendar.
    - If the user clicks on a certain date, report page of the date is displayed.
    - If the user clicks on the right-arrow button, next month's calendar is displayed on the popup.
@@ -88,6 +102,10 @@ That is, “Group” model and “Stock” model is “many to many” relations
    - news analysis result of the stock
    - text 'noticeable news' of the stock
 - **FOOTER** is displayed on the bottom.
+
+#### 4. My Page
+- **HEADER** is displayed on the top.
+   - At My Page, page scroll is disabled, thus **HEADER 1** is always displayed.
 
 ## Controller
 <img src = "https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg" width="70%">
