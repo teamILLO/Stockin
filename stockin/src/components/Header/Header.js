@@ -62,29 +62,31 @@ const Header = (props) => {
         </Menu>
       </Visibility>
 
-      <div className={isVisible ? '' : 'disabled'}>
-        <Menu borderless="true" fixed="top">
-          <Container>
-            <Menu.Item name="REPORT">
-              <Image
-                src={logo}
-                onClick={() => onClickNavHandler('/main')}
-                centered
-                className="headerSmallLogo"
-              />
-            </Menu.Item>
-            <Menu.Menu position="right" widths="4">
-              <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
-              <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
-              <Menu.Item>
-                <Button secondary onClick={() => clickLogoutHandler()}>
-                  LOGOUT
-                </Button>
+      {isVisible && (
+        <div className="stickyHeader">
+          <Menu borderless="true" fixed="top">
+            <Container>
+              <Menu.Item name="REPORT">
+                <Image
+                  src={logo}
+                  onClick={() => onClickNavHandler('/main')}
+                  centered
+                  className="headerSmallLogo"
+                />
               </Menu.Item>
-            </Menu.Menu>
-          </Container>
-        </Menu>
-      </div>
+              <Menu.Menu position="right" widths="4">
+                <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
+                <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
+                <Menu.Item>
+                  <Button secondary onClick={() => clickLogoutHandler()}>
+                    LOGOUT
+                  </Button>
+                </Menu.Item>
+              </Menu.Menu>
+            </Container>
+          </Menu>
+        </div>
+      )}
     </div>
   );
 };
