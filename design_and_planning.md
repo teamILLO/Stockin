@@ -20,7 +20,11 @@ If you have considered alternative designs, please describe briefly your reasons
 ***
 
 ## Model
-**Write Here**
+This is django-specific model diagram. Actually, since only models we deal with in development are Django ORM ones, we described it in class-like diagram rather than relational UML. 
+When representing class relations, three line connected class matches to “many”, one line connected class matches to “one”.
+That is, “Group” model and “Stock” model is “many to many” relationship.
+
+![image](https://user-images.githubusercontent.com/26567209/97430265-f9e22d80-195b-11eb-8510-f276bd6b5d18.png)
 
 ## View
 #### 0. Headers and footers
@@ -58,10 +62,6 @@ If you have considered alternative designs, please describe briefly your reasons
 - If the user enters some text on the search input, related results appear on the bottom.
 - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 - Footer is displayed on the bottom.
-
-
-
-
 
 ## Controller
 **Write Here**
