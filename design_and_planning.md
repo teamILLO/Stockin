@@ -28,6 +28,9 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ![image](https://user-images.githubusercontent.com/26567209/97430265-f9e22d80-195b-11eb-8510-f276bd6b5d18.png)
 
 ## View
+
+![Untitled Diagram](https://user-images.githubusercontent.com/13393489/97493421-43f10080-19a8-11eb-9371-78c7350ae9c7.png)
+
 #### 0. Headers and footers
 ##### HEADER
 - **HEADER** is composed of **HEADER 1** and **HEADER 2**.
