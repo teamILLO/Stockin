@@ -20,11 +20,6 @@ If you have considered alternative designs, please describe briefly your reasons
 ***
 
 ## Model
-This is django-specific model diagram. Actually, since only models we deal with in development are Django ORM ones, we described it in class-like diagram rather than relational UML. 
-When representing class relations, three line connected class matches to “many”, one line connected class matches to “one”.
-That is, “Group” model and “Stock” model is “many to many” relationship.
-
-![image](https://user-images.githubusercontent.com/26567209/97430265-f9e22d80-195b-11eb-8510-f276bd6b5d18.png)
 
 ## View
 #### 0. Headers and footers
@@ -74,26 +69,6 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 
 ### Backend design
 Write down Django API for our application.
-
-| Model | API | GET | POST | PUT | DELETE |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ```api/users/signup ``` | X | Create user | X | X |
-| | ``` api/users/signin ``` | X | User login check | X | X |
-| | ``` api/users/signout ``` | User logout | X | X | X |
-| | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
-| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
-| | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
-| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | Delete stocks |
-| Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
-| | ``` api/stocks/:stock_id ``` | Get stock info | X | X | X |
-| | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
-| | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
-| News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
-| | ``` api/news/:news_id ``` | Get news info | X | X | X |
-| Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
-| | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
-| | ``` api/reports/stock/:stock_id ``` | Get report list of specified stock | X | X | X |
-| FinancialStat | ``` api/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
 
 #### ``` api/signup/ ```
 - POST
