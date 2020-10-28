@@ -1,6 +1,6 @@
 .headerLogo {
   width: 200px;
-  padding-top: 150px;
+  padding-top: 100px;
   padding-bottom: 20px;
 }
 
@@ -21,5 +21,6 @@
 }
 
 .Header {
+  padding-top: 30px;
   padding-bottom: 30px;
 }
