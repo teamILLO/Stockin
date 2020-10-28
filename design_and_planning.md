@@ -150,7 +150,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ## Implementation Details
 ### Frontend design
-**Write Here**
+![frontend_design](https://user-images.githubusercontent.com/54826729/97495907-8f58de00-19ab-11eb-845e-54e2499c8b15.png)
 
 https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<br/>
 
