@@ -37,6 +37,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - If the user clicks on the logo image, he/she is navigated to Main Page.
 - If the user clicks on Report button, he/she is navigated to Report Page.
 - If the user clicks on My Page button, he/she is navigated to My Page.
+- If the user clicks on About Us button, he/she is navigated to AboutUs Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
 - If the user enters some text on the search input, related results appear on the bottom.
    - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
@@ -44,7 +45,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - If the user clicks on the logo image, he/she is navigated to Main Page.
 - If the user clicks on Report button, he/she is navigated to Report Page.
 - If the user clicks on My Page button, he/she is navigated to My Page.
-- If the user clicks on About Us button, he/she is navigated to AboutUs Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
 - If the user enters some text on the search input, related results appear on the bottom.
    - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
@@ -68,8 +68,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
    - If the user clicks on Preview button, peek view of the service is displayed on the right side.
 
 #### 2. Main Page
-- **HEADER 1** is displayed on the top.
-   - At Main Page, page scroll is disabled, thus **HEADER 1** is always displayed.
+- **HEADER 2** is displayed on the top.
 - As a default, brief report on the stock market as a whole is displayed below the header.
 - Brief report of the few selected stocks is displayed as a clickable component.
 - If the user clicks on Daily Report button, brief report on the stock market as a whole is displayed.
