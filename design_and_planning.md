@@ -20,7 +20,12 @@ If you have considered alternative designs, please describe briefly your reasons
 ***
 
 ## Model
-**Write Here**
+This is django-specific model diagram. Actually, since only models we deal with in development are Django ORM ones, we described it in class-like diagram rather than relational UML. 
+When representing class relations, three line connected class matches to “many”, one line connected class matches to “one”.
+That is, “Group” model and “Stock” model is “many to many” relationship.
+
+![image](https://user-images.githubusercontent.com/26567209/97430265-f9e22d80-195b-11eb-8510-f276bd6b5d18.png)
+
 
 ## View
 #### 0. Headers and footers
@@ -94,33 +99,172 @@ If you have considered alternative designs, please describe briefly your reasons
 https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<br/>
 
 ### Backend design
-Write down Django API for our application.
-
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ``` api/ ``` | X | X | X | X |
-| | ``` api/ ``` | X | X | X | X |
-| | ``` api/ ``` | X | X | X | X |
+| User | ```api/users/signup ``` | X | Create user | X | X |
+| | ``` api/users/signin ``` | X | User login check | X | X |
+| | ``` api/users/signout ``` | User logout | X | X | X |
+| | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
+| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
+| | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
+| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | Delete stocks |
+| Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
+| | ``` api/stocks/:stock_id ``` | Get stock info | X | X | X |
+| | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
+| | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
+| News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
+| | ``` api/news/:news_id ``` | Get news info | X | X | X |
+| Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
+| | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
+| | ``` api/reports/stock/:stock_id ``` | Get report list of specified stock | X | X | X |
+| FinancialStat | ``` api/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
 
-#### ``` api/signup/ ```
+#### ``` api/users/signup ```
 - POST
-   * require json : ``` {"username": string, "password": string, "nickname": string} ```
-   * (additional) json : ``` {"phone_number": string, "age": int, "gender": string} ```
-   * return json : ``` {"id": id, "username": string, "phone_number": string, "age": int, "gender": string, "number_of_reviews": int, "number_of_friends": int, "nickname": string} ```
+   * require json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * return json : ``` {“email”: string, "nickname": string, “password": string} ```
    * KeyError : status 400
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/signup/ ```
+#### ``` api/users/signin ```
 - POST
-   * require json : ``` {"username": string, "password": string, "nickname": string} ```
-   * (additional) json : ``` {"phone_number": string, "age": int, "gender": string} ```
-   * return json : ``` {"id": id, "username": string, "phone_number": string, "age": int, "gender": string, "number_of_reviews": int, "number_of_friends": int, "nickname": string} ```
+   * Require json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * Return json : ``` {“email”: string, "nickname": string, “password": string} ```
    * KeyError : status 400
    * Success : status 201
 - NotAllowedMethod : status 405
 
-**Write Here**
+#### ``` api/users/signout ```
+- GET
+      * Success : status 204
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/users/:user_id ```
+- GET
+      * Return json response : ``` {“email”: string, "nickname": string, “password": string} ```
+      * Success : status 200
+- PUT
+   * Require json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * Return json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * KeyError : status 400
+   * Success : status 201
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/groups/ ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “user”: string, “name”: string} ```
+        * Success : status 200
+- POST
+   * Require json : ``` {“name”: string} ```
+   * Return json : ``` {“id”: id, “user”: string, “name”: string} ```
+   * KeyError : status 400
+   * Success : status 204
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/groups/:group_id ```
+- PUT
+   * Require json : ``` {“name”: string} ```
+   * Return json : ``` {“id”: id, “user”: string, “name”: string} ```
+   * KeyError : status 400
+   * Success : status 204
+- DELETE
+	*  NotFound : status 404
+        *  Success : status 204
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/groups/:group_id/stocks ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “title”: string} ```
+        * Success : status 200
+- POST
+   * Require json : ``` {“id”: string} ```
+   * Return json : ``` {“id”: id, “title”: string} ```
+   * KeyError : status 400
+   * Success : status 201
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/groups/:group_id/stocks/:stock_id ```
+- DELETE ( 고쳐야함 )
+	*  NotFound : status 404
+        *  Success : status 204
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/ ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/:stock_id ```
+- GET
+	* Return json : ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/history/:stockhistory_date ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/history/:stockhistory_stock_id ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/news/stock/:stock_id/date/:news_date ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “time” : time(%H-%m-%s), “title”: string, “content”:text} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/news/:news_id ```
+- GET
+	* Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “time” : time(%H-%m-%s), “title”: string, “content”:text} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/reports/date/:report_date ```
+- GET
+	* Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/reports/date/:report_date/stock/:stock_title ```
+- GET
+	* Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/reports/stock/:stock_id ``` ( 필요없을듯)
+- GET
+	* Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/fiancialstats/stock/:stock_id ```
+- GET
+	* Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “quarter”: date(“%Y-%m-%d”), “sales”: integer, “operating_profit”: integer, “net_income”: integer, “operating_margin”: float, “net_profit_margin”: float, “roe”: float, “debt_ratio”: float, “quick_ratio”: float, “reserve_ratio”: float, “eps”: integer, “per”: float, “bps”: integer, “dyr”: float, “dpr”: float} ```
+        * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
 
 ## Implementation Plan
 Break down each user story described in your requirements document into programming tasks. Determine the difficulty of each task, and try to estimate the number of developer-days that the tasks should take. Try to also determine dependencies among tasks. Then, you should list all of the tasks to be done in the current sprint, a preliminary assignment of tasks to people in the group, estimates of the time for each task, dependencies between tasks, and a preliminary division into sprints (e.g., which features are implemented in the first sprint, second sprint, and so on). The plan should be designed to get some prototype system running as quickly as possible and then growing towards to the full project over a sequence of sprints. Please pay extra attention to the dependency relationships between tasks; you will almost certainly run into the situation where one bit isn't done but everything else is waiting for it. In that case, you want to know exactly where resources need to go, and how urgent each bit is (hint: NOT proportional to its size or importance in the whole system).
