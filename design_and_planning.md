@@ -106,15 +106,21 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - **HEADER** is displayed on the top.
    - At My Page, page scroll is disabled, thus **HEADER 1** is always displayed.
 - As a default, brief quadrant chart on information of stocks pre-selected is displayed.
-- If you click on My Interests button, brief quadrant chart on information of stocks pre-selected is displayed.
-- If you click on My Interests Detail button, detailed chart of pre-selected stocks is displayed.
-   -If you click on All button, detailed chart of all the pre-selected stocks is displayed.
-   -If you click on a button for specific group, detailed chart of the stocks in the group is displayed.
-   -If you click on Edit button, group manager is displayed instead of the chart.
-      - If you click on make new group button, you can create a new group.
-      - If none of the checkboxes of the stocks is checked, then add to group button is deactivated.
-      - If you click on add to group button when activated, checked stocks will be added to the group
+- If the user clicks on My Interests button, brief quadrant chart on information of stocks pre-selected is displayed.
+- If the user clicks on My Interests Detail button, detailed chart of pre-selected stocks is displayed.
+   - If the user clicks on All button, detailed chart of all the pre-selected stocks is displayed.
+   - If the user clicks on a button for specific group, detailed chart of the stocks in the group is displayed.
+   - If you click on Edit button, group manager is displayed instead of the chart.
+      - If the user clicks on make new group button, you can create a new group.
+      - If none of the checkboxes of the stocks is checked, then add to group button and delete button are deactivated.
+      - If the user clicks on add to group button when activated, checked stocks will be added to the group
+      - If the user clicks on delete button when activated, checked stocks or groups will be deleted from the list.
+- If the user clicks on User Information button, brief account information of current user is displayed.
+   - If the user clicks on Edit button, he/she can change his/her nickname.
+   - If the user clicks on Change Password button, he/she can change his/her password.
+   - If the user clicks on Sign Out button, he/she can delete his/her account from the website.
 
+#### 5. Detail Page
 
 ## Controller
 <img src = "https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg" width="70%">
