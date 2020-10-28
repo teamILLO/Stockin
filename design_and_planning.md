@@ -122,16 +122,16 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### User Model
 #### ``` api/users/signup ```
 - POST
-   * require json : ``` {“email”: string, "nickname": string, “password": string} ```
-   * return json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
    * KeyError : status 400
    * Success : status 201
 - NotAllowedMethod : status 405
 
 #### ``` api/users/signin ```
 - POST
-   * Require json : ``` {“email”: string, "nickname": string, “password": string} ```
-   * Return json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
    * KeyError : status 400
    * Success : status 201
 - NotAllowedMethod : status 405
@@ -144,11 +144,11 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 
 #### ``` api/users/:user_id ```
 - GET
-   * Return json response : ``` {“email”: string, "nickname": string, “password": string} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
    * Success : status 200
 - PUT
-   * Require json : ``` {“email”: string, "nickname": string, “password": string} ```
-   * Return json : ``` {“email”: string, "nickname": string, “password": string} ```
+   * require form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
    * KeyError : status 400
    * Success : status 201
 - AuthenticateError : status 401
@@ -157,11 +157,11 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### Group Model
 #### ``` api/groups/ ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “user”: string, “name”: string} ```
+   * response form(list) : each element :  ``` {“id”: id, “user”: string, “name”: string} ```
    * Success : status 200
 - POST
-   * Require json : ``` {“name”: string} ```
-   * Return json : ``` {“id”: id, “user”: string, “name”: string} ```
+   * request form : ``` {“name”: string} ```
+   * response form : ``` {“id”: id, “user”: string, “name”: string} ```
    * KeyError : status 400
    * Success : status 204
 - AuthenticateError : status 401
@@ -169,8 +169,8 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 
 #### ``` api/groups/:group_id ```
 - PUT
-   * Require json : ``` {“name”: string} ```
-   * Return json : ``` {“id”: id, “user”: string, “name”: string} ```
+   * request form : ``` {“name”: string} ```
+   * response form : ``` {“id”: id, “user”: string, “name”: string} ```
    * KeyError : status 400
    * Success : status 204
 - DELETE
@@ -181,11 +181,11 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 
 #### ``` api/groups/:group_id/stocks ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “title”: string} ```
+   * response form(list) : each element :  ``` {“id”: id, “title”: string} ```
    * Success : status 200
 - POST
-   * Require json : ``` {“id”: string} ```
-   * Return json : ``` {“id”: id, “title”: string} ```
+   * request form : ``` {“id”: string} ```
+   * response form : ``` {“id”: id, “title”: string} ```
    * KeyError : status 400
    * Success : status 201
 - AuthenticateError : status 401
@@ -201,14 +201,14 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### Stock Model
 #### ``` api/stocks/ ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
+   * response form : list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
 #### ``` api/stocks/:stock_id ```
 - GET
-   * Return json : ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
+   * response form : ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
@@ -216,14 +216,14 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### StockHistory Model
 #### ``` api/stocks/history/:stockhistory_date ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
 #### ``` api/stocks/history/:stockhistory_stock_id ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
@@ -231,14 +231,14 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### News Model
 #### ``` api/news/stock/:stock_id/date/:news_date ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “time” : time(%H-%m-%s), “title”: string, “content”:text} ```
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “time” : time(%H-%m-%s), “title”: string, “content”:text} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
 #### ``` api/news/:news_id ```
 - GET
-   * Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “time” : time(%H-%m-%s), “title”: string, “content”:text} ```
+   * response form :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “time” : time(%H-%m-%s), “title”: string, “content”:text} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
@@ -246,14 +246,14 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### Report Model
 #### ``` api/reports/date/:report_date ```
 - GET
-   * Return json list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
 #### ``` api/reports/date/:report_date/stock/:stock_title ```
 - GET
-   * Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+   * response form :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
@@ -261,7 +261,7 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 ### FinancialStat Model
 #### ``` api/fiancialstats/stock/:stock_id ```
 - GET
-   * Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “quarter”: date(“%Y-%m-%d”), “sales”: integer, “operating_profit”: integer, “net_income”: integer, “operating_margin”: float, “net_profit_margin”: float, “roe”: float, “debt_ratio”: float, “quick_ratio”: float, “reserve_ratio”: float, “eps”: integer, “per”: float, “bps”: integer, “dyr”: float, “dpr”: float} ```
+   * response form :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “quarter”: date(“%Y-%m-%d”), “sales”: integer, “operating_profit”: integer, “net_income”: integer, “operating_margin”: float, “net_profit_margin”: float, “roe”: float, “debt_ratio”: float, “quick_ratio”: float, “reserve_ratio”: float, “eps”: integer, “per”: float, “bps”: integer, “dyr”: float, “dpr”: float} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
