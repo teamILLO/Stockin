@@ -4,7 +4,7 @@
    Rev. 1.0 YYYY-MM-DD - initial version
 
 ## System Architecture<br />
-<img src = "https://user-images.githubusercontent.com/59424336/97463307-f57d3b00-1982-11eb-806a-e7c9459b7ad2.jpg" width="70%">
+<img src = "https://user-images.githubusercontent.com/59424336/97464056-c915ee80-1983-11eb-8d65-4d68287d08fa.jpg" width="70%">
 
 
 ***
