@@ -77,25 +77,23 @@ Write down Django API for our application.
 
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ```api/users/signup ``` | X | create user | X | X |
-| | ``` api/users/signin ``` | X | user login check | X | X |
-| | ``` api/users/signout ``` | user logout | X | X | X |
-| | ``` api/users/:user_id ``` | get user info | X | edit user info | X |
-| | ``` api/groups/ ``` | get user's group list | create group | X | X |
-| | ``` api/groups/:group_id ``` | X | X | update group name | delete group |
-| | ``` api/groups/:group_id/stocks ``` | get user's all stock | add stocks | X | delete stocks |
-| | ``` api/stocks/ ``` | get stock list | X | X | X |
-| | ``` api/stocks/:stock_id ``` | get stock info | X | X | X |
-| | ``` api/stocks/history/:stockhistory_date ``` | get stock history list of date | X | X | X |
-| | ``` api/stocks/history/:stockhistory_id ``` | get specified stockhistory info | X | X | X |
-| | ``` api/reports/ ``` | get report list | post report | X | X |
-| | ``` api/reports/:report_id ``` | get specified report info | X | update report info | delete report |
-| | ``` api/news/stock/:stock_id/date/:news_date ``` | get news list of specified date | X | X | X |
-| | ``` api/news/:news_id ``` | get news info | X | X | X |
-| | ``` api/reports/date/:report_date ``` | get report list of specified date | X | X | X |
-| | ``` api/reports/stock/:stock_id ``` | get report list of specified stock | X | X | X |
-| | ``` api/reports/date/:report_date/stock/:stock_title ``` | get report of specified stock & date | X | X | X |
-| | ``` api/financialstats/stock/:stock_id ``` | get financial statement of specified stock | X | X | X |
+| User | ```api/users/signup ``` | X | Create user | X | X |
+| | ``` api/users/signin ``` | X | User login check | X | X |
+| | ``` api/users/signout ``` | User logout | X | X | X |
+| | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
+| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
+| | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
+| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | Delete stocks |
+| Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
+| | ``` api/stocks/:stock_id ``` | Get stock info | X | X | X |
+| | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
+| | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
+| News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
+| | ``` api/news/:news_id ``` | Get news info | X | X | X |
+| Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
+| | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
+| | ``` api/reports/stock/:stock_id ``` | Get report list of specified stock | X | X | X |
+| FinancialStat | ``` api/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
 
 #### ``` api/signup/ ```
 - POST
