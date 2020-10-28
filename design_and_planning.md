@@ -85,7 +85,7 @@ If you have considered alternative designs, please describe briefly your reasons
 - **FOOTER** is displayed on the bottom.
 
 ## Controller
-**Write Here**
+[Frame 2.pdf](https://github.com/swsnu/swpp2020-team15/files/5452085/Frame.2.pdf)
 
 ## Implementation Details
 ### Frontend design
