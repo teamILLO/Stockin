@@ -4,7 +4,8 @@
    Rev. 1.0 YYYY-MM-DD - initial version
 
 ## System Architecture<br />
-Here you should describe the **high-level architecture** of your system: the major pieces and how they fit together. Use graphical notations as much as possible in preference to English sentences. For example, you could describe the architecture using UML, if your system lends itself to these descriptions. Try to use standard architectural elements (e.g., pipe-and-filter, client-server, event-based, model-view-controller). Make sure to describe the major interfaces between components, which you will describe in more detail in the "Design details" section below.
+<img src = "https://user-images.githubusercontent.com/59424336/97463307-f57d3b00-1982-11eb-806a-e7c9459b7ad2.jpg" width="50%">
+
 
 ***
 ## Design Details(When finished, erase this)<br />
