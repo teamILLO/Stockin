@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import logo from '../../images/logo.png';
-import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
+import { Container, Menu, Button, Image, Visibility, Search } from 'semantic-ui-react';
+import SearchBox from '../SearchBox/SearchBox';
 import './Header.css';
-import ReactSearchBox from 'react-search-box';
 
 const Header = (props) => {
   const [search, setSearch] = useState();
@@ -29,8 +29,8 @@ const Header = (props) => {
   return (
     <div className="Header">
       <Visibility
-        continuous="true"
-        once="false"
+        continuous
+        once
         onBottomVisible={() => handleOnScreen()}
         onBottomPassed={() => handleOffScreen()}
       >
@@ -45,7 +45,7 @@ const Header = (props) => {
           centered
           className="headerLogo"
         />
-        <div className="searchBox">
+        {/* <div className="searchBox">
           <ReactSearchBox
             placeholder="Search"
             data={data}
@@ -54,8 +54,13 @@ const Header = (props) => {
               threshold: 0.05,
             }}
           />
+        </div> */}
+        <div>
+          <Menu compact secondary>
+            <SearchBox />
+          </Menu>
         </div>
-        <Menu secondary widths="7" size="massive">
+        <Menu secondary compact size="massive">
           <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
           <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
           <Menu.Item name="ABOUT US" onClick={() => onClickNavHandler('/aboutus')} />
@@ -64,7 +69,7 @@ const Header = (props) => {
 
       {isVisible && (
         <div className="stickyHeader">
-          <Menu borderless="true" fixed="top">
+          <Menu borderless fixed="top">
             <Container>
               <Menu.Item name="REPORT">
                 <Image
@@ -75,6 +80,9 @@ const Header = (props) => {
                 />
               </Menu.Item>
               <Menu.Menu position="right" widths="4">
+                <Menu.Item>
+                  <SearchBox />
+                </Menu.Item>
                 <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
                 <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
                 <Menu.Item>

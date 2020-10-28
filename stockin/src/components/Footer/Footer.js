@@ -35,7 +35,7 @@ const Footer = (props) => {
         <Container>
           <Menu secondary compact icon>
             {links.map((item) => (
-              <Menu.Item href={item.href}>
+              <Menu.Item href={item.href} key={item.id}>
                 <Icon inverted size="large" name={item.id} />
               </Menu.Item>
             ))}
