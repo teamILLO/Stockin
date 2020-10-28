@@ -1,36 +1,14 @@
-.Footer {
-  align-items: center;
-}
-
-.footerNavStuff {
-  text-align: center;
-  width: 80px;
-  height: 20px;
-  background: none;
-  border: none;
-  color: #ffffff;
-}
-
 .footerNavBox {
   height: 200px;
   background-color: #ff6f61;
   padding-top: 50px;
 }
 
-.footerLogoBox {
-  height: 100px;
-}
-
 .footerLogo {
-  width: 200px;
-  padding-top: 35px;
+  width: 150px;
+  padding: 35px 0;
 }
 
-.footerSocialStuff {
-  text-align: center;
-}
-
-.footerSocialIcon {
-  height: 20px;
-  margin: 0 10px;
+.Footer {
+  padding-top: 30px;
 }

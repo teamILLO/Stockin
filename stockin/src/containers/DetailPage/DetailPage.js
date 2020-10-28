@@ -6,7 +6,7 @@ import DetailNews from '../../components/Detail/DetailNews/DetailNews';
 import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailPriceTrends';
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
-// import { Tabs, Tab } from '@material-ui/core';
+import Footer from '../../components/Footer/Footer';
 
 const DetailPage = (props) => {
   const [value, setValue] = React.useState(2);
@@ -55,6 +55,7 @@ const DetailPage = (props) => {
         <Tab label="Comments" />
       </Tabs> */}
       {currentTab}
+      <Footer history={props.history} />
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 const ReportPage = (props) => {
   return (
@@ -38,7 +39,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -68,7 +68,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -98,7 +97,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -128,7 +126,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -158,7 +155,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -188,7 +184,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -218,7 +213,6 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
@@ -231,54 +225,7 @@ const ReportPage = (props) => {
       <div>ReportPage</div>
       <div>ReportPage</div>
       <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div> <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
-      <div>ReportPage</div>
+      <Footer history={props.history} />
     </div>
   );
 };

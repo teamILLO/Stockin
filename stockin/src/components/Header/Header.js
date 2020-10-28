@@ -27,7 +27,7 @@ const Header = (props) => {
     setIsVisible(true);
   };
   return (
-    <div>
+    <div className="Header">
       <Visibility
         continuous="true"
         once="false"
@@ -61,7 +61,8 @@ const Header = (props) => {
           <Menu.Item name="ABOUT US" onClick={() => onClickNavHandler('/aboutus')} />
         </Menu>
       </Visibility>
-      <div className={isVisible ? 'visible' : 'disabledHeader'}>
+
+      <div className={isVisible ? '' : 'disabled'}>
         <Menu borderless="true" fixed="top">
           <Container>
             <Menu.Item name="REPORT">

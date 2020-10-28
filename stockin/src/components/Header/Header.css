@@ -16,6 +16,10 @@
   width: 200px;
 }
 
-.disabledHeader {
+.disabled {
   display: none;
+}
+
+.Header {
+  padding-bottom: 30px;
 }
