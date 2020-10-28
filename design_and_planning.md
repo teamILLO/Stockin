@@ -107,7 +107,8 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 | | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
 | | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
-| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | Delete stocks |
+| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
+| | ``` api/groups/:group_id/stocks/:stock_id ``` | X | X | X | Delete stock |
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
 | | ``` api/stocks/:stock_id ``` | Get stock info | X | X | X |
 | | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
@@ -116,7 +117,6 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 | | ``` api/news/:news_id ``` | Get news info | X | X | X |
 | Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
 | | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
-| | ``` api/reports/stock/:stock_id ``` | Get report list of specified stock | X | X | X |
 | FinancialStat | ``` api/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
 
 #### ``` api/users/signup ```
@@ -190,7 +190,7 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 - NotAllowedMethod : status 405
 
 #### ``` api/groups/:group_id/stocks/:stock_id ```
-- DELETE ( 고쳐야함 )
+- DELETE
 	*  NotFound : status 404
         *  Success : status 204
 - AuthenticateError : status 401
@@ -252,20 +252,12 @@ https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<b
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/reports/stock/:stock_id ``` ( 필요없을듯)
-- GET
-	* Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
-        * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
 #### ``` api/fiancialstats/stock/:stock_id ```
 - GET
 	* Return json :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “quarter”: date(“%Y-%m-%d”), “sales”: integer, “operating_profit”: integer, “net_income”: integer, “operating_margin”: float, “net_profit_margin”: float, “roe”: float, “debt_ratio”: float, “quick_ratio”: float, “reserve_ratio”: float, “eps”: integer, “per”: float, “bps”: integer, “dyr”: float, “dpr”: float} ```
         * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
-
 
 ## Implementation Plan
 Break down each user story described in your requirements document into programming tasks. Determine the difficulty of each task, and try to estimate the number of developer-days that the tasks should take. Try to also determine dependencies among tasks. Then, you should list all of the tasks to be done in the current sprint, a preliminary assignment of tasks to people in the group, estimates of the time for each task, dependencies between tasks, and a preliminary division into sprints (e.g., which features are implemented in the first sprint, second sprint, and so on). The plan should be designed to get some prototype system running as quickly as possible and then growing towards to the full project over a sequence of sprints. Please pay extra attention to the dependency relationships between tasks; you will almost certainly run into the situation where one bit isn't done but everything else is waiting for it. In that case, you want to know exactly where resources need to go, and how urgent each bit is (hint: NOT proportional to its size or importance in the whole system).
