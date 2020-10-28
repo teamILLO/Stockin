@@ -46,8 +46,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - If the user clicks on Report button, he/she is navigated to Report Page.
 - If the user clicks on My Page button, he/she is navigated to My Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
-- If the user enters some text on the search input, related results appear on the bottom.
-   - If the user clicks on one of the results, he/she is navigated to Detail Page of the corresponding stock.
 ##### FOOTER
 - If the user clicks on twitter icon, he/she is navigated to the twitter page of the team.
 - If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
@@ -121,6 +119,15 @@ That is, “Group” model and “Stock” model is “many to many” relations
    - If the user clicks on Sign Out button, he/she can delete his/her account from the website.
 
 #### 5. Detail Page
+- **HEADER** is displayed on the top.
+- As a default, breif overview of the stock and a graph image is displayed except for the following cases:
+   - When navigated by clicking on the news related parts, news is displayed instead of the overview.
+   - When navigated by clicking on the graph related parts, price trends are displayed instead of the overview.
+   - When navigated by clicking on the financial statement related parts, financial statement is displayed instead of the overview.
+- If the user clicks on the star icon,
+   - ????????? What does the star mean
+
+#### 6. AboutUs Page
 
 ## Controller
 <img src = "https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg" width="70%">
