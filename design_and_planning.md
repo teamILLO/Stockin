@@ -122,12 +122,24 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - **HEADER** is displayed on the top.
 - As a default, breif overview of the stock and a graph image is displayed except for the following cases:
    - When navigated by clicking on the news related parts, news is displayed instead of the overview.
-   - When navigated by clicking on the graph related parts, price trends are displayed instead of the overview.
+   - When navigated by clicking on the graph related parts, history of prices of the stock is displayed instead of the overview.
    - When navigated by clicking on the financial statement related parts, financial statement is displayed instead of the overview.
 - If the user clicks on the star icon,
    - ????????? What does the star mean
-
+- If the user clicks on Overview button, brief overview of the stock is displayed below the graph.
+- If the user clicks on News button, list of titles of news related to the stock is displayed below the graph.
+   - If the user clicks on the title of an article, he/she is navigated to the source of the article.
+- If the user clicks on Price trends button, history of prices of the stock is displayed.
+- If the user clicks on Financial state button, financial statement of the stock and scores of it with comparisons of other average stocks.
+- If the user clicks on Comments button, new-comment textarea and comment list for the stock is displayed.
+   - Comment list is sorted in recently-created order.
+   - If new-comment text area is empty, submit button is disabled.
+   - If the user clicks on submit button when enabled, new comment of corresponding content is created.
+   - If the user clicks on the number buttons on the bottom of the list, the corresonding page of comment list is displayed.
+   
 #### 6. AboutUs Page
+- **HEADER 2** is displayed on the top.
+- As a default, brief information about the team and the contact info is displayed.
 
 ## Controller
 <img src = "https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg" width="70%">
