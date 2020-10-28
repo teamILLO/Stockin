@@ -77,9 +77,25 @@ Write down Django API for our application.
 
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ``` api/ ``` | X | X | X | X |
-| | ``` api/ ``` | X | X | X | X |
-| | ``` api/ ``` | X | X | X | X |
+| User | ```api/users/signup ``` | X | create user | X | X |
+| | ``` api/users/signin ``` | X | user login check | X | X |
+| | ``` api/users/signout ``` | user logout | X | X | X |
+| | ``` api/users/:user_id ``` | get user info | X | edit user info | X |
+| | ``` api/groups/ ``` | get user's group list | create group | X | X |
+| | ``` api/groups/:group_id ``` | X | X | update group name | delete group |
+| | ``` api/groups/:group_id/stocks ``` | get user's all stock | add stocks | X | delete stocks |
+| | ``` api/stocks/ ``` | get stock list | X | X | X |
+| | ``` api/stocks/:stock_id ``` | get stock info | X | X | X |
+| | ``` api/stocks/history/:stockhistory_date ``` | get stock history list of date | X | X | X |
+| | ``` api/stocks/history/:stockhistory_id ``` | get specified stockhistory info | X | X | X |
+| | ``` api/reports/ ``` | get report list | post report | X | X |
+| | ``` api/reports/:report_id ``` | get specified report info | X | update report info | delete report |
+| | ``` api/news/stock/:stock_id/date/:news_date ``` | get news list of specified date | X | X | X |
+| | ``` api/news/:news_id ``` | get news info | X | X | X |
+| | ``` api/reports/date/:report_date ``` | get report list of specified date | X | X | X |
+| | ``` api/reports/stock/:stock_id ``` | get report list of specified stock | X | X | X |
+| | ``` api/reports/date/:report_date/stock/:stock_title ``` | get report of specified stock & date | X | X | X |
+| | ``` api/financialstats/stock/:stock_id ``` | get financial statement of specified stock | X | X | X |
 
 #### ``` api/signup/ ```
 - POST
