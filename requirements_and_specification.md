@@ -862,7 +862,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > **Sprint: 3**  
 > >
 > **Story 6**
-> > **Feature:** User wants to see specific stock
+> > **Feature:** User wants to search & see specific stock
 > >  
 > > **Actors:** Any users  
 > >  
@@ -888,7 +888,7 @@ The goal of our service is to efficiently provide all the information that can h
 > > ```
 > > Given that the user types letter in the search box input
 > > When the user clicks on the search result button
-> > Then user should see produced list of article led by the input
+> > Then user should see produced block component led by the input
 > > ```  
 > > **Sprint: 5**  
 > >
