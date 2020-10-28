@@ -85,7 +85,7 @@ If you have considered alternative designs, please describe briefly your reasons
 - **FOOTER** is displayed on the bottom.
 
 ## Controller
-![Frame 2](https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg)
+![Frame 2](https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg){: width="70%" height="70%"}
 
 ## Implementation Details
 ### Frontend design
