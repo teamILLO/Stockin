@@ -155,20 +155,46 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ### Frontend design
 ![frontend_design(1)](https://user-images.githubusercontent.com/54826729/97574073-0b940580-1a2e-11eb-8d97-ebae68a15f56.png)
 
-#### 0. Header
-- Logo : an image of a logo, clickable
-   - onClickLogo : a function, navigates user to Main Page
-- Report : a button, clickable
-   - onClickReport : a function, navigates user to Report Page
-- MyPage : a button, clickable
-   - onClickMypage : a function, navigates user to My Page
-- AboutUs : a button, clickable
-   - onClickAboutUs : a function, naviagates user to AboutUs Page
-- SearchBar : an input for searching specific stock
-   - onChangeSearch : a function, saves string to a state when input string changes
-   - onClickSearch : a function, navigates user to corresponding stock's Detail Page
-- Logout : a button, clickable
-   - onClickLogout : a function, helps user log out and navigates user to Prelogin Page
+#### 0. Headers and footers
+##### HEADER
+- **HEADER** is composed of a logo, Report, MyPage, AboutUs and Logout buttons, and a searchbox.
+- Shape of **HEADER** is different depending on its location on the page
+   - If **HEADER** is placed at the top of the page, its size is 1440 x 112, hiding AboutUs button
+   - Else its size is 1440 x 400
+
+##### FOOTER
+- **FOOTER** is composed of a logo, Home, Report, MyPage, AboutUs buttons and a ContactUs component.
+   - ContactUs displays information about service providers' contact info.
+   
+#### 1. Prelogin Page
+- PreloginPage is composed of email and password inputs, signup and login buttons, Stockin, AboutUs and Preview components.
+   - signup button triggers modal ModalLogin
+   - Stockin, AboutUs, Preview components display information about the service
+   - ModalLogin is composed of email, password and nickname inputs and nextButton and loginButton buttons.
+      - When nextButton is clicked, email and password inputs disappear and nickname input appears.
+
+#### 2. Main Page
+- Main Page is composed of **HEADER** and **FOOTER**, DailyReportTab and MyInterestsTab buttons and DailyReport and MyInterests components.
+   - DailyReport and MyInterests are composed of a few StockBox components, and 4 arrow buttons.
+      - StockBox component is composed of HalfCircularScore and CircularPercentage components, a revised version of react-circle-progressbar.
+      
+#### 3. Report Page
+- Report Page is composed of **HEADER** and **FOOTER**, toBuyTab and toSellTab buttons and Calendar, ToBuy and ToSell components.
+   - If toBuyTab button is clicked, ToBuy component is displayed.
+   - If toSellTab button is clicked, ToSell component is displayed.
+   - ToBuy and ToSell components are composed of a few StockDetailBox components.
+   - Calendar component displays a calendar, allowing user to choose between dates.
+   - StockDetailBox displays various information about the stock.
+
+#### 4. My Page
+- My Page is composed of MyPageTabs, MyStocks, MyStocksDetail and UserInformation.
+   - MyPageTabs is composed of myInterests, myInterestsDetail and userInfomation buttons.
+   - MyStocks is composed of MyStocksTab and Graph components.
+      - Further components are well displayed on the flowchart.
+   - MyStocksDetail is composed of MyStocksTab and MyStocksTable components.
+      - Further components are well displaeyd on the flowchart.
+   - UserInformation is composed of edit, changePassword and signOut buttons.
+      - Further components are well displayed on the flowchart.
 
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
