@@ -16,7 +16,7 @@ matrix:
       script:
         - ./node_modules/.bin/eslint src/
         - yarn test --coverage --watchAll=false
-        - cd .. && sonar-scanner
+        - sonar-scanner
     - language: python
       python: "3.7"
       cache:
