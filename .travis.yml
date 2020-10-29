@@ -26,7 +26,7 @@ matrix:
       install:
         - pip install -r requirements.txt
       script:
-        - pylint **/*.y --load-plugins pylint_django
+        - pylint **/*.py --load-plugins pylint_django
         - coverage run --source='.' manage.py test
         - coverage xml
         - cd .. && sonar-scanner
