@@ -156,13 +156,19 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ![frontend_design(1)](https://user-images.githubusercontent.com/54826729/97574073-0b940580-1a2e-11eb-8d97-ebae68a15f56.png)
 
 #### 0. Header
-- onClickLogo : a function, navigates user to Main Page
-- onClickReport : a function, navigates user to Report Page
-- onClickMypage : a function, navigates user to My Page
-- onClickAboutUs : a function, naviagates user to AboutUs Page
-- onChangeSearch : a function, saves string to a state when input string changes
-- onClickSearch : a function, navigates user to corresponding stock's Detail Page
-- onClickLogout : a function, helps user log out and navigates user to Prelogin Page
+- Logo : an image of a logo, clickable
+   - onClickLogo : a function, navigates user to Main Page
+- Report : a button, clickable
+   - onClickReport : a function, navigates user to Report Page
+- MyPage : a button, clickable
+   - onClickMypage : a function, navigates user to My Page
+- AboutUs : a button, clickable
+   - onClickAboutUs : a function, naviagates user to AboutUs Page
+- SearchBar : an input for searching specific stock
+   - onChangeSearch : a function, saves string to a state when input string changes
+   - onClickSearch : a function, navigates user to corresponding stock's Detail Page
+- Logout : a button, clickable
+   - onClickLogout : a function, helps user log out and navigates user to Prelogin Page
 
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
