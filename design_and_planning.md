@@ -196,6 +196,13 @@ That is, “Group” model and “Stock” model is “many to many” relations
    - UserInformation is composed of edit, changePassword and signOut buttons.
       - Further components are well displayed on the flowchart.
 
+#### 5. Detail Page
+- Detail Page is composed of DetailData, DetailNav, DetialOverview, DetailNews, DetailTrends, DetailFinancalState, DetailComment components.
+   - Each component represent a tab containing corresponding information except for DetailData and DetailNav.
+
+#### 6. AboutUs Page
+- AboutUs Page is composed of AboutUs component displayed in Prelogin Page.
+
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
