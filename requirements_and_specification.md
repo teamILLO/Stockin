@@ -711,6 +711,39 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then “add to group” button should be disabled
 > > ```  
 > > **Sprint: 4**  
+> > 
+> **Story 9**
+> > **Feature:** User wants to know more about our service
+> >  
+> > **Actors:** Any users
+> >  
+> > **Precondition:** The user must be logged-in and in My Page
+> >  
+> > **Trigger:** User scrolls
+> >  
+> > **Scenario:**
+> > ```
+> > 1. User sees overview information of our service on
+> > 2. User can scroll page and see more information according to the degree of scrolling - (1) (2)
+> > ```
+> >  
+> > **Exceptions:** 
+> > ```
+> > (1) Nothing happens when user reaches the end of list and scrolls down
+> > (2) Nothing happens when user reaches the top of list and scrolls up
+> > ```
+> > 
+> > **Acceptance Test:**
+> > ```
+> > When the user clicks on the “AboutUs” tab
+> > Then the user should see the overview information of our service
+> >
+> > When the user scrolls the page
+> > Then user should see more information according to the degree of scrolling
+> > ```
+> > **Sprint: 2**
+>
+
 ### Report page
 > **Story 1**
 > > **Feature:** User wants to switch and see "To Buy / To Sell" tab
