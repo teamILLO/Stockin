@@ -1,9 +1,28 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { shallow, mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import { connectRouter, ConnectedRouter } from 'connected-react-router';
+import { Route, Redirect, Switch } from 'react-router-dom';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+import App from './App';
+import { history } from './store/store';
+
+/*
+describe('App', () => {
+  let app;
+
+  beforeEach(() => {
+    app = (
+      <Provider store={mockStore}>
+        <App history={history} />
+      </Provider>
+    );
+    console.log(app == undefined);
+  });
+
+  it('should render', () => {
+    console.log(app);
+    const component = mount(app);
+    expect(component.find('.App').length).toBe(1);
+  });
+});*/

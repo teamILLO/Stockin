@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DetailNews = (props) => {
-  return <div>DetailNews</div>;
+  return <div className="DetailNews">DetailNews</div>;
 };
 
 export default DetailNews;

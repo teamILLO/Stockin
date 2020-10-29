@@ -4,7 +4,7 @@ const DetailData = (props) => {
   const onClickInterest = () => {};
 
   return (
-    <div>
+    <div className="DetailData">
       <h1 className="detailName">{props.name}</h1>
       <h4 className="detailCode">{props.code}</h4>
       <button className="detailInterest" onClick={() => onClickInterest()}>

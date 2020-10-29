@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer';
 
 const ReportPage = (props) => {
   return (
-    <div>
+    <div className="ReportPage">
       <Header history={props.history} />
       <div>ReportPage</div>
       <div>ReportPage</div>

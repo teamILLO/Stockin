@@ -5,7 +5,7 @@ import Footer from '../../components/Footer/Footer';
 
 const MainPage = (props) => {
   return (
-    <div>
+    <div className="MainPage">
       <Header history={props.history} />
       <div>MainPage</div>
       <Footer history={props.history} />

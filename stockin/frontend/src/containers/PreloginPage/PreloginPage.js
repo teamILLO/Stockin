@@ -31,7 +31,7 @@ const PreloginPage = (props) => {
     tab === 'STOCKIN' ? <Stockin /> : tab === 'ABOUTUS' ? <AboutUs /> : <Preview />;
 
   return (
-    <div>
+    <div className="PreloginPage">
       Prelogin Page
       <br />
       <div className="email">

@@ -57,6 +57,7 @@ function SearchBox() {
 
   return (
     <Search
+      className="SearchBox"
       fluid
       loading={loading}
       onResultSelect={(e, data) =>
