@@ -25,7 +25,7 @@ This is django-specific model diagram. Actually, since only models we deal with 
 When representing class relations, three line connected class matches to “many”, one line connected class matches to “one”.
 That is, “Group” model and “Stock” model is “many to many” relationship.
 
-![image](https://user-images.githubusercontent.com/26567209/97430265-f9e22d80-195b-11eb-8510-f276bd6b5d18.png)
+![image](https://user-images.githubusercontent.com/26567209/97522291-c7c7de80-19e2-11eb-8e6e-d7d33c0c5c89.png)
 
 ## View
 
