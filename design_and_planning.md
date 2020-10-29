@@ -364,14 +364,12 @@ Try to identify the major risks for the project in general and the plan in parti
 ||calculate score using ml|5|3,4||
 
 ## Testing Plan<br />
-In this section goes a brief description of how you plan to test the system. Thought should be given to how mostly automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. The effort you put early on on automated testing will pay off when you have to ensure that you are not breaking existing functionality in future sprints.
-Consider the following kinds of testing:
+- **Unit testing**<br />Every component, reducer, and module should be tested automatically. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
 
-- **Unit testing**: explain for what modules you plan to write unit tests, and what framework you plan to use.<br />
-- **Functional testing**: What APIs you plan to test? How will you test them? What tools you will use? Will you write mocks?<br />
-- **Acceptance & integration testing**: how do you plan to test the user interface and scenarios?<br />
+- **Functional testing**<br />Every API should be tested. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
 
-**Write Here**
+- **Acceptance & integration testing**<br />All user stories should be covered. We will use travis CI for integration test.<br />
+
 
 ***
 ## Registering Issues<br />
