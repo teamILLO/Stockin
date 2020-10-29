@@ -151,9 +151,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ## Implementation Details
 ### Frontend design
-![frontend_design](https://user-images.githubusercontent.com/54826729/97495907-8f58de00-19ab-11eb-845e-54e2499c8b15.png)
-
-https://github.com/swsnu/swpp2019-team10/wiki/Design-and-Implementation 참고<br/>
+![frontend_design(1)](https://user-images.githubusercontent.com/54826729/97574073-0b940580-1a2e-11eb-8d97-ebae68a15f56.png)
 
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
