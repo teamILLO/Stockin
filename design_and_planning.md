@@ -326,12 +326,25 @@ Break down each user story described in your requirements document into programm
 
 Try to identify the major risks for the project in general and the plan in particular. Explain what the risks are and discuss how you plan to mitigate them.
 
-| Page | Feature | Difficulty | Sprints | Assignee | Challenges |
-|:--------|:--------|:--------|:--------|:--------|:--------|
-| Sign up | sign up | 0.5 | 2 | X | |
-| Login | ~~log in~~ | 0.5 | 2 | X | |
-|  | write here | 0.5 | 2 | X | |
-|  | ~~write here~~ | 0.5 | 2 | X | |
+| Page | Feature | Difficulty | Sprints | Challenges |
+|:--------|:--------|:--------|:--------|:--------|
+|Pre-login|sign in|1|2||
+|Pre-login|sign up|1|2||
+|Pre-login|forget password|3|4||
+|Pre-login|about stockin|0.5|5||
+|Main|load stocks by ranking|3|5||
+|Main|load stocks in interests|3|5||
+|Report page|load stocks by ranking|2|4||
+|Detail page|load stock detail|1.5|4||
+|Detail page|make graph|3|4||
+|Detail page|add stock to interests|1|3||
+|Detail page|add or delete comments|2|3||
+|My page|load Interests' information|2|3||
+|My page|edit group|4|5||
+|My page|edit user information|1|3||
+|About Us page|about stockin|0.5|5||
+|Header|search stocks|2|3||
+
 
 ## Testing Plan<br />
 In this section goes a brief description of how you plan to test the system. Thought should be given to how mostly automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. The effort you put early on on automated testing will pay off when you have to ensure that you are not breaking existing functionality in future sprints.
