@@ -64,6 +64,8 @@ const PreloginPage = (props) => {
         </button>
       </div>
       {selectedTab}
+      <HalfCircularScore score={100} maxScore={250} />
+      <CircularPercentage percentage={0.66} />
     </div>
   );
 };
