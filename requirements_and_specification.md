@@ -742,7 +742,6 @@ The goal of our service is to efficiently provide all the information that can h
 > > Then user should see more information according to the degree of scrolling
 > > ```
 > > **Sprint: 2**
->
 
 ### Report page
 > **Story 1**
