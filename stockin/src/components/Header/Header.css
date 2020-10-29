@@ -1,0 +1,22 @@
+.headerLogo {
+  width: 200px;
+  padding-top: 100px;
+  padding-bottom: 20px;
+}
+
+.headerSmallLogo {
+  height: 30px;
+}
+
+.searchBox {
+  width: 400px;
+  margin: auto;
+}
+.miniSearchBox {
+  width: 200px;
+}
+
+.Header {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
