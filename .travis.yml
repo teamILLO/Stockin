@@ -5,7 +5,7 @@ matrix:
       cashe:
         - yarn: true
       before_install:
-        - cd frontend
+        - cd stockin 
       install:
         - yarn install
       script:
