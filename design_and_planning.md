@@ -49,6 +49,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - If the user clicks on Report button, he/she is navigated to Report Page.
 - If the user clicks on My Page button, he/she is navigated to My Page.
 - If the user clicks on Logout button, he/she is navigated to Prelogin Page.
+- If the user enters some text on the search input, related results appear on the bottom.
+   - If the user clicks on one of the results, he/she is navigated to Detail Page of the 
 ##### FOOTER
 - If the user clicks on twitter icon, he/she is navigated to the twitter page of the team.
 - If the user clicks on facebook icon, he/she is navigated to the facebook page of the team.
@@ -152,6 +154,15 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ## Implementation Details
 ### Frontend design
 ![frontend_design(1)](https://user-images.githubusercontent.com/54826729/97574073-0b940580-1a2e-11eb-8d97-ebae68a15f56.png)
+
+#### 0. Header
+- onClickLogo : a function, navigates user to Main Page
+- onClickReport : a function, navigates user to Report Page
+- onClickMypage : a function, navigates user to My Page
+- onClickAboutUs : a function, naviagates user to AboutUs Page
+- onChangeSearch : a function, saves string to a state when input string changes
+- onClickSearch : a function, navigates user to corresponding stock's Detail Page
+- onClickLogout : a function, helps user log out and navigates user to Prelogin Page
 
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
