@@ -128,7 +128,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
    - When navigated by clicking on the graph related parts, history of prices of the stock is displayed instead of the overview.
    - When navigated by clicking on the financial statement related parts, financial statement is displayed instead of the overview.
 - If the user clicks on the star icon,
-   - ????????? What does the star mean
+   - If the star was already colored, corresponding stock is deleted from the groups.
+   - If the star was not colored, corresponding stock is added to the groups. 
 - If the user clicks on Overview button, brief overview of the stock is displayed below the graph.
 - If the user clicks on News button, list of titles of news related to the stock is displayed below the graph.
    - If the user clicks on the title of an article, he/she is navigated to the source of the article.
