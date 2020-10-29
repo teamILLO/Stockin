@@ -340,11 +340,11 @@ Try to identify the major risks for the project in general and the plan in parti
 |Detail page|add stock to interests|1|3||
 |Detail page|add or delete comments|2|3||
 |My page|load Interests' information|2|3||
-|My page|edit group|4|5||
+|My page|edit group|3|5||
 |My page|edit user information|1|3||
 |About Us page|about stockin|0.5|5||
 |Header|search stocks|2|3||
-
+||calculate score using ml|5|3,4||
 
 ## Testing Plan<br />
 In this section goes a brief description of how you plan to test the system. Thought should be given to how mostly automatic testing can be carried out, so as to maximize the limited number of human hours you will have for testing your system. The effort you put early on on automated testing will pay off when you have to ensure that you are not breaking existing functionality in future sprints.
