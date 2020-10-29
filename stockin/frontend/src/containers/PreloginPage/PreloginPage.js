@@ -1,71 +1,84 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import CircularPercentage from '../../components/CircularPercentage/CircularPercentage';
-import HalfCircularScore from '../../components/HalfCircularScore/HalfCircularScore';
+import { Tab } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { tryLogin } from '../../store/authentication';
+import { useDispatch } from 'react-redux';
+
+const panes = [
+  {
+    menuItem: 'Stockin',
+    render: () => <Stockin />,
+  },
+  {
+    menuItem: 'About Us',
+    render: () => <AboutUs />,
+  },
+  {
+    menuItem: 'Preview',
+    render: () => <Preview />,
+  },
+];
 
 //TODO: password find feature
 const PreloginPage = (props) => {
-  const [tab, setTab] = useState('STOCKIN');
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const clickLoginHandler = () => {
+  const clickSignupHandler = () => {
     //TODO: call modal
   };
-
-  const clickStockinHandler = () => {
-    setTab('STOCKIN'); //TODO: fill this
+  const submitHandler = () => {
+    const submitEmail = email;
+    const submitPassword = password;
+    console.log(submitEmail, submitPassword);
+    dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
   };
-
-  const clickAboutusHandler = () => {
-    setTab('ABOUTUS');
-  };
-
-  const clickPreviewHandler = () => {
-    setTab('PREVIOUS');
-  };
-
-  const selectedTab =
-    tab === 'STOCKIN' ? <Stockin /> : tab === 'ABOUTUS' ? <AboutUs /> : <Preview />;
 
   return (
     <div>
       Prelogin Page
       <br />
-      <div className="email">
-        Email:
-        <input id="email" onChange={(event) => setEmail(event.target.value)} />
+      <div>
+        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
+          <Grid.Column width={7}>
+            <Grid.Column style={{ maxWidth: 450 }}>
+              <Form size="large">
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+
+                <Button color="primary" size="large" onClick={submitHandler}>
+                  Login
+                </Button>
+                <Button basic color="primary" size="large" onClick={clickSignupHandler}>
+                  Signup
+                </Button>
+              </Form>
+            </Grid.Column>
+          </Grid.Column>
+          <Grid.Column width={7}>
+            <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          </Grid.Column>
+        </Grid>
       </div>
-      <div className="password">
-        Password:
-        <input id="password" onChange={(event) => setPassword(event.target.value)} />
-      </div>
-      {/*        Modal TODO          */}
-      <div className="loginButton">
-        <button id="login-button" onClick={clickLoginHandler}>
-          Login
-        </button>
-      </div>
-      <div className="stockinTabButton">
-        <button id="stockin-tab-button" onClick={clickStockinHandler}>
-          Stockin
-        </button>
-      </div>
-      <div className="aboutusTabButton">
-        <button id="aboutus-tab-button" onClick={clickAboutusHandler}>
-          About Us
-        </button>
-      </div>
-      <div className="previewTabButton">
-        <button id="preview-tab-button" onClick={clickPreviewHandler}>
-          Preview
-        </button>
-      </div>
-      {selectedTab}
-      <HalfCircularScore score={100} maxScore={250} />
-      <CircularPercentage percentage={0.66} />
     </div>
   );
 };
