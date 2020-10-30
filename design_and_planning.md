@@ -1,23 +1,12 @@
 # stockin': Design and Planning
 
 ## Document Revision History
-   Rev. 1.0 YYYY-MM-DD - initial version
+   Rev. 1.0 2020-10-31 - initial version
 
 ## System Architecture<br />
 <img src = "https://user-images.githubusercontent.com/59424336/97679637-de506180-1ad8-11eb-9d7f-f248d3de02b7.png" width="100%">
 
 
-***
-## Design Details(When finished, erase this)<br />
-In this section go those important facets that are not at the level of “architecture,” such as descriptions of critical algorithms, protocols, and key invariants. Also, wherever possible items should be linked back to your specification. Ideally, you can match up everything in the specification with where it is implemented in the design.
-
-We expect that once this document is completed you will split into subteams to implement the various major components. To be ready for such a split, you need to have a precise idea of how the components are interacting, and how you are going to start implementing them. A complete class-level design might not be always possible so early, but you need to specify at least the API among the major components. Use UML when appropriate.
-
-If there are messages sent between clients and servers, you should identify **what messages and what data they contain, and in what format, and in what order they should be sent.**
-
-We expect to see a more refined design for the features to be included in the current sprint, and perhaps a more rough design for the features to be implemented in future sprints.  
-
-If you have considered alternative designs, please describe briefly your reasons for choosing the final design.
 ***
 
 ## Model
@@ -376,25 +365,36 @@ Break down each user story described in your requirements document into programm
 
 Try to identify the major risks for the project in general and the plan in particular. Explain what the risks are and discuss how you plan to mitigate them.
 
-| Page | Feature | Difficulty | Sprints | Challenges |
-|:--------|:--------|:--------|:--------|:--------|
-|Pre-login|sign in|1|2||
-|Pre-login|sign up|1|2||
-|Pre-login|forget password|3|4||
-|Pre-login|about stockin|0.5|5||
-|Main|load stocks by ranking|3|5||
-|Main|load stocks in interests|3|5||
-|Report page|load stocks by ranking|2|4||
-|Detail page|load stock detail|1.5|4||
-|Detail page|make graph|3|4||
-|Detail page|add stock to interests|1|3||
-|Detail page|add or delete comments|2|3||
-|My page|load Interests' information|2|3||
-|My page|edit group|3|5||
-|My page|edit user information|1|3||
-|About Us page|about stockin|0.5|5||
-|Header|search stocks|2|3||
-||calculate score using ml|5|3,4||
+| Page | Feature | Difficulty | Sprints | Challenges | Assignees |
+|:--------|:--------|:--------|:--------|:--------|:--------|
+|Pre-login|sign in|1|2||Woo0, Junhyeok|
+|Pre-login|sign up|1|2||Woo0, Junhyeok|
+|Pre-login|forget password|3|4|Daun, G1|
+|Pre-login|about stockin|0.5|5|Daun, G1|
+|Main|load stocks by ranking|3|5|Woo0, Daun|
+|Main|load stocks in interests|3|5|Woo0, Daun|
+|Report page|load stocks by ranking|2|4|G1, Junhyeok|
+|Detail page|load stock detail|1.5|4|G1, Junhyeok|
+|Detail page|make graph|3|4|Woo0, G1|
+|Detail page|add stock to interests|1|3|Daun, Junhyeok|
+|Detail page|add or delete comments|2|3|Daun, G1|
+|My page|load Interests' information|2|3|G1, Junhyeok|
+|My page|edit group|3|5|Daun, G1|
+|My page|edit user information|1|3|Woo0, Junhyeok|
+|About Us page|about stockin|0.5|5|Junhyeok|
+|Header|search stocks|2|3|Woo0, G1|
+||**set up an ML model**|5|3,4|Daun, Junhyeok|
+||**train model**|4|3,4|Daun, Junhyeok|
+||**set up an ML pipeline**|5|3,4|Daun, Junhyeok|
+
+- Dependencies
+   - `load stocks by ranking` depends on `ML tasks`
+   - `make graph` depends on `ML tasks`
+- Risks
+1. ML does not show high performance
+> We can try completing service with low-performance model and work on performance simultaneously
+2. Our IP might be banned from the API source
+> We should try to limit calls from API to a certain amount
 
 ## Testing Plan<br />
 - **Unit testing**<br />Every component, reducer, and module should be tested automatically. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
