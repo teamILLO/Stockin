@@ -13,7 +13,7 @@
 ## Problems (Write down problems you have experienced)
 - It is tricky to test Header because of scrolls and visible options
 - In order to query nodes in RTL, you need to give field `data-testid` to every nodes
-## Evils (Write down weird things that you have done so that everyone should be careful about it)
+## Evils (Write down weird things that you have done so that everyone should be careful)
 - I fixed some part of the non-testing codes in order to query using `getByTestId` and `queryAllByTestId`
 - store is not mocked at `App.test.js`
 - history is not properly sent to child nodes even though `<App />` is covered with `<Provider />`
