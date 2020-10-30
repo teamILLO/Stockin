@@ -3,7 +3,8 @@
 Since there were a lot of misunderstandings about each other's code, work report must be written for chunks of job you have done.<br/>
 You **MUST** write a report in following cases:
 1. when you are merging your working branch to master
-2. when you saved your work without finishing it
+2. when you pushed your work to this repo
+2. when you saved your work without completing the job (probably always this case)
 3. when there are some problems and special cases that has been caused by my work
 
 For those cases, please do a favor of our team by writing a work report.
