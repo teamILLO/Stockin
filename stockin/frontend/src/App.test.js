@@ -1,28 +1,28 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
+import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import { connectRouter, ConnectedRouter } from 'connected-react-router';
 import { Route, Redirect, Switch } from 'react-router-dom';
+import store from './store/store';
 
 import App from './App';
 import { history } from './store/store';
 
-/*
 describe('App', () => {
   let app;
-
+  //store and history needs to be mocked
   beforeEach(() => {
     app = (
-      <Provider store={mockStore}>
+      <Provider store={store}>
         <App history={history} />
       </Provider>
     );
-    console.log(app == undefined);
   });
 
   it('should render', () => {
-    console.log(app);
-    const component = mount(app);
-    expect(component.find('.App').length).toBe(1);
+    const { container } = render(app);
+    const query = queryAllByTestId(container, 'App');
+    expect(query.length).toBe(1);
   });
-});*/
+});

@@ -27,7 +27,7 @@ const Header = (props) => {
     setIsVisible(true);
   };
   return (
-    <div className="Header">
+    <div className="Header" data-testid="Header">
       <Visibility
         continuous
         once
@@ -61,9 +61,21 @@ const Header = (props) => {
           </Menu>
         </div>
         <Menu secondary compact size="massive">
-          <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
-          <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
-          <Menu.Item name="ABOUT US" onClick={() => onClickNavHandler('/aboutus')} />
+          <Menu.Item
+            name="REPORT"
+            data-testid="REPORT"
+            onClick={() => onClickNavHandler('/report')}
+          />
+          <Menu.Item
+            name="MY PAGE"
+            data-testid="MY PAGE"
+            onClick={() => onClickNavHandler('/mypage')}
+          />
+          <Menu.Item
+            name="ABOUT US"
+            data-testid="ABOUT US"
+            onClick={() => onClickNavHandler('/aboutus')}
+          />
         </Menu>
       </Visibility>
 
@@ -73,6 +85,7 @@ const Header = (props) => {
             <Container>
               <Menu.Item name="REPORT">
                 <Image
+                  data-testid="Logo"
                   src={logo}
                   onClick={() => onClickNavHandler('/main')}
                   centered

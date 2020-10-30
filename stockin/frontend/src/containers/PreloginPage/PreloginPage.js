@@ -31,7 +31,7 @@ const PreloginPage = (props) => {
     tab === 'STOCKIN' ? <Stockin /> : tab === 'ABOUTUS' ? <AboutUs /> : <Preview />;
 
   return (
-    <div className="PreloginPage">
+    <div className="PreloginPage" data-testid="PreloginPage">
       Prelogin Page
       <br />
       <div className="email">
@@ -64,8 +64,6 @@ const PreloginPage = (props) => {
         </button>
       </div>
       {selectedTab}
-      <HalfCircularScore score={100} maxScore={250} />
-      <CircularPercentage percentage={0.66} />
     </div>
   );
 };

@@ -38,7 +38,7 @@ const DetailPage = (props) => {
   }
 
   return (
-    <div className="DetailPage">
+    <div data-testid="DetailPage">
       <Header history={props.history} />
       <DetailData name={props.name} code={props.code} />
       {/* <Tabs

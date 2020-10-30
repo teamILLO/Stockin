@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import StockBlock from './StockBlock';
 
 describe('<StockBlock />', () => {
   it('should render without errors', () => {
-    const component = shallow(<StockBlock />);
-    const wrapper = component.find('.StockBlock');
-    expect(wrapper.length).toBe(1);
+    const { container } = render(<StockBlock />);
+    const query = queryAllByTestId(container, 'StockBlock');
+    expect(query.length).toBe(1);
   });
 });

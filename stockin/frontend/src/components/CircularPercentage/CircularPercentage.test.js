@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import CircularPercentage from './CircularPercentage';
 
 describe('<CircularPercentage />', () => {
   it('should render without errors', () => {
-    const component = shallow(<CircularPercentage />);
-    const wrapper = component.find('.CircularPercentage');
-    expect(wrapper.length).toBe(1);
+    const { container } = render(<CircularPercentage />);
+    const query = queryAllByTestId(container, 'CircularPercentage');
+    expect(query.length).toBe(1);
   });
 });

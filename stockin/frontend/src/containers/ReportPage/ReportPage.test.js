@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import ReportPage from './ReportPage';
 
 describe('<ReportPage />', () => {
   it('should render without errors', () => {
-    const component = shallow(<ReportPage />);
-    const wrapper = component.find('.ReportPage');
-    expect(wrapper.length).toBe(1);
+    const { container } = render(<ReportPage />);
+    const query = queryAllByTestId(container, 'ReportPage');
+    expect(query.length).toBe(1);
   });
 });

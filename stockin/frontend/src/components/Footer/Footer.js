@@ -30,7 +30,7 @@ const Footer = (props) => {
   };
 
   return (
-    <div className="Footer">
+    <div className="Footer" data-testid="Footer">
       <div className="footerNavBox">
         <Container>
           <Menu secondary compact icon>
@@ -43,14 +43,27 @@ const Footer = (props) => {
         </Container>
         <Container>
           <Menu inverted secondary compact>
-            <Menu.Item name="HOME" onClick={() => onClickNavHandler('/main')} />
-            <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
-            <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
-            <Menu.Item name="ABOUT US" onClick={() => onClickNavHandler('/aboutus')} />
+            <Menu.Item name="HOME" data-testid="HOME" onClick={() => onClickNavHandler('/main')} />
+            <Menu.Item
+              name="REPORT"
+              data-testid="REPORT"
+              onClick={() => onClickNavHandler('/report')}
+            />
+            <Menu.Item
+              name="MY PAGE"
+              data-testid="MYPAGE"
+              onClick={() => onClickNavHandler('/mypage')}
+            />
+            <Menu.Item
+              name="ABOUT US"
+              data-testid="ABOUT US"
+              onClick={() => onClickNavHandler('/aboutus')}
+            />
           </Menu>
         </Container>
       </div>
       <Image
+        data-testid="Logo"
         src={logo}
         onClick={() => onClickNavHandler('/main')}
         centered

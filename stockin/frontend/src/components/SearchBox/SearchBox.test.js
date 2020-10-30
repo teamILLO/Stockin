@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import SearchBox from './SearchBox';
 
 describe('<SearchBox />', () => {
   it('should render without errors', () => {
-    const component = shallow(<SearchBox />);
-    const wrapper = component.find('.SearchBox');
-    expect(wrapper.length).toBe(1);
+    const { container } = render(<SearchBox />);
+    const query = queryAllByTestId(container, 'SearchBox');
+    expect(query.length).toBe(1);
   });
 });

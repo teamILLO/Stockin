@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer';
 
 const MyPage = (props) => {
   return (
-    <div className="MyPage">
+    <div data-testid="MyPage">
       <Header history={props.history} />
       <div>MyPage</div>
       <Footer history={props.history} />

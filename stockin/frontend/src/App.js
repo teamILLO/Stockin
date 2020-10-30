@@ -9,10 +9,10 @@ import MyPage from './containers/MyPage/MyPage';
 import AboutUsPage from './containers/AboutUsPage/AboutUsPage';
 import DetailPage from './containers/DetailPage/DetailPage';
 
-function App(props) {
+const App = (props) => {
   return (
     <ConnectedRouter history={props.history}>
-      <div className="App">
+      <div className="App" data-testid="App">
         <Switch>
           <Route path="/prelogin" exact component={PreloginPage} />
           <Route path="/main" exact component={MainPage} />
@@ -26,6 +26,6 @@ function App(props) {
       </div>
     </ConnectedRouter>
   );
-}
+};
 
 export default App;

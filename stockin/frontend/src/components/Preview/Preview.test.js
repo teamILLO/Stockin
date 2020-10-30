@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import Preview from './Preview';
 
 describe('<Preview />', () => {
   it('should render without errors', () => {
-    const component = shallow(<Preview />);
-    const wrapper = component.find('.Preview');
-    expect(wrapper.length).toBe(1);
+    const { container } = render(<Preview />);
+    const query = queryAllByTestId(container, 'Preview');
+    expect(query.length).toBe(1);
   });
 });
