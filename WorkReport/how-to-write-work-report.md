@@ -28,7 +28,7 @@ Please write the report regarding to the following form **AT THE MASTER BRANCH**
 - Markdown didn't work well
 - I don't know if this form is nice and clean
 - I don't know if there will be more things that needs to be written
-## Evils (Write down weird things that you have done so that everyone should be careful about it)
+## Evils (Write down weird things that you have done so that everyone should be careful)
 - I erased some file wooyoung had written
 - I don't want to code anymore so I am fleeing with bugs left
 ## Plans (Write down what are you going to do next)
