@@ -13,8 +13,8 @@ For those cases, please do a favor of our team by writing a work report.
 Please write the report regarding to the following form.
 
 #### Name and file directory of the file
-> root/work_reports/(Current Date)_(My Name).md
-> > ex) work_reports/20200202_G1.md
+> root/WorkReport/(Current Date)_(My Name).md
+> > ex) WorkReport/20200202_G1.md
 
 #### Content of the file:
 - Files (Write down on what branch, on what files you have worked on)
