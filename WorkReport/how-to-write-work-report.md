@@ -18,20 +18,20 @@ Please write the report regarding to the following form **AT THE MASTER BRANCH**
 > > ex) WorkReport/20200202_G1.md
 
 #### Content of the file:
-- Files (Write down on what branch, on what files you have worked on)
-  - BRANCH_NAME:FILE_DIRECTORY
-  - BRANCH_NAME2:FILE_DIRECTORY2
-- Jobs (Write down what you have done)
-  - I wrote down this report
-  - I want to go home
-- Problems (Write down problems you have experienced)
-  - Markdown didn't work well
-  - I don't know if this form is nice and clean
-  - I don't know if there will be more things that needs to be written
-- Evils (Write down weird things that you have done so that everyone should be careful about it)
-  - I erased some file wooyoung had written
-  - I don't want to code anymore so I am fleeing with bugs left
-- Plans (Write down what are you going to do next)
-  - Fix bugs in this report
-  - Decorate with css on `frontend/src/components/fake_file.js
+## Files (Write down on what branch, on what files you have worked on)
+- BRANCH_NAME:FILE_DIRECTORY
+- BRANCH_NAME2:FILE_DIRECTORY2
+## Jobs (Write down what you have done)
+- I wrote down this report
+- I want to go home
+## Problems (Write down problems you have experienced)
+- Markdown didn't work well
+- I don't know if this form is nice and clean
+- I don't know if there will be more things that needs to be written
+## Evils (Write down weird things that you have done so that everyone should be careful about it)
+- I erased some file wooyoung had written
+- I don't want to code anymore so I am fleeing with bugs left
+## Plans (Write down what are you going to do next)
+- Fix bugs in this report
+- Decorate with css on `frontend/src/components/fake_file.js
 
