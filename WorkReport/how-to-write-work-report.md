@@ -11,7 +11,7 @@ For those cases, please do a favor of our team by writing a work report.
 
 ## How do we write work report?
 
-Please write the report regarding to the following form.
+Please write the report regarding to the following form **AT THE MASTER BRANCH**.
 
 #### Name and file directory of the file
 > root/WorkReport/(Current Date)_(My Name).md
