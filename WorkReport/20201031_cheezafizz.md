@@ -9,6 +9,7 @@
   - installed redux toolkit
   - updated react testing library
   - fixed all testing codes in `enzyme` to `RTL`
+  - **I deleted `signup` branch** (It is orignally meant to implement signup but ended up implmenting testing, so contents are moved to `test-frontend`)
 - Problems (Write down problems you have experienced)
   - It is tricky to test Header because of scrolls and visible options
   - In order to query nodes in RTL, you need to give field `data-testid` to every nodes
