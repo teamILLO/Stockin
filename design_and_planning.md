@@ -16,6 +16,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ![image](https://user-images.githubusercontent.com/26567209/97522291-c7c7de80-19e2-11eb-8e6e-d7d33c0c5c89.png)
 
+
 ## View
 
 ![Untitled Diagram](https://user-images.githubusercontent.com/13393489/97493421-43f10080-19a8-11eb-9371-78c7350ae9c7.png)
@@ -93,6 +94,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
    - news analysis result of the stock
    - text 'noticeable news' of the stock
 - **FOOTER** is displayed on the bottom.
+
 
 #### 4. My Page
 - **HEADER** is displayed on the top.
@@ -223,6 +225,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - NotAllowedMethod : status 405
 
 #### ``` api/users/signin ```
+
 - POST
    * request form : ``` {“email”: string, "nickname": string, “password": string} ```
    * response form : ``` {“email”: string, "nickname": string, “password": string} ```
