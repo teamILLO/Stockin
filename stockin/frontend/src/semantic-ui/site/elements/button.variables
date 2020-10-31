@@ -1,3 +1,20 @@
 /*******************************
     User Variable Overrides
 *******************************/
+
+
+@main             : #ff6f61;
+@sub              : #feab92;
+@light            : #ffe7e0;
+@yellow           : #feca4e;
+@logo             : #de154a;
+@black            : #212121;
+
+
+@black            : #191919;
+@grey             : #CCCCCC;
+@white            : #FFFFFF;
+@dark             : #444c5b;
+
+@primaryColor     : @main;
+@secondaryColor   : @dark;
