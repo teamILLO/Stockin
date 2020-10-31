@@ -21,7 +21,7 @@ const App = (props) => {
           <Route path="/aboutus" exact component={AboutUsPage} />
           <Route path="/detail/:id" exact component={DetailPage} />
           <Redirect exact from="/" to="prelogin" />
-          <Route render={() => <h1>Not Found</h1>} />
+          <Route render={() => <h1 data-testid="NotFound">Not Found</h1>} />
         </Switch>
       </div>
     </ConnectedRouter>

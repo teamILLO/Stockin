@@ -25,4 +25,11 @@ describe('App', () => {
     const query = queryAllByTestId(container, 'App');
     expect(query.length).toBe(1);
   });
+
+  it('should be redirected to error page', () => {
+    const { container } = render(app);
+    history.push('/aaa');
+    const query = queryAllByTestId(container, 'NotFound');
+    expect(query.length).toBe(1);
+  });
 });
