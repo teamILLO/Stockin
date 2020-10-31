@@ -6,6 +6,7 @@ import { Tab } from 'semantic-ui-react';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 import { tryLogin } from '../../store/authentication';
 import { useDispatch } from 'react-redux';
+import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 
 const panes = [
   {
@@ -28,9 +29,6 @@ const PreloginPage = (props) => {
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
-  const clickSignupHandler = () => {
-    //TODO: call modal
-  };
   const submitHandler = () => {
     const submitEmail = email;
     const submitPassword = password;
@@ -68,9 +66,13 @@ const PreloginPage = (props) => {
                 <Button color="primary" size="large" onClick={submitHandler}>
                   Login
                 </Button>
-                <Button basic color="primary" size="large" onClick={clickSignupHandler}>
-                  Signup
-                </Button>
+                <SignupModal
+                  trigger={
+                    <Button basic color="primary" size="large">
+                      Sign up
+                    </Button>
+                  }
+                />
               </Form>
             </Grid.Column>
           </Grid.Column>
