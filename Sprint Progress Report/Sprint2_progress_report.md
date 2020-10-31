@@ -3,13 +3,25 @@
 ## Implementation of this Sprint
 ### Frontend
 * **Implementation of the overall framework**<br/>
-For front-end development , React's development environment was prepared, each basic container and component element was created, and url was set.
+For front-end development , React's development environment was prepared, each basic container, component and url element was created and set. And we made setting of semantic-ui 
+<br/>
 
-* **Header, Footer**<br />
+* **Header**<br />
+<kbd><img src = "https://user-images.githubusercontent.com/59424336/97773620-bde5dd00-1b94-11eb-88f5-04496b5dfbd7.png" width="100%"></kbd>
+<kbd><img src = "https://user-images.githubusercontent.com/59424336/97773622-bfafa080-1b94-11eb-8ecf-55bac58d12bd.png" width="100%"></kbd>
+Header is an element commonly included in all views except prelogin, and provides basic redirect button and searchbox <br />
+If you scroll up the page, the header is rendered like the first picture, but if you scroll down, the header is rendered like the second picture, so User can use the searchbox and buttons regardless of the scroll.
+<br/>
 
-* **Sign-in**<br />
+* **Footer**<br />
+<kbd><img src = "https://user-images.githubusercontent.com/59424336/97773791-22ee0280-1b96-11eb-82f0-094307cea667.png" width="100%"></kbd>
+The footer provides a button to navigate to other support sites or views, and is rendered common to all pages like the header.
+<br/>
 
-* **Sign-up**<br />
+* **Search Box**<br />
+<img src = "https://user-images.githubusercontent.com/59424336/97773815-53ce3780-1b96-11eb-8994-5e69857152b4.png" width="50%">
+The searchbox is a component that is included and rendered in the Header. It is used when searching for a specific stock. When text is entered in the textbox, the corresponding  stocks are automatically listed as shown in photos.
+
 
 ### Backend
 * **Model design** <br />
