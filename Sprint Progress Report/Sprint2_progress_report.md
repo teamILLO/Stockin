@@ -41,9 +41,15 @@ When team members developed their own part with their own thoughts and collabora
 
 ## Test
 ### Test coverage report
-reports screen shot mush show below<Br/>
--The overall coverage metric<Br/>
--The list of classes with lowest coverage. Explain why is the coverage low, and what (if anything) you plan to do about it
+#### Frontend
+<kbd><img src = "https://user-images.githubusercontent.com/59424336/97774942-6f8a0b80-1b9f-11eb-9723-44c1b15ec361.png" width="80%"></kbd>
+
+#### Backend
+
+#### About Results
+Since the searchbox component is for implementation practice, it has not been tested with the backend yet. We plan to write test code after linking with backend in the future.
+
+
 
 
 ## Team contribution
@@ -61,5 +67,5 @@ He composed the Frontend Relations and api of Report, Main page,  implemented a 
 
 ## git revision
 https://github.com/swsnu/swpp2020-team15 <Br/>
-sprint2 branch <Br/>
+master branch <Br/>
 리비전버전~~
