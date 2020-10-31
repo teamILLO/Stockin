@@ -11,23 +11,23 @@ import { Tab } from 'semantic-ui-react';
 
 const panes = [
   {
-    menuItem: 'Overview',
+    menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => <DetailOverview />,
   },
   {
-    menuItem: 'News',
+    menuItem: { key: 'News', className: 'News', content: 'News' },
     render: () => <DetailNews />,
   },
   {
-    menuItem: 'Price Trends',
+    menuItem: { key: 'Price Trends', className: 'Price Trends', content: 'Price Trends' },
     render: () => <DetailPriceTrends />,
   },
   {
-    menuItem: 'Financial State',
+    menuItem: { key: 'FinancialState', className: 'FinancialState', content: 'Financial State' },
     render: () => <DetailFinancialState />,
   },
   {
-    menuItem: 'Comments',
+    menuItem: { key: 'Comments', className: 'Comments', content: 'Comments' },
     render: () => <DetailComment />,
   },
 ];
