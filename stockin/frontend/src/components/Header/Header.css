@@ -21,6 +21,6 @@
   padding-bottom: 30px;
 }
 
-.invisible {
-  visibility: hidden;
+.hidden {
+  display: none;
 }

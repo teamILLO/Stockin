@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import logo from '../../images/logo.png';
-import { Container, Menu, Button, Image, Visibility, Search } from 'semantic-ui-react';
+import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
 import SearchBox from '../SearchBox/SearchBox';
 import './Header.css';
 
@@ -17,6 +17,7 @@ const Header = (props) => {
   const handleOffScreen = () => {
     setIsVisible(true);
   };
+
   return (
     <div className="Header" data-testid="Header">
       <Visibility
@@ -58,8 +59,7 @@ const Header = (props) => {
           />
         </Menu>
       </Visibility>
-
-      <div className={'stickyHeader ' + (isVisible ? '' : 'invisible')} data-testid="StickyHeader">
+      <div className={'stickyHeader ' + (isVisible ? '' : 'hidden')} data-testid="StickyHeader">
         <Menu borderless fixed="top">
           <Container>
             <Menu.Item name="REPORT">

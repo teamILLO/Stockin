@@ -1,12 +1,21 @@
 import React from 'react';
-import { render, fireEvent, getByTestId, queryAllByTestId } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  getByTestId,
+  queryAllByTestId,
+  queryByTestId,
+} from '@testing-library/react';
 import Header from './Header';
 import { history } from '../../store/store';
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('<Header />', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
+
   it('should render without errors', () => {
     const { container } = render(<Header />);
     const query = queryAllByTestId(container, 'Header');
@@ -67,5 +76,100 @@ describe('<Header />', () => {
     const button = getByTestId(container, 'stickyMypage');
     fireEvent.click(button);
     expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('<Header />', () => {
+  let app;
+  beforeEach(() => {
+    app = (
+      <div>
+        <Header />
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+        <div>ReportPage</div>
+      </div>
+    );
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should render without errors', () => {
+    const { container } = render(app);
+    const query = queryAllByTestId(container, 'Header');
+    expect(query.length).toBe(1);
+    expect(queryByTestId(container, 'StickyHeader')).toHaveClass('hidden');
+
+    fireEvent.scroll(window, { target: { scrollY: 2000 } });
+    expect(queryByTestId(container, 'StickyHeader')).toBeVisible();
+
+    fireEvent.scroll(window, { target: { scrollY: 0 } });
+    expect(queryByTestId(container, 'StickyHeader')).toBeVisible();
   });
 });
