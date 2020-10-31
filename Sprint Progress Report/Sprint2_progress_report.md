@@ -2,6 +2,9 @@
 
 ## Implementation of this Sprint
 ### Frontend
+* **Implementation of the overall framework**<br/>
+For front-end development , React's development environment was prepared, each basic container and component element was created, and url was set.
+
 * **Header, Footer**<br />
 
 * **Sign-in**<br />
@@ -45,5 +48,5 @@ He composed the Frontend Relations and api of Report, Main page,  implemented a 
 
 ## git revision
 https://github.com/swsnu/swpp2020-team15 <Br/>
-sprint branch <Br/>
+sprint2 branch <Br/>
 리비전버전~~
