@@ -18,8 +18,8 @@ If you scroll up the page, the header is rendered like the first picture, but if
 The footer provides a button to navigate to other support sites or views, and is rendered common to all pages like the header.
 <br/>
 
-* **Search Box**<br />
-<img src = "https://user-images.githubusercontent.com/59424336/97773815-53ce3780-1b96-11eb-8994-5e69857152b4.png" width="50%">
+* **Search Box**<br /><img src = "https://user-images.githubusercontent.com/59424336/97773815-53ce3780-1b96-11eb-8994-5e69857152b4.png" width="50%" height="50%">
+
 The searchbox is a component that is included and rendered in the Header. It is used when searching for a specific stock. When text is entered in the textbox, the corresponding  stocks are automatically listed as shown in photos.
 <br/>
 
