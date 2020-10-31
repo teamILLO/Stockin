@@ -4,7 +4,7 @@ import './HalfCircularScore.css';
 
 const HalfCircularScore = (props) => {
   return (
-    <div className="HalfCircularScore">
+    <div data-testid="HalfCircularScore">
       <CircularProgressbar
         value={props.score}
         maxValue={props.maxScore}

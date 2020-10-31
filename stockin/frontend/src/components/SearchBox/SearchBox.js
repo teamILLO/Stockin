@@ -41,8 +41,6 @@ function SearchBox() {
         dispatch({ type: 'CLEAN_QUERY' });
         return;
       }
-
-      console.log(data.value);
       dispatch({
         type: 'FINISH_SEARCH',
         results: stocks.filter((st) => st.name.toUpperCase().includes(data.value.toUpperCase())),
@@ -57,6 +55,7 @@ function SearchBox() {
 
   return (
     <Search
+      data-testid="SearchBox"
       fluid
       loading={loading}
       onResultSelect={(e, data) =>
