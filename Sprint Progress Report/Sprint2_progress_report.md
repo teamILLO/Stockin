@@ -42,10 +42,11 @@ When team members developed their own part with their own thoughts and collabora
 ## Test
 ### Test coverage report
 #### Frontend
-<kbd><img src = "https://user-images.githubusercontent.com/59424336/97774942-6f8a0b80-1b9f-11eb-9723-44c1b15ec361.png" width="80%"></kbd>
-
+<img src = "https://user-images.githubusercontent.com/59424336/97774942-6f8a0b80-1b9f-11eb-9723-44c1b15ec361.png" width="80%">
+<br/>
 #### Backend
 
+<br/>
 #### About Results
 Since the searchbox component is for implementation practice, it has not been tested with the backend yet. We plan to write test code after linking with backend in the future.
 
