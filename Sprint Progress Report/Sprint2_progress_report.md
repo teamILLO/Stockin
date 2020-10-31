@@ -7,8 +7,8 @@ For front-end development , React's development environment was prepared, each b
 <br/>
 
 * **Header**<br />
-<kbd><img src = "https://user-images.githubusercontent.com/59424336/97773620-bde5dd00-1b94-11eb-88f5-04496b5dfbd7.png" width="100%"></kbd>
 <kbd><img src = "https://user-images.githubusercontent.com/59424336/97773622-bfafa080-1b94-11eb-8ecf-55bac58d12bd.png" width="100%"></kbd>
+<kbd><img src = "https://user-images.githubusercontent.com/59424336/97773620-bde5dd00-1b94-11eb-88f5-04496b5dfbd7.png" width="100%"></kbd>
 Header is an element commonly included in all views except prelogin, and provides basic redirect button and searchbox <br />
 If you scroll up the page, the header is rendered like the first picture, but if you scroll down, the header is rendered like the second picture, so User can use the searchbox and buttons regardless of the scroll.
 <br/>
