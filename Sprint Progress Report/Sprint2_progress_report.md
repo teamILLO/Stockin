@@ -21,6 +21,7 @@ The footer provides a button to navigate to other support sites or views, and is
 * **Search Box**<br />
 <img src = "https://user-images.githubusercontent.com/59424336/97773815-53ce3780-1b96-11eb-8994-5e69857152b4.png" width="50%">
 The searchbox is a component that is included and rendered in the Header. It is used when searching for a specific stock. When text is entered in the textbox, the corresponding  stocks are automatically listed as shown in photos.
+<br/>
 
 
 ### Backend
@@ -45,15 +46,16 @@ reports screen shot mush show below<Br/>
 -The overall coverage metric<Br/>
 -The list of classes with lowest coverage. Explain why is the coverage low, and what (if anything) you plan to do about it
 
+
 ## Team contribution
 #### Junheok
-He composed the Frontend Relations and api of Pre-login page, constructed VIEW and Testing plan in design and planning, and implements the frontend part of sprint2 with Wooyoung.
+He composed the Frontend Relations and api of Pre-login page, constructed VIEW and Testing plan in design and planning. And he implemented the frontend in collaboration with Woohyoung, mainly coding and testing test codes.
 
 #### Wooyoung
-She composed the Frontend Relations and api of Detail Page, drew up Frontend design and Implementation plan in design and planning, and implements the frontend part of sprint2 with Junheok.
+She composed the Frontend Relations and api of Detail Page, drew up Frontend design and Implementation plan in design and planning, And she implemented the frontend part with Junheok, mainy designed and implemented header and footer, and implemented detail page and searchbox.
 
 #### Jiwon
-He composed the Frontend Relations and api of MY-page, designed the overall backend model and the api of each model in design and planning. And e implemented the overall framework of the backend and created a custom user and implemented a function that handles http requests for interworking with the sign-in and sign-up functions of the front end.
+He composed the Frontend Relations and api of MY-page, designed the overall backend model and the api of each model in design and planning. And he implemented the overall framework of the backend and created a custom user and implemented a function that handles http requests for interworking with the sign-in and sign-up functions of the front end.
 
 #### Daun
 He composed the Frontend Relations and api of Report, Main page,  implemented a parser that searches for an information source to crawl stock price information, crawls stock information, and stores it directly in the model implemented by Jiwon.
