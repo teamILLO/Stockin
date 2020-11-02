@@ -2,6 +2,7 @@
 
 ## Document Revision History
    Rev. 1.0 2020-10-31 - initial version
+   Rev. 1.1 2020-11-03 - additional backend model `Comment`
 
 ## System Architecture<br />
 <img src = "https://user-images.githubusercontent.com/59424336/97679637-de506180-1ad8-11eb-9d7f-f248d3de02b7.png" width="100%">
@@ -197,23 +198,25 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ```api/users/signup ``` | X | Create user | X | X |
-| | ``` api/users/signin ``` | X | User login check | X | X |
-| | ``` api/users/signout ``` | User logout | X | X | X |
-| | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
+| User | ```api/users/signup/ ``` | X | Create user | X | X |
+| | ``` api/users/signin/ ``` | X | User login check | X | X |
+| | ``` api/users/signout/ ``` | User logout | X | X | X |
+| | ``` api/users/:user_id/ ``` | Get user info | X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
-| | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
-| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
-| | ``` api/groups/:group_id/stocks/:stock_id ``` | X | X | X | Delete stock |
+| | ``` api/groups/:group_id/ ``` | X | X | Update group name | Delete group |
+| | ``` api/groups/:group_id/stocks/ ``` | Get user's all stock | Add stocks | X | X |
+| | ``` api/groups/:group_id/stocks/:stock_id/ ``` | X | X | X | Delete stock |
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
-| | ``` api/stocks/:stock_id ``` | Get stock info | X | X | X |
-| | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
-| | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
-| News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
-| | ``` api/news/:news_id ``` | Get news info | X | X | X |
-| Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
-| | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
-| FinancialStat | ``` api/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
+| | ``` api/stocks/:stock_id/ ``` | Get stock info | X | X | X |
+| | ``` api/stocks/history/:stockhistory_date/ ``` | Get stock history list of date | X | X | X |
+| | ``` api/stocks/history/:stockhistory_id/ ``` | Get specified stockhistory info | X | X | X |
+| Comment | ``` api/stocks/:stock_id/comments/ ``` | Get stock's comment list | Create comment | X | X |
+| | ``` api/comments/:comment_id/ ``` | Get a comment | X | Edit comment | Delete comment |
+| News | ``` api/news/stock/:stock_id/date/:news_date/ ``` | Get news list of specified date | X | X | X |
+| | ``` api/news/:news_id/ ``` | Get news info | X | X | X |
+| Report | ``` api/reports/date/:report_date/ ``` | Get report list of specified date | X | X | X |
+| | ``` api/reports/date/:report_date/stock/:stock_title/ ``` | Get report of specified stock & date | X | X | X |
+| FinancialStat | ``` api/financialstats/stock/:stock_id/ ``` | Get financial statement of specified stock | X | X | X |
 
 ### User Model
 #### ``` api/users/signup ```
@@ -308,6 +311,38 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * response form : ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
    * Success : status 200
 - AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+### Comment Model
+#### ``` api/stocks/:stock_id/comments ```
+- GET
+   * response form : list : each element : ``` {“stock”: id of stock, "time": DateTime, "content": string, "author": integer} ```
+   * Success : status 200
+- AuthenticateError : status 401
+- DoesNotExistError : status 404
+- NotAllowedMethod : status 405
+- POST
+   * response form : list : ``` {“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": integer} ```
+   * KeyError : status 400
+   * Success : status 201
+- AuthenticateError : status 401
+- DoesNotExistError : status 404
+- NotAllowedMethod : status 405
+
+#### ``` api/comments/:comment_id ```
+- GET
+   * response form : list : ``` {“stock”: id of stock, "time": DateTime, "content": string, "author": integer} ```
+   * Success : status 200
+- AuthenticateError : status 401
+- DoesNotExistError : status 404
+- NotAllowedMethod : status 405
+- PUT
+   * response form : list : ``` {“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": integer} ```
+   * KeyError : status 400
+   * Success : status 200
+- AuthenticateError : status 401
+- ForbiddenError : status 403
+- DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 
 ### StockHistory Model
