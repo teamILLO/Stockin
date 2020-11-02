@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
+from django.db.utils import IntegrityError
 from json import JSONDecodeError
 import json
 
@@ -15,7 +16,10 @@ def signup(request):
         email = req_data['email']
         nickname = req_data['nickname']
         password = req_data['password']
-        User.objects.create_user(email=email, nickname=nickname, password=password)
+        try:
+            User.objects.create_user(email=email, nickname=nickname, password=password)
+        except IntegrityError as er:
+            return HttpResponse(status= 406)
         response_dict = {'email' : email, 'nickname' : nickname, 'password' : password}
         return HttpResponse(content=json.dumps(response_dict), status = 201)
     

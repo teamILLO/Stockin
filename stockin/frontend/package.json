@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.21.0",
     "connected-react-router": "^6.8.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
@@ -52,6 +53,7 @@
     "@semantic-ui-react/craco-less": "^1.2.1",
     "semantic-ui-less": "^2.4.1"
   },
+  "proxy": "http://localhost:8000",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
