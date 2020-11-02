@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, Header, Icon, Image, Input, Modal } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
+import { trySignup } from '../../../store/signup';
+
 import logo from '../../../images/logo.png';
 import './SignupModal.css';
 
@@ -10,8 +13,14 @@ const SignupModal = (props) => {
   const [nickname, setNickname] = useState('');
   const [next, setNext] = useState(false);
 
+  const dispatch = useDispatch();
+
   const signupHandler = () => {
-    alert('Sign up succesfully');
+    let submitEmail = email;
+    let submitNickname = nickname;
+    let submitPassword = password;
+    dispatch(trySignup({ email: submitEmail, nickname: submitNickname, password: submitPassword }));
+    alert('Sign up succesfully'); //TODO: need to catch signup unsuccessfully
     setOpen(false);
   };
 

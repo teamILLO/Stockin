@@ -21,7 +21,7 @@ def comment_list(request, stock_id=""):
 
         response_list = []
         for comment in Comment.objects.filter(stock= stock_id).iterator():
-            response_list.append({'time': comment.time, 'stock': stock_id, 'content': comment.content, 'author': comment.author.id})
+            response_list.append({'stock': stock_id, 'time': comment.time, 'content': comment.content, 'author': comment.author.id})
         return JsonResponse(response_list, safe=False)
     elif request.method == 'POST':
         if not request.user.is_authenticated:

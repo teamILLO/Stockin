@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import authentication from './authentication';
+import signup from './signup';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
   authentication,
+  signup,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 

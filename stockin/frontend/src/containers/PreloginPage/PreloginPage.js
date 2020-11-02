@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
+import CSRFToken from '../../csrftoken';
+import CommentBlock from '../../components/CommentBlock/CommentBlock';
 import { Tab } from 'semantic-ui-react';
 
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
@@ -35,7 +37,6 @@ const PreloginPage = (props) => {
   const submitHandler = () => {
     const submitEmail = email;
     const submitPassword = password;
-    console.log(submitEmail, submitPassword);
     dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
   };
 
@@ -68,7 +69,6 @@ const PreloginPage = (props) => {
                   onChange={(event) => setPassword(event.target.value)}
                 />
 
-
                 <Button color="primary" size="large" onClick={submitHandler}>
                   Login
                 </Button>
@@ -79,7 +79,6 @@ const PreloginPage = (props) => {
                     </Button>
                   }
                 />
-
               </Form>
             </Grid.Column>
           </Grid.Column>
