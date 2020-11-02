@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'stocks.apps.StocksConfig',
     'users.apps.UsersConfig',
     'groups.apps.GroupsConfig',
+    'comments.apps.CommentsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
