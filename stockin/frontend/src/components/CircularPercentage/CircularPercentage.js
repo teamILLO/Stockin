@@ -4,7 +4,7 @@ import './CircularPercentage.css';
 
 const CircularPercentage = (props) => {
   return (
-    <div className="CircularPercentage">
+    <div className="CircularPercentage" data-testid="CircularPercentage">
       <CircularProgressbar value={props.percentage * 100} text={`${props.percentage * 100}%`} />
     </div>
   );

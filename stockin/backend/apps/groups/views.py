@@ -12,8 +12,22 @@ from apps.stocks.models import Stock
 
  
 ## Group views
-def group_create(request):
-    if request.method == 'POST':
+def group_list_and_create(request):
+    if request.method == 'GET':
+        # check if user is logged_in
+        if not request.user.is_authenticated :
+            return HttpResponse(status=401)
+
+        response_list = []
+        group_list = [group for group in Group.objects.all() if group.user == request.user]
+        for group in group_list : 
+            response_dict = {'id' : group.id, 'user' : group.user.email, 'name' : group.name}
+            response_list.append(response_dict)
+
+        return JsonResponse(response_list, safe=False)
+
+    elif request.method == 'POST':
+        # check if user is logged_in
         if not request.user.is_authenticated :
             return HttpResponse(status=401)
 
@@ -31,7 +45,7 @@ def group_create(request):
         return HttpResponse(content=json.dumps(response_dict), status = 201)
     
     else :
-        return HttpResponseNotAllowed(['POST'])
+        return HttpResponseNotAllowed(['GET', 'POST'])
 
 
 def group_edit(request, id='') :
@@ -70,36 +84,13 @@ def group_edit(request, id='') :
         if group.user != request.user :
             return HttpResponse(status=403)
 
-        try : 
-            body = request.body.decode()
-            name = json.loads(body)['name']
-            user = request.user
-        except (KeyError, JSONDecodeError) as e:
-            return HttpResponseBadRequest()
-
+        # TODO : Delete fail handle
         group.delete()
+
         return HttpResponse(status=200)
 
     else :
         return HttpResponseNotAllowed(['PUT', 'DELETE'])
-
-
-def group_list(request):
-    if request.method == 'GET':
-        # check if user is logged_in
-        if not request.user.is_authenticated :
-            return HttpResponse(status=401)
-
-        response_list = []
-        group_list = [group for group in Group.objects.all() if group.user == request.user]
-        for group in group_list : 
-            response_dict = {'id' : group.id, 'user' : group.user.email, 'name' : group.name}
-            response_list.append(response_dict)
-
-        return JsonResponse(response_list, safe=False)
-
-    else :
-        return HttpResponseNotAllowed(['GET'])
 
 
 def group_stock_list(request, id=''):
@@ -141,8 +132,8 @@ def group_stock_list(request, id=''):
         for stock in req_data : 
             stock_id = stock['id']
 
-            # check already exists
-            if group.stocks.filter(stock__id=stock_id) :
+            # if stock already exists, continue
+            if group.stocks.filter(id=int(stock_id)) :
                 continue
             
             # find record in stock model
@@ -152,48 +143,41 @@ def group_stock_list(request, id=''):
                 return HttpResponseBadRequest()
                 
             # add
-            group.stock.add(target_stock)
+            group.stocks.add(target_stock)
             group.save()
 
             response_dict = {'id' : target_stock.id, 'title' : target_stock.title}
             response_list.append(response_dict)
 
         return HttpResponse(content=json.dumps(response_list), status = 201)
+                
+    else :
+        return HttpResponseNotAllowed(['GET', 'POST'])
 
-    elif request.method == 'DELETE':
+
+def group_stock_delete(request, group_id='', stock_id=''):
+    if request.method == 'DELETE':
         # check if user is logged_in
         if not request.user.is_authenticated :
             return HttpResponse(status=401)
 
-        group = get_object_or_404(Group, id=id)
+        group = get_object_or_404(Group, id=group_id)
         # check user valid
         if group.user != request.user :
             return HttpResponse(status=403)
-
-        try:
-            body = request.body.decode()
-            req_data = json.loads(body)
-            user = request.user
-        except (KeyError, JSONDecodeError) as e:
-            return HttpResponseBadRequest()
-
-        for stock in req_data : 
-            stock_id = stock['id']
-
-            # check already exists
-            if group.stocks.filter(stock__id=stock_id) :
-                continue
-            
-            # find record in stock model
-            try:
-                group.stocks.delete(stock__id=stock_id)
-            except Stock.DoesNotExist:
-                return HttpResponseBadRequest()
         
-        return HttpResponse(status=200)
-                
+        # get target stock
+        target_stock = get_object_or_404(Stock, id=stock_id)
+        # delete from group
+        try :
+            group.stock.remove(target_stock)
+        except :
+            return HttpResponse(status=404)
+
     else :
-        return HttpResponseNotAllowed(['GET', 'POST', 'DELETE'])
+        return HttpResponseNotAllowed(['DELETE'])
+
+
 
 
 

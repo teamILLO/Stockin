@@ -1,33 +1,25 @@
 import React, { useState } from 'react';
 import logo from '../../images/logo.png';
-import { Container, Menu, Button, Image, Visibility, Search } from 'semantic-ui-react';
+import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
 import SearchBox from '../SearchBox/SearchBox';
 import './Header.css';
 
 const Header = (props) => {
-  const [search, setSearch] = useState();
   const [isVisible, setIsVisible] = useState(false);
-
-  const data = [
-    { value: 'aaaaa', key: 1234 },
-    { value: 'aabdd', key: 1235 },
-    { value: 'aacccaa', key: 1236 },
-    { value: 'aaewrqaa', key: 1237 },
-    { value: 'qerw', key: 1238 },
-  ];
 
   const onClickNavHandler = (dest) => {
     props.history.push(dest);
   };
-  const clickLogoutHandler = () => {};
+  // const clickLogoutHandler = () => {};
   const handleOnScreen = () => {
     setIsVisible(false);
   };
   const handleOffScreen = () => {
     setIsVisible(true);
   };
+
   return (
-    <div className="Header">
+    <div className="Header" data-testid="Header">
       <Visibility
         continuous
         once
@@ -35,66 +27,71 @@ const Header = (props) => {
         onBottomPassed={() => handleOffScreen()}
       >
         <Container textAlign="right">
-          <Button secondary onClick={() => clickLogoutHandler()}>
-            LOGOUT
-          </Button>
+          <Button secondary>LOGOUT</Button>
         </Container>
         <Image
           src={logo}
           onClick={() => onClickNavHandler('/main')}
           centered
           className="headerLogo"
+          data-testid="Logo"
         />
-        {/* <div className="searchBox">
-          <ReactSearchBox
-            placeholder="Search"
-            data={data}
-            onChange={(value) => setSearch(value)}
-            fuseConfigs={{
-              threshold: 0.05,
-            }}
-          />
-        </div> */}
         <div>
           <Menu compact secondary>
             <SearchBox />
           </Menu>
         </div>
         <Menu secondary compact size="massive">
-          <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
-          <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
-          <Menu.Item name="ABOUT US" onClick={() => onClickNavHandler('/aboutus')} />
+          <Menu.Item
+            name="REPORT"
+            data-testid="Report"
+            onClick={() => onClickNavHandler('/report')}
+          />
+          <Menu.Item
+            name="MY PAGE"
+            data-testid="Mypage"
+            onClick={() => onClickNavHandler('/mypage')}
+          />
+          <Menu.Item
+            name="ABOUT US"
+            data-testid="AboutUs"
+            onClick={() => onClickNavHandler('/aboutus')}
+          />
         </Menu>
       </Visibility>
-
-      {isVisible && (
-        <div className="stickyHeader">
-          <Menu borderless fixed="top">
-            <Container>
-              <Menu.Item name="REPORT">
-                <Image
-                  src={logo}
-                  onClick={() => onClickNavHandler('/main')}
-                  centered
-                  className="headerSmallLogo"
-                />
+      <div className={'stickyHeader ' + (isVisible ? '' : 'hidden')} data-testid="StickyHeader">
+        <Menu borderless fixed="top">
+          <Container>
+            <Menu.Item name="REPORT">
+              <Image
+                data-testid="stickyLogo"
+                src={logo}
+                onClick={() => onClickNavHandler('/main')}
+                centered
+                className="headerSmallLogo"
+              />
+            </Menu.Item>
+            <Menu.Menu position="right" widths="4">
+              <Menu.Item>
+                <SearchBox />
               </Menu.Item>
-              <Menu.Menu position="right" widths="4">
-                <Menu.Item>
-                  <SearchBox />
-                </Menu.Item>
-                <Menu.Item name="REPORT" onClick={() => onClickNavHandler('/report')} />
-                <Menu.Item name="MY PAGE" onClick={() => onClickNavHandler('/mypage')} />
-                <Menu.Item>
-                  <Button secondary onClick={() => clickLogoutHandler()}>
-                    LOGOUT
-                  </Button>
-                </Menu.Item>
-              </Menu.Menu>
-            </Container>
-          </Menu>
-        </div>
-      )}
+              <Menu.Item
+                name="REPORT"
+                data-testid="stickyReport"
+                onClick={() => onClickNavHandler('/report')}
+              />
+              <Menu.Item
+                name="MY PAGE"
+                data-testid="stickyMypage"
+                onClick={() => onClickNavHandler('/mypage')}
+              />
+              <Menu.Item>
+                <Button secondary>LOGOUT</Button>
+              </Menu.Item>
+            </Menu.Menu>
+          </Container>
+        </Menu>
+      </div>
     </div>
   );
 };

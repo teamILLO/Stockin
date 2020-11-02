@@ -3,6 +3,7 @@ import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
 import { Tab } from 'semantic-ui-react';
+
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
 import { tryLogin } from '../../store/authentication';
 import { useDispatch } from 'react-redux';
@@ -19,6 +20,7 @@ const panes = [
   },
   {
     menuItem: 'Preview',
+
     render: () => <Preview />,
   },
 ];
@@ -27,6 +29,7 @@ const panes = [
 const PreloginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const dispatch = useDispatch();
 
   const submitHandler = () => {
@@ -37,7 +40,7 @@ const PreloginPage = (props) => {
   };
 
   return (
-    <div>
+    <div className="PreloginPage" data-testid="PreloginPage">
       Prelogin Page
       <br />
       <div>
@@ -46,6 +49,7 @@ const PreloginPage = (props) => {
             <Grid.Column style={{ maxWidth: 450 }}>
               <Form size="large">
                 <Form.Input
+                  data-testid="inputEmail"
                   fluid
                   icon="user"
                   iconPosition="left"
@@ -54,6 +58,7 @@ const PreloginPage = (props) => {
                   onChange={(event) => setEmail(event.target.value)}
                 />
                 <Form.Input
+                  data-testid="inputPassword"
                   fluid
                   icon="lock"
                   iconPosition="left"
@@ -62,6 +67,7 @@ const PreloginPage = (props) => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
+
 
                 <Button color="primary" size="large" onClick={submitHandler}>
                   Login
@@ -73,6 +79,7 @@ const PreloginPage = (props) => {
                     </Button>
                   }
                 />
+
               </Form>
             </Grid.Column>
           </Grid.Column>

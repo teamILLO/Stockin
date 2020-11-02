@@ -9,10 +9,10 @@ import MyPage from './containers/MyPage/MyPage';
 import AboutUsPage from './containers/AboutUsPage/AboutUsPage';
 import DetailPage from './containers/DetailPage/DetailPage';
 
-function App(props) {
+const App = (props) => {
   return (
     <ConnectedRouter history={props.history}>
-      <div className="App">
+      <div className="App" data-testid="App">
         <Switch>
           <Route path="/prelogin" exact component={PreloginPage} />
           <Route path="/main" exact component={MainPage} />
@@ -21,11 +21,11 @@ function App(props) {
           <Route path="/aboutus" exact component={AboutUsPage} />
           <Route path="/detail/:id" exact component={DetailPage} />
           <Redirect exact from="/" to="prelogin" />
-          <Route render={() => <h1>Not Found</h1>} />
+          <Route render={() => <h1 data-testid="NotFound">Not Found</h1>} />
         </Switch>
       </div>
     </ConnectedRouter>
   );
-}
+};
 
 export default App;

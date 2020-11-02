@@ -2,8 +2,8 @@ from django.urls import path
 from groups import views
 
 urlpatterns = [
-    path('create/', views.group_create, name='group_create'),
-    path('edit/<int:id>/', views.group_edit, name='group_edit'),
-    path('list/', views.group_list, name='group_list'),
-    path('<int:id>/stocks/', views.group_stock_list, name='group_stock edit'),
+    path('', views.group_list_and_create, name='group_list_and_create'),
+    path('<int:id>', views.group_edit, name='group_edit'),
+    path('<int:id>/stocks', views.group_stock_list, name='group_stock edit'),
+    path('<int:group_id>/stocks/<int:stock_id>', views.group_stock_delete, name='group_stock_delete')
 ]
