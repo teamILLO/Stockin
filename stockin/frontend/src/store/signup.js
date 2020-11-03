@@ -13,7 +13,7 @@ export default slice.reducer;
 
 export const signup = (user) => async (dispatch) => {
   try {
-    await api.post('/users/signin', user).then((response) => dispatch(login(response.data)));
+    await api.post('/users/signin/', user).then((response) => dispatch(login(response.data)));
   } catch (e) {
     return console.error(e.message);
   }
