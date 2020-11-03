@@ -7,6 +7,8 @@ from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 from json import JSONDecodeError
 import json
+from django.core.mail import EmailMessage
+
 
 User = get_user_model()
 
@@ -54,6 +56,51 @@ def signout(request):
         
     else :
         return HttpResponseNotAllowed(['GET'])
+
+
+
+def duplicate(request):
+    if request.method == 'POST':
+        req_data = json.loads(request.body.decode())
+        email = req_data['email']     
+        filter_result = User.objects.filter(email=email)
+
+        if len(filter_result) >= 1:
+            response_dict = {'duplicate':True}
+            return HttpResponse(content=json.dumps(response_dict), status= 203)
+        else:
+            response_dict = {'duplicate':False}
+            return HttpResponse(content=json.dumps(response_dict), status= 203)
+    else :
+        return HttpResponseNotAllowed(['POST'])
+
+
+def sendCode(request):
+    if request.method == 'POST':
+        req_data = json.loads(request.body.decode())
+        email = req_data['email']
+        code = req_data['code']
+        EmailMessage(
+            'Hello Stokcin~',             # 제목
+            'Code : '+ code,                 # 내용
+            to = [email],      # 받는 이메일 리스트
+        ).send()
+        return HttpResponse(status=204)
+    else :
+        return HttpResponseNotAllowed(['POST'])
+
+
+def userInfo(request):
+    if request.method == 'PUT':
+        req_data = json.loads(request.body.decode())
+        email = req_data['email']
+        password = req_data['password']
+        target_user = User.objects.get(email=email)
+        target_user.set_password(password)
+        target_user.save()
+        return HttpResponse(status=204)
+    else :
+        return HttpResponseNotAllowed(['PUT'])
 
 
 @ensure_csrf_cookie

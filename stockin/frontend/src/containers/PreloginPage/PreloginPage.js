@@ -6,10 +6,11 @@ import CSRFToken from '../../csrftoken';
 import CommentBlock from '../../components/CommentBlock/CommentBlock';
 import { Tab } from 'semantic-ui-react';
 
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Image, Message, Segment,Checkbox, Item } from 'semantic-ui-react';
 import { tryLogin } from '../../store/authentication';
 import { useDispatch } from 'react-redux';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
+import FindPasswdModal from '../../components/Modal/FindPasswdModal/FindPasswdModal';
 
 const panes = [
   {
@@ -67,6 +68,15 @@ const PreloginPage = (props) => {
                   type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
+                />
+
+                <Checkbox
+                  label="Remember Me"
+                />
+                <FindPasswdModal
+                  trigger={
+                    <Item as="a" content="Forget Password?"/>
+                  }
                 />
 
                 <Button color="primary" size="large" onClick={submitHandler}>
