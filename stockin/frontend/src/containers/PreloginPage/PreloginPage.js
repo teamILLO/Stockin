@@ -1,21 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
 import { Tab } from 'semantic-ui-react';
-import { Button, Form, Grid } from 'semantic-ui-react';
+
+import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { tryLogin } from '../../store/authentication';
+import { useDispatch } from 'react-redux';
+import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 
 const panes = [
   {
-    menuItem: { key: 'Stockin', className: 'Stockin', content: 'About Stockin' },
+    menuItem: 'Stockin',
     render: () => <Stockin />,
   },
   {
-    menuItem: { key: 'AboutUs', className: 'AboutUs', content: 'About Us' },
+    menuItem: 'About Us',
     render: () => <AboutUs />,
   },
   {
-    menuItem: { key: 'Preview', className: 'Preview', content: 'Preview' },
+    menuItem: 'Preview',
+
     render: () => <Preview />,
   },
 ];
@@ -25,11 +30,13 @@ const PreloginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const clickSignupHandler = () => {
-    //TODO: call modal
-  };
+  const dispatch = useDispatch();
+
   const submitHandler = () => {
-    //TODO: connect with BE
+    const submitEmail = email;
+    const submitPassword = password;
+    console.log(submitEmail, submitPassword);
+    dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
   };
 
   return (
@@ -61,12 +68,18 @@ const PreloginPage = (props) => {
                   onChange={(event) => setPassword(event.target.value)}
                 />
 
-                <Button primary size="large" onClick={submitHandler}>
+
+                <Button color="primary" size="large" onClick={submitHandler}>
                   Login
                 </Button>
-                <Button basic primary size="large" onClick={clickSignupHandler}>
-                  Signup
-                </Button>
+                <SignupModal
+                  trigger={
+                    <Button basic color="primary" size="large">
+                      Sign up
+                    </Button>
+                  }
+                />
+
               </Form>
             </Grid.Column>
           </Grid.Column>
