@@ -1,8 +1,9 @@
 import os,sys
 from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
+print(BASE_DIR)
 # for a in sys.path:
 #     print(a)
 
@@ -187,9 +188,13 @@ if __name__ == '__main__':
 
 
 
+    # start = time.time()
+    # initialStockAdd()
+    # print('time: ' , time.time()-start)
+
     start = time.time()
-    initialStockAdd()
-    print('time: ' , time.time()-start)
+    stockUpdate()
+    print('time: ' , time.time()-start, ' 초')
 
     # start = time.time()
     # stockHistoryUpdate()
