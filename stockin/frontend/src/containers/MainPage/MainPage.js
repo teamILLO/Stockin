@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../../components/Header/Header';
-import { Button } from 'semantic-ui-react';
 import Footer from '../../components/Footer/Footer';
 
 const MainPage = (props) => {

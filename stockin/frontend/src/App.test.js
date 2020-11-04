@@ -1,9 +1,6 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
-import { connectRouter, ConnectedRouter } from 'connected-react-router';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { render, queryAllByTestId } from '@testing-library/react';
 import store from './store/store';
 
 import App from './App';

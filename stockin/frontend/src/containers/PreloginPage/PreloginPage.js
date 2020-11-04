@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
 import { Tab } from 'semantic-ui-react';
 
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
+import { Button, Form, Grid } from 'semantic-ui-react';
 import { tryLogin } from '../../store/authentication';
 import { useDispatch } from 'react-redux';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 
 const panes = [
   {
-    menuItem: 'Stockin',
+    menuItem: 'About Stockin',
     render: () => <Stockin />,
   },
   {
@@ -68,18 +68,16 @@ const PreloginPage = (props) => {
                   onChange={(event) => setPassword(event.target.value)}
                 />
 
-
-                <Button color="primary" size="large" onClick={submitHandler}>
+                <Button primary size="large" onClick={submitHandler}>
                   Login
                 </Button>
                 <SignupModal
                   trigger={
-                    <Button basic color="primary" size="large">
+                    <Button basic primary size="large">
                       Sign up
                     </Button>
                   }
                 />
-
               </Form>
             </Grid.Column>
           </Grid.Column>

@@ -1,7 +1,6 @@
-import _ from 'lodash';
 import React from 'react';
 import stocks from './stocks';
-import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
+import { Search } from 'semantic-ui-react';
 
 const initialState = {
   loading: false,

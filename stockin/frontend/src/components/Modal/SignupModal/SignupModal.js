@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Header, Icon, Image, Input, Modal } from 'semantic-ui-react';
+import { Button, Form, Image, Modal } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { trySignup } from '../../../store/signup';
 
@@ -25,7 +25,7 @@ const SignupModal = (props) => {
   };
 
   const inputs = next ? (
-    <Form size="medium">
+    <Form size="small">
       <Form.Input
         fluid
         icon="id card outline"
@@ -36,7 +36,7 @@ const SignupModal = (props) => {
       />
     </Form>
   ) : (
-    <Form size="medium">
+    <Form size="small">
       <Form.Input
         fluid
         icon="user"
@@ -58,11 +58,11 @@ const SignupModal = (props) => {
   );
 
   const nextButton = next ? (
-    <Button color="primary" onClick={() => signupHandler()}>
+    <Button primary onClick={() => signupHandler()}>
       Sign Up
     </Button>
   ) : (
-    <Button color="primary" onClick={() => setNext(true)}>
+    <Button primary onClick={() => setNext(true)}>
       Next
     </Button>
   );
