@@ -3,7 +3,7 @@ from apps.comments.models import Comment
 from apps.stocks.models import Stock
 
 from django.contrib.auth import get_user_model
-import jsonpty
+import json
 
 # Create your tests here.
 

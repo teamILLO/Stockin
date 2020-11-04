@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { api } from '../api/index';
 
 const slice = createSlice({
-  name: 'signup',
+  name: 'user',
   initialState: {
     userList: [],
   },

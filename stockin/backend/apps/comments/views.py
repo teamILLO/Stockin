@@ -21,7 +21,7 @@ def comment_list(request, stock_id=""):
 
         response_list = []
         for comment in Comment.objects.filter(stock= stock_id).iterator():
-            response_list.append({'stock': stock_id, 'time': comment.time, 'content': comment.content, 'author': comment.author.id})
+            response_list.append({'stock': stock_id, 'time': comment.time, 'content': comment.content, 'author': comment.author.nickname})
         return JsonResponse(response_list, safe=False)
     elif request.method == 'POST':
         if not request.user.is_authenticated:
@@ -35,7 +35,7 @@ def comment_list(request, stock_id=""):
         
         comment = Comment(stock=stock, content=comment_content, author=request.user)
         comment.save()
-        response_dict = {'id': comment.id, 'stock': comment.stock.id, 'time': comment.time, 'content': comment.content, 'author': comment.author.id}
+        response_dict = {'id': comment.id, 'stock': comment.stock.id, 'time': comment.time, 'content': comment.content, 'author': comment.author.nickname}
         return JsonResponse(response_dict, status=201)
     
     else:
@@ -46,7 +46,7 @@ def comment(request, comment_id=""):
             return HttpResponse(status=401)
         comment = get_object_or_404(Comment, id=comment_id)
         
-        response_dict = {'stock': comment.stock.id, 'time': comment.time, 'content': comment.content, 'author': comment.author.id}
+        response_dict = {'stock': comment.stock.id, 'time': comment.time, 'content': comment.content, 'author': comment.author.nickname}
         return JsonResponse(response_dict)
 
     elif request.method == 'PUT':
@@ -65,7 +65,7 @@ def comment(request, comment_id=""):
 
         comment.content = comment_content
         comment.save()
-        response_dict = {'id': comment.id, 'stock': comment.stock.id, 'time': comment.time, 'content': comment.content, 'author': comment.author.id}
+        response_dict = {'id': comment.id, 'stock': comment.stock.id, 'time': comment.time, 'content': comment.content, 'author': comment.author.nickname}
         return  JsonResponse(response_dict, status=200)
     
     elif request.method == 'DELETE':

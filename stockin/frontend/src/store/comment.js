@@ -20,7 +20,7 @@ export default slice.reducer;
 // Actions
 
 const { saveCommentList } = slice.actions;
-export const updateCommentList = (stock_id) => async (dispatch) => {
+export const getCommentList = (stock_id) => async (dispatch) => {
   try {
     await api
       .get('/stocks/' + stock_id + '/comments/')
@@ -29,4 +29,3 @@ export const updateCommentList = (stock_id) => async (dispatch) => {
     return console.error(e.message);
   }
 };
-export const commentList = state.comment.commentList;
