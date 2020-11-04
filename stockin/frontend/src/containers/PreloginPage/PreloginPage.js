@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import CSRFToken from '../../csrftoken';
-import CommentBlock from '../../components/CommentBlock/CommentBlock';
+import CommentList from '../../components/CommentList/CommentList';
 import { Tab } from 'semantic-ui-react';
 
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';

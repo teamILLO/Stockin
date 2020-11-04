@@ -26,7 +26,7 @@ def signup(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
-        
+@csrf_exempt        
 def signin(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
@@ -35,7 +35,7 @@ def signin(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
-            response_dict = {'email' : email, 'password' : password}
+            response_dict = {'email' : email, 'nickname': user.nickname, 'password' : password}
             return HttpResponse(content=json.dumps(response_dict), status = 204)
         else:
             return HttpResponse(status=401)

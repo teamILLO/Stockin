@@ -358,14 +358,12 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - GET
   - response form : list : each element : `{“stock”: id of stock, "time": DateTime, "content": string, "author": string}`
   - Success : status 200
-- AuthenticateError : status 401
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 - POST
   - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
   - KeyError : status 400
   - Success : status 201
-- AuthenticateError : status 401
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 
@@ -374,14 +372,12 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - GET
   - response form : list : `{“stock”: id of stock, "time": DateTime, "content": string, "author": string}`
   - Success : status 200
-- AuthenticateError : status 401
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 - PUT
   - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
   - KeyError : status 400
   - Success : status 200
-- AuthenticateError : status 401
 - ForbiddenError : status 403
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405

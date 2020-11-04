@@ -9,7 +9,7 @@ import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
 import { Tab } from 'semantic-ui-react';
 
-const panes = [
+const panes = (id) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => <DetailOverview />,
@@ -28,7 +28,7 @@ const panes = [
   },
   {
     menuItem: { key: 'Comments', className: 'Comments', content: 'Comments' },
-    render: () => <DetailComment />,
+    render: () => <DetailComment id={id} />,
   },
 ];
 
@@ -37,7 +37,7 @@ const DetailPage = (props) => {
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <DetailData name={props.name} code={props.code} />
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
 
       <Footer history={props.history} />
     </div>
