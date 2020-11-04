@@ -3,7 +3,7 @@
 ## Document Revision History
 
 Rev. 1.0 2020-10-31 - initial version
-Rev. 1.1 2020-11-03 - additional backend model `Comment`
+Rev. 1.1 2020-11-05 - additional backend model `Comment`
 
 ## System Architecture<br />
 
@@ -356,7 +356,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 #### `api/stocks/:stock_id/comments`
 
 - GET
-  - response form : list : each element : `{“stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - response form : list : each element : `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
   - Success : status 200
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
@@ -378,7 +378,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
   - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
   - KeyError : status 400
   - Success : status 200
-- ForbiddenError : status 403
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 
