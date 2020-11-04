@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Comment, Form, Header } from 'semantic-ui-react';
-import { editComment } from '../../store/comment';
+import { deleteComment, editComment } from '../../store/comment';
 
 const CommentBlock = (props) => {
   const [edit, setEdit] = useState(false);
-  const [del, setDel] = useState(false);
   const [editContent, setEditContent] = useState(props.content);
   const dispatch = useDispatch();
 
   const onEditHandler = () => {
     dispatch(editComment(props.id, editContent));
     setEdit(false);
+  };
+
+  const onDeleteHandler = () => {
+    dispatch(deleteComment(props.id));
   };
 
   const content = edit ? (
@@ -46,12 +49,11 @@ const CommentBlock = (props) => {
           <Comment.Action
             onClick={() => {
               setEdit(true);
-              console.log(edit);
             }}
           >
             Edit
           </Comment.Action>
-          <Comment.Action>Delete</Comment.Action>
+          <Comment.Action onClick={() => onDeleteHandler()}>Delete</Comment.Action>
         </Comment.Actions>
       </Comment.Content>
     </Comment>

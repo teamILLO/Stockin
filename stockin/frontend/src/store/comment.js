@@ -14,9 +14,13 @@ const slice = createSlice({
     },
     editCommentList: (state, action) => {
       let editedComment = action.payload;
-      state.commentList
-        .filter((comment) => comment.id === editedComment.id)
-        .map((comment) => (comment.content = editedComment.content));
+      state.commentList.forEach((comment) => {
+        comment =
+          comment.id === editedComment.id ? (comment.content = editedComment.content) : comment;
+      });
+    },
+    deleteCommentFromList: (state, action) => {
+      state.commentList.filter();
     },
   },
 });
@@ -25,8 +29,7 @@ export default slice.reducer;
 
 // Actions
 
-const { saveCommentList } = slice.actions;
-const { editCommentList } = slice.actions;
+const { saveCommentList, editCommentList, deleteCommentFromList } = slice.actions;
 export const getCommentList = (stock_id) => async (dispatch) => {
   try {
     await api
@@ -41,6 +44,15 @@ export const editComment = (comment_id, content) => async (dispatch) => {
     await api
       .put('/comments/' + comment_id + '/', { content: content })
       .then((response) => dispatch(editCommentList({ ...response.data, id: comment_id })));
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+export const deleteComment = (comment_id) => async (dispatch) => {
+  try {
+    await api
+      .delete('/comments/' + comment_id + '/')
+      .then((response) => dispatch(deleteCommentFromList({ id: comment_id })));
   } catch (e) {
     return console.error(e.message);
   }
