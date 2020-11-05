@@ -19,6 +19,7 @@ describe('<PreloginPage />', () => {
       </Provider>
     );
   });
+
   it('should render without errors', () => {
     const { container } = render(preLoginPage);
     const query = queryAllByTestId(container, 'PreloginPage');
@@ -58,5 +59,15 @@ describe('<PreloginPage />', () => {
     const query = getByPlaceholderText(container, 'Password');
     fireEvent.change(query, { target: { value: 'password' } });
     expect(query.value).toBe('password');
+  });
+
+  test(`should dispatch tryLogin`, () => {
+    const { container } = render(preLoginPage);
+    const email = getByPlaceholderText(container, 'Email');
+    fireEvent.change(email, { target: { value: 'test@email.com' } });
+    const password = getByPlaceholderText(container, 'Password');
+    fireEvent.change(password, { target: { value: 'password' } });
+    fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
+    //TODO : check dispatch
   });
 });
