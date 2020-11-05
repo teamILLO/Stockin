@@ -10,6 +10,8 @@ import json
 
 User = get_user_model()
 
+
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
@@ -17,16 +19,19 @@ def signup(request):
         nickname = req_data['nickname']
         password = req_data['password']
         try:
-            User.objects.create_user(email=email, nickname=nickname, password=password)
+            User.objects.create_user(
+                email=email, nickname=nickname, password=password)
         except IntegrityError as er:
-            return HttpResponse(status= 406)
-        response_dict = {'email' : email, 'nickname' : nickname, 'password' : password}
-        return HttpResponse(content=json.dumps(response_dict), status = 201)
-    
+            return HttpResponse(status=406)
+        response_dict = {'email': email,
+                         'nickname': nickname, 'password': password}
+        return HttpResponse(content=json.dumps(response_dict), status=201)
+
     else:
         return HttpResponseNotAllowed(['POST'])
 
-        
+
+@csrf_exempt
 def signin(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
@@ -35,24 +40,26 @@ def signin(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
-            response_dict = {'email' : email, 'password' : password}
-            return HttpResponse(content=json.dumps(response_dict), status = 204)
+            response_dict = {'email': email,
+                             'password': password, 'id': user.id}
+            return JsonResponse(response_dict, status=204)
         else:
             return HttpResponse(status=401)
-    
+
     else:
         return HttpResponseNotAllowed(['POST'])
 
 
+@csrf_exempt
 def signout(request):
     if request.method == 'GET':
-        if request.user.is_authenticated :
+        if request.user.is_authenticated:
             logout(request)
             return HttpResponse(status=204)
-        else :
+        else:
             return HttpResponse(status=401)
-        
-    else :
+
+    else:
         return HttpResponseNotAllowed(['GET'])
 
 
@@ -62,4 +69,3 @@ def token(request):
         return HttpResponse(status=204)
     else:
         return HttpResponseNotAllowed(['GET'])
-    

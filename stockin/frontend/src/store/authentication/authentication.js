@@ -1,16 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { api } from '../api/index';
+import { api } from '../../api/index';
 
 const slice = createSlice({
   name: 'authentication',
   initialState: {
     loggingIn: false,
-    userEmail: '',
+    userid: 0,
   },
   reducers: {
     login: (state, action) => {
-      state.userEmail = action.payload.email;
+      state.userid = action.payload.id;
       state.loggingIn = true;
+      console.log(action.payload);
+      console.log(action);
     },
   },
 });
@@ -22,7 +24,11 @@ export default slice.reducer;
 const { login } = slice.actions;
 export const tryLogin = (user) => async (dispatch) => {
   try {
-    await api.post('/users/signin/', user).then((response) => dispatch(login(response.data)));
+    console.log(user);
+    await api.post('/users/signin/', user).then((response) => {
+      console.log(response);
+      dispatch(login(response.data));
+    });
   } catch (e) {
     return console.error(e.message);
   }

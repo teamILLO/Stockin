@@ -5,7 +5,7 @@ import Preview from '../../components/Preview/Preview';
 import { Tab } from 'semantic-ui-react';
 
 import { Button, Form, Grid } from 'semantic-ui-react';
-import { tryLogin } from '../../store/authentication';
+import { tryLogin } from '../../store/authentication/authentication';
 import { useDispatch } from 'react-redux';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 
@@ -35,7 +35,6 @@ const PreloginPage = (props) => {
   const submitHandler = () => {
     const submitEmail = email;
     const submitPassword = password;
-    console.log(submitEmail, submitPassword);
     dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
   };
 
