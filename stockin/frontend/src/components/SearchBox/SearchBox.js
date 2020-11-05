@@ -2,11 +2,15 @@ import _ from 'lodash';
 import React from 'react';
 import stocks from './stocks';
 import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
+import { useHistory } from "react-router";
+import { useSelector, useDispatch } from 'react-redux';
+import { getStocks } from '../../store/stock';
 
 const initialState = {
   loading: false,
   results: [],
   value: '',
+  stocks: [],
 };
 
 function exampleReducer(state, action) {
@@ -25,16 +29,29 @@ function exampleReducer(state, action) {
   }
 }
 
-const resultRenderer = ({ name }) => <p>{name}</p>;
+const resultRenderer = ({ title }) => <p>{title}</p>;
 
 function SearchBox() {
+  const history = useHistory(); 
+  const _dispatch = useDispatch();
+  const { stockList } = useSelector((state) => state.stock);
   const [state, dispatch] = React.useReducer(exampleReducer, initialState);
   const { loading, results, value } = state;
 
   const timeoutRef = React.useRef();
+
+  React.useEffect(() => {
+    _dispatch(getStocks());
+    return () => {
+      clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
   const handleSearchChange = React.useCallback((e, data) => {
+    console.log(data)
     clearTimeout(timeoutRef.current);
     dispatch({ type: 'START_SEARCH', query: data.value });
+
 
     timeoutRef.current = setTimeout(() => {
       if (data.value.length === 0) {
@@ -43,25 +60,25 @@ function SearchBox() {
       }
       dispatch({
         type: 'FINISH_SEARCH',
-        results: stocks.filter((st) => st.name.toUpperCase().includes(data.value.toUpperCase())),
+        results: stockList.filter((st) => st.title.toUpperCase().includes(data.value.toUpperCase())),
       });
     }, 300);
-  }, []);
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, []);
+  }, [stockList]);
 
+  const handleResultSelect = (e, data) => {
+    dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title });
+    console.log(data.result.id)
+    history.push('/detail/' + data.result.id)
+
+  }
   return (
     <Search
       data-testid="SearchBox"
       fluid
+      action
       loading={loading}
-      onResultSelect={(e, data) =>
-        dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title })
-      }
       onSearchChange={handleSearchChange}
+      onResultSelect={handleResultSelect}
       resultRenderer={resultRenderer}
       results={results}
       value={value}
