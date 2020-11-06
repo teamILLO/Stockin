@@ -7,6 +7,25 @@ import { getStocks } from '../../store/stock';
 
 const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
+const handleOnClick = (title) => {
+  console.log('clicked : ' + {title});
+  var retrieve_list = JSON.parse(localStorage.getItem('recent-search')) || [];
+  console.log(retrieve_list);
+  const idx = retrieve_list.findIndex(function(elem) {return elem.title === title});
+  if (idx > -1) {
+    retrieve_list.splice(idx, 1);
+  }
+  localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
+  console.log(retrieve_list);
+};
+const resultRenderer = ({ title, description }) => (
+  <div>
+    <p>{title}</p>
+    <p>{description}</p>
+    <button onclick={handleOnClick(title)}>button</button>
+  </div>
+);
+
 const initialState = {
   loading: false,
   results: [],
@@ -93,6 +112,7 @@ function SearchBox() {
       loading={loading}
       onSearchChange={handleSearchChange}
       onResultSelect={handleResultSelect}
+      resultRenderer={resultRenderer}
       results={results}
       value={value}
     />
