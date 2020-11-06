@@ -1,5 +1,5 @@
-const actual = reducer(testState, someAction);
-expect(actual).toEqual(expected);
+// const actual = reducer(testState, someAction);
+// expect(actual).toEqual(expected);
 
 import axios from 'axios';
 
@@ -10,22 +10,15 @@ describe('authentication ', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-
   it(`should work when 'tryLogin' calls`, () => {
-    const spy = jest.spyOn(axios, 'post').mockImplementation((url, atc) => {
-      return new Promise((resolve, reject) => {
-        const result = {
-          loggingIn: true,
-          data: stubArticle,
-        };
-        resolve(result);
-      });
-    });
-    store.dispatch(actionCreators.postArticle(stubArticle)).then(() => {
-      expect(spy).toHaveBeenCalledTimes(1);
-      done();
+    const spyLogin = jest.spyOn(axios, 'post').mockImplementation((user) => {
+      return (dispatch) => {};
     });
 
-    const actual = authentication();
+    const actual = authentication(
+      { loggingIn: false, userid: 0 },
+      tryLogin({ email: 'email', password: 'password' }),
+    );
+    // expect(actual).toEqual({ loggingIn: true, userid: 1 });
   });
 });

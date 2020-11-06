@@ -11,8 +11,6 @@ const slice = createSlice({
     login: (state, action) => {
       state.userid = action.payload.id;
       state.loggingIn = true;
-      console.log(action.payload);
-      console.log(action);
     },
   },
 });
