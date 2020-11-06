@@ -1,14 +1,15 @@
 import _ from 'lodash';
 import React from 'react';
-import stocks from './stocks';
 import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock';
 
+const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
+
 const initialState = {
   loading: false,
-  results: JSON.parse(localStorage.getItem('recent-search')) || [],
+  results: [],
   value: '',
   stocks: [],
 };
@@ -20,7 +21,8 @@ function exampleReducer(state, action) {
     case 'START_SEARCH':
       return { ...state, loading: true, value: action.query };
     case 'FINISH_SEARCH':
-      return { ...state, loading: false, results: state.results.concat(action.results) };
+      const fin_results = (JSON.parse(localStorage.getItem('recent-search')) || []).concat(action.results);
+      return { ...state, loading: false, results: fin_results };
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection };
 
@@ -28,10 +30,6 @@ function exampleReducer(state, action) {
       throw new Error();
   }
 }
-
-const resultRenderer = ({ title }) => <p>{title}</p>;
-
-const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
 function SearchBox() {
   const history = useHistory(); 
@@ -42,6 +40,7 @@ function SearchBox() {
   const timeoutRef = React.useRef();
 
   React.useEffect(() => {
+    state.results = JSON.parse(localStorage.getItem('recent-search')) || [];
     _dispatch(getStocks());
     return () => {
       clearTimeout(timeoutRef.current);
@@ -57,38 +56,35 @@ function SearchBox() {
         dispatch({ type: 'CLEAN_QUERY' });
         return;
       }
-
       var search_result = [];
       var _search_result = stockList.filter((st) => st.title.toUpperCase().includes(data.value.toUpperCase())).slice(0,5);
+      
       var i;
       for(i = 0; i < _search_result.length; i++) {
-        var temp = {..._search_result[i], key : keyGenerator()};
+        var temp = {..._search_result[i], key : keyGenerator(), description : _search_result[i].sector, };
         search_result.push(temp);
       }
-
-      console.log(search_result);
 
       dispatch({type: 'FINISH_SEARCH', results: search_result});
     }, 300);
   }, [stockList]);
 
   const handleResultSelect = (e, data) => {
-    const selected_stock = data.result;
+    var selected_stock = data.result;
     var retrieve_list = JSON.parse(localStorage.getItem('recent-search')) || [];
-    console.log(retrieve_list);
     
     if(retrieve_list.length === 0
        || !retrieve_list.find(element => element.id === selected_stock.id)) {
       selected_stock.key = keyGenerator();
-      console.log(selected_stock);
+      selected_stock = {...selected_stock, key : keyGenerator(), description : "최근 검색" }
       retrieve_list.push(selected_stock);
       localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
     }
-    
+  
     dispatch({ type: 'UPDATE_SELECTION', selection: selected_stock.title });
-    //history.push('/detail/' + data.result.id)
-
+    history.push('/detail/' + data.result.id)
   }
+
   return (
     <Search
       data-testid="SearchBox"
@@ -97,7 +93,6 @@ function SearchBox() {
       loading={loading}
       onSearchChange={handleSearchChange}
       onResultSelect={handleResultSelect}
-      resultRenderer={resultRenderer}
       results={results}
       value={value}
     />
