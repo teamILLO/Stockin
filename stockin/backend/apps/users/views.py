@@ -42,7 +42,7 @@ def signin(request):
             login(request, user)
             response_dict = {'email': email,
                              'password': password, 'id': user.id}
-            return JsonResponse(response_dict, status=204)
+            return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
 
@@ -50,10 +50,28 @@ def signin(request):
         return HttpResponseNotAllowed(['POST'])
 
 
+# @csrf_exempt
+# def signout(request):
+#     if request.method == 'GET':
+#         if request.user.is_authenticated:
+#             logout(request)
+#             return HttpResponse(status=204)
+#         else:
+#             return HttpResponse(status=401)
+
+#     else:
+#         return HttpResponseNotAllowed(['GET'])
+
+
 @csrf_exempt
 def signout(request):
     if request.method == 'GET':
-        if request.user.is_authenticated:
+        req_data = json.loads(request.body.decode())
+        email = req_data['email']
+        password = req_data['password']
+        user = authenticate(email=email, password=password)
+        print(user)
+        if user is not None and user.is_authenticated:
             logout(request)
             return HttpResponse(status=204)
         else:

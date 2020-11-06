@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import { Tab } from 'semantic-ui-react';
-
-import { Button, Form, Grid } from 'semantic-ui-react';
+import { Tab, Button, Form, Grid } from 'semantic-ui-react';
 import { tryLogin } from '../../store/authentication/authentication';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
+import { useHistory } from 'react-router-dom';
 
 const panes = [
   {
@@ -29,13 +28,21 @@ const panes = [
 const PreloginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { loggingIn } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const submitHandler = () => {
     const submitEmail = email;
     const submitPassword = password;
     dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
   };
+
+  useEffect(() => {
+    if (loggingIn) {
+      history.push('/main');
+    }
+  }, [history, loggingIn]);
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">

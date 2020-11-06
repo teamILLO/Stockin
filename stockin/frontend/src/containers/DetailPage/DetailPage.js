@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import DetailData from '../../components/Detail/DetailData/DetailData';
 import DetailOverview from '../../components/Detail/DetailOverview/DetailOverview';
@@ -8,6 +8,8 @@ import DetailFinancialState from '../../components/Detail/DetailFinancialState/D
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
 import { Tab } from 'semantic-ui-react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const panes = [
   {
@@ -33,6 +35,15 @@ const panes = [
 ];
 
 const DetailPage = (props) => {
+  const { loggingIn } = useSelector((state) => state.authentication);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!loggingIn) {
+      history.push('/prelogin');
+    }
+  }, [history, loggingIn]);
+
   return (
     <div data-testid="DetailPage">
       <Header history={props.history} />

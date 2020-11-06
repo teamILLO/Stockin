@@ -1,16 +1,23 @@
 import React, { useState } from 'react';
 import logo from '../../images/logo.png';
 import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
 import SearchBox from '../SearchBox/SearchBox';
+import { tryLogout } from '../../store/authentication/authentication';
 import './Header.css';
 
 const Header = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const dispatch = useDispatch();
 
-  const onClickNavHandler = (dest) => {
+  const clickNavHandler = (dest) => {
     props.history.push(dest);
   };
-  // const clickLogoutHandler = () => {};
+
+  const clickLogoutHandler = () => {
+    dispatch(tryLogout());
+  };
+
   const handleOnScreen = () => {
     setIsVisible(false);
   };
@@ -27,11 +34,13 @@ const Header = (props) => {
         onBottomPassed={() => handleOffScreen()}
       >
         <Container textAlign="right">
-          <Button secondary>LOGOUT</Button>
+          <Button secondary onClick={clickLogoutHandler}>
+            LOGOUT
+          </Button>
         </Container>
         <Image
           src={logo}
-          onClick={() => onClickNavHandler('/main')}
+          onClick={() => clickNavHandler('/main')}
           centered
           className="headerLogo"
           data-testid="Logo"
@@ -45,17 +54,17 @@ const Header = (props) => {
           <Menu.Item
             name="REPORT"
             data-testid="Report"
-            onClick={() => onClickNavHandler('/report')}
+            onClick={() => clickNavHandler('/report')}
           />
           <Menu.Item
             name="MY PAGE"
             data-testid="Mypage"
-            onClick={() => onClickNavHandler('/mypage')}
+            onClick={() => clickNavHandler('/mypage')}
           />
           <Menu.Item
             name="ABOUT US"
             data-testid="AboutUs"
-            onClick={() => onClickNavHandler('/aboutus')}
+            onClick={() => clickNavHandler('/aboutus')}
           />
         </Menu>
       </Visibility>
@@ -66,7 +75,7 @@ const Header = (props) => {
               <Image
                 data-testid="stickyLogo"
                 src={logo}
-                onClick={() => onClickNavHandler('/main')}
+                onClick={() => clickNavHandler('/main')}
                 centered
                 className="headerSmallLogo"
               />
@@ -78,15 +87,17 @@ const Header = (props) => {
               <Menu.Item
                 name="REPORT"
                 data-testid="stickyReport"
-                onClick={() => onClickNavHandler('/report')}
+                onClick={() => clickNavHandler('/report')}
               />
               <Menu.Item
                 name="MY PAGE"
                 data-testid="stickyMypage"
-                onClick={() => onClickNavHandler('/mypage')}
+                onClick={() => clickNavHandler('/mypage')}
               />
               <Menu.Item>
-                <Button secondary>LOGOUT</Button>
+                <Button secondary onClick={clickLogoutHandler}>
+                  LOGOUT
+                </Button>
               </Menu.Item>
             </Menu.Menu>
           </Container>
