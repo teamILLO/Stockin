@@ -123,33 +123,28 @@ def group_stock_list(request, id=''):
 
         try:
             body = request.body.decode()
-            req_data = json.loads(body)
+            stock_id = json.loads(body)['id']
             user = request.user
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
-        response_list = []
-        for stock in req_data : 
-            stock_id = stock['id']
+        # find record in stock model
+        try:
+            target_stock = Stock.objects.get(id=stock_id)
+        except Stock.DoesNotExist:
+            return HttpResponseBadRequest()
 
-            # if stock already exists, continue
-            if group.stocks.filter(id=int(stock_id)) :
-                continue
-            
-            # find record in stock model
-            try:
-                target_stock = Stock.objects.get(id=stock_id)
-            except Stock.DoesNotExist:
-                return HttpResponseBadRequest()
-                
-            # add
-            group.stocks.add(target_stock)
-            group.save()
+        # if stock already exists, immediate return 204 'NO CONTENT'
+        if group.stocks.filter(id=int(stock_id)) :
+            return HttpResponse(status = 204)
+        
+        # add
+        group.stocks.add(target_stock)
+        group.save()
 
-            response_dict = {'id' : target_stock.id, 'title' : target_stock.title}
-            response_list.append(response_dict)
+        response_dict = {'id' : target_stock.id, 'title' : target_stock.title}
 
-        return HttpResponse(content=json.dumps(response_list), status = 201)
+        return HttpResponse(content=json.dumps(response_dict), status = 201)
                 
     else :
         return HttpResponseNotAllowed(['GET', 'POST'])
@@ -169,11 +164,11 @@ def group_stock_delete(request, group_id='', stock_id=''):
         # get target stock
         target_stock = get_object_or_404(Stock, id=stock_id)
         # delete from group
-        try :
-            group.stock.remove(target_stock)
-        except :
-            return HttpResponse(status=404)
+        # 'remove' method has no error although have no target delete models
+        group.stocks.remove(target_stock)
 
+        return HttpResponse(status=200)
+                
     else :
         return HttpResponseNotAllowed(['DELETE'])
 
