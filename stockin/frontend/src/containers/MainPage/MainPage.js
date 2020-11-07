@@ -2,17 +2,16 @@ import React, { useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { history } from '../../store/store';
 
 const MainPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
-  const history = useHistory();
 
   useEffect(() => {
     if (!loggingIn) {
       history.push('/prelogin');
     }
-  }, [history, loggingIn]);
+  }, [loggingIn]);
 
   return (
     <div data-testid="MainPage">

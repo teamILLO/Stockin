@@ -10,17 +10,18 @@ const Header = (props) => {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useDispatch();
 
-  const clickNavHandler = (dest) => {
+  const onClickNavHandler = (dest) => {
     props.history.push(dest);
   };
 
-  const clickLogoutHandler = () => {
+  const onClickLogoutHandler = () => {
     dispatch(tryLogout());
   };
 
   const handleOnScreen = () => {
     setIsVisible(false);
   };
+
   const handleOffScreen = () => {
     setIsVisible(true);
   };
@@ -34,13 +35,13 @@ const Header = (props) => {
         onBottomPassed={() => handleOffScreen()}
       >
         <Container textAlign="right">
-          <Button secondary onClick={clickLogoutHandler}>
+          <Button secondary onClick={onClickLogoutHandler}>
             LOGOUT
           </Button>
         </Container>
         <Image
           src={logo}
-          onClick={() => clickNavHandler('/main')}
+          onClick={() => onClickNavHandler('/main')}
           centered
           className="headerLogo"
           data-testid="Logo"
@@ -54,17 +55,17 @@ const Header = (props) => {
           <Menu.Item
             name="REPORT"
             data-testid="Report"
-            onClick={() => clickNavHandler('/report')}
+            onClick={() => onClickNavHandler('/report')}
           />
           <Menu.Item
             name="MY PAGE"
             data-testid="Mypage"
-            onClick={() => clickNavHandler('/mypage')}
+            onClick={() => onClickNavHandler('/mypage')}
           />
           <Menu.Item
             name="ABOUT US"
             data-testid="AboutUs"
-            onClick={() => clickNavHandler('/aboutus')}
+            onClick={() => onClickNavHandler('/aboutus')}
           />
         </Menu>
       </Visibility>
@@ -75,7 +76,7 @@ const Header = (props) => {
               <Image
                 data-testid="stickyLogo"
                 src={logo}
-                onClick={() => clickNavHandler('/main')}
+                onClick={() => onClickNavHandler('/main')}
                 centered
                 className="headerSmallLogo"
               />
@@ -87,15 +88,15 @@ const Header = (props) => {
               <Menu.Item
                 name="REPORT"
                 data-testid="stickyReport"
-                onClick={() => clickNavHandler('/report')}
+                onClick={() => onClickNavHandler('/report')}
               />
               <Menu.Item
                 name="MY PAGE"
                 data-testid="stickyMypage"
-                onClick={() => clickNavHandler('/mypage')}
+                onClick={() => onClickNavHandler('/mypage')}
               />
               <Menu.Item>
-                <Button secondary onClick={clickLogoutHandler}>
+                <Button secondary onClick={onClickLogoutHandler}>
                   LOGOUT
                 </Button>
               </Menu.Item>

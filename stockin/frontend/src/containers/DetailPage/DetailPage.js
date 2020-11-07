@@ -9,7 +9,7 @@ import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
 import { Tab } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { history } from '../../store/store';
 
 const panes = [
   {
@@ -36,13 +36,12 @@ const panes = [
 
 const DetailPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
-  const history = useHistory();
 
   useEffect(() => {
     if (!loggingIn) {
       history.push('/prelogin');
     }
-  }, [history, loggingIn]);
+  }, [loggingIn]);
 
   return (
     <div data-testid="DetailPage">

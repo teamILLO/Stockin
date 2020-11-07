@@ -8,7 +8,6 @@ import ReportPage from './containers/ReportPage/ReportPage';
 import MyPage from './containers/MyPage/MyPage';
 import AboutUsPage from './containers/AboutUsPage/AboutUsPage';
 import DetailPage from './containers/DetailPage/DetailPage';
-import CSRFToken from './csrftoken';
 import DjangoCSRFToken from 'django-react-csrftoken';
 
 const App = (props) => {

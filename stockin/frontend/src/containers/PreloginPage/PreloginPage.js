@@ -6,7 +6,7 @@ import { Tab, Button, Form, Grid } from 'semantic-ui-react';
 import { tryLogin } from '../../store/authentication/authentication';
 import { useDispatch, useSelector } from 'react-redux';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
-import { useHistory } from 'react-router-dom';
+import { history } from '../../store/store';
 
 const panes = [
   {
@@ -30,7 +30,6 @@ const PreloginPage = (props) => {
   const [password, setPassword] = useState('');
   const { loggingIn } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const submitHandler = () => {
     const submitEmail = email;
@@ -42,7 +41,7 @@ const PreloginPage = (props) => {
     if (loggingIn) {
       history.push('/main');
     }
-  }, [history, loggingIn]);
+  }, [loggingIn]);
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">

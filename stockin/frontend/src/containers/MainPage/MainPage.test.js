@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
 import MainPage from './MainPage';
 import { Provider } from 'react-redux';
-import store from '../../store/store';
+import store, { history } from '../../store/store';
 
 describe('<MainPage />', () => {
   let mainPage;

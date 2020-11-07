@@ -7,7 +7,7 @@ import {
   getByPlaceholderText,
 } from '@testing-library/react';
 import PreloginPage from './PreloginPage';
-import store from '../../store/store';
+import store, { history } from '../../store/store';
 import { Provider } from 'react-redux';
 
 describe('<PreloginPage />', () => {
