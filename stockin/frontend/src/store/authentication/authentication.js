@@ -11,12 +11,10 @@ const slice = createSlice({
     login: (state, action) => {
       state.user = action.payload;
       state.loggingIn = true;
-      console.log(state);
     },
     logout: (state, action) => {
       state.user = null;
       state.loggingIn = false;
-      console.log(state);
     },
   },
 });
@@ -38,12 +36,11 @@ export const tryLogin = (user) => async (dispatch) => {
   }
 };
 
-export const tryLogout = () => async (dispatch) => {
+export const tryLogout = (user) => async (dispatch) => {
   try {
-    await api.get('/users/signout/').then((response) => {
+    await api.post('/users/signout/', user).then((response) => {
       dispatch(logout());
-      console.log(response);
-      localStorage.removeItem('userInfo');
+      sessionStorage.removeItem('userInfo');
     });
   } catch (e) {
     return console.error(e.message);

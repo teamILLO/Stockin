@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import logo from '../../images/logo.png';
 import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchBox from '../SearchBox/SearchBox';
 import { tryLogout } from '../../store/authentication/authentication';
 import './Header.css';
 
 const Header = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const { user } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
   const onClickNavHandler = (dest) => {
@@ -15,7 +16,7 @@ const Header = (props) => {
   };
 
   const onClickLogoutHandler = () => {
-    dispatch(tryLogout());
+    dispatch(tryLogout(user));
   };
 
   const handleOnScreen = () => {
