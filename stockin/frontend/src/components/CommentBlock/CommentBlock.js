@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Comment, Form, Header } from 'semantic-ui-react';
 import { deleteComment, editComment } from '../../store/comment';
 
 const CommentBlock = (props) => {
+  const { userNickname } = useSelector((state) => state.authentication);
   const [edit, setEdit] = useState(false);
   const [editContent, setEditContent] = useState(props.content);
   const dispatch = useDispatch();
@@ -17,6 +18,21 @@ const CommentBlock = (props) => {
     dispatch(deleteComment(props.id));
   };
 
+  const buttons =
+    userNickname == props.author ? (
+      <Comment.Actions>
+        <Comment.Action
+          onClick={() => {
+            setEdit(true);
+          }}
+        >
+          Edit
+        </Comment.Action>
+        <Comment.Action onClick={() => onDeleteHandler()}>Delete</Comment.Action>
+      </Comment.Actions>
+    ) : (
+      <Comment.Actions />
+    );
   const content = edit ? (
     <Comment>
       <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
@@ -45,16 +61,7 @@ const CommentBlock = (props) => {
           <div>{props.time}</div>
         </Comment.Metadata>
         <Comment.Text>{props.content}</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action
-            onClick={() => {
-              setEdit(true);
-            }}
-          >
-            Edit
-          </Comment.Action>
-          <Comment.Action onClick={() => onDeleteHandler()}>Delete</Comment.Action>
-        </Comment.Actions>
+        {buttons}
       </Comment.Content>
     </Comment>
   );
@@ -62,6 +69,8 @@ const CommentBlock = (props) => {
   return (
     <div className="CommentBlock" data-testid="CommentBlock">
       <Form>{content}</Form>
+      <p>{userNickname}</p>
+      <p>{props.author}</p>
     </div>
   );
 };

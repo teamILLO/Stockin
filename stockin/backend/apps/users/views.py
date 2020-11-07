@@ -10,6 +10,7 @@ import json
 
 User = get_user_model()
 
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
@@ -36,7 +37,7 @@ def signin(request):
         if user is not None:
             login(request, user)
             response_dict = {'email' : email, 'nickname': user.nickname, 'password' : password}
-            return HttpResponse(content=json.dumps(response_dict), status = 204)
+            return JsonResponse(response_dict, status = 201)
         else:
             return HttpResponse(status=401)
     

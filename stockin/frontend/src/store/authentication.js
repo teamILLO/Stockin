@@ -11,6 +11,7 @@ const slice = createSlice({
     login: (state, action) => {
       state.userEmail = action.payload.email;
       state.userNickname = action.payload.nickname;
+      console.log(state.userNickname);
       state.loggingIn = true;
     },
   },
@@ -23,7 +24,9 @@ export default slice.reducer;
 const { login } = slice.actions;
 export const tryLogin = (user) => async (dispatch) => {
   try {
-    await api.post('/users/signin/', user).then((response) => dispatch(login(response.data)));
+    await api.post('/users/signin/', user).then((response) => {
+      dispatch(login(response.data));
+    });
   } catch (e) {
     return console.error(e.message);
   }
