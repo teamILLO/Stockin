@@ -34,14 +34,17 @@ def signup(request):
 @csrf_exempt
 def signin(request):
     if request.method == 'POST':
-        req_data = json.loads(request.body.decode())
-        email = req_data['email']
-        password = req_data['password']
+        try:
+            req_data = json.loads(request.body.decode())
+            email = req_data['email']
+            password = req_data['password']
+        except (KeyError, JSONDecodeError) as e:
+            return HttpResponseBadRequest()
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
             response_dict = {'email': email,
-                             'password': password, 'id': user.id}
+                             'nickname': user.nickname, 'password': password}
             return JsonResponse(response_dict, status=200)
         else:
             return HttpResponse(status=401)
@@ -50,27 +53,16 @@ def signin(request):
         return HttpResponseNotAllowed(['POST'])
 
 
-# @csrf_exempt
-# def signout(request):
-#     if request.method == 'GET':
-#         if request.user.is_authenticated:
-#             logout(request)
-#             return HttpResponse(status=204)
-#         else:
-#             return HttpResponse(status=401)
-
-#     else:
-#         return HttpResponseNotAllowed(['GET'])
-
-
 @csrf_exempt
-def signout(request):
-    if request.method == 'GET':
-        req_data = json.loads(request.body.decode())
-        email = req_data['email']
-        password = req_data['password']
+def logoff(request):
+    if request.method == 'POST':
+        try:
+            req_data = json.loads(request.body.decode())
+            email = req_data['email']
+            password = req_data['password']
+        except (KeyError, JSONDecodeError) as e:
+            return HttpResponseBadRequest()
         user = authenticate(email=email, password=password)
-        print(user)
         if user is not None and user.is_authenticated:
             logout(request)
             return HttpResponse(status=204)
@@ -78,7 +70,27 @@ def signout(request):
             return HttpResponse(status=401)
 
     else:
-        return HttpResponseNotAllowed(['GET'])
+        return HttpResponseNotAllowed(['POST'])
+
+
+@csrf_exempt
+def signout(request):
+    if request.method == 'POST':
+        try:
+            req_data = json.loads(request.body.decode())
+            email = req_data['email']
+            password = req_data['password']
+        except (KeyError, JSONDecodeError) as e:
+            return HttpResponseBadRequest()
+        user = authenticate(email=email, password=password)
+        if user is not None and user.is_authenticated:
+            user.delete()
+            return HttpResponse(status=204)
+        else:
+            return HttpResponse(status=401)
+
+    else:
+        return HttpResponseNotAllowed(['POST'])
 
 
 @ensure_csrf_cookie

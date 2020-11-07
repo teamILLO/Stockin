@@ -1,9 +1,10 @@
 import React from 'react';
-import { render, queryAllByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, queryAllByTestId } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import store, { history } from '../../store/store';
+import { history } from '../../store/store';
 import MyPage from './MyPage';
 import { getMockStore } from '../../test-utils/mocks';
+import * as authentication from '../../store/authentication/authentication';
 
 const initialAuthState = { loggingIn: true };
 const initialAuthStateLogout = { loggingIn: false };
@@ -37,5 +38,16 @@ describe('<MyPage />', () => {
   it('should redirect when loggingIn = false', () => {
     render(myPageLogout);
     expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+  });
+
+  it('should call onClickSignoutHandler when clicking signout button', () => {
+    const spySignoutHandler = jest
+      .spyOn(authentication, 'trySignout')
+      .mockImplementation((user) => {
+        return (dispatch) => {};
+      });
+    render(myPage);
+    fireEvent.click(screen.getAllByText(/signout/i, { selector: 'button' })[0]);
+    expect(spySignoutHandler).toHaveBeenCalledTimes(1);
   });
 });

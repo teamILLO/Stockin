@@ -23,7 +23,7 @@ export default slice.reducer;
 
 // Actions
 
-const { login, logout } = slice.actions;
+export const { login, logout } = slice.actions;
 
 export const tryLogin = (user) => async (dispatch) => {
   try {
@@ -38,9 +38,19 @@ export const tryLogin = (user) => async (dispatch) => {
 
 export const tryLogout = (user) => async (dispatch) => {
   try {
-    await api.post('/users/signout/', user).then((response) => {
+    await api.post('/users/logout/', user).then((response) => {
       dispatch(logout());
       sessionStorage.removeItem('userInfo');
+    });
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+
+export const trySignout = (user) => async (dispatch) => {
+  try {
+    await api.post('/users/signout/', user).then((response) => {
+      dispatch(logout());
     });
   } catch (e) {
     return console.error(e.message);

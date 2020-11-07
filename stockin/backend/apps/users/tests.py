@@ -4,10 +4,11 @@ import json
 
 
 class UsersTestCase(TestCase):
-    ### Tests for CustomUser model
+    # Tests for CustomUser model
     def test_create_user(self):
         User = get_user_model()
-        user = User.objects.create_user(email='normal@user.com', password='foo')
+        user = User.objects.create_user(
+            email='normal@user.com', password='foo')
         self.assertEqual(str(user), 'normal@user.com')
         self.assertEqual(user.email, 'normal@user.com')
         self.assertTrue(user.is_active)
@@ -25,7 +26,6 @@ class UsersTestCase(TestCase):
             User.objects.create_user(email='')
         with self.assertRaises(ValueError):
             User.objects.create_user(email='', password="foo")
-
 
     def test_create_superuser(self):
         User = get_user_model()
@@ -47,18 +47,20 @@ class UsersTestCase(TestCase):
             User.objects.create_superuser(
                 email='super@user.com', password='foo', is_superuser=False)
 
+    # Tests for views.py
 
-    ### Tests for views.py
     def test_csrf(self):
         # By default, csrf checks are disabled in test client
         # To test csrf protection we enforce csrf checks here
         client = Client(enforce_csrf_checks=True)
         response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
                                content_type='application/json')
-        self.assertEqual(response.status_code, 403)  # Request without csrf token returns 403 response
+        # Request without csrf token returns 403 response
+        self.assertEqual(response.status_code, 403)
 
         response = client.get('/api/users/token/')
-        csrftoken = response.cookies['csrftoken'].value  # Get csrf token from cookie
+        # Get csrf token from cookie
+        csrftoken = response.cookies['csrftoken'].value
 
         response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
                                content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
@@ -66,39 +68,41 @@ class UsersTestCase(TestCase):
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
-        csrftoken = response.cookies['csrftoken'].value  # Get csrf token from cookie
-        
+        # Get csrf token from cookie
+        csrftoken = response.cookies['csrftoken'].value
+
         response = client.post('/api/users/token/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
-
 
     def test_signup(self):
         client = Client(enforce_csrf_checks=True)
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/signup/')
-        self.assertEqual(response.status_code, 405) 
-
+        self.assertEqual(response.status_code, 405)
 
     def test_signin(self):
         client = Client(enforce_csrf_checks=True)
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/signup/', json.dumps(
+            {'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # test 1
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/signin/', json.dumps(
+            {'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 204)
 
         # test 2
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/signin/', json.dumps({'email': 'invalid@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/signin/', json.dumps(
+            {'email': 'invalid@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
 
         # HttpResponseNotAllowed tests
@@ -108,33 +112,40 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/signin/')
         self.assertEqual(response.status_code, 405)
 
-
-    def test_signout(self):
+    def test_logout(self):
         client = Client(enforce_csrf_checks=True)
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
+                                                      'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # test 1
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        
-        client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
-        response = client.get('/api/users/signout/')
-        self.assertEqual(response.status_code, 204)
 
-        # test 2
-        response = client.get('/api/users/signout/')
-        self.assertEqual(response.status_code, 401)
+        client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
+                                                      'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
-        # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/signout/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/logout/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
+                                                                 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken))
+        self.assertEqual(response.status_code, 204)
+
+        # test 2
+        response=client.get('/api/users/token/')
+        csrftoken=response.cookies['csrftoken'].value
+
+        response=client.post('/api/users/logout/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
+                                                                   'password': 'foo'}), content_type = 'application/json', HTTP_X_CSRFTOKEN = csrftoken))
+        self.assertEqual(response.status_code, 401)
+
+        # HttpResponseNotAllowed tests
+        response=client.get('/api/users/token/')
+        csrftoken=response.cookies['csrftoken'].value
+
+        response=client.get('/api/users/logout/',
+                               HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
-
-
-    
-
