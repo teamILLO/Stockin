@@ -24,4 +24,4 @@
 - neural network (CNN, RNN, LSTM)
 - genetic algorithms >> ?
 
-## Next Meeting Nov. 16 Sat. 11:00 PM
+## Next Meeting Nov. 7 Sat. 11:00 PM
