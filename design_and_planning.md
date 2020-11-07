@@ -199,7 +199,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | User | ```api/users/signup ``` | X | Create user | X | X |
 | | ``` api/users/signin ``` | X | User login check | X | X |
-| | ``` api/users/signout ``` | User logout | X | X | X |
+| | ``` api/users/logout ``` | X | User logout | X | X |
+| | ``` api/users/signout ``` | X | User signout | X | X |
 | | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
 | | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
@@ -233,11 +234,25 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/users/signout ```
-- GET
+#### ``` api/users/logout ```
+
+- POST
+   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * KeyError : status 400
    * Success : status 204
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
+
+
+#### ``` api/users/signout ```
+
+- POST
+   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * KeyError : status 400
+   * Success : status 204
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
 
 #### ``` api/users/:user_id ```
 - GET
