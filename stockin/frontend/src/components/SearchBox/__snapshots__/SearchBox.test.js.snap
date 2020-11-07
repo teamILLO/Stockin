@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBox /> should render without errors 1`] = `
+<div>
+  <div
+    class="ui fluid search"
+    data-testid="SearchBox"
+  >
+    <div
+      class="ui icon input"
+    >
+      <input
+        autocomplete="off"
+        class="prompt"
+        tabindex="0"
+        type="text"
+        value=""
+      />
+      <i
+        aria-hidden="true"
+        class="search icon"
+      />
+    </div>
+    <div
+      class="results transition"
+    >
+      <div
+        class="message empty"
+      >
+        <div
+          class="header"
+        >
+          No results found.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
