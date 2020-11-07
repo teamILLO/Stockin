@@ -7,17 +7,32 @@ import {
   getByPlaceholderText,
 } from '@testing-library/react';
 import PreloginPage from './PreloginPage';
-import store, { history } from '../../store/store';
+import { history } from '../../store/store';
 import { Provider } from 'react-redux';
+import { getMockStore } from '../../test-utils/mocks';
+import * as authentication from '../../store/authentication/authentication';
+
+const initialAuthState = { loggingIn: false };
+const initialAuthStateLogin = { loggingIn: true };
+const mockStore = getMockStore(initialAuthState);
+const mockStoreLogin = getMockStore(initialAuthStateLogin);
 
 describe('<PreloginPage />', () => {
-  let preLoginPage;
+  let preLoginPage, preLoginPageLogin, spyHistoryPush;
   beforeEach(() => {
     preLoginPage = (
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <PreloginPage history={history} />
       </Provider>
     );
+
+    preLoginPageLogin = (
+      <Provider store={mockStoreLogin}>
+        <PreloginPage history={history} />
+      </Provider>
+    );
+
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
   });
 
   it('should render without errors', () => {
@@ -62,12 +77,20 @@ describe('<PreloginPage />', () => {
   });
 
   test(`should dispatch tryLogin`, () => {
+    const spyLoginHandler = jest.spyOn(authentication, 'tryLogin').mockImplementation((user) => {
+      return (dispatch) => {};
+    });
     const { container } = render(preLoginPage);
     const email = getByPlaceholderText(container, 'Email');
     fireEvent.change(email, { target: { value: 'test@email.com' } });
     const password = getByPlaceholderText(container, 'Password');
     fireEvent.change(password, { target: { value: 'password' } });
     fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
-    //TODO : check dispatch
+    expect(spyLoginHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it('should redirect to when loggingIn = true', () => {
+    render(preLoginPageLogin);
+    expect(spyHistoryPush).toHaveBeenCalledTimes(1);
   });
 });

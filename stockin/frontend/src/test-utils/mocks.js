@@ -3,19 +3,7 @@ import { connectRouter } from 'connected-react-router';
 import { history, middlewares } from '../store/store';
 import { createSlice } from '@reduxjs/toolkit';
 
-// const getMockAuthentication = (initialState) =>
-//   createSlice({
-//     name: 'authentication',
-//     initialState,
-//     reducers: {
-//       login() {},
-//       logout() {},
-//     },
-//   });
-
 const getMockAuthentication = jest.fn((initialState) => (state = initialState, action) => {
-  console.log(state);
-  console.log(action);
   return state;
 });
 

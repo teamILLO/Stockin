@@ -13,7 +13,7 @@ import store, { history } from '../../store/store';
 import '@testing-library/jest-dom';
 import '@testing-library/jest-dom/extend-expect';
 import { getMockStore } from '../../test-utils/mocks';
-import authentication from '../../store/authentication/authentication';
+import * as authentication from '../../store/authentication/authentication';
 
 const initialAuthState = { loggingIn: false, user: null };
 const mockStore = getMockStore(initialAuthState);
@@ -72,10 +72,12 @@ describe('<Header />', () => {
   });
 
   it('should call onClickLogoutHandler when clicking logout button', () => {
-    const spyLogoutHandler = jest.spyOn(authentication, 'logout').mockImplementation(() => {});
+    const spyLogoutHandler = jest.spyOn(authentication, 'tryLogout').mockImplementation((user) => {
+      return (dispatch) => {};
+    });
     render(header);
     fireEvent.click(screen.getAllByText(/logout/i, { selector: 'button' })[0]);
-    expect(spyLogoutHandler).toHaveBeenCalledTimes(0);
+    expect(spyLogoutHandler).toHaveBeenCalledTimes(1);
   });
 
   it('should call onClickNavHandler when clicking Logo in StickyHeader', () => {
