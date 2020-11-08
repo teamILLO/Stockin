@@ -2,7 +2,6 @@ import os,sys
 import django
 import requests
 from bs4 import BeautifulSoup
-from pathlib import Path
 import datetime
 from multiprocessing import Pool, Process
 
@@ -93,4 +92,4 @@ b=datetime.date(2020,11,1)
 
 NewsCrawler(b,a)
 if __name__ == '__main__':
-    
+    pass

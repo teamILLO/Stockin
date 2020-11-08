@@ -2,7 +2,6 @@ import os,sys
 import django
 import requests
 from bs4 import BeautifulSoup
-from pathlib import Path
 import datetime
 from multiprocessing import Pool, Process
 from selenium import webdriver

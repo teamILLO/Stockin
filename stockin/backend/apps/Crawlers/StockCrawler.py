@@ -1,5 +1,5 @@
 import os,sys
-from pathlib import Path
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(BASE_DIR)
 
