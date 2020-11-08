@@ -20,7 +20,7 @@ mysql> grant all on stockinDB.* to 'team15'@'%';
 mysql> flush privileges;
 ```
 
-open backend/stockin/setting.py
+open **backend/stockin/setting.py**
 and edit database setting like below
 ```
 DATABASES = {
