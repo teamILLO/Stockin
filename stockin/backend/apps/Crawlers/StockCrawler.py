@@ -1,4 +1,4 @@
-import os,sys
+import os,sys, getopt
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(BASE_DIR)
@@ -145,15 +145,16 @@ def beforeMarket(process=32):
     
 
 
-def pastStockHistory_(stock):
+def pastStockHistory_(stock, count):
 
-    count = 2500
+    count = count
     headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
     url = 'https://fchart.stock.naver.com/sise.nhn?symbol={}&timeframe=day&count={}&requestType=0'.format(stock.code, count)
     rs = requests.get(url, headers= headers).content
     soup = BeautifulSoup(rs, 'html.parser')
     datas = soup.select('item')
 
+    StockHistory_list=[]
     for data in datas:
         info = data['data'].split('|')
         date = info[0]
@@ -166,7 +167,7 @@ def pastStockHistory_(stock):
         upDown = int(endPrice) - int(startPrice)
 
         print(stock.title,' ',date)
-        StockHistory.objects.create(
+        s = StockHistory(
             stock=stock,
             date=date,
             startPrice=startPrice,
@@ -176,22 +177,26 @@ def pastStockHistory_(stock):
             tradeVolume=tradeVolume,
             upDown=upDown
         )
+        StockHistory_list.append(s)
+
+    StockHistory.objects.bulk_create(StockHistory_list)
 
 
 # 과거 주가 기록 가져오는용
-def pastStockHistory(process=32):
+def pastStockHistory(count, process=32):
     stocks = Stock.objects.all()
    
     
-    pool = Pool(16)
-    
-    for stock in stocks:
-        pool.apply_async(stockHistory, args=(stock,))
+    pool = Pool(process)
 
-    pool.map(stockHistory, stocks)
+    try:
+        for stock in stocks:
+            pool.apply_async(pastStockHistory_, args=(stock, count))
 
-    pool.close()
-    pool.join()
+   
+    finally:
+        pool.close()
+        pool.join()
 
     # for stock in stocks:
     #     pastStockHistory(stock)
@@ -202,18 +207,11 @@ def pastStockHistory(process=32):
 # 크롤링 실험해볼려면 아래에서
 
 if __name__ == '__main__':
-    # driver = webdriver.PhantomJS('./phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
-    # driver.implicitly_wait(3)
-    # driver.get('https://stockplus.com/m/stocks/KOREA-A035420')
-    # time.sleep(3)
-    # a=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-    # print(a)
+ 
 
-
-
-    start = time.time()
-    initialStockAdd()
-    print('time: ' , time.time()-start)
+    # start = time.time()
+    # initialStockAdd()
+    # print('time: ' , time.time()-start)
 
     # start = time.time()
     # stockHistoryUpdate()
@@ -224,3 +222,18 @@ if __name__ == '__main__':
     # s = Stock.objects.get(title='힘스')
     # stockHistory(s)
     
+    if sys.argv[1] == 'initial':
+        print(' initial stock-adding start!')
+        initialStockAdd()
+        print('finish!')
+    
+    elif sys.argv[1] == 'realtime':
+        print('realtime stock update start!')
+        stockUpdate()
+        print('finish!')
+        
+    elif sys.argv[1] == 'past':
+        count = int(sys.argv[2])
+        print('past stock-info start!')
+        pastStockHistory(count)
+        print('finish!')
