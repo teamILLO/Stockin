@@ -1,29 +1,44 @@
-## Available Scripts
+# connect djangodb with mysql
 
-In the `stockin/` directory, you can run:
+### install mysql
+```
+(on your virtualenv)
+$ sudo apt-get update
+$ sudo apt-get install mysql-server
+$ sudo apt-get install libmysqlclient-dev
+$ pip3 install mysqlclient
+```
 
-#### `python manage.py runserver --settings=stockin.settings.development`
+### set up db
+```
+$ sudo mysql -u root -p
+(password is your os root password)
 
-Runs the app in the development mode.<br />
-It is same to `python manage.py runserverer`
+mysql> CREATE DATABASE stockinDB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+mysql> create user 'team15'@'%' identified by '1234';
+mysql> grant all on stockinDB.* to 'team15'@'%';
+mysql> flush privileges;
+```
 
-
-## When you have with DB problem(operational error...)
-
-### 1. Remove all the migration files
-#### `find . -path "*/migrations/*.py" -not -name "__init__.py" -delete`
-#### `find . -path "*/migrations/*.pyc"  -delete`
-
-### 2. Delete db.sqlite3
-#### `rm db.sqlite3`
-
-### 3. Create and run the migrations:
-#### `python manage.py makemigrations && python manage.py migrate`
-
-### 4. Sync the DB
-#### `manage.py migrate --run-syncdb`
-
-
+open backend/stockin/setting.py
+and edit database setting like below
+```
+DATABASES = {
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',    
+        'NAME': 'stockinDB',                     
+        'USER': 'team15',                          
+        'PASSWORD': '1234',                  
+        'HOST': 'localhost',                     
+        'PORT': '3306',                          
+    }
+}
+```
+### migrate
+```
+$ python manage.py makemigrations
+$ python manage.py migrate
+```
 
 
 
