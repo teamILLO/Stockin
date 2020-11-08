@@ -12,8 +12,9 @@ $ pip3 install -r requirements.txt
 ```
 python StockCrawler.py initial
 ```
-stock/Stock model 주식종목 추가
-StockCrawler.py
+stock/Stock model 주식종목 추가<br/>
+처음 1번만 실행하면됨
+
 <br/><br/>
 
 ```
