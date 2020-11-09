@@ -199,7 +199,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | User | ```api/users/signup ``` | X | Create user | X | X |
 | | ``` api/users/signin ``` | X | User login check | X | X |
-| | ``` api/users/logout ``` | X | User logout | X | X |
+| | ``` api/users/logout ``` | User logout | X | X | X |
 | | ``` api/users/signout ``` | X | User signout | X | X |
 | | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
@@ -235,10 +235,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - NotAllowedMethod : status 405
 
 #### ``` api/users/logout ```
-
-- POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
-   * KeyError : status 400
+- GET
    * Success : status 204
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
