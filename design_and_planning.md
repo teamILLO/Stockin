@@ -2,7 +2,7 @@
 
 ## Document Revision History
    Rev. 1.0 2020-10-31 - initial version
-   Rev. 1.1 2020-11-03 - additional backend model `Comment`
+   Rev. 1.1 2020-11-10 - additional backend model `Comment`, `Stock`, `StockHistory`
 
 ## System Architecture<br />
 <img src = "https://user-images.githubusercontent.com/59424336/97679637-de506180-1ad8-11eb-9d7f-f248d3de02b7.png" width="100%">
@@ -210,6 +210,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | | ``` api/stocks/:stock_id/ ``` | Get stock info | X | X | X |
 | | ``` api/stocks/history/:stockhistory_date/ ``` | Get stock history list of date | X | X | X |
 | | ``` api/stocks/history/:stockhistory_id/ ``` | Get specified stockhistory info | X | X | X |
+| | ``` api/stocks/price/:stock_id/ ``` | Get price history of a stock | X | X | X |
 | Comment | ``` api/stocks/:stock_id/comments/ ``` | Get stock's comment list | Create comment | X | X |
 | | ``` api/comments/:comment_id/ ``` | Get a comment | X | Edit comment | Delete comment |
 | News | ``` api/news/stock/:stock_id/date/:news_date/ ``` | Get news list of specified date | X | X | X |
@@ -356,6 +357,13 @@ That is, “Group” model and “Stock” model is “many to many” relations
 #### ``` api/stocks/history/:stockhistory_stock_id ```
 - GET
    * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+   * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/price/:stock_id ```
+- GET
+   * response form(list) : each element :  ``` {“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer} ```
    * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
