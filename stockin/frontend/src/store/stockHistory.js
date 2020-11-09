@@ -10,7 +10,7 @@ const slice = createSlice({
   reducers: {
     stockHistory: (state, action) => {
       let data = action.payload;
-      let parseDate = timeParse('%Y-%m-%dT%H:%M:%SZ');
+      let parseDate = timeParse('%Y-%m-%d');
       data.forEach((d, i) => {
         d.date = parseDate(d.date);
         d.open = +d.open;
@@ -32,7 +32,7 @@ const { stockHistory } = slice.actions;
 export const getStockHistory = (stock_id) => async (dispatch) => {
   try {
     await api
-      .get('/stocks/price/' + stock_id + '/', user)
+      .get('/stocks/price/' + stock_id + '/')
       .then((response) => dispatch(stockHistory(response.data)));
   } catch (e) {
     return console.error(e.message);

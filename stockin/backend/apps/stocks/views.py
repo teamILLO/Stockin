@@ -13,7 +13,7 @@ from apps.stocks.models import Stock, StockHistory
 
 def price_list(request, stock_id=""):
     if request.method == 'GET':
-        get_object_or_404(Stock, stock_id)
+        get_object_or_404(Stock, id=stock_id)
         response_list = []
         for stock_history in StockHistory.objects.filter(stock_id=stock_id).iterator():
             response_list.append({'stock': stock_id, 'date': stock_history.date, 'open': stock_history.startPrice, 'high': stock_history.highestPrice, 'low': stock_history.lowestPrice, 'close': stock_history.endPrice, 'volume': stock_history.tradeVolume})
