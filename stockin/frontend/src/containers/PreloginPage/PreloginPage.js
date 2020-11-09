@@ -7,6 +7,7 @@ import { tryLogin } from '../../store/authentication/authentication';
 import { useDispatch, useSelector } from 'react-redux';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 import { history } from '../../store/store';
+import { checkLogin } from '../../store/authentication/authentication';
 
 const panes = [
   {
@@ -38,10 +39,11 @@ const PreloginPage = (props) => {
   };
 
   useEffect(() => {
-    if (loggingIn) {
+    dispatch(checkLogin());
+    if (loggingIn === true) {
       history.push('/main');
     }
-  }, [loggingIn]);
+  }, [dispatch, loggingIn]);
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">

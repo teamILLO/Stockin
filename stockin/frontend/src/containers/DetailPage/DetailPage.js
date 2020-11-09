@@ -8,8 +8,9 @@ import DetailFinancialState from '../../components/Detail/DetailFinancialState/D
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
 import { Tab } from 'semantic-ui-react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
+import { checkLogin } from '../../store/authentication/authentication';
 
 const panes = [
   {
@@ -36,12 +37,14 @@ const panes = [
 
 const DetailPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!loggingIn) {
+    dispatch(checkLogin());
+    if (loggingIn === false) {
       history.push('/prelogin');
     }
-  }, [loggingIn]);
+  }, [dispatch, loggingIn]);
 
   return (
     <div data-testid="DetailPage">

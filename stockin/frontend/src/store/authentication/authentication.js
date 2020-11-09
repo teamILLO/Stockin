@@ -4,7 +4,7 @@ import { api } from '../../api/index';
 const slice = createSlice({
   name: 'authentication',
   initialState: {
-    loggingIn: false,
+    loggingIn: undefined,
     user: null,
   },
   reducers: {
@@ -36,9 +36,23 @@ export const tryLogin = (user) => async (dispatch) => {
   }
 };
 
-export const tryLogout = (user) => async (dispatch) => {
+export const checkLogin = () => async (dispatch) => {
+  const userInfo = sessionStorage.getItem('userInfo');
+  if (userInfo != null) {
+    try {
+      const user = JSON.parse(userInfo);
+      await api.post('/users/signin/', user).then((response) => {
+        dispatch(login(response.data));
+      });
+    } catch (e) {
+      return console.error(e.message);
+    }
+  } else dispatch(logout());
+};
+
+export const tryLogout = () => async (dispatch) => {
   try {
-    await api.post('/users/logout/', user).then((response) => {
+    await api.get('/users/logout/').then((response) => {
       dispatch(logout());
       sessionStorage.removeItem('userInfo');
     });
@@ -51,6 +65,7 @@ export const trySignout = (user) => async (dispatch) => {
   try {
     await api.post('/users/signout/', user).then((response) => {
       dispatch(logout());
+      sessionStorage.removeItem('userInfo');
     });
   } catch (e) {
     return console.error(e.message);

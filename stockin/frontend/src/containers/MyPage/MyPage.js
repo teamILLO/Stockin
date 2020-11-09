@@ -5,6 +5,7 @@ import { Button } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { trySignout } from '../../store/authentication/authentication';
+import { checkLogin } from '../../store/authentication/authentication';
 
 const MyPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
@@ -16,10 +17,11 @@ const MyPage = (props) => {
   };
 
   useEffect(() => {
-    if (!loggingIn) {
+    dispatch(checkLogin());
+    if (loggingIn === false) {
       history.push('/prelogin');
     }
-  }, [loggingIn]);
+  }, [dispatch, loggingIn]);
 
   return (
     <div data-testid="MyPage">

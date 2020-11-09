@@ -130,22 +130,22 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/logout/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
-                                                                 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.get(
+            '/api/users/logout/', content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 204)
 
         # test 2
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/logout/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
-                                                                 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.get(
+            '/api/users/logout/', content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.get('/api/users/logout/',
-                              HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/logout/',
+                               HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
