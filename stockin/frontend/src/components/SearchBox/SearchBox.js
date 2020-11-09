@@ -7,26 +7,6 @@ import { getStocks } from '../../store/stock';
 
 const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
-// const handleOnClick = (title) => {
-//   console.log('clicked : ' + {title});
-//   var retrieve_list = JSON.parse(localStorage.getItem('recent-search')) || [];
-//   console.log(retrieve_list);
-//   const idx = retrieve_list.findIndex(function(elem) {return elem.title === title});
-//   if (idx > -1) {
-//     retrieve_list.splice(idx, 1);
-//   }
-//   localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
-//   console.log(retrieve_list);
-// };
-
-// const resultRenderer = ({ title, description }) => (
-//   <div>
-//     <p>{title}</p>
-//     <p>{description}</p>
-//     <label onclick={handleOnClick(title)}>button</label>
-//   </div>
-// );
-
 const initialState = {
   loading: false,
   results: [],
@@ -36,13 +16,17 @@ const initialState = {
 function exampleReducer(state, action) {
   switch (action.type) {
     case 'CLEAN_QUERY':
+      console.log("1");
       return initialState;
     case 'START_SEARCH':
+      console.log("2");
       return { ...state, loading: true, value: action.query };
     case 'FINISH_SEARCH':
+      console.log("3");
       const fin_results = (JSON.parse(localStorage.getItem('recent-search')) || []).concat(action.results);
       return { ...state, loading: false, results: fin_results };
     case 'UPDATE_SELECTION':
+      console.log("4");
       return { ...state, value: action.selection };
 
     default:
@@ -61,6 +45,7 @@ const SearchBox = () => {
   React.useEffect(() => {
     state.results = JSON.parse(localStorage.getItem('recent-search')) || [];
     _dispatch(getStocks());
+    console.log(state.results);
     return () => {
       clearTimeout(timeoutRef.current);
     };
@@ -83,7 +68,7 @@ const SearchBox = () => {
         var temp = {..._search_result[i], key : keyGenerator(), description : _search_result[i].sector, };
         search_result.push(temp);
       }
-
+      console.log(search_result);
       dispatch({type: 'FINISH_SEARCH', results: search_result});
     }, 300);
   }, [stockList]);
@@ -107,8 +92,8 @@ const SearchBox = () => {
   return (
     <Search
       data-testid="SearchBox"
-      fluid
       action
+      fluid
       loading={loading}
       onSearchChange={handleSearchChange}
       onResultSelect={handleResultSelect}
