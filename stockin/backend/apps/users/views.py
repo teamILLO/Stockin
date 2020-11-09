@@ -91,14 +91,28 @@ def sendCode(request):
 
 
 def userInfo(request):
+    if request.method == 'GET':
+        if not request.user.is_authenticated:
+            response_dict = {'email':'none', 'nickname':'none'}
+            return HttpResponse(content=json.dumps(response_dict), status= 203)
+
+        response_dict = {'email':request.user.email, 'nickname': request.user.nickname}
+        return HttpResponse(content=json.dumps(response_dict), status= 203)
     if request.method == 'PUT':
         req_data = json.loads(request.body.decode())
-        email = req_data['email']
-        password = req_data['password']
-        target_user = User.objects.get(email=email)
-        target_user.set_password(password)
-        target_user.save()
-        return HttpResponse(status=204)
+        if req_data['change'] == 'password':
+            email = req_data['email']
+            password = req_data['password']
+            target_user = User.objects.get(email=email)
+            target_user.set_password(password)
+            target_user.save()
+            return HttpResponse(status=204)
+        elif req_data['change'] == 'nickname':
+            email = req_data['email']
+            nickname = req_data['nickname']
+            target_user = User.objects.get(email=email)
+            target_user.nickname = nickname
+            target_user.save()
     else :
         return HttpResponseNotAllowed(['PUT'])
 

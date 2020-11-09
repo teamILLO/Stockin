@@ -48,7 +48,7 @@ const FindPasswdModal = (props) => {
   }
 
   const changeHandler= () =>{
-    api.put('/users/userInfo/', {'email':email ,'password':password})
+    api.put('/users/userInfo/', {'change':'password', 'email':email ,'password':password})
     alert('password changed succesfully');
     setOpen(false)
   }
