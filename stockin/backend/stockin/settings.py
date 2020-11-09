@@ -79,8 +79,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'stockin.wsgi.application'
 
-##CORS
-CORS_ORIGIN_ALLOW_ALL=False
+# CORS
+CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://localhost:3000'
@@ -157,3 +157,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# End the session when user closes the window
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

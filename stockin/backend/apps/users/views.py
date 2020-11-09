@@ -65,6 +65,8 @@ def logoff(request):
         user = authenticate(email=email, password=password)
         if user is not None and user.is_authenticated:
             logout(request)
+            print(user.is_authenticated)
+            print(user.is_anonymous)
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
