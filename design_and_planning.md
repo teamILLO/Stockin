@@ -219,8 +219,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ### User Model
 #### ``` api/users/signup ```
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * KeyError : status 400
    * Success : status 201
 - NotAllowedMethod : status 405
@@ -228,8 +228,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
 #### ``` api/users/signin ```
 
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * KeyError : status 400
    * Success : status 201
 - NotAllowedMethod : status 405
@@ -244,7 +244,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 #### ``` api/users/signout ```
 
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * resquest form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * KeyError : status 400
    * Success : status 204
 - AuthenticateError : status 401
@@ -253,13 +253,15 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 #### ``` api/users/:user_id ```
 - GET
-   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * Success : status 200
+   * NotFound : status 404
 - PUT
-   * require form : ``` {“email”: string, "nickname": string, “password": string} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * KeyError : status 400
    * Success : status 201
+   * NotFound : status 404
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
