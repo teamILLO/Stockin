@@ -4,6 +4,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import authentication from './authentication';
 import signup from './signup';
+import news from './news';
 
 export const history = createBrowserHistory();
 
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   router: connectRouter(history),
   authentication,
   signup,
+  news,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 
