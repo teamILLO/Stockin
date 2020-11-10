@@ -4,7 +4,7 @@ import { Button, Comment, Form, Header } from 'semantic-ui-react';
 import { deleteComment, editComment } from '../../store/comment';
 
 const CommentBlock = (props) => {
-  const { userNickname } = useSelector((state) => state.authentication);
+  const { user } = useSelector((state) => state.authentication);
   const [edit, setEdit] = useState(false);
   const [editContent, setEditContent] = useState(props.content);
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const CommentBlock = (props) => {
   };
 
   const buttons =
-    userNickname == props.author ? (
+    user && user.id == props.author ? (
       <Comment.Actions>
         <Comment.Action
           onClick={() => {
@@ -68,8 +68,10 @@ const CommentBlock = (props) => {
 
   return (
     <div className="CommentBlock" data-testid="CommentBlock">
+      {console.log(user)}
+      {console.log(props)}
       <Form>{content}</Form>
-      <p>{userNickname}</p>
+      <p>{user.nickname}</p>
       <p>{props.author}</p>
     </div>
   );

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Comment } from 'semantic-ui-react';
 import { getCommentList } from '../../store/comment';
 import CommentBlock from '../CommentBlock/CommentBlock';
-
+import './CommentList.css';
 const CommentList = (props) => {
   const { commentList } = useSelector((state) => state.comment);
   const dispatch = useDispatch();

@@ -68,7 +68,7 @@ export const deleteComment = (comment_id) => async (dispatch) => {
 };
 export const postComment = (stock_id, content) => async (dispatch) => {
   try {
-    await api.post('/stocks/' + stock_id + '/comments/').then((response) =>
+    await api.post('/stocks/' + stock_id + '/comments/', { content: content }).then((response) =>
       dispatch(
         postCommentToList({
           id: response.data.id,

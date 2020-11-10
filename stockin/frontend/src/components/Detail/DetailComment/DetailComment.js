@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Container } from 'semantic-ui-react';
 import CommentList from '../../CommentList/CommentList';
 import { postComment } from '../../../store/comment';
 
