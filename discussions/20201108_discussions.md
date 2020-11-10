@@ -3,8 +3,8 @@
 - [ ] forget ID / password find (testing) (DAUN)
 - [ ] change password/nickname (testing) (DAUN)
 - [X] redirection to prelogin/main page (WOO0)
-- [ ] logout (WOO0)
-- [ ] signout (WOO0)
+- [X] logout (WOO0)
+- [X] signout (WOO0)
 - [ ] comment (testing, almost finished) (JUNHYEOK)
 - [X] crawling for stocks
 
@@ -50,7 +50,7 @@
 - [ ] ML modeling feature - Daun
 - [ ] graph visualization feature - Junhyeok
 - [ ] news search feature (G1)
-- [ ] sessionStorage feature - Woo0
+- [X] sessionStorage feature - Woo0
 - [ ] presentation files
 
 최종확인
