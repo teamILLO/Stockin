@@ -8,6 +8,7 @@ import comment from './comment';
 import stock from './stock';
 import news from './news';
 import financialstats from './financialstats';
+import stockHistory from './stockHistory';
 
 export const history = createBrowserHistory();
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   comment,
   stock,
   news,
+  stockHistory,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 
