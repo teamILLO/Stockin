@@ -2,15 +2,8 @@
 
 ## Document Revision History
 
-<<<<<<< HEAD
-
-Rev. 1.0 2020-10-31 - initial version
-Rev. 1.1 2020-11-05 - additional backend model `Comment`
-=======
 Rev. 1.0 2020-10-31 - initial version
 Rev. 1.1 2020-11-10 - additional backend model `Comment`, `Stock`, `StockHistory`
-
-> > > > > > > f2ae8b0ea1cc77a73c3b1353d87004d48192c51f
 
 ## System Architecture<br />
 

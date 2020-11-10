@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Container } from 'semantic-ui-react';
 import CommentList from '../../CommentList/CommentList';
 import { postComment } from '../../../store/comment';
 
 const DetailComment = (props) => {
   const [comment, setComment] = useState('');
+  const { user } = useSelector((state) => state.authentication);
 
   const dispatch = useDispatch();
   const onSubmitHandler = () => {
-    dispatch(postComment(props.id, comment));
+    dispatch(postComment(props.id, comment, user.nickname));
   };
 
   return (

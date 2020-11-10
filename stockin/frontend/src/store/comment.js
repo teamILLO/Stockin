@@ -66,19 +66,22 @@ export const deleteComment = (comment_id) => async (dispatch) => {
     return console.error(e.message);
   }
 };
-export const postComment = (stock_id, content) => async (dispatch) => {
+export const postComment = (stock_id, content, author) => async (dispatch) => {
   try {
-    await api.post('/stocks/' + stock_id + '/comments/', { content: content }).then((response) =>
-      dispatch(
-        postCommentToList({
-          id: response.data.id,
-          stock: stock_id,
-          time: response.data.time,
-          content: content,
-          author: response.data.nickname,
-        }),
-      ),
-    );
+    await api
+      .post('/stocks/' + stock_id + '/comments/', { content: content, author: author })
+      .then((response) => {
+        dispatch(
+          postCommentToList({
+            id: response.data.id,
+            stock: stock_id,
+            time: response.data.time,
+            content: content,
+            author: response.data.author,
+          }),
+        );
+        console.log(response.data);
+      });
   } catch (e) {
     return console.error(e.message);
   }

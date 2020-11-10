@@ -19,7 +19,7 @@ const CommentBlock = (props) => {
   };
 
   const buttons =
-    user && user.id == props.author ? (
+    user && user.nickname == props.author ? (
       <Comment.Actions>
         <Comment.Action
           onClick={() => {
@@ -68,11 +68,7 @@ const CommentBlock = (props) => {
 
   return (
     <div className="CommentBlock" data-testid="CommentBlock">
-      {console.log(user)}
-      {console.log(props)}
       <Form>{content}</Form>
-      <p>{user.nickname}</p>
-      <p>{props.author}</p>
     </div>
   );
 };

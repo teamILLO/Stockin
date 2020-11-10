@@ -21,7 +21,7 @@ def comment_list(request, stock_id=""):
         response_list = []
         for comment in Comment.objects.filter(stock=stock_id).iterator():
             response_list.append({'stock': stock_id, 'time': comment.time,
-                                  'content': comment.content, 'author': comment.author.id, 'id': comment.id})
+                                  'content': comment.content, 'author': comment.author.nickname, 'id': comment.id})
         return JsonResponse(response_list, safe=False)
     elif request.method == 'POST':
         if not request.user.is_authenticated:
@@ -30,14 +30,16 @@ def comment_list(request, stock_id=""):
         try:
             req_data = json.loads(request.body.decode())
             comment_content = req_data['content']
+            comment_author = req_data['author']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
-
+        User = get_user_model()
+        user = User.objects.get(nickname=comment_author)
         comment = Comment(
-            stock=stock, content=comment_content, author=request.user)
+            stock=stock, content=comment_content, author=user)
         comment.save()
         response_dict = {'id': comment.id, 'stock': comment.stock.id,
-                         'time': comment.time, 'content': comment.content, 'author': comment.author.id}
+                         'time': comment.time, 'content': comment.content, 'author': comment.author.nickname}
         return JsonResponse(response_dict, status=201)
 
     else:
