@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history';
 import authentication from './authentication';
 import signup from './signup';
 import comment from './comment';
+import stock from './stock';
 
 export const history = createBrowserHistory();
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   authentication,
   signup,
   comment,
+  stock,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 

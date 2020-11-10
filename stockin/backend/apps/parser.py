@@ -1,52 +1,35 @@
-import os,sys
+from django import db
+import re
+from selenium import webdriver
+from multiprocessing import Pool, Process
+import time
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+from apps.stocks.models import Stock, StockHistory
+import django
+import os
+import sys
 from pathlib import Path
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
+print(BASE_DIR)
 # for a in sys.path:
 #     print(a)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings')
-import django
 django.setup()
-from apps.stocks.models import Stock, StockHistory
-
-import pandas as pd
-import requests
-from bs4 import BeautifulSoup
-import time
-from multiprocessing import Pool, Process
-
-from selenium import webdriver
-
-import re
-
-from django import db
 
 
-
-#처음 스타팅용
+# 처음 스타팅용
 def initialStockAdd():
-    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
+    driver = webdriver.PhantomJS(os.path.join(
+        BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
     driver.implicitly_wait(3)
 
-    code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSPI.xls'))[['종목코드', '기업명']]
-    code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
-    
-    for stock in code_title.iloc:
-        code = str(stock['종목코드'])
-        title = str(stock['기업명'])
-        try:
-            Stock.objects.get(code=code)
-        except:
-            driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
-            time.sleep(1)
-            sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-            Stock(title = title, code=code, sector=sector, isKOSPI=True).save()
-            
-        
-    
-    code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSDAQ.xls'))[['종목코드', '기업명']]
+    code_title = pd.read_excel(os.path.join(
+        BASE_DIR, 'apps/stocks/stock-Excel/KOSPI.xls'))[['종목코드', '기업명']]
     code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
 
     for stock in code_title.iloc:
@@ -57,29 +40,43 @@ def initialStockAdd():
         except:
             driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
             time.sleep(1)
-            sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-            Stock(title = title, code=code, sector=sector, isKOSPI=False).save()
-            
-    
+            sector = driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[
+                5].find_element_by_tag_name('td').text
+            Stock(title=title, code=code, sector=sector, isKOSPI=True).save()
 
+    code_title = pd.read_excel(os.path.join(
+        BASE_DIR, 'apps/stocks/stock-Excel/KOSDAQ.xls'))[['종목코드', '기업명']]
+    code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
 
-   
+    for stock in code_title.iloc:
+        code = str(stock['종목코드'])
+        title = str(stock['기업명'])
+        try:
+            Stock.objects.get(code=code)
+        except:
+            driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
+            time.sleep(1)
+            sector = driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[
+                5].find_element_by_tag_name('td').text
+            Stock(title=title, code=code, sector=sector, isKOSPI=False).save()
 
 
 def stockUpdate_(stock):
-    
-    url = 'http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=' + str(stock.code)
+
+    url = 'http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=' + \
+        str(stock.code)
     html = requests.get(url).content
     soup = BeautifulSoup(html, 'html.parser')
 
     stockinfo = soup.select('TBL_StockInfo')[0]
-    price = stockinfo['curjuka'].replace(',','')
-    highestPrice = stockinfo['highjuka'].replace(',','')
-    lowestPrice = stockinfo['lowjuka'].replace(',','')
-    tradeVolume = stockinfo['volume'].replace(',','')
-    tradeValue = stockinfo['money'].replace(',','')
+    price = stockinfo['curjuka'].replace(',', '')
+    highestPrice = stockinfo['highjuka'].replace(',', '')
+    lowestPrice = stockinfo['lowjuka'].replace(',', '')
+    tradeVolume = stockinfo['volume'].replace(',', '')
+    tradeValue = stockinfo['money'].replace(',', '')
 
-    print("info : ",stock.title,' ', price," ",highestPrice," ",lowestPrice," ",tradeVolume," ",tradeValue)
+    print("info : ", stock.title, ' ', price, " ", highestPrice,
+          " ", lowestPrice, " ", tradeVolume, " ", tradeValue)
 
     stock.price = price
     stock.highestPrice = highestPrice
@@ -94,21 +91,19 @@ def stockUpdate(process=32):
     # start = time.time()
 
     stocks = Stock.objects.all()
-   
-    
+
     pool = Pool(process)
-    
+
     for stock in stocks:
         pool.apply_async(stockUpdate_, args=(stock,))
 
     pool.close()
     pool.join()
 
-
     # print('time: ' , time.time()-start)
 
 
-#손보는중
+# 손보는중
 def beforeMarketUpdate(stock):
     price = stock.price
     stock.highestPrice = price
@@ -118,15 +113,16 @@ def beforeMarketUpdate(stock):
 def beforeMarket(process=32):
     stocks = Stock.objects.all()
     pool = Pool(process)
-    
 
 
 def pastStockHistory_(stock):
 
     count = 100
-    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
-    url = 'https://fchart.stock.naver.com/sise.nhn?symbol={}&timeframe=day&count={}&requestType=0'.format(stock.code, count)
-    rs = requests.get(url, headers= headers).content
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
+    url = 'https://fchart.stock.naver.com/sise.nhn?symbol={}&timeframe=day&count={}&requestType=0'.format(
+        stock.code, count)
+    rs = requests.get(url, headers=headers).content
     soup = BeautifulSoup(rs, 'html.parser')
     datas = soup.select('item')
 
@@ -141,7 +137,7 @@ def pastStockHistory_(stock):
         tradeVolume = info[5]
         upDown = int(endPrice) - int(startPrice)
 
-        print(stock.title,' ',date)
+        print(stock.title, ' ', date)
         StockHistory.objects.create(
             stock=stock,
             date=date,
@@ -157,10 +153,9 @@ def pastStockHistory_(stock):
 # 과거 주가 기록 가져오는용
 def pastStockHistory(process=32):
     stocks = Stock.objects.all()
-   
-    
+
     # pool = Pool(16)
-    
+
     # for stock in stocks:
     #     pool.apply_async(stockHistory, args=(stock,))
 
@@ -172,11 +167,8 @@ def pastStockHistory(process=32):
     for stock in stocks:
         pastStockHistory(stock)
 
-        
 
-    
 # 크롤링 실험해볼려면 아래에서
-
 if __name__ == '__main__':
     # driver = webdriver.PhantomJS('./phantomjs-2.1.1-linux-x86_64/bin/phantomjs')
     # driver.implicitly_wait(3)
@@ -185,18 +177,17 @@ if __name__ == '__main__':
     # a=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
     # print(a)
 
+    # start = time.time()
+    # initialStockAdd()
+    # print('time: ' , time.time()-start)
 
-
-    #start = time.time()
-    #initialStockAdd()
-    #print('time: ' , time.time()-start)
+    start = time.time()
+    stockUpdate()
+    print('time: ', time.time()-start, ' 초')
 
     start = time.time()
     stockHistoryUpdate()
-    print('time: ' , time.time()-start, ' 초')
-
-
+    print('time: ', time.time()-start, ' 초')
 
     # s = Stock.objects.get(title='힘스')
     # stockHistory(s)
-    
