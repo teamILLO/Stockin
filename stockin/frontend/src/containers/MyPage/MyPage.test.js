@@ -8,11 +8,13 @@ import * as authentication from '../../store/authentication/authentication';
 
 const initialAuthState = { loggingIn: true };
 const initialAuthStateLogout = { loggingIn: false };
+const initialAuthStateUndefined = { loggingIn: undefined };
 const mockStore = getMockStore(initialAuthState);
 const mockStoreLogout = getMockStore(initialAuthStateLogout);
+const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
 describe('<MyPage />', () => {
-  let myPage, myPageLogout, spyHistoryPush;
+  let myPage, myPageLogout, myPageUndefined, spyHistoryPush;
   beforeEach(() => {
     myPage = (
       <Provider store={mockStore}>
@@ -26,6 +28,11 @@ describe('<MyPage />', () => {
       </Provider>
     );
 
+    myPageUndefined = (
+      <Provider store={mockStoreUndefined}>
+        <MyPage history={history} />
+      </Provider>
+    );
     spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
   });
 
@@ -49,5 +56,13 @@ describe('<MyPage />', () => {
     render(myPage);
     fireEvent.click(screen.getAllByText(/signout/i, { selector: 'button' })[0]);
     expect(spySignoutHandler).toHaveBeenCalledTimes(1);
+  });
+
+  it('should dispatch checkLogin when loggingIn = undefined', () => {
+    const spyCheckLoginHandler = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
+    render(myPageUndefined);
+    expect(spyCheckLoginHandler).toHaveBeenCalledTimes(1);
   });
 });

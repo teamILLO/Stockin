@@ -14,11 +14,13 @@ import * as authentication from '../../store/authentication/authentication';
 
 const initialAuthState = { loggingIn: false };
 const initialAuthStateLogin = { loggingIn: true };
+const initialAuthStateUndefined = { loggingIn: undefined };
 const mockStore = getMockStore(initialAuthState);
 const mockStoreLogin = getMockStore(initialAuthStateLogin);
+const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
 describe('<PreloginPage />', () => {
-  let preLoginPage, preLoginPageLogin, spyHistoryPush;
+  let preLoginPage, preLoginPageLogin, preLoginPageUndefined, spyHistoryPush;
   beforeEach(() => {
     preLoginPage = (
       <Provider store={mockStore}>
@@ -28,6 +30,12 @@ describe('<PreloginPage />', () => {
 
     preLoginPageLogin = (
       <Provider store={mockStoreLogin}>
+        <PreloginPage history={history} />
+      </Provider>
+    );
+
+    preLoginPageUndefined = (
+      <Provider store={mockStoreUndefined}>
         <PreloginPage history={history} />
       </Provider>
     );
@@ -92,5 +100,13 @@ describe('<PreloginPage />', () => {
   it('should redirect to when loggingIn = true', () => {
     render(preLoginPageLogin);
     expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+  });
+
+  it('should dispatch checkLogin when loggingIn = undefined', () => {
+    const spyCheckLoginHandler = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
+    render(preLoginPageUndefined);
+    expect(spyCheckLoginHandler).toHaveBeenCalledTimes(1);
   });
 });
