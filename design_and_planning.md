@@ -264,6 +264,12 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
+#### ``` api/user/sendCode```
+- POST
+   * requset form : ``` {“email”: string, “code”: integer} ```
+   * Sucess : status 204
+- NotAllowedMethod : status 405
+
 ### Group Model
 #### ``` api/groups/ ```
 - GET
