@@ -40,7 +40,7 @@ const DetailPage = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(checkLogin());
+    if (loggingIn == undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
     }
