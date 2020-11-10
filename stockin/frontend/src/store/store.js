@@ -5,11 +5,13 @@ import { createBrowserHistory } from 'history';
 import authentication from './authentication';
 import signup from './signup';
 import news from './news';
+import financialstats from './financialstats';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
+  fs : financialstats,
   authentication,
   signup,
   news,

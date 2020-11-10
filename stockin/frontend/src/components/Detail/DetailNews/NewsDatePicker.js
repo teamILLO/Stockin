@@ -31,7 +31,6 @@ function setDateRange(startDate, n) {
 */
 function getStockId() {
   var a = window.location.pathname.substr(1).split('/');
-  console.log(a);
   var b = -1;
   for (var i = 0; i < a.length; i++) {
       if (a[i] === "detail") {

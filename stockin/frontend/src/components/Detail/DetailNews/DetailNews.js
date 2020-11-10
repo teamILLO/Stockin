@@ -6,6 +6,9 @@ import NewsDatePicker from './NewsDatePicker';
 
 import "react-datepicker/dist/react-datepicker.css";
 
+/*
+  List items rendering
+*/
 const RenderListItem = item => 
   <List.Item key={item.id}>
     <List.Content>
@@ -22,7 +25,7 @@ const DetailNews = () => {
   return(
     <div id="DetailNews">
       <NewsDatePicker/>
-      <List>
+      <List divided>
         {news.map((e) => RenderListItem(e))}
       </List>
     </div>

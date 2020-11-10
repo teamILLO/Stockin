@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import datetime
 from multiprocessing import Pool, Process
 from selenium import webdriver
-
+import time
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(BASE_DIR)
@@ -17,17 +17,15 @@ from apps.news.models import News
 from apps.stocks.models import Stock, FinancialStat
 
 
-
-
-
 def FSCrawler():
-    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'), service_log_path='/tmp/ghostdriver.log')
+    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-macosx/bin/phantomjs'))
     driver.implicitly_wait(2)
     
     stocks = Stock.objects.all()
     for stock in stocks:
         
         driver.get('https://stockplus.com/m/stocks/KOREA-A{}/analysis'.format(stock.code))
+        time.sleep(1)
         raw = driver.page_source
         soup = BeautifulSoup(raw, 'html.parser')
         table = soup.select_one('.type02 tbody')

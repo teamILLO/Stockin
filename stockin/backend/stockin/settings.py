@@ -123,8 +123,8 @@ DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',    
         'NAME': 'stockinDB',                     
-        'USER': 'team15',                          
-        'PASSWORD': '1234',                  
+        'USER': '',                          
+        'PASSWORD': '',                  
         'HOST': 'localhost',                     
         'PORT': '3306',                          
     }
