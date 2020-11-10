@@ -44,7 +44,7 @@ def signin(request):
             # request.session['user'] = user.id
             response_dict = {'email': email, 'nickname': user.nickname,
                              'password': password, 'id': user.id}
-            return JsonResponse(response_dict, status=200)
+            return JsonResponse(response_dict, status=201)
         else:
             return HttpResponse(status=401)
 

@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 
-const panes = [
+const panes = (id) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => <DetailOverview />,
@@ -31,7 +31,7 @@ const panes = [
   },
   {
     menuItem: { key: 'Comments', className: 'Comments', content: 'Comments' },
-    render: () => <DetailComment />,
+    render: () => <DetailComment id={id} />,
   },
 ];
 
@@ -50,7 +50,7 @@ const DetailPage = (props) => {
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <DetailData name={props.name} code={props.code} />
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+      <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
 
       <Footer history={props.history} />
     </div>

@@ -1,7 +1,7 @@
 import os,sys
 from pathlib import Path
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 # for a in sys.path:
 #     print(a)
@@ -123,7 +123,7 @@ def beforeMarket(process=32):
 
 def pastStockHistory_(stock):
 
-    count = 2500
+    count = 100
     headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
     url = 'https://fchart.stock.naver.com/sise.nhn?symbol={}&timeframe=day&count={}&requestType=0'.format(stock.code, count)
     rs = requests.get(url, headers= headers).content
@@ -187,13 +187,13 @@ if __name__ == '__main__':
 
 
 
-    start = time.time()
-    initialStockAdd()
-    print('time: ' , time.time()-start)
+    #start = time.time()
+    #initialStockAdd()
+    #print('time: ' , time.time()-start)
 
-    # start = time.time()
-    # stockHistoryUpdate()
-    # print('time: ' , time.time()-start, ' 초')
+    start = time.time()
+    stockHistoryUpdate()
+    print('time: ' , time.time()-start, ' 초')
 
 
 
