@@ -7,8 +7,7 @@ import Footer from '../../components/Footer/Footer';
 import { Button } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
-import { trySignout } from '../../store/authentication/authentication';
-import { checkLogin } from '../../store/authentication/authentication';
+import { trySignout, checkLogin } from '../../store/authentication/authentication';
 import { Tab } from 'semantic-ui-react';
 
 const panes = [

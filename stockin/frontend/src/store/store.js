@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
-import authentication from './authentication';
+import authentication from './authentication/authentication';
 import signup from './signup';
 import comment from './comment';
 import stock from './stock';

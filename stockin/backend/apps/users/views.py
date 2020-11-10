@@ -161,7 +161,7 @@ def userInfo(request):
                          'nickname': request.user.nickname}
         return HttpResponse(content=json.dumps(response_dict), status=203)
     if request.method == 'PUT':
-        if request.user.is_authenticated:
+        if not request.user.is_authenticated:
             return HttpResponse(status=401)
         try:
             req_data = json.loads(request.body.decode())
