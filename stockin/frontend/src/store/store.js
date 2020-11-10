@@ -6,15 +6,19 @@ import authentication from './authentication/authentication';
 import signup from './signup';
 import comment from './comment';
 import stock from './stock';
+import news from './news';
+import financialstats from './financialstats';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   router: connectRouter(history),
+  fs: financialstats,
   authentication,
   signup,
   comment,
   stock,
+  news,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 

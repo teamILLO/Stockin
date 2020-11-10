@@ -7,17 +7,21 @@ from django.contrib.auth import get_user_model
 from json import JSONDecodeError
 import json
 
-from apps.stocks.models import Stock
+from apps.stocks.models import Stock, FinancialStat
 
-def stock_list(request):
+
+def stock_fs(request, stock_id=''):
     if request.method == 'GET':
         response_list = []
-        stocks = [stock for stock in Stock.objects.all()]
-        for stock in stocks : 
-            response_dict = {'id' : stock.id, 'title' : stock.title, 'code' : stock.code, 'sector' : stock.sector}
+        fs_list = [fs for fs in FinancialStat.objects.all()
+                   if fs.stock.id == stock_id]
+
+        for fs in fs_list:
+            response_dict = {'id': fs.id, 'stock_id': fs.stock.id, 'quarter': fs.quarter, 'sales': fs.sales, 'operatingProfit': fs.operatingProfit,
+                             'netIncome': fs.netIncome, 'operatingMargin': fs.operatingMargin, 'netProfitMargin': fs.netProfitMargin, 'PER': fs.PER, 'PBR': fs.PBR, 'ROE': fs.ROE}
             response_list.append(response_dict)
 
         return JsonResponse(response_list, safe=False)
-    
-    else :
-        return HttpResponseNotAllowed(['GET'])
+
+    else:
+        HttpResponseNotAllowed['GET']

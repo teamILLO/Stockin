@@ -39,3 +39,21 @@ class StockHistory(models.Model):
 
     def __str__(self):
         return str(self.stock.title)+ ' '+str(self.date)
+
+class FinancialStat(models.Model):
+    stock = models.ForeignKey(
+        Stock,
+        on_delete = models.CASCADE
+    )
+    quarter = models.CharField(max_length=10, null=True)            #분기 ex> '20년 6월'
+    sales = models.CharField(max_length=10, null=True)       #매출액
+    operatingProfit = models.CharField(max_length=10, null=True)    #영업이익
+    netIncome = models.CharField(max_length=10, null=True)   #당기순이익
+    operatingMargin = models.CharField(max_length=10, null=True)    #영업이익률
+    netProfitMargin = models.CharField(max_length=10, null=True)    #순이익률
+    PER = models.CharField(max_length=10, null=True)                #PER
+    PBR = models.CharField(max_length=10, null=True)                #PBR
+    ROE = models.CharField(max_length=10, null=True)                #ROE
+
+    def __str__(self):
+        return str(self.stock.title)+ ' '+str(self.quarter)

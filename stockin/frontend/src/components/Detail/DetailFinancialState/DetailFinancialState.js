@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Tab } from 'semantic-ui-react';
 
-const DetailFinancialState = (props) => {
-  return <div data-testid="DetailFinancialState">DetailFinancialState</div>;
+import YearTable from './YearTable';
+import QuarterTable from './QuarterTable';
+
+const panes = [
+  { menuItem: '연간', render: () => <YearTable/> },
+  { menuItem: '분기', render: () => <QuarterTable/> },
+]
+
+const DetailFinancialState = () => {
+  return (
+    <Tab panes={panes} />
+  );
 };
-
 export default DetailFinancialState;
+
