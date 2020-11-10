@@ -5,11 +5,13 @@ import CommentList from '../../CommentList/CommentList';
 import { postComment } from '../../../store/comment';
 
 const DetailComment = (props) => {
+  const [comment, setComment] = useState('');
+
   const dispatch = useDispatch();
   const onSubmitHandler = () => {
     dispatch(postComment(props.id, comment));
   };
-  const [comment, setComment] = useState('');
+
   return (
     <div className="DetailComment" data-testid="DetailComment">
       DetailComment
