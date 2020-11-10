@@ -211,10 +211,9 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
 | | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
 | News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
-| | ``` api/news/:news_id ``` | Get news info | X | X | X |
 | Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
 | | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
-| FinancialStat | ``` api/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
+| FinancialStat | ``` api/stocks/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
 
 ### User Model
 #### ``` api/users/signup ```
