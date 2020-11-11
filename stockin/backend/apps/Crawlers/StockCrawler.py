@@ -25,7 +25,8 @@ import csv
 
 #처음 엑셀 추출용
 def initialStockAddFromExcel():
-    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
+    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux/bin/phantomjs'))
+     # driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-macosx/bin/phantomjs')) #맥용!
     driver.implicitly_wait(3)
     f = open('stocks.csv','w', newline='')
     writer = csv.DictWriter(f, fieldnames = ['title','code','sector','isKOSPI'])

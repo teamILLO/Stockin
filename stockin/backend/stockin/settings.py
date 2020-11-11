@@ -123,13 +123,13 @@ DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',    
         'NAME': 'stockinDB',                     
-        'USER': '',                          
-        'PASSWORD': '',                  
+        'USER': 'team15',                          
+        'PASSWORD': '1234',                  
         'HOST': 'localhost',                     
         'PORT': '3306',                          
     }
 }
-
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
