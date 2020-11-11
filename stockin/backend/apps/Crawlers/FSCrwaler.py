@@ -8,6 +8,7 @@ from selenium import webdriver
 import time
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+print(BASE_DIR)
 sys.path.append(BASE_DIR)
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings')
@@ -19,6 +20,8 @@ from apps.stocks.models import Stock, FinancialStat
 
 def FSCrawler():
     driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
+    # driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-linux/bin/phantomjs')) #직접 apps/stocks 에 있는 phantomjs의 경로보고 확인할 것
+    # driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'apps/stocks/phantomjs-2.1.1-macosx/bin/phantomjs')) #맥용!
     driver.implicitly_wait(2)
     
     stocks = Stock.objects.all()
