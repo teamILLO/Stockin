@@ -38,3 +38,17 @@ def price_list(request, stock_id=""):
         return JsonResponse(response_list, safe=False)
     else :
         return HttpResponseNotAllowed(['GET'])
+
+
+def stock_list(request):
+    if request.method == 'GET':
+        response_list = []
+        stocks = [stock for stock in Stock.objects.all()]
+        for stock in stocks : 
+            response_dict = {'id' : stock.id, 'title' : stock.title, 'code' : stock.code, 'sector' : stock.sector}
+            response_list.append(response_dict)
+
+        return JsonResponse(response_list, safe=False)
+    
+    else :
+        return HttpResponseNotAllowed(['GET'])

@@ -1,5 +1,6 @@
+import _ from 'lodash';
 import React from 'react';
-import { Search } from 'semantic-ui-react';
+import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
 import { useHistory } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock';
@@ -15,18 +16,19 @@ const initialState = {
 function exampleReducer(state, action) {
   switch (action.type) {
     case 'CLEAN_QUERY':
-      console.log("1");
+      console.log('1');
       return initialState;
     case 'START_SEARCH':
-      console.log("2");
+      console.log('2');
       return { ...state, loading: true, value: action.query };
     case 'FINISH_SEARCH':
+      console.log('3');
       const fin_results = (JSON.parse(localStorage.getItem('recent-search')) || []).concat(
         action.results,
       );
       return { ...state, loading: false, results: fin_results };
     case 'UPDATE_SELECTION':
-      console.log("4");
+      console.log('4');
       return { ...state, value: action.selection };
 
     default:
@@ -35,7 +37,7 @@ function exampleReducer(state, action) {
 }
 
 const SearchBox = () => {
-  const history = useHistory(); 
+  const history = useHistory();
   const _dispatch = useDispatch();
   const { stockList } = useSelector((state) => state.stock);
   const [state, dispatch] = React.useReducer(exampleReducer, initialState);
@@ -51,27 +53,36 @@ const SearchBox = () => {
     };
   }, []);
 
-  const handleSearchChange = React.useCallback((e, data) => {
-    clearTimeout(timeoutRef.current);
-    dispatch({ type: 'START_SEARCH', query: data.value });
+  const handleSearchChange = React.useCallback(
+    (e, data) => {
+      clearTimeout(timeoutRef.current);
+      dispatch({ type: 'START_SEARCH', query: data.value });
 
-    timeoutRef.current = setTimeout(() => {
-      if (data.value.length === 0) {
-        dispatch({ type: 'CLEAN_QUERY' });
-        return;
-      }
-      var search_result = [];
-      var _search_result = stockList.filter((st) => st.title.toUpperCase().includes(data.value.toUpperCase())).slice(0,5);
-      
-      var i;
-      for(i = 0; i < _search_result.length; i++) {
-        var temp = {..._search_result[i], key : keyGenerator(), description : _search_result[i].sector, };
-        search_result.push(temp);
-      }
-      console.log(search_result);
-      dispatch({type: 'FINISH_SEARCH', results: search_result});
-    }, 300);
-  }, [stockList]);
+      timeoutRef.current = setTimeout(() => {
+        if (data.value.length === 0) {
+          dispatch({ type: 'CLEAN_QUERY' });
+          return;
+        }
+        var search_result = [];
+        var _search_result = stockList
+          .filter((st) => st.title.toUpperCase().includes(data.value.toUpperCase()))
+          .slice(0, 5);
+
+        var i;
+        for (i = 0; i < _search_result.length; i++) {
+          var temp = {
+            ..._search_result[i],
+            key: keyGenerator(),
+            description: _search_result[i].sector,
+          };
+          search_result.push(temp);
+        }
+        console.log(search_result);
+        dispatch({ type: 'FINISH_SEARCH', results: search_result });
+      }, 300);
+    },
+    [stockList],
+  );
 
   const handleResultSelect = (e, data) => {
     var selected_stock = data.result;
@@ -103,6 +114,6 @@ const SearchBox = () => {
       value={value}
     />
   );
-}
+};
 
 export default SearchBox;
