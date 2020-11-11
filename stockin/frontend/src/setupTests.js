@@ -4,7 +4,22 @@
 // learn more: https://github.com/testing-library/jest-dom
 import Enzyme from 'enzyme';
 import EnzymeAdapter from 'enzyme-adapter-react-16';
+
 Enzyme.configure({
   adapter: new EnzymeAdapter(),
   disableLifecycleMethods: true,
+});
+
+const originalError = console.error;
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
 });

@@ -77,6 +77,13 @@ class UsersTestCase(TestCase):
     def test_signup(self):
         client = Client(enforce_csrf_checks=True)
 
+        client = Client(enforce_csrf_checks=True)
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 406)
+         
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/signup/')
         self.assertEqual(response.status_code, 405)
