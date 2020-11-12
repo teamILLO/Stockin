@@ -5,8 +5,8 @@ import { createBrowserHistory } from 'history';
 import authentication from './authentication/authentication';
 import comment from './comment/comment';
 import stock from './stock/stock';
-import news from './news';
-import financialstats from './financialstats';
+import news from './news/news';
+import financialstats from './financialstats/financialstats';
 import stockHistory from './stockHistory/stockHistory';
 
 export const history = createBrowserHistory();
