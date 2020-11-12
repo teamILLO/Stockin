@@ -1,7 +1,6 @@
 import { api } from '../../api/index';
 import stock, { updateStockList, getStocks } from './stock';
 import store from '../store';
-import { updatePriceList } from '../stockHistory/stockHistory';
 
 const testList = [
   { id: 1, name: 'a' },
@@ -25,7 +24,7 @@ describe('stock ', () => {
     });
   });
 
-  it('should handle updatePriceList', () => {
+  it('should handle updateStockList', () => {
     expect(
       stock(
         {
@@ -41,7 +40,7 @@ describe('stock ', () => {
     });
   });
 
-  it(`should work when 'tryLogin' calls`, (done) => {
+  it(`should work when 'getStocks' calls`, (done) => {
     const spy = jest.spyOn(api, 'get').mockImplementation((url) => {
       return new Promise((resolve, reject) => {
         const result = {
@@ -58,7 +57,7 @@ describe('stock ', () => {
     });
   });
 
-  it(`should not work when 'tryLogin' calls with error`, (done) => {
+  it(`should not work when 'getStocks' calls with error`, (done) => {
     const spyError = jest.spyOn(api, 'get').mockImplementation((url) => {
       return new Promise((resolve, reject) => {
         const result = {
