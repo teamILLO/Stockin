@@ -77,11 +77,11 @@ pytorch >> backward propagation >> lots of examples >> MLP model
 - [ ] financial state backend testing - G
 - [ ] financial state testing - G
 
-- [ ] sign in sign up reducer testing - W
-- [ ] comment reducer testing - W
-- [ ] stockHistory and stock reducer testing - W
-- [ ] financial stats reducer testing - W
-- [ ] news reducer testing - W
+- [X] sign in sign up reducer testing - W
+- [X] comment reducer testing - W
+- [X] stockHistory and stock reducer testing - W
+- [X] financial stats reducer testing - W
+- [X] news reducer testing - W
 - [ ] user backend testing - W
 - [ ] signout backend testing - W
 
