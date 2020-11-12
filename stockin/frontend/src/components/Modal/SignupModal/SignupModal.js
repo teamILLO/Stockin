@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Image, Modal } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { trySignup } from '../../../store/signup';
+import { trySignup } from '../../../store/authentication/authentication';
 
 import logo from '../../../images/logo.png';
 import './SignupModal.css';

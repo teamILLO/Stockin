@@ -61,6 +61,16 @@ export const tryLogout = () => async (dispatch) => {
   }
 };
 
+export const trySignup = (user) => async (dispatch) => {
+  try {
+    await api.post('/users/signup/', user).then((response) => {
+      dispatch(login(response.data));
+    });
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+
 export const trySignout = (user) => async (dispatch) => {
   try {
     await api.post('/users/signout/', user).then((response) => {
