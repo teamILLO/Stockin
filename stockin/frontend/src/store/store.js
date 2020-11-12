@@ -4,7 +4,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import authentication from './authentication/authentication';
 import comment from './comment/comment';
-import stock from './stock';
+import stock from './stock/stock';
 import news from './news';
 import financialstats from './financialstats';
 import stockHistory from './stockHistory/stockHistory';
