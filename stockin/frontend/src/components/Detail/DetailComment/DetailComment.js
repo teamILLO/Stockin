@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Form, Container } from 'semantic-ui-react';
 import CommentList from '../../CommentList/CommentList';
-import { postComment } from '../../../store/comment';
+import { postComment } from '../../../store/comment/comment';
 
 const DetailComment = (props) => {
   const [comment, setComment] = useState('');
