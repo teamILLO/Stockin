@@ -12,6 +12,7 @@ export const getMockStore = (initialAuthState) => {
   const rootReducer = combineReducers({
     router: connectRouter(history),
     authentication: mockAuthentication,
+    comment: mockCommentHistory,
   });
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const mockStore = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
