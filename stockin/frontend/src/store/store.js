@@ -7,7 +7,7 @@ import comment from './comment/comment';
 import stock from './stock';
 import news from './news';
 import financialstats from './financialstats';
-import stockHistory from './stockHistory';
+import stockHistory from './stockHistory/stockHistory';
 
 export const history = createBrowserHistory();
 
