@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 
 import {
   render,
@@ -52,11 +52,7 @@ const mockStoreUserDiff = getMockStore(
 );
 
 describe('<CommentBlock />', () => {
-  let commentBlockUserNull,
-    commentBlockUserSame,
-    commentBlockUserDiff,
-    spyHistoryPush,
-    spyDeleteComment;
+  let commentBlockUserNull, commentBlockUserSame, commentBlockUserDiff, spyDeleteComment;
   beforeEach(() => {
     commentBlockUserNull = (
       <Provider store={mockStoreUserNull}>
@@ -73,7 +69,6 @@ describe('<CommentBlock />', () => {
         <CommentBlock history={history} {...defaultProps} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
     spyDeleteComment = jest.spyOn(comment, 'deleteComment').mockImplementation(() => {
       return (dispatch) => {};
     });

@@ -16,7 +16,11 @@ const DetailComment = (props) => {
   return (
     <div className="DetailComment" data-testid="DetailComment">
       DetailComment
-      <Form.TextArea value={comment} onChange={(event) => setComment(event.target.value)} />
+      <Form.TextArea
+        value={comment}
+        placeholder="Write your comment here"
+        onChange={(event) => setComment(event.target.value)}
+      />
       <Button
         primary
         content="Submit"
