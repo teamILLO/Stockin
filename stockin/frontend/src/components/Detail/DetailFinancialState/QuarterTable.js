@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Label, Segment } from 'semantic-ui-react';
+import { Table, Segment } from 'semantic-ui-react';
 
 import { getFs } from '../../../store/financialstats/financialstats';
 
@@ -61,10 +61,10 @@ const QuarterTable = () => {
   React.useEffect(() => {
     var stock_id = getStockId();
     // console.log(stock_id);
-    if (stock_id != -1) {
+    if (stock_id !== -1) {
       dispatch(getFs(stock_id));
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <Segment style={{ overflowX: 'scroll' }} data-testid="QuarterTable">

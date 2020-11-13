@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import { getNews } from '../../../store/news/news';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 /*
   For number padding
@@ -43,9 +43,9 @@ function getStockId() {
 
 const NewsDatePicker = () => {
   var curDate = new Date(Date.now());
-  const timeoutRef = React.useRef();
+  // const timeoutRef = React.useRef();
   const dispatch = useDispatch();
-  const { news } = useSelector((state) => state.news);
+  // const { news } = useSelector((state) => state.news);
   const [startDate, setStartDate] = useState(curDate);
   var validDate = setDateRange(curDate, 30);
   const dateFormat =
@@ -56,10 +56,10 @@ const NewsDatePicker = () => {
   React.useEffect(() => {
     var stock_id = getStockId();
     // console.log(stock_id);
-    if (stock_id != -1) {
+    if (stock_id !== -1) {
       dispatch(getNews(stock_id, dateFormat));
     }
-  }, [dateFormat]);
+  }, [dateFormat, dispatch]);
 
   return (
     <DatePicker

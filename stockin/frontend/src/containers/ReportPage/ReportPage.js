@@ -10,7 +10,7 @@ const ReportPage = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (loggingIn == undefined) dispatch(checkLogin());
+    if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
     }
