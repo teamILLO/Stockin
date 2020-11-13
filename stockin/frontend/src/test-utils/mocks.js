@@ -23,7 +23,7 @@ const getMockFS = jest.fn((initialState) => (state = initialState, action) => {
 });
 
 export const getMockStore = (
-  initialAuthState = {},
+  initialAuthState = { loggingIn: false, user: null },
   initialStockState = { stockList: [] },
   initialStockHistoryState = { priceList: [] },
   initialCommentState = { commentList: [] },
