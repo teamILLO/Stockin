@@ -72,7 +72,7 @@ const DetailData = (props) => {
           <XAxis axisAt="bottom" orient="bottom" ticks={6} />
           <YAxis axisAt="left" orient="left" ticks={5} />
           <CandlestickSeries width={timeIntervalBarWidth(utcDay)} />
-          <HoverTooltip data-testid="tooltip" tooltipContent={tooltipContent([])} fontSize={15} />
+          <HoverTooltip tooltipContent={tooltipContent([])} fontSize={15} />
         </Chart>
       </ChartCanvas>
     </div>
