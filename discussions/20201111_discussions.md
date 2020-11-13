@@ -92,4 +92,3 @@ pytorch >> backward propagation >> lots of examples >> MLP model
 
 
 
-## Next Meeting Nov. 10 Tue. 12:30 PM
