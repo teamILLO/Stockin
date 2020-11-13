@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
-import { useHistory } from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
-import { getStocks } from '../../store/stock';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { getStocks } from '../../store/stock/stock';
+import { history } from '../../store/store';
 const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
 const initialState = {
@@ -27,20 +27,19 @@ function exampleReducer(state, action) {
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection };
 
-    default:
-      throw new Error();
+    // default:
+    //   throw new Error();
   }
 }
 
 const SearchBox = () => {
-  const history = useHistory();
   const _dispatch = useDispatch();
   const { stockList } = useSelector((state) => state.stock);
   const [state, dispatch] = React.useReducer(exampleReducer, initialState);
   const { loading, results, value } = state;
   const timeoutRef = React.useRef();
 
-  React.useEffect(() => {
+  useEffect(() => {
     state.results = JSON.parse(localStorage.getItem('recent-search')) || [];
     _dispatch(getStocks());
     return () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Comment, Form, Header } from 'semantic-ui-react';
-import { deleteComment, editComment } from '../../store/comment';
+import { deleteComment, editComment } from '../../store/comment/comment';
 
 const CommentBlock = (props) => {
   const { user } = useSelector((state) => state.authentication);

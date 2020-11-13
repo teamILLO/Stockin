@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Comment } from 'semantic-ui-react';
-import { getCommentList } from '../../store/comment';
+import { getComments } from '../../store/comment/comment';
 import CommentBlock from '../CommentBlock/CommentBlock';
 import './CommentList.css';
 const CommentList = (props) => {
@@ -9,7 +9,7 @@ const CommentList = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCommentList(props.stock));
+    dispatch(getComments(props.stock));
   }, [props.stock]);
   return (
     <div className="CommentList" data-testid="CommentList">

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { api } from '../api/index';
+import { api } from '../../api/index';
 import { timeParse } from 'd3-time-format';
 
 const slice = createSlice({
@@ -8,7 +8,7 @@ const slice = createSlice({
     priceList: [],
   },
   reducers: {
-    stockHistory: (state, action) => {
+    updatePriceList: (state, action) => {
       let data = action.payload;
       let parseDate = timeParse('%Y-%m-%d');
       data.forEach((d, i) => {
@@ -27,13 +27,13 @@ export default slice.reducer;
 
 // Actions
 
-const { stockHistory } = slice.actions;
+export const { updatePriceList } = slice.actions;
 
 export const getStockHistory = (stock_id) => async (dispatch) => {
   try {
     await api
       .get('/stocks/price/' + stock_id + '/')
-      .then((response) => dispatch(stockHistory(response.data)));
+      .then((response) => dispatch(updatePriceList(response.data)));
   } catch (e) {
     return console.error(e.message);
   }

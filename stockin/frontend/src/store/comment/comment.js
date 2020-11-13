@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { api } from '../api/index';
+import { api } from '../../api/index';
 
 const initialState = {
   commentList: [],
@@ -32,17 +32,17 @@ export default slice.reducer;
 
 // Actions
 
-const {
+export const {
   saveCommentList,
   editCommentList,
   deleteCommentFromList,
   postCommentToList,
 } = slice.actions;
-export const getCommentList = (stock_id) => async (dispatch) => {
+
+export const getComments = (stock_id) => async (dispatch) => {
   try {
     await api.get('/stocks/' + stock_id + '/comments/').then((response) => {
       dispatch(saveCommentList(response.data));
-      console.log(response.data);
     });
   } catch (e) {
     return console.error(e.message);
@@ -80,7 +80,6 @@ export const postComment = (stock_id, content, author) => async (dispatch) => {
             author: response.data.author,
           }),
         );
-        console.log(response.data);
       });
   } catch (e) {
     return console.error(e.message);
