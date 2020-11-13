@@ -72,24 +72,11 @@ const DetailData = (props) => {
           <XAxis axisAt="bottom" orient="bottom" ticks={6} />
           <YAxis axisAt="left" orient="left" ticks={5} />
           <CandlestickSeries width={timeIntervalBarWidth(utcDay)} />
-          <HoverTooltip tooltipContent={tooltipContent([])} fontSize={15} />
+          <HoverTooltip data-testid="tooltip" tooltipContent={tooltipContent([])} fontSize={15} />
         </Chart>
       </ChartCanvas>
     </div>
   );
 };
-
-/*
-DetailData.propTypes = {
-	data: PropTypes.array.isRequired,
-	width: PropTypes.number.isRequired,
-	ratio: PropTypes.number.isRequired,
-	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
-};
-
-DetailData.defaultProps = {
-	type: "svg",
-};
-*/
 
 export default DetailData;
