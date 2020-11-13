@@ -115,7 +115,7 @@ def sendCode(request):
         return HttpResponseNotAllowed(['POST'])
 
 
-def userInfo(request, id=''):
+def specificUserInfo(request, id=''):
     if request.method == 'GET':
         if request.user.is_authenticated:
             return HttpResponse(status=401)
@@ -126,40 +126,13 @@ def userInfo(request, id=''):
         response_dict = {'email': user.email, 'nickname': user.nickname,
                          'password': user.password, 'id': user.id}
         return JsonResponse(response_dict, status=200)
-
-    elif request.method == 'PUT':
-        if request.user.is_authenticated:
-            return HttpResponse(status=401)
-        try:
-            req_data = json.loads(request.body.decode())
-            email = req_data['email']
-            nickname = req_data['nickname']
-            password = req_data['password']
-        except (KeyError, JSONDecodeError) as e:
-            return HttpResponseBadRequest()
-        user = authenticate(email=email)
-        if user is not None:
-            user.nickname = nickname
-            user.password = password
-            user.save()
-            response_dict = {'email': email, 'nickname': user.nickname,
-                             'password': password, 'id': user.id}
-            return JsonResponse(response_dict, status=201)
-        else:
-            return HttpResponse(status=401)
     else:
-        return HttpResponseNotAllowed(['GET', 'PUT'])
+        return HttpResponseNotAllowed(['GET'])
+
+
 
 
 def userInfo(request):
-    if request.method == 'GET':
-        if not request.user.is_authenticated:
-            response_dict = {'email': 'none', 'nickname': 'none'}
-            return HttpResponse(content=json.dumps(response_dict), status=203)
-
-        response_dict = {'email': request.user.email,
-                         'nickname': request.user.nickname}
-        return HttpResponse(content=json.dumps(response_dict), status=203)
     if request.method == 'PUT':
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
