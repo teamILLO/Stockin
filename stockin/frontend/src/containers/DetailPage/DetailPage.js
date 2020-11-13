@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { fitWidth } from 'react-stockcharts/lib/helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { getStockHistory } from '../../store/stockHistory/stockHistory';

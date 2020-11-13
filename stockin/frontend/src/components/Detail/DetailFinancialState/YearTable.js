@@ -74,12 +74,12 @@ const YearTable = () => {
         temp_fs.push(e);
       }
     });
-    console.log(temp_fs);
+    // console.log(temp_fs);
     setYearFS(temp_fs);
   }, [fs]);
 
   return (
-    <Segment style={{ overflowX: 'scroll' }}>
+    <Segment style={{ overflowX: 'scroll' }} data-testid="YearTable">
       <Table attached="bottom">
         <Table.Header>
           <Table.Row>

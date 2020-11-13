@@ -8,6 +8,7 @@ import authentication, {
   tryLogout,
   trySignup,
   trySignout,
+  updateUserInfo,
 } from './authentication';
 import store from '../store';
 
@@ -246,6 +247,46 @@ describe('authentication ', () => {
     });
 
     store.dispatch(trySignout(testuser)).then(() => {
+      expect(console.error).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  it(`should work when 'updateUserInfo' calls`, (done) => {
+    const change = { change: 'nickname', email: 'test@email.com', nickname: 'newNick' };
+    const edituser = {
+      email: 'test@email.com',
+      nickname: 'newNick',
+      id: 2,
+    };
+    const spy = jest.spyOn(api, 'put').mockImplementation((url, user) => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 200,
+          data: edituser,
+        };
+        resolve(result);
+      });
+    });
+
+    store.dispatch(updateUserInfo(change)).then(() => {
+      expect(spy).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  it(`should not work when 'updateUserInfo' calls with error`, (done) => {
+    const change = { change: 'nickname', nickname: 'newNick' };
+    const spyError = jest.spyOn(api, 'put').mockImplementation((url, user) => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+        };
+        reject(result);
+      });
+    });
+
+    store.dispatch(updateUserInfo(change)).then(() => {
       expect(console.error).toHaveBeenCalledTimes(1);
       done();
     });

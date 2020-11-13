@@ -1,30 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, Label, Grid } from 'semantic-ui-react';
-import { api } from '../../../api/index';
+import { updateUserInfo } from '../../../store/authentication/authentication';
 
 const MyInfo = (props) => {
-  const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState('');
-  const [nickname, setNickname] = useState('');
+  const { user } = useSelector((state) => state.authentication);
   const [nicknameInput, setNicknameInput] = useState('');
   const [edit, setEdit] = useState(false);
-
-  useEffect(() => {
-    api.get('/users/userInfo/').then((response) => {
-      setEmail(response.data['email']);
-      setNickname(response.data['nickname']);
-    });
-  });
+  const dispatch = useDispatch();
 
   const changeNick = () => {
-    api.put('/users/userInfo/', { change: 'nickname', email: email, nickname: nicknameInput });
+    dispatch(updateUserInfo({ change: 'nickname', email: user.email, nickname: nicknameInput }));
     setEdit(false);
     alert('nickname changed succesfully');
   };
 
   const clickEdit = () => {
     setEdit(true);
-    setNicknameInput(nickname);
+    setNicknameInput(user.nickname);
   };
 
   if (!edit)
@@ -32,12 +25,12 @@ const MyInfo = (props) => {
       <div className="MyInfo" data-testid="MyInfo">
         <Grid centered>
           <Grid.Row>
-            <Label> email </Label>
-            {email}
+            <Label content="Mail" />
+            {user && user.email}
           </Grid.Row>
           <Grid.Row>
-            <Label> nickname {edit} </Label>
-            {nickname}
+            <Label content="nickname" />
+            {user && user.nickname}
           </Grid.Row>
           <Grid.Row>
             <Button onClick={() => clickEdit()}>Edit!</Button>
@@ -47,15 +40,16 @@ const MyInfo = (props) => {
     );
   else
     return (
-      <div className="MyInfo" data-testid="MyInfo">
+      <div className="MyInfoEdit" data-testid="MyInfoEdit">
         <Grid centered>
           <Grid.Row>
-            <Label> email </Label>
-            {email}
+            <Label content="Mail" />
+            {user && user.email}
           </Grid.Row>
           <Grid.Row>
-            <Label> nickname {edit} </Label>
+            <Label content="nickname" />
             <Input
+              name="nicknameInput"
               value={nicknameInput}
               onChange={(event) => setNicknameInput(event.target.value)}
             />

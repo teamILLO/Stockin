@@ -11,18 +11,16 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-import sys
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z%wx=a8g2f%vr*!3il=87t+__%hsf4xqcfgq*9z#7om-=^#9g@'
+SECRET_KEY = '^6ha-gdjwl#96*n5d5j#^)w0$k7chwa)trbyh@ju5u#1*ex166'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,13 +29,9 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-# stock이 제일 위에가게 해주셈
+
 INSTALLED_APPS = [
-    'stocks.apps.StocksConfig',
-    'users.apps.UsersConfig',
-    'groups.apps.GroupsConfig',
-    'news.apps.NewsConfig',
-    'comments.apps.CommentsConfig',
+    'core.apps.CoreConfig',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,10 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-AUTH_USER_MODEL = 'users.CustomUser'
+# Register custom user model
+
+AUTH_USER_MODEL = 'core.CustomUser'
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -80,12 +75,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'stockin.wsgi.application'
 
-# CORS
 CORS_ORIGIN_ALLOW_ALL = False
+
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://localhost:3000'
 ]
+
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOW_METHODS = (
@@ -109,6 +105,18 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
 )
 
+# End the session when user closes the window
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# for sending email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'stockinswpp@gmail.com'
+EMAIL_HOST_PASSWORD = 'swpp2020'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -119,17 +127,20 @@ CORS_ALLOW_HEADERS = (
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',    
         'NAME': 'stockinDB',                     
-        'USER': 'team15',                          
-        'PASSWORD': 'as857236',                  
+        'USER': 'swpp',                         # mysql user-id                      
+        'PASSWORD': 'Swpp2020-team15!',         # mysql user-password                 
         'HOST': 'localhost',                     
         'PORT': '3306',                          
     }
 }
+
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -147,7 +158,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -167,16 +177,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-# End the session when user closes the window
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-
-# for sending email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = 'stockinswpp@gmail.com'
-EMAIL_HOST_PASSWORD = 'swpp2020'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -24,7 +24,7 @@
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.4",
+    "react-scripts": "3.2.0",
     "react-search-box": "^2.0.2",
     "react-stockcharts": "^0.7.8",
     "react-testing-library": "^8.0.1",
@@ -68,7 +68,9 @@
       "src/**/*.{js,jsx}",
       "!src/index.js",
       "!src/serviceWorker.js",
-      "!src/api/index.js"
+      "!src/api/index.js",
+      "!src/test-utils/*.{js, jsx}",
+      "!src/csrftoken.js"
     ]
   }
 }

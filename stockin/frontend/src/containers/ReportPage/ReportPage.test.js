@@ -6,15 +6,28 @@ import ReportPage from './ReportPage';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
 
-const initialAuthState = { loggingIn: true };
-const initialAuthStateLogout = { loggingIn: false };
-const initialAuthStateUndefined = { loggingIn: undefined };
+jest.mock('../../components/Header/Header', () => {
+  return jest.fn((props) => {
+    return <div className="spyHeader">a</div>;
+  });
+});
+
+jest.mock('../../components/Footer/Footer', () => {
+  return jest.fn((props) => {
+    return <div className="spyFooter">a</div>;
+  });
+});
+
+const initialAuthState = { loggingIn: true, user: {} };
+const initialAuthStateLogout = { loggingIn: false, user: null };
+const initialAuthStateUndefined = { loggingIn: undefined, user: null };
 const mockStore = getMockStore(initialAuthState);
 const mockStoreLogout = getMockStore(initialAuthStateLogout);
 const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
 describe('<ReportPage />', () => {
-  let reportPage, reportPageLogout, reportPageUndefined, spyHistoryPush;
+  let reportPage, reportPageLogout, reportPageUndefined, spyHistoryPush, spyCheckLogin;
+
   beforeEach(() => {
     reportPage = (
       <Provider store={mockStore}>
@@ -33,7 +46,14 @@ describe('<ReportPage />', () => {
         <ReportPage history={history} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
+
+    spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
   });
 
   it('should render without errors', () => {
@@ -48,10 +68,7 @@ describe('<ReportPage />', () => {
   });
 
   it('should dispatch checkLogin when loggingIn = undefined', () => {
-    const spyCheckLoginHandler = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
-      return (dispatch) => {};
-    });
     render(reportPageUndefined);
-    expect(spyCheckLoginHandler).toHaveBeenCalledTimes(1);
+    expect(spyCheckLogin).toHaveBeenCalledTimes(1);
   });
 });
