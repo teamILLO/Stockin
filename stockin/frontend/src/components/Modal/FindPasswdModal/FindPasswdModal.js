@@ -24,11 +24,14 @@ const FindPasswdModal = (props) => {
   };
 
   const emailConfirmHandler = async () => {
+
     await api.post('/users/duplicate/', { email: email }).then((response) => {
       if (response.data['duplicate']) {
         sendEmail();
         setNext(2);
-      } else alert('Email does not exist!');
+      }
+      else 
+        alert('Email does not exist!');
     });
   };
 
@@ -72,7 +75,7 @@ const FindPasswdModal = (props) => {
           />
         </Form>
       );
-    else if (next == 3)
+    else 
       return (
         <Form>
           <Form.Input
@@ -97,10 +100,10 @@ const FindPasswdModal = (props) => {
     else if (next == 2)
       return (
         <Button primary onClick={() => codeConfirmHandler()}>
-          Next
+          Next!
         </Button>
       );
-    else if (next == 3)
+    else 
       return (
         <Button primary onClick={() => changeHandler()}>
           Confirm
@@ -124,7 +127,7 @@ const FindPasswdModal = (props) => {
       trigger={props.trigger}
     >
       <Image src={logo} centered className="logo" />
-
+      {next}
       <Modal.Content>
         <h4>Find your password!</h4>
         {inputs()}
