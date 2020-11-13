@@ -12,15 +12,33 @@ import { Provider } from 'react-redux';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
 
-const initialAuthState = { loggingIn: false };
-const initialAuthStateLogin = { loggingIn: true };
-const initialAuthStateUndefined = { loggingIn: undefined };
+jest.mock('../../components/Header/Header', () => {
+  return jest.fn((props) => {
+    return <div className="spyHeader"></div>;
+  });
+});
+
+jest.mock('../../components/Footer/Footer', () => {
+  return jest.fn((props) => {
+    return <div className="spyFooter"></div>;
+  });
+});
+
+const initialAuthState = { loggingIn: false, user: { id: 1 } };
+const initialAuthStateLogin = { loggingIn: true, user: null };
+const initialAuthStateUndefined = { loggingIn: undefined, user: null };
 const mockStore = getMockStore(initialAuthState);
 const mockStoreLogin = getMockStore(initialAuthStateLogin);
 const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
 describe('<PreloginPage />', () => {
-  let preLoginPage, preLoginPageLogin, preLoginPageUndefined, spyHistoryPush;
+  let preLoginPage,
+    preLoginPageLogin,
+    preLoginPageUndefined,
+    spyHistoryPush,
+    spyTryLogin,
+    spyCheckLogin;
+
   beforeEach(() => {
     preLoginPage = (
       <Provider store={mockStore}>
@@ -40,7 +58,15 @@ describe('<PreloginPage />', () => {
       </Provider>
     );
 
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
+    spyTryLogin = jest.spyOn(authentication, 'tryLogin').mockImplementation((user) => {
+      return (dispatch) => {};
+    });
+    spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
   });
 
   it('should render without errors', () => {
@@ -85,16 +111,13 @@ describe('<PreloginPage />', () => {
   });
 
   test(`should dispatch tryLogin`, () => {
-    const spyLoginHandler = jest.spyOn(authentication, 'tryLogin').mockImplementation((user) => {
-      return (dispatch) => {};
-    });
     const { container } = render(preLoginPage);
     const email = getByPlaceholderText(container, 'Email');
     fireEvent.change(email, { target: { value: 'test@email.com' } });
     const password = getByPlaceholderText(container, 'Password');
     fireEvent.change(password, { target: { value: 'password' } });
     fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
-    expect(spyLoginHandler).toHaveBeenCalledTimes(1);
+    expect(spyTryLogin).toHaveBeenCalledTimes(1);
   });
 
   it('should redirect to when loggingIn = true', () => {
@@ -103,10 +126,7 @@ describe('<PreloginPage />', () => {
   });
 
   it('should dispatch checkLogin when loggingIn = undefined', () => {
-    const spyCheckLoginHandler = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
-      return (dispatch) => {};
-    });
     render(preLoginPageUndefined);
-    expect(spyCheckLoginHandler).toHaveBeenCalledTimes(1);
+    expect(spyCheckLogin).toHaveBeenCalledTimes(1);
   });
 });

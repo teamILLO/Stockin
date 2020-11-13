@@ -13,8 +13,39 @@ const mockStore = getMockStore(initialAuthState);
 const mockStoreLogout = getMockStore(initialAuthStateLogout);
 const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
+jest.mock('../../components/Header/Header', () => {
+  return jest.fn((props) => {
+    return <div className="spyHeader"></div>;
+  });
+});
+
+jest.mock('../../components/Footer/Footer', () => {
+  return jest.fn((props) => {
+    return <div className="spyFooter"></div>;
+  });
+});
+
+jest.mock('../../components/MyPage/MyInterests/MyInterests', () => {
+  return jest.fn((props) => {
+    return <div data-testid="spyMyInterests"></div>;
+  });
+});
+
+jest.mock('../../components/MyPage/MyInterestsDetail/MyInterestsDetail', () => {
+  return jest.fn((props) => {
+    return <div data-testid="spyInterestsDetail"></div>;
+  });
+});
+
+jest.mock('../../components/MyPage/MyInfo/MyInfo', () => {
+  return jest.fn((props) => {
+    return <div data-testid="spyMyInfo"></div>;
+  });
+});
+
 describe('<MyPage />', () => {
-  let myPage, myPageLogout, myPageUndefined, spyHistoryPush;
+  let myPage, myPageLogout, myPageUndefined, spyHistoryPush, spyTrySignout, spyCheckLogin;
+
   beforeEach(() => {
     myPage = (
       <Provider store={mockStore}>
@@ -33,7 +64,18 @@ describe('<MyPage />', () => {
         <MyPage history={history} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {});
+
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
+
+    spyTrySignout = jest.spyOn(authentication, 'trySignout').mockImplementation((user) => {
+      return (dispatch) => {};
+    });
+
+    spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
   });
 
   it('should render without errors', () => {
@@ -48,21 +90,27 @@ describe('<MyPage />', () => {
   });
 
   it('should call onClickSignoutHandler when clicking signout button', () => {
-    const spySignoutHandler = jest
-      .spyOn(authentication, 'trySignout')
-      .mockImplementation((user) => {
-        return (dispatch) => {};
-      });
     render(myPage);
     fireEvent.click(screen.getAllByText(/signout/i, { selector: 'button' })[0]);
-    expect(spySignoutHandler).toHaveBeenCalledTimes(1);
+    expect(spyTrySignout).toHaveBeenCalledTimes(1);
   });
 
   it('should dispatch checkLogin when loggingIn = undefined', () => {
-    const spyCheckLoginHandler = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
-      return (dispatch) => {};
-    });
     render(myPageUndefined);
-    expect(spyCheckLoginHandler).toHaveBeenCalledTimes(1);
+    expect(spyCheckLogin).toHaveBeenCalledTimes(1);
+  });
+
+  it('should change tab when My Interests Detail clicked', () => {
+    const { container } = render(myPage);
+    fireEvent.click(screen.getByText(/my Interests detail/i));
+    const query = queryAllByTestId(container, 'spyInterestsDetail');
+    expect(query.length).toBe(1);
+  });
+
+  it('should change tab when My Information clicked', () => {
+    const { container } = render(myPage);
+    fireEvent.click(screen.getByText(/my information/i));
+    const query = queryAllByTestId(container, 'spyMyInfo');
+    expect(query.length).toBe(1);
   });
 });

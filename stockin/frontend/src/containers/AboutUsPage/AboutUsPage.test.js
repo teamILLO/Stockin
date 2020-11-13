@@ -6,15 +6,28 @@ import AboutUsPage from './AboutUsPage';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
 
-const initialAuthState = { loggingIn: true };
-const initialAuthStateLogout = { loggingIn: false };
-const initialAuthStateUndefined = { loggingIn: undefined };
+const initialAuthState = { loggingIn: true, user: { id: 1 } };
+const initialAuthStateLogout = { loggingIn: false, user: null };
+const initialAuthStateUndefined = { loggingIn: undefined, user: null };
 const mockStore = getMockStore(initialAuthState);
 const mockStoreLogout = getMockStore(initialAuthStateLogout);
 const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
+jest.mock('../../components/Header/Header', () => {
+  return jest.fn((props) => {
+    return <div className="spyHeader"></div>;
+  });
+});
+
+jest.mock('../../components/Footer/Footer', () => {
+  return jest.fn((props) => {
+    return <div className="spyFooter"></div>;
+  });
+});
+
 describe('<AboutUsPage />', () => {
-  let aboutUsPage, aboutUsPageLogout, aboutUsPageUndefined, spyHistoryPush;
+  let aboutUsPage, aboutUsPageLogout, aboutUsPageUndefined, spyHistoryPush, spyCheckLogin;
+
   beforeEach(() => {
     aboutUsPage = (
       <Provider store={mockStore}>
@@ -35,6 +48,10 @@ describe('<AboutUsPage />', () => {
     );
 
     spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {});
+
+    spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
   });
 
   it('should render without errors', () => {
@@ -49,10 +66,7 @@ describe('<AboutUsPage />', () => {
   });
 
   it('should dispatch checkLogin when loggingIn = undefined', () => {
-    const spyCheckLoginHandler = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
-      return (dispatch) => {};
-    });
     render(aboutUsPageUndefined);
-    expect(spyCheckLoginHandler).toHaveBeenCalledTimes(1);
+    expect(spyCheckLogin).toHaveBeenCalledTimes(1);
   });
 });
