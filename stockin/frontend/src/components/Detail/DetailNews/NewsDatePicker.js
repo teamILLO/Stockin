@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
-import { getNews } from '../../../store/news';
+import { getNews } from '../../../store/news/news';
 import { useDispatch, useSelector } from 'react-redux';
 
 /*
@@ -19,7 +19,7 @@ function numberPad(n, width) {
 */
 function setDateRange(startDate, n) {
   var li = [];
-  for(var i = (-1*n); i < 1; i++) {
+  for (var i = -1 * n; i < 1; i++) {
     li.push(addDays(startDate, i));
   }
   return li;
@@ -33,38 +33,41 @@ function getStockId() {
   var a = window.location.pathname.substr(1).split('/');
   var b = -1;
   for (var i = 0; i < a.length; i++) {
-      if (a[i] === "detail") {
-        b = a[i+1];
-        break;
-      }
+    if (a[i] === 'detail') {
+      b = a[i + 1];
+      break;
+    }
   }
   return b;
 }
 
 const NewsDatePicker = () => {
-    var curDate = new Date(Date.now());
-    const timeoutRef = React.useRef();
-    const dispatch = useDispatch();
-    const { news } = useSelector((state) => state.news);
-    const [startDate, setStartDate] = useState(curDate);
-    var validDate = setDateRange(curDate, 30);
-    const dateFormat = startDate.getFullYear() + (numberPad(startDate.getMonth()+1,2)) + numberPad(startDate.getDate(),2);
-    
-    React.useEffect(() => {
-      var stock_id = getStockId();
-      console.log(stock_id);
-      if(stock_id != -1) {
-        dispatch(getNews(stock_id, dateFormat));
-      }
-    }, [dateFormat]);
+  var curDate = new Date(Date.now());
+  const timeoutRef = React.useRef();
+  const dispatch = useDispatch();
+  const { news } = useSelector((state) => state.news);
+  const [startDate, setStartDate] = useState(curDate);
+  var validDate = setDateRange(curDate, 30);
+  const dateFormat =
+    startDate.getFullYear() +
+    numberPad(startDate.getMonth() + 1, 2) +
+    numberPad(startDate.getDate(), 2);
 
-    return (
-      <DatePicker
-        selected={startDate}
-        onChange={date => setStartDate(date)}
-        includeDates={validDate}
-      />
-    );
+  React.useEffect(() => {
+    var stock_id = getStockId();
+    console.log(stock_id);
+    if (stock_id != -1) {
+      dispatch(getNews(stock_id, dateFormat));
+    }
+  }, [dateFormat]);
+
+  return (
+    <DatePicker
+      selected={startDate}
+      onChange={(date) => setStartDate(date)}
+      includeDates={validDate}
+    />
+  );
 };
 
 export default NewsDatePicker;

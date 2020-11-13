@@ -80,4 +80,18 @@ describe('<CommentBlock />', () => {
     query = queryAllByText(container, /delete/i);
     expect(query.length).toBe(1);
   });
+  it('should not have edit and delete buttons', () => {
+    const { container } = render(commentBlockUserDiff);
+    let query = queryAllByText(container, /edit/i);
+    expect(query.length).toBe(0);
+    query = queryAllByText(container, /delete/i);
+    expect(query.length).toBe(0);
+  });
+  /*
+  it('should have submit edit button', () => {
+    const { container } = render(commentBlockUserSame);
+    fireEvent.click(screen.getByText(/edit/i));
+    let query = queryAllByText(container, /edit/i);
+    expect(query.length).toBe(0);
+  });*/
 });
