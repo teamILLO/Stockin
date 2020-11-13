@@ -67,7 +67,7 @@ const QuarterTable = () => {
   }, []);
 
   return (
-    <Segment style={{ overflowX: 'scroll' }}>
+    <Segment style={{ overflowX: 'scroll' }} data-testid="QuarterTable">
       <Table attached="bottom">
         <Table.Header>
           <Table.Row>

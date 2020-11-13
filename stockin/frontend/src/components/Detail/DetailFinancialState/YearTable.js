@@ -79,7 +79,7 @@ const YearTable = () => {
   }, [fs]);
 
   return (
-    <Segment style={{ overflowX: 'scroll' }}>
+    <Segment style={{ overflowX: 'scroll' }} data-testid="YearTable">
       <Table attached="bottom">
         <Table.Header>
           <Table.Row>
