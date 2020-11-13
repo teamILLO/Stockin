@@ -74,17 +74,71 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'stockin.wsgi.application'
 
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    'http://localhost:3000'
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+)
+
+# End the session when user closes the window
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# for sending email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = 'stockinswpp@gmail.com'
+EMAIL_HOST_PASSWORD = 'swpp2020'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',    
+        'NAME': 'stockinDB',                     
+        'USER': 'swpp',                         # mysql user-id                      
+        'PASSWORD': 'Swpp2020-team15!',         # mysql user-password                 
+        'HOST': 'localhost',                     
+        'PORT': '3306',                          
     }
 }
 
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -103,7 +157,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
