@@ -44,6 +44,7 @@ const CommentBlock = (props) => {
 
         <Form.TextArea
           onChange={(event) => setEditContent(event.target.value)}
+          placeholder="Write your comment here"
           value={editContent}
         />
         <Button

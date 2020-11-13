@@ -6,12 +6,14 @@ import {
   fireEvent,
   queryAllByTestId,
   screen,
+  wait,
   queryAllByText,
 } from '@testing-library/react';
 import CommentBlock from './CommentBlock';
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
-import { scaleDivergingPow } from 'd3-scale';
+
+import * as comment from '../../store/comment/comment';
 
 const defaultProps = {
   id: 1,
@@ -50,7 +52,11 @@ const mockStoreUserDiff = getMockStore(
 );
 
 describe('<CommentBlock />', () => {
-  let commentBlockUserNull, commentBlockUserSame, commentBlockUserDiff, spyHistoryPush;
+  let commentBlockUserNull,
+    commentBlockUserSame,
+    commentBlockUserDiff,
+    spyHistoryPush,
+    spyDeleteComment;
   beforeEach(() => {
     commentBlockUserNull = (
       <Provider store={mockStoreUserNull}>
@@ -68,6 +74,9 @@ describe('<CommentBlock />', () => {
       </Provider>
     );
     spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    spyDeleteComment = jest.spyOn(comment, 'deleteComment').mockImplementation(() => {
+      return (dispatch) => {};
+    });
   });
   it('should render without errors', () => {
     const { container } = render(commentBlockUserNull);
@@ -88,12 +97,45 @@ describe('<CommentBlock />', () => {
     query = queryAllByText(container, /delete/i);
     expect(query.length).toBe(0);
   });
-  it('should have submit edit button', () => {
-    const { container } = render(commentBlockUserSame);
-    let query = queryAllByTestId(container, 'editButton');
+  it('should have submit edit button and be gone when clicked', async () => {
+    render(commentBlockUserSame);
+    let query;
+    await wait(() => {
+      query = screen.getByTestId(/editbutton/i);
+    });
+    await wait(() => {
+      fireEvent.click(query);
+    });
+    await wait(() => {
+      query = screen.getByTestId(/submiteditbutton/i);
+    });
+    fireEvent.click(query);
+    query = screen.queryAllByTestId(/submiteditbutton/i);
+    expect(query.length).toBe(0);
+  });
+  it('should change content after edit', async () => {
+    render(commentBlockUserSame);
+    let query;
+    await wait(() => {
+      query = screen.getByTestId(/editbutton/i);
+    });
+    await wait(() => {
+      fireEvent.click(query);
+    });
+    await wait(() => {
+      query = screen.getByPlaceholderText(/write your comment here/i);
+    });
+    fireEvent.change(query, { target: { value: 'TEST_CHANGE' } });
+    query = screen.queryAllByText('TEST_CHANGE');
     expect(query.length).toBe(1);
-    fireEvent.click(getByTestId('editButton'));
-    query = queryAllByTestId(container, 'editSubmitButton');
-    expect(query.length).toBe(1);
+  });
+  it('should call deleteComment', async () => {
+    render(commentBlockUserSame);
+    let query;
+    await wait(() => {
+      query = screen.getByTestId(/deletebutton/i);
+    });
+    fireEvent.click(query);
+    expect(spyDeleteComment).toHaveBeenCalledTimes(1);
   });
 });
