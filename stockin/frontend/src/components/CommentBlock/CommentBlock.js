@@ -40,6 +40,7 @@ const CommentBlock = (props) => {
         <Comment.Author as="a">{props.author}</Comment.Author>
 
         <Form.TextArea
+          data-testid="EditTextArea"
           onChange={(event) => setEditContent(event.target.value)}
           value={editContent}
         />

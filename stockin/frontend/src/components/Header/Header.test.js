@@ -40,7 +40,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking Logo', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'Logo');
     fireEvent.click(button);
@@ -48,7 +50,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking REPORT', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'Report');
     fireEvent.click(button);
@@ -56,7 +60,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking MY PAGE', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'Mypage');
     fireEvent.click(button);
@@ -64,7 +70,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking ABOUT US', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'AboutUs');
     fireEvent.click(button);
@@ -81,7 +89,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking Logo in StickyHeader', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'stickyLogo');
     fireEvent.click(button);
@@ -89,7 +99,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking REPORT in StickyHeader', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'stickyReport');
     fireEvent.click(button);
@@ -97,7 +109,9 @@ describe('<Header />', () => {
   });
 
   it('should call onClickNavHandler when clicking MY PAGE in StickyHeader', () => {
-    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    const spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
     const { container } = render(header);
     const button = getByTestId(container, 'stickyMypage');
     fireEvent.click(button);

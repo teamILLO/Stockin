@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
-import DatePicker from './NewsDatePicker';
+import NewsDatePicker from './NewsDatePicker';
 
 describe('<NewsDatePicker />', () => {
   it('should render without errors', () => {

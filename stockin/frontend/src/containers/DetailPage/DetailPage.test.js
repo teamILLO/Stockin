@@ -46,28 +46,28 @@ describe('<DetailPage />', () => {
     expect(query.length).toBe(1);
   });
 
-  test('should change tab when clicked News', () => {
+  it('should change tab when clicked News', () => {
     const { container } = render(detailPage);
     fireEvent.click(screen.getByText(/news/i));
     const query = queryAllByTestId(container, 'DetailNews');
     expect(query.length).toBe(1);
   });
 
-  test('should change tab when clicked Price Trends', () => {
+  it('should change tab when clicked Price Trends', () => {
     const { container } = render(detailPage);
     fireEvent.click(screen.getByText(/price trends/i));
     const query = queryAllByTestId(container, 'DetailPriceTrends');
     expect(query.length).toBe(1);
   });
 
-  test('should change tab when clicked FiancialState', () => {
+  it('should change tab when clicked FiancialState', () => {
     const { container } = render(detailPage);
     fireEvent.click(screen.getByText(/financial state/i));
     const query = queryAllByTestId(container, 'DetailFinancialState');
     expect(query.length).toBe(1);
   });
 
-  test('should change tab when clicked Comments', () => {
+  it('should change tab when clicked Comments', () => {
     const { container } = render(detailPage);
     fireEvent.click(screen.getByText(/comments/i));
     const query = queryAllByTestId(container, 'DetailComment');

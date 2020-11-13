@@ -4,10 +4,6 @@ import logo from '../../../images/logo.png';
 
 import { api } from '../../../api/index';
 
-
-
-
-
 const FindPasswdModal = (props) => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -16,50 +12,41 @@ const FindPasswdModal = (props) => {
   const [password, setPassword] = useState('');
   const [next, setNext] = useState(1);
 
-
-  const sendEmail = async ()=>{
+  const sendEmail = async () => {
     let random = 0;
     let number = '';
-    for(let i=0; i<6; i++){
-      random= Math.floor(Math.random() * 10);
+    for (let i = 0; i < 6; i++) {
+      random = Math.floor(Math.random() * 10);
       number += random;
     }
     setCodeSent(number);
-    await api.post('/users/sendCode/', {'email':email, 'code':number});
-  }
+    await api.post('/users/sendCode/', { email: email, code: number });
+  };
 
-  const emailConfirmHandler= async () =>{
-    await api.post('/users/duplicate/', {'email':email}).then((response)=>{
-      if(response.data['duplicate'])
-      {
+  const emailConfirmHandler = async () => {
+    await api.post('/users/duplicate/', { email: email }).then((response) => {
+      if (response.data['duplicate']) {
         sendEmail();
         setNext(2);
-      }
-      else
-        alert('Email does not exist!')
+      } else alert('Email does not exist!');
     });
-  }
+  };
 
-  const codeConfirmHandler= () =>{
-    if(codeInput===codeSent)
-      setNext(3)
-    else
-      alert('Invalid Code!')
-  }
+  const codeConfirmHandler = () => {
+    if (codeInput === codeSent) setNext(3);
+    else alert('Invalid Code!');
+  };
 
-  const changeHandler= () =>{
-    api.put('/users/userInfo/', {'change':'password', 'email':email ,'password':password})
+  const changeHandler = () => {
+    api.put('/users/userInfo/', { change: 'password', email: email, password: password });
     alert('password changed succesfully');
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
-
-  
-  const inputs=()=>{
-
-    if(next==1)
-      return(
-        <Form size="medium">
+  const inputs = () => {
+    if (next == 1)
+      return (
+        <Form>
           <h2>Please enter your email</h2>
           <Form.Input
             fluid
@@ -70,10 +57,10 @@ const FindPasswdModal = (props) => {
             onChange={(event) => setEmail(event.target.value)}
           />
         </Form>
-      )
-    else if(next==2)
-      return(
-        <Form size="medium">
+      );
+    else if (next == 2)
+      return (
+        <Form>
           <h2>Please enter the code sent to you by email</h2>
           <Form.Input
             fluid
@@ -84,10 +71,10 @@ const FindPasswdModal = (props) => {
             onChange={(event) => setCodeInput(event.target.value)}
           />
         </Form>
-      )
-    else if(next==3)
-      return(
-        <Form size="medium">
+      );
+    else if (next == 3)
+      return (
+        <Form>
           <Form.Input
             fluid
             icon="lock"
@@ -97,31 +84,29 @@ const FindPasswdModal = (props) => {
             onChange={(event) => setPassword(event.target.value)}
           />
         </Form>
-      )
+      );
+  };
 
-  }
-
-  const nextButton=()=>{
-    if(next==1)
-      return(
-        <Button color="primary" onClick={() => emailConfirmHandler()}>
+  const nextButton = () => {
+    if (next == 1)
+      return (
+        <Button primary onClick={() => emailConfirmHandler()}>
           Next
         </Button>
-      )
-    else if(next==2)
-      return(
-        <Button color="primary" onClick={() => codeConfirmHandler()}>
+      );
+    else if (next == 2)
+      return (
+        <Button primary onClick={() => codeConfirmHandler()}>
           Next
         </Button>
-      )
-    else if(next==3)
-      return(
-        <Button color="primary" onClick={() => changeHandler()}>
+      );
+    else if (next == 3)
+      return (
+        <Button primary onClick={() => changeHandler()}>
           Confirm
         </Button>
-      )
-  }
-
+      );
+  };
 
   return (
     <Modal
