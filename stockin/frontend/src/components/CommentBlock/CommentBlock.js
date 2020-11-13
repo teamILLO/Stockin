@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Comment, Form, Header } from 'semantic-ui-react';
+import { Button, Comment, Form } from 'semantic-ui-react';
 import { deleteComment, editComment } from '../../store/comment/comment';
 
 const CommentBlock = (props) => {
@@ -19,7 +19,7 @@ const CommentBlock = (props) => {
   };
 
   const buttons =
-    user && user.nickname == props.author ? (
+    user && user.nickname === props.author ? (
       <Comment.Actions>
         <Comment.Action
           data-testid="editButton"

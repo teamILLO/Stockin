@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import React, { useEffect } from 'react';
-import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
-
+import { Search } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock/stock';
 import { history } from '../../store/store';

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { api } from '../../api/index';
-import axios from 'axios';
+
 
 const slice = createSlice({
   name: 'stock',

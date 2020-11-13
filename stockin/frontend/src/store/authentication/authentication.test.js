@@ -89,7 +89,7 @@ describe('authentication ', () => {
   });
 
   it(`should not work when 'tryLogin' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
+    jest.spyOn(api, 'post').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -122,7 +122,7 @@ describe('authentication ', () => {
   });
 
   it(`should not work when 'checkLogin' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
+    jest.spyOn(api, 'post').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -172,7 +172,7 @@ describe('authentication ', () => {
   });
 
   it(`should not work when 'tryLogout' calls with errors`, (done) => {
-    const spyError = jest.spyOn(api, 'get').mockImplementation((url) => {
+    jest.spyOn(api, 'get').mockImplementation((url) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -205,7 +205,7 @@ describe('authentication ', () => {
   });
 
   it(`should not work when 'trySignup' calls with errors`, (done) => {
-    const spyError = jest.spyOn(api, 'post').mockImplementation((url, user) => {
+    jest.spyOn(api, 'post').mockImplementation((url, user) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -237,7 +237,7 @@ describe('authentication ', () => {
   });
 
   it(`should not work when 'trySignout' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'post').mockImplementation((url, user) => {
+    jest.spyOn(api, 'post').mockImplementation((url, user) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -277,7 +277,7 @@ describe('authentication ', () => {
 
   it(`should not work when 'updateUserInfo' calls with error`, (done) => {
     const change = { change: 'nickname', nickname: 'newNick' };
-    const spyError = jest.spyOn(api, 'put').mockImplementation((url, user) => {
+    jest.spyOn(api, 'put').mockImplementation((url, user) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,

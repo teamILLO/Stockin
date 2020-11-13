@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const StockBlock = (props) => {
   return <div data-testid="StockBlock">StockBlock</div>;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Header, Icon, Image, Input, Modal } from 'semantic-ui-react';
+import { Button, Form, Image, Modal } from 'semantic-ui-react';
 import logo from '../../../images/logo.png';
 
 import { api } from '../../../api/index';
@@ -47,7 +47,7 @@ const FindPasswdModal = (props) => {
   };
 
   const inputs = () => {
-    if (next == 1)
+    if (next === 1)
       return (
         <Form>
           <h2>Please enter your email</h2>
@@ -61,7 +61,7 @@ const FindPasswdModal = (props) => {
           />
         </Form>
       );
-    else if (next == 2)
+    else if (next === 2)
       return (
         <Form>
           <h2>Please enter the code sent to you by email</h2>
@@ -91,13 +91,13 @@ const FindPasswdModal = (props) => {
   };
 
   const nextButton = () => {
-    if (next == 1)
+    if (next === 1)
       return (
         <Button primary onClick={() => emailConfirmHandler()}>
           Next
         </Button>
       );
-    else if (next == 2)
+    else if (next === 2)
       return (
         <Button primary onClick={() => codeConfirmHandler()}>
           Next!

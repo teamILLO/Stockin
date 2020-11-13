@@ -64,7 +64,7 @@ describe('financialstats ', () => {
   });
 
   it(`should not work when 'getFs' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'get').mockImplementation((url) => {
+    jest.spyOn(api, 'get').mockImplementation((url) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
