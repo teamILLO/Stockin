@@ -1,10 +1,10 @@
 import _ from 'lodash';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
 import { useHistory } from "react-router";
 import { useSelector, useDispatch } from 'react-redux';
-import { getStocks } from '../../store/stock';
-
+import { getStocks } from '../../store/stock/stock';
+import { history } from '../../store/store';
 const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
 const initialState = {
@@ -29,20 +29,20 @@ function exampleReducer(state, action) {
       console.log("4");
       return { ...state, value: action.selection };
 
-    default:
-      throw new Error();
+    // default:
+    //   throw new Error();
   }
 }
 
 const SearchBox = () => {
-  const history = useHistory(); 
+  
   const _dispatch = useDispatch();
   const { stockList } = useSelector((state) => state.stock);
   const [state, dispatch] = React.useReducer(exampleReducer, initialState);
   const { loading, results, value } = state;
   const timeoutRef = React.useRef();
 
-  React.useEffect(() => {
+  useEffect(() => {
     state.results = JSON.parse(localStorage.getItem('recent-search')) || [];
     _dispatch(getStocks());
     console.log(state.results);
@@ -76,7 +76,8 @@ const SearchBox = () => {
   const handleResultSelect = (e, data) => {
     var selected_stock = data.result;
     var retrieve_list = JSON.parse(localStorage.getItem('recent-search')) || [];
-    
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2', localStorage.getItem('recent-search'))
+    console.log('@#################################2', retrieve_list)
     if(retrieve_list.length === 0
        || !retrieve_list.find(element => element.id === selected_stock.id)) {
       selected_stock.key = keyGenerator();
