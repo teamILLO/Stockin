@@ -16,19 +16,15 @@ const initialState = {
 function exampleReducer(state, action) {
   switch (action.type) {
     case 'CLEAN_QUERY':
-      console.log('1');
       return initialState;
     case 'START_SEARCH':
-      console.log('2');
       return { ...state, loading: true, value: action.query };
     case 'FINISH_SEARCH':
-      console.log('3');
       const fin_results = (JSON.parse(localStorage.getItem('recent-search')) || []).concat(
         action.results,
       );
       return { ...state, loading: false, results: fin_results };
     case 'UPDATE_SELECTION':
-      console.log('4');
       return { ...state, value: action.selection };
 
     default:
@@ -47,7 +43,6 @@ const SearchBox = () => {
   React.useEffect(() => {
     state.results = JSON.parse(localStorage.getItem('recent-search')) || [];
     _dispatch(getStocks());
-    console.log(state.results);
     return () => {
       clearTimeout(timeoutRef.current);
     };
@@ -77,7 +72,6 @@ const SearchBox = () => {
           };
           search_result.push(temp);
         }
-        console.log(search_result);
         dispatch({ type: 'FINISH_SEARCH', results: search_result });
       }, 300);
     },

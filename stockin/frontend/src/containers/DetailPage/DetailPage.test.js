@@ -13,24 +13,27 @@ const mockStore = getMockStore(initialAuthState);
 const mockStoreLogout = getMockStore(initialAuthStateLogout);
 const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
+const defaultProps = {
+  match: { params: { id: 123 } },
+};
 describe('<DetailPage />', () => {
   let detailPage, detailPageLogout, detailPageUndefined, spyHistoryPush;
   beforeEach(() => {
     detailPage = (
       <Provider store={mockStore}>
-        <DetailPage history={history} />
+        <DetailPage history={history} {...defaultProps} />
       </Provider>
     );
 
     detailPageLogout = (
       <Provider store={mockStoreLogout}>
-        <DetailPage history={history} />
+        <DetailPage history={history} {...defaultProps} />
       </Provider>
     );
 
     detailPageUndefined = (
       <Provider store={mockStoreUndefined}>
-        <DetailPage history={history} />
+        <DetailPage history={history} {...defaultProps} />
       </Provider>
     );
 

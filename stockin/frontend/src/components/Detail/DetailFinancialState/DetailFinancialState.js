@@ -6,14 +6,15 @@ import YearTable from './YearTable';
 import QuarterTable from './QuarterTable';
 
 const panes = [
-  { menuItem: '연간', render: () => <YearTable/> },
-  { menuItem: '분기', render: () => <QuarterTable/> },
-]
+  { menuItem: '연간', render: () => <YearTable /> },
+  { menuItem: '분기', render: () => <QuarterTable /> },
+];
 
 const DetailFinancialState = () => {
   return (
-    <Tab panes={panes} />
+    <div data-testid="DetailFinancialState">
+      <Tab panes={panes} />
+    </div>
   );
 };
 export default DetailFinancialState;
-

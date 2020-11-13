@@ -33,7 +33,7 @@ describe('<MyPage />', () => {
         <MyPage history={history} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {});
   });
 
   it('should render without errors', () => {
