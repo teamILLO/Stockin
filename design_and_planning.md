@@ -201,7 +201,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | | ``` api/users/signin ``` | X | User login check | X | X |
 | | ``` api/users/logout ``` | User logout | X | X | X |
 | | ``` api/users/signout ``` | X | User signout | X | X |
-| | ``` api/users/:user_id ``` | Get user info | X | Edit user info | X |
+| | ``` api/users/:user_id ``` | Get user info | X | X| X |
+| | ``` api/users/userInfo ``` | X| X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
 | | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
 | | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
@@ -255,8 +256,12 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * Success : status 200
    * NotFound : status 404
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/users/userInfo ```
 - PUT
-   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * request form : ``` {“change”: string, "email": string, “nickname": string} or {“change”: string, "email": string, “password": string}  ```
    * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * KeyError : status 400
    * Success : status 201
