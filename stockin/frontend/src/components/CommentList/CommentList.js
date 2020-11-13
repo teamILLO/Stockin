@@ -17,6 +17,7 @@ const CommentList = (props) => {
         {commentList.map((comment) => (
           <CommentBlock
             id={comment.id}
+            key={comment.id}
             author={comment.author}
             time={comment.time}
             content={comment.content}

@@ -1,10 +1,16 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { render, queryAllByTestId } from '@testing-library/react';
 import CommentList from './CommentList';
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
+
+jest.mock('../CommentBlock/CommentBlock', () => {
+  return jest.fn((props) => {
+    return <div className="spyCommentBlock">{props.content}</div>;
+  });
+});
 
 const defaultProps = {
   id: 1,
@@ -32,7 +38,9 @@ describe('<CommentList />', () => {
         <CommentList history={history} {...defaultProps} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
+    });
   });
   it('should render without errors', () => {
     const { container } = render(commentList);
