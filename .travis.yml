@@ -1,0 +1,31 @@
+matrix:
+  include:
+    - language: node_js
+      node_js: '12'
+      addons:
+        sonarcloud:
+          organization: "swsnu"
+          token:
+            secure: "cb6WE5ZRnjfcQcTKU88g4MXyHuK/Xgycri3yGeb7rXlwlhuROCyIDuBzZTY1KDXHOBxWCW+1t+NI/xUjnsQBzxSbwlDE5YKTVeLXMCwtX7sVjOWW2iph6wMiKngApeGyvy2RCVGJwPMeiz+AZGd3kiVstbdY8aeEXYTsdtTW2D/oUDCF0SCmqY28Z+jb1rm8jRUihDYISgRitX0aoagwTj5dMxgbwIMhBfo8eWOWvMZgN836m76LQbQxwIfnNlgx/9hF3epB9HpMVV2VZCyWwGDXtOxsS8Nq15BjViitl4pcR7ntEtco9atS7K5Tu76NRYDKvOd+QZfQnrI3m1Srq5repFMnsBymYba0kqBJvhww5agAOvCWnD/AmqDnlv6Rn6Z2TaLQOCvjjwD68uvzVLX4t3/80GjYKtIJZyPqFcMuk/Akk7bGxNvpaC/wM280QSzfC1mT2yosx0N/jwaaQpgczWO+WyLpnqqsxuEFn37Q4s6a4GyW6fdqUroEexvkhhBtaXUChRFBm9W6dPdvW4RmLUZkU8tVp1PnoopiOhnE13QAkl/1kQfKqqgx5031HvQ4IV63scSAsK5+pLuw/P5tsJt9Ny/pGA+SY/PyIwCPyc9Q++xSMZLceAT7ApycykXIPg4EcTx4pJ2L7INlyETKIjJhGzn/wsGfXIRo80k="
+      cache:
+        - yarn: true
+      before_install:
+        - cd stockin/frontend
+      install:
+        - yarn install
+      script:
+        - ./node_modules/.bin/eslint src/
+        - yarn test --coverage --watchAll=false
+        - sonar-scanner
+    - language: python
+      python: "3.7"
+      cache:
+        - pip: true
+      before_install:
+        - cd stockin/backend
+      install:
+        - pip install -r requirements.txt
+      script:
+        - pylint **/*.py --load-plugins pylint_django
+        - coverage run --source='.' manage.py test
+        - coverage xml
