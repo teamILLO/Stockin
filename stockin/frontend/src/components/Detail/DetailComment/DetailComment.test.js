@@ -8,6 +8,12 @@ import { history } from '../../../store/store';
 
 import * as comment from '../../../store/comment/comment';
 
+jest.mock('../../CommentList/CommentList', () => {
+  return jest.fn((props) => {
+    return <div className="spyCommentList"></div>;
+  });
+});
+
 const defaultProps = {
   id: 1,
 };
@@ -29,10 +35,12 @@ describe('<DetailComment />', () => {
         <DetailComment history={history} {...defaultProps} />
       </Provider>
     );
+
     spyPostComment = jest.spyOn(comment, 'postComment').mockImplementation(() => {
       return (dispatch) => {};
     });
   });
+
   it('should render without errors', () => {
     render(detailComment);
     const query = screen.queryAllByTestId('DetailComment');

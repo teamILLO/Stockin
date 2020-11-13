@@ -96,7 +96,7 @@ const SearchBox = () => {
   return (
     <Search
       data-testid="SearchBox"
-      action
+      // action
       fluid
       loading={loading}
       onSearchChange={handleSearchChange}

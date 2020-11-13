@@ -60,7 +60,7 @@ const QuarterTable = () => {
 
   React.useEffect(() => {
     var stock_id = getStockId();
-    console.log(stock_id);
+    // console.log(stock_id);
     if (stock_id != -1) {
       dispatch(getFs(stock_id));
     }
