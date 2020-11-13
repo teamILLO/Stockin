@@ -9,7 +9,7 @@ urlpatterns = [
     path('signout/', views.signout, name='sign_out'),
     path('duplicate/', views.duplicate, name='duplicate'),
     path('sendCode/', views.sendCode, name='send_code'),
-    path('userInfo/', views.userInfo, name='user_info'),
+    path('userInfo/', views.userInfo, name='userInfo'),
     path('token/', views.token, name='token'),
-    path('<int:id>/', views.userInfo, name='userInfo'),
+    path('<int:id>/', views.userInfo, name='specificUserInfo'),
 ]
