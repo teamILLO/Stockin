@@ -68,7 +68,8 @@
       "src/**/*.{js,jsx}",
       "!src/index.js",
       "!src/serviceWorker.js",
-      "!src/api/index.js"
+      "!src/api/index.js",
+      "!src/test-utils/*.{js, jsx}"
     ]
   }
 }

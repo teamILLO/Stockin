@@ -62,6 +62,9 @@ describe('<SearchBox />', () => {
       </Provider>
     );
 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
     spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
 
     jest.spyOn(axios, 'get').mockImplementation(() => {
