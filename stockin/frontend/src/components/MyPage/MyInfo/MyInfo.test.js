@@ -26,6 +26,10 @@ describe('<MyInfo />', () => {
       </Provider>
     );
 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     spyUpdateUserInfo = jest
       .spyOn(authentication, 'updateUserInfo')
       .mockImplementation((change) => {
@@ -52,8 +56,7 @@ describe('<MyInfo />', () => {
     let input = container.querySelector('input[name="nicknameInput"]');
     fireEvent.change(input, { target: { value: 'newNickname' } });
     fireEvent.click(screen.getByText(/confirm!/i, { selector: 'button' }));
-    const query = screen.queryAllByText(/newnickname/i);
-    expect(query.length).toBe(0);
+    expect(spyUpdateUserInfo).toHaveBeenCalledTimes(1);
   });
 
   it('should not change value when cancel clicked', () => {

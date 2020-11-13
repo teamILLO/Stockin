@@ -4,7 +4,7 @@ import { api } from '../../api/index';
 const slice = createSlice({
   name: 'authentication',
   initialState: {
-    loggingIn: true,
+    loggingIn: undefined,
     user: null,
   },
   reducers: {

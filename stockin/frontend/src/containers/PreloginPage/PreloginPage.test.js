@@ -75,21 +75,21 @@ describe('<PreloginPage />', () => {
     expect(query.length).toBe(1);
   });
 
-  test(`should change tab when clicked 'About Stockin'`, () => {
+  test(`should change tab when 'About Stockin' clicked`, () => {
     const { container } = render(preLoginPage);
     fireEvent.click(screen.getByText(/about stockin/i));
     const query = queryAllByTestId(container, 'Stockin');
     expect(query.length).toBe(1);
   });
 
-  test(`should change tab when clicked 'About Us'`, () => {
+  test(`should change tab when 'About Us' clicked`, () => {
     const { container } = render(preLoginPage);
     fireEvent.click(screen.getByText(/about us/i));
     const query = queryAllByTestId(container, 'AboutUs');
     expect(query.length).toBe(1);
   });
 
-  test(`should change tab when clicked 'Preview'`, () => {
+  test(`should change tab when 'Preview' clicked`, () => {
     const { container } = render(preLoginPage);
     fireEvent.click(screen.getByText(/preview/i));
     const query = queryAllByTestId(container, 'Preview');
@@ -116,7 +116,7 @@ describe('<PreloginPage />', () => {
     fireEvent.change(email, { target: { value: 'test@email.com' } });
     const password = getByPlaceholderText(container, 'Password');
     fireEvent.change(password, { target: { value: 'password' } });
-    fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
+    fireEvent.click(screen.getByText(/Login/i, { selector: '' }));
     expect(spyTryLogin).toHaveBeenCalledTimes(1);
   });
 
