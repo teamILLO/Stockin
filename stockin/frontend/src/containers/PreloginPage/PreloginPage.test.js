@@ -116,7 +116,7 @@ describe('<PreloginPage />', () => {
     fireEvent.change(email, { target: { value: 'test@email.com' } });
     const password = getByPlaceholderText(container, 'Password');
     fireEvent.change(password, { target: { value: 'password' } });
-    fireEvent.click(screen.getByText(/Login/i, { selector: '' }));
+    fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
     expect(spyTryLogin).toHaveBeenCalledTimes(1);
   });
 
