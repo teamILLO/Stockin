@@ -11,6 +11,7 @@ import {
 import CommentBlock from './CommentBlock';
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
+import { scaleDivergingPow } from 'd3-scale';
 
 const defaultProps = {
   id: 1,
@@ -87,11 +88,12 @@ describe('<CommentBlock />', () => {
     query = queryAllByText(container, /delete/i);
     expect(query.length).toBe(0);
   });
-  /*
   it('should have submit edit button', () => {
     const { container } = render(commentBlockUserSame);
-    fireEvent.click(screen.getByText(/edit/i));
-    let query = queryAllByText(container, /edit/i);
-    expect(query.length).toBe(0);
-  });*/
+    let query = queryAllByTestId(container, 'editButton');
+    expect(query.length).toBe(1);
+    fireEvent.click(getByTestId('editButton'));
+    query = queryAllByTestId(container, 'editSubmitButton');
+    expect(query.length).toBe(1);
+  });
 });
