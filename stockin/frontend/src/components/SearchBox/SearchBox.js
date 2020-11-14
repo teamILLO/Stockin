@@ -42,11 +42,12 @@ const SearchBox = () => {
     return () => {
       clearTimeout(timeoutRef.current);
     };
-  }, [_dispatch, state.results]);
+  }, []);
 
   const handleSearchChange = React.useCallback(
     (e, data) => {
       clearTimeout(timeoutRef.current);
+      dispatch({ type: 'DEFAULT' });
       dispatch({ type: 'START_SEARCH', query: data.value });
 
       timeoutRef.current = setTimeout(() => {
