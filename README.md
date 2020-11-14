@@ -1,6 +1,7 @@
 # swpp2020-team15
 
 #### Current working branch : mid-presentation
+# Frontend
 ### How to run frontend:
 ```
 $ cd stockin/frontend
