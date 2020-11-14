@@ -71,7 +71,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_filter = ()
 
     @classmethod
-    def get_stock_id(self, obj):
+    def get_stock_id(cls, obj):
         '''
         get_stock_id
         '''
@@ -82,8 +82,4 @@ class NewsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Group)
-
-
 admin.site.register(Comment)
-
-
