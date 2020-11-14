@@ -41,10 +41,12 @@ matrix:
       install:
         - pip install -r requirements.txt
         - pip3 install coveralls
-        - sudo mysql < db_set
-        - sudo service mysql restart
-        - sudo mysql < db_create
+        # - sudo mysql < db_set
+        # - sudo service mysql restart
+        # - sudo mysql < db_create
       script:
+        - python manage.py makemigrations core
+        - python manage.py migrate
         - pylint **/*.py --load-plugins pylint_django
         - coverage run --source='.' manage.py test
         - coverage xml
