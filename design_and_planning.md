@@ -201,16 +201,19 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | | ``` api/users/signin ``` | X | User login check | X | X |
 | | ``` api/users/logout ``` | User logout | X | X | X |
 | | ``` api/users/signout ``` | X | User signout | X | X |
-| | ``` api/users/:user_id ``` | Get user info | X | X| X |
-| | ``` api/users/userInfo ``` | X| X | Edit user info | X |
+| | ``` api/users/duplicate ``` | X | Check signin integrity | X | X |
+| | ``` api/users/sendCode ``` | X | Send code to user | X | X |
+| | ``` api/users/userInfo ``` | Get user's info | X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
 | | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
 | | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
 | | ``` api/groups/:group_id/stocks/:stock_id ``` | X | X | X | Delete stock |
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
-| | ``` api/stocks/:stock_id ``` | Get stock info | X | X | X |
+| | ``` api/stocks/price/:stock_id ``` | Get stock price info | X | X | X |
 | | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
 | | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
+| Comment | ``` api/stocks/:stock_id/comments/  ``` | Get stock's comment list   | Create comment | X | X |
+| | ``` api/comments/:comment_id/  ``` | Get a comment | X | Edit comment | Delete comment |
 | News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
 | Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
 | | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
