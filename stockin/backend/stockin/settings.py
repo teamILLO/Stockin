@@ -122,6 +122,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# For testing
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -136,7 +137,10 @@ DATABASES = {
         'USER': 'swpp',                         # mysql user-id                      
         'PASSWORD': 'Swpp2020-team15!',         # mysql user-password                 
         'HOST': 'localhost',                     
-        'PORT': '3306',                          
+        'PORT': '3306',  
+        'TEST': {
+            'NAME': 'test_stockinDB',
+        },                        
     }
 }
 

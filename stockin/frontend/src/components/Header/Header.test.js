@@ -18,6 +18,12 @@ import * as authentication from '../../store/authentication/authentication';
 const initialAuthState = { loggingIn: false, user: null };
 const mockStore = getMockStore(initialAuthState);
 
+jest.mock('../SearchBox/SearchBox', () => {
+  return jest.fn((props) => {
+    return <div className="spySearchBox"></div>;
+  });
+});
+
 describe('<Header />', () => {
   let header;
 

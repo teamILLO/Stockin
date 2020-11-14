@@ -73,9 +73,6 @@ class FinancialStat(models.Model):
     PBR = models.CharField(max_length=10, null=True)                        #PBR
     ROE = models.CharField(max_length=10, null=True)                        #ROE
 
-    def __str__(self):
-        return str(self.stock.title) + ' ' + str(self.quarter)
-
 
 class News(models.Model):
     stock = models.ForeignKey(
@@ -88,9 +85,6 @@ class News(models.Model):
     link = models.CharField(max_length=300, null=True)  
     date = models.DateField(null=True)
 
-    def __str__(self):
-        return str(self.date) + ' ' + str(self.stock.title) + ' ' + str(self.press)
-
 
 class Group(models.Model):
     user = models.ForeignKey(
@@ -101,9 +95,6 @@ class Group(models.Model):
     )
     name = models.CharField(max_length=64, default='default')
     stocks = models.ManyToManyField(Stock)
-
-    def __str__(self):
-        return str(self.user.id) + ' ' + str(self.name)
 
 
 class Comment(models.Model):
@@ -119,7 +110,4 @@ class Comment(models.Model):
     )
     time = models.DateTimeField(default=timezone.now)
     content = models.TextField()
-
-    def __str__(self):
-        return str(self.stock.title) + ' ' + str(self.author.email) + ' '
     

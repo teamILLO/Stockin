@@ -52,7 +52,11 @@ const mockStoreUserDiff = getMockStore(
 );
 
 describe('<CommentBlock />', () => {
-  let commentBlockUserNull, commentBlockUserSame, commentBlockUserDiff, spyDeleteComment;
+  let commentBlockUserNull,
+    commentBlockUserSame,
+    commentBlockUserDiff,
+    spyEditComment,
+    spyDeleteComment;
   beforeEach(() => {
     commentBlockUserNull = (
       <Provider store={mockStoreUserNull}>
@@ -69,6 +73,10 @@ describe('<CommentBlock />', () => {
         <CommentBlock history={history} {...defaultProps} />
       </Provider>
     );
+    spyEditComment = jest.spyOn(comment, 'editComment').mockImplementation(() => {
+      return (dispatch) => {};
+    });
+
     spyDeleteComment = jest.spyOn(comment, 'deleteComment').mockImplementation(() => {
       return (dispatch) => {};
     });

@@ -83,7 +83,7 @@ describe('<SearchBox />', () => {
 
     jest.useFakeTimers();
     setTimeout(() => {
-       waitForElement(() => getByText('foo1_title'));
+      waitForElement(() => getByText('foo1_title'));
     }, 3000);
     jest.runAllTimers();
 

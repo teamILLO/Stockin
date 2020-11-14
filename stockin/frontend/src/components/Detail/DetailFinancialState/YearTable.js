@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Label, Segment } from 'semantic-ui-react';
+import { Table, Segment } from 'semantic-ui-react';
 
 import { getFs } from '../../../store/financialstats/financialstats';
 
@@ -61,10 +61,10 @@ const YearTable = () => {
 
   React.useEffect(() => {
     var stock_id = getStockId();
-    if (stock_id != -1) {
+    if (stock_id !== -1) {
       dispatch(getFs(stock_id));
     }
-  }, []);
+  }, [dispatch]);
 
   React.useEffect(() => {
     var temp_fs = [];

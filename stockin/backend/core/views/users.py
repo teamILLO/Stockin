@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseNotAllowed, JsonResponse
-from django.contrib.auth import authenticate, login, logout as auth_logout
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
@@ -56,7 +56,7 @@ def signin(request):
 def logout(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            auth_logout(request)
+            logout(request)
             return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
@@ -116,46 +116,8 @@ def send_code(request):
     else:
         return HttpResponseNotAllowed(['POST'])
 
-# TODO
-def user_info_1(request, id=''):
-    if request.method == 'GET':
-        if request.user.is_authenticated:
-            return HttpResponse(status=401)
-        try:
-            user = User.objects.get(id=id)
-        except User.DoesNotExist:
-            return HttpResponseNotFound()
-        response_dict = {'email': user.email, 'nickname': user.nickname,
-                         'password': user.password, 'id': user.id}
-        return JsonResponse(response_dict, status=200)
 
-    elif request.method == 'PUT':
-        if request.user.is_authenticated:
-            return HttpResponse(status=401)
-        try:
-            req_data = json.loads(request.body.decode())
-            email = req_data['email']
-            nickname = req_data['nickname']
-            password = req_data['password']
-        except (KeyError, JSONDecodeError) as e:
-            return HttpResponseBadRequest()
-        user = authenticate(email=email)
-        if user is not None:
-            user.nickname = nickname
-            user.password = password
-            user.save()
-            response_dict = {'email': email, 'nickname': user.nickname,
-                             'password': password, 'id': user.id}
-            return JsonResponse(response_dict, status=201)
-        else:
-            return HttpResponse(status=401)
-
-    else:
-        return HttpResponseNotAllowed(['GET', 'PUT'])
-
-
-# TODO
-def user_info_2(request):
+def user_info(request):
     if request.method == 'GET':
         if not request.user.is_authenticated:
             response_dict = {'email': 'none', 'nickname': 'none'}
@@ -173,33 +135,28 @@ def user_info_2(request):
             if req_data['change'] == 'password':
                 email = req_data['email']
                 password = req_data['password']
-                target_user = User.objects.get(email=email)
-                if target_user is not None:
-                    target_user.set_password(password)
-                    target_user.save()
-                    response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
-                                     'password': target_user.password, 'id': target_user.id}
-                    return JsonResponse(response_dict, status=201)
-                else:
-                    return HttpResponse(status=401)
+                target_user = get_object_or_404(User, email=email)
+                target_user.set_password(password)
+                target_user.save()
+                response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
+                                    'password': target_user.password, 'id': target_user.id}
+                return JsonResponse(response_dict, status=201)
+
             elif req_data['change'] == 'nickname':
                 email = req_data['email']
                 nickname = req_data['nickname']
-                target_user = User.objects.get(email=email)
-                if target_user is not None:
-                    target_user.nickname = nickname
-                    target_user.save()
-                    response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
-                                     'password': target_user.password, 'id': target_user.id}
-                    return JsonResponse(response_dict, status=201)
-                else:
-                    return HttpResponse(status=401)
+                target_user = get_object_or_404(User, email=email)
+                target_user.nickname = nickname
+                target_user.save()
+                response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
+                                    'password': target_user.password, 'id': target_user.id}
+                return JsonResponse(response_dict, status=201)
 
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
     else:
-        return HttpResponseNotAllowed(['PUT'])
+        return HttpResponseNotAllowed(['GET','PUT'])
 
 
 @ensure_csrf_cookie

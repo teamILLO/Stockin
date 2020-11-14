@@ -10,7 +10,7 @@ const CommentList = (props) => {
 
   useEffect(() => {
     dispatch(getComments(props.stock));
-  }, [props.stock]);
+  }, [dispatch, props.stock]);
   return (
     <div className="CommentList" data-testid="CommentList">
       <Comment.Group>

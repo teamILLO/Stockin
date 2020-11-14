@@ -39,7 +39,7 @@ const MyPage = (props) => {
   };
 
   useEffect(() => {
-    if (loggingIn == undefined) dispatch(checkLogin());
+    if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
     }
