@@ -1,4 +1,6 @@
-# This file is for custom user settings.
+'''
+This file is for custom user settings.
+'''
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import ugettext_lazy as _

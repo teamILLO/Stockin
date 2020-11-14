@@ -1,3 +1,7 @@
+'''
+models.py
+'''
+
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -8,6 +12,9 @@ from .managers import CustomUserManager
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+    '''
+    CustomUser
+    '''
     email = models.EmailField(_('email address'), unique=True)
     nickname = models.CharField(max_length=20, unique=True)
     is_staff = models.BooleanField(default=False)
@@ -24,6 +31,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Stock(models.Model):
+    '''
+    Stock
+    '''
     title = models.CharField(max_length=200)                                #종목이름
     code = models.CharField(max_length=200)                                 #종목코드
     sector = models.CharField(max_length=200, null=True, blank=True)        #업종
@@ -42,6 +52,9 @@ class Stock(models.Model):
 
 
 class StockHistory(models.Model):
+    '''
+    StockHistory
+    '''
     stock = models.ForeignKey(
         Stock,
         on_delete = models.CASCADE
@@ -59,11 +72,14 @@ class StockHistory(models.Model):
 
 
 class FinancialStat(models.Model):
+    '''
+    FinancialStat
+    '''
     stock = models.ForeignKey(
         Stock,
         on_delete = models.CASCADE
     )
-    quarter = models.CharField(max_length=10, null=True)                    #분기 
+    quarter = models.CharField(max_length=10, null=True)                    #분기
     sales = models.CharField(max_length=10, null=True)                      #매출액
     operatingProfit = models.CharField(max_length=10, null=True)            #영업이익
     netIncome = models.CharField(max_length=10, null=True)                  #당기순이익
@@ -75,6 +91,9 @@ class FinancialStat(models.Model):
 
 
 class News(models.Model):
+    '''
+    News
+    '''
     stock = models.ForeignKey(
         Stock,
         on_delete = models.CASCADE,
@@ -82,11 +101,14 @@ class News(models.Model):
     )
     title = models.CharField(max_length=200, null=True)
     press = models.CharField(max_length=200, null=True)
-    link = models.CharField(max_length=300, null=True)  
+    link = models.CharField(max_length=300, null=True)
     date = models.DateField(null=True)
 
 
 class Group(models.Model):
+    '''
+    Group
+    '''
     user = models.ForeignKey(
         CustomUser,
         null=True,
@@ -98,6 +120,9 @@ class Group(models.Model):
 
 
 class Comment(models.Model):
+    '''
+    Comment
+    '''
     stock = models.ForeignKey(
         Stock,
         on_delete=models.CASCADE,

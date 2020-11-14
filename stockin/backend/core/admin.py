@@ -1,3 +1,6 @@
+'''
+admin.py
+'''
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
@@ -8,6 +11,9 @@ from .models import CustomUser, Stock, StockHistory, FinancialStat, News, Group,
 # User admin
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
+    '''
+    CustomUserAdmin
+    '''
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
@@ -29,6 +35,9 @@ class CustomUserAdmin(UserAdmin):
 
 @admin.register(Stock)
 class StockAdmin(admin.ModelAdmin):
+    '''
+    StockAdmin
+    '''
     list_display = ('id', 'title', 'code', 'sector', 'price',)
     list_display_links = ('title',)
     list_editable = ()
@@ -38,6 +47,9 @@ class StockAdmin(admin.ModelAdmin):
 
 @admin.register(FinancialStat)
 class FinancialStatAdmin(admin.ModelAdmin):
+    '''
+    FinancialStatAdmin
+    '''
     list_display = ('id','stock', 'quarter',)
     list_display_links = ('stock',)
     list_editable = ()
@@ -49,13 +61,20 @@ admin.site.register(StockHistory)
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
+    '''
+    NewsAdmin
+    '''
     list_display = ('id', 'get_stock_id', 'stock', 'title', 'date',)
     list_display_links = ('title',)
     list_editable = ()
     list_per_page = 50
     list_filter = ()
 
+    @classmethod
     def get_stock_id(self, obj):
+        '''
+        get_stock_id
+        '''
         return obj.stock.id
 
     get_stock_id.admin_order_field  = 'stock'  #Allows column order sorting
