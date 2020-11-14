@@ -22,7 +22,7 @@ function exampleReducer(state, action) {
         action.results,
       );
       return { ...state, loading: false, results: fin_results };
-    case 'UPDATE_SELECㅌTION':
+    case 'UPDATE_SELECTION':
       return { ...state, value: action.selection };
     default:
       return;
