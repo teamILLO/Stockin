@@ -201,7 +201,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | | ``` api/users/signin ``` | X | User login check | X | X |
 | | ``` api/users/logout ``` | User logout | X | X | X |
 | | ``` api/users/signout ``` | X | User signout | X | X |
-| | ``` api/users/duplicate ``` | X | Check signin integrity | X | X |
+| | ``` api/users/duplicate ``` | X | Check signup integrity | X | X |
 | | ``` api/users/sendCode ``` | X | Send code to user | X | X |
 | | ``` api/users/userInfo ``` | Get user's info | X | Edit user info | X |
 | Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
@@ -222,18 +222,18 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ### User Model
 #### ``` api/users/signup ```
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
-   * KeyError : status 400
+   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * IntegrityError : status 406
    * Success : status 201
 - NotAllowedMethod : status 405
 
 #### ``` api/users/signin ```
-
 - POST
    * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
    * KeyError : status 400
+   * AuthenticateError : status 401
    * Success : status 201
 - NotAllowedMethod : status 405
 
@@ -245,21 +245,24 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 
 #### ``` api/users/signout ```
-
 - POST
-   * resquest form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * resquest form : ``` {“email”: string, “password": string} ```
    * KeyError : status 400
+   * AuthenticateError : status 401
    * Success : status 204
-- AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
+#### ``` api/users/duplicate ```
+- POST
+   * resquest form : ``` {“email”: string} ```
+   * response form : ``` {“duplicate”: boolean} ```
+   * Success : status 203
+- NotAllowedMethod : status 405
 
-#### ``` api/users/:user_id ```
-- GET
-   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
-   * Success : status 200
-   * NotFound : status 404
-- AuthenticateError : status 401
+#### ``` api/user/sendCode```
+- POST
+   * requset form : ``` {“email”: string, “code”: integer} ```
+   * Sucess : status 204
 - NotAllowedMethod : status 405
 
 #### ``` api/users/userInfo ```
@@ -272,12 +275,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/user/sendCode```
-- POST
-   * requset form : ``` {“email”: string, “code”: integer} ```
-   * Sucess : status 204
-- NotAllowedMethod : status 405
-
 ### Group Model
 #### ``` api/groups/ ```
 - GET
@@ -287,7 +284,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * request form : ``` {“name”: string} ```
    * response form : ``` {“id”: id, “user”: string, “name”: string} ```
    * KeyError : status 400
-   * Success : status 204
+   * Success : status 201
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
@@ -295,22 +292,30 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - PUT
    * request form : ``` {“name”: string} ```
    * response form : ``` {“id”: id, “user”: string, “name”: string} ```
+   * NotFound : status 404
+   * InvalidUser : status 403
    * KeyError : status 400
-   * Success : status 204
+   * Success : status 200
 - DELETE
-   *  NotFound : status 404
-   *  Success : status 204
+   * NotFound : status 404
+   * InvalidUser : status 403
+   * Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
 #### ``` api/groups/:group_id/stocks ```
 - GET
    * response form(list) : each element :  ``` {“id”: id, “title”: string} ```
+   * NotFound : status 404
+   * InvalidUser : status 403
    * Success : status 200
 - POST
    * request form : ``` {“id”: string} ```
    * response form : ``` {“id”: id, “title”: string} ```
+   * NotFound : status 404
+   * InvalidUser : status 403
    * KeyError : status 400
+   * StockAlreadyExists : status 204
    * Success : status 201
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
@@ -318,7 +323,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 #### ``` api/groups/:group_id/stocks/:stock_id ```
 - DELETE
    *  NotFound : status 404
-   *  Success : status 204
+   *  Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
@@ -352,13 +357,19 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
+#### ``` api/stocks/price/:stock_id ```
+- GET
+  - response form(list) : each element : `{“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer}`
+  - Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
 ### News Model
 #### ``` api/news/stock/:stock_id/date/:news_date ```
 - GET
    * response form(list) : each element :  ``` {"id" : id, "title" : string, "press" : string, "link" : string, "date" : string(YYYY-MM-DD)} ```
    * Success : status 200
 - NotAllowedMethod : status 405
-
 
 ### Report Model
 #### ``` api/reports/date/:report_date ```
