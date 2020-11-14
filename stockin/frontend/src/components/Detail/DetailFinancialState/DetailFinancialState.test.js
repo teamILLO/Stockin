@@ -1,11 +1,8 @@
 import React from 'react';
-import { render, screen, getByText, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, queryAllByTestId } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
 import DetailFinancialState from './DetailFinancialState';
-import YearTable from './YearTable';
-import QuarterTable from './QuarterTable';
 
 jest.mock('./QuarterTable', () => {
   return jest.fn((props) => {

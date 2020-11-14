@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  fireEvent,
-  getByText,
-  getByTestId,
-  queryAllByTestId,
-} from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { getMockStore } from '../../../test-utils/mocks';
 import NewsDatePicker from './NewsDatePicker';

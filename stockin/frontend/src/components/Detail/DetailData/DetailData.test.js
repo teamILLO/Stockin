@@ -1,11 +1,7 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 
-import { render, fireEvent, screen, wait } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
 import DetailData from './DetailData';
-import { timeParse } from 'd3-time-format';
-import { getMockStore } from '../../../test-utils/mocks';
-import { history } from '../../../store/store';
 
 describe('<DetailData />', () => {
   let detailData;

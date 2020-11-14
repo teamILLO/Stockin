@@ -53,7 +53,7 @@ def signin(request):
         return HttpResponseNotAllowed(['POST'])
 
 
-def logout(request):
+def logoff(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             logout(request)

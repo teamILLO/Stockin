@@ -22,7 +22,7 @@ function exampleReducer(state, action) {
         action.results,
       );
       return { ...state, loading: false, results: fin_results };
-    case 'UPDATE_SELECTION':
+    case 'UPDATE_SELECㅌTION':
       return { ...state, value: action.selection };
     default:
       return;
@@ -42,7 +42,7 @@ const SearchBox = () => {
     return () => {
       clearTimeout(timeoutRef.current);
     };
-  }, []);
+  }, [_dispatch]);
 
   const handleSearchChange = React.useCallback(
     (e, data) => {

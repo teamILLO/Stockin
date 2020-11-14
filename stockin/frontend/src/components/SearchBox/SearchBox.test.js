@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, screen, fireEvent, waitForElement, wait } from '@testing-library/react';
+import { render, fireEvent, waitForElement } from '@testing-library/react';
 import SearchBox from './SearchBox';
 import { history } from '../../store/store';
 import { Provider } from 'react-redux';
 import { getMockStore } from '../../test-utils/mocks';
 import { api } from '../../api/index';
-import { timeDay } from 'd3-time';
 
 // const localStorageMock = {
 //   getItem: jest.fn(a=>{
@@ -35,7 +34,6 @@ const mockStore = getMockStore(initialAuthState, initialStockState);
 
 describe('<SearchBox />', () => {
   let searchbox;
-
 
   beforeEach(() => {
     searchbox = (
@@ -68,15 +66,15 @@ describe('<SearchBox />', () => {
   it('it should render without errors', async () => {
     const { getByText } = render(searchbox);
     const query = document.body.querySelector('.prompt');
-    
+
     fireEvent.change(query, { target: { value: 'foo1_title' } });
 
     await jest.useFakeTimers();
-    
+
     fireEvent.change(query, { target: { value: '' } });
     waitForElement(() => getByText(''));
     await jest.runAllTimers();
-    
+
     fireEvent.change(query, { target: { value: 'foo1_title' } });
 
     await jest.useFakeTimers();
@@ -94,8 +92,5 @@ describe('<SearchBox />', () => {
       fireEvent.keyDown(query, { key: 'Enter', code: 'Enter' });
     }, 3000);
     await jest.runAllTimers();
-
   });
-
-  
 });
