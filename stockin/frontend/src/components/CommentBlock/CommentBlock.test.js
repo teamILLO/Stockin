@@ -1,16 +1,19 @@
 import React from 'react';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 
 import {
   render,
   fireEvent,
   queryAllByTestId,
   screen,
+  wait,
   queryAllByText,
 } from '@testing-library/react';
 import CommentBlock from './CommentBlock';
 import { getMockStore } from '../../test-utils/mocks';
 import { history } from '../../store/store';
+
+import * as comment from '../../store/comment/comment';
 
 const defaultProps = {
   id: 1,
@@ -49,7 +52,11 @@ const mockStoreUserDiff = getMockStore(
 );
 
 describe('<CommentBlock />', () => {
-  let commentBlockUserNull, commentBlockUserSame, commentBlockUserDiff, spyHistoryPush;
+  let commentBlockUserNull,
+    commentBlockUserSame,
+    commentBlockUserDiff,
+    spyEditComment,
+    spyDeleteComment;
   beforeEach(() => {
     commentBlockUserNull = (
       <Provider store={mockStoreUserNull}>
@@ -66,7 +73,13 @@ describe('<CommentBlock />', () => {
         <CommentBlock history={history} {...defaultProps} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    spyEditComment = jest.spyOn(comment, 'editComment').mockImplementation(() => {
+      return (dispatch) => {};
+    });
+
+    spyDeleteComment = jest.spyOn(comment, 'deleteComment').mockImplementation(() => {
+      return (dispatch) => {};
+    });
   });
   it('should render without errors', () => {
     const { container } = render(commentBlockUserNull);
@@ -87,11 +100,45 @@ describe('<CommentBlock />', () => {
     query = queryAllByText(container, /delete/i);
     expect(query.length).toBe(0);
   });
-  /*
-  it('should have submit edit button', () => {
-    const { container } = render(commentBlockUserSame);
-    fireEvent.click(screen.getByText(/edit/i));
-    let query = queryAllByText(container, /edit/i);
+  it('should have submit edit button and be gone when clicked', async () => {
+    render(commentBlockUserSame);
+    let query;
+    await wait(() => {
+      query = screen.getByTestId(/editbutton/i);
+    });
+    await wait(() => {
+      fireEvent.click(query);
+    });
+    await wait(() => {
+      query = screen.getByTestId(/submiteditbutton/i);
+    });
+    fireEvent.click(query);
+    query = screen.queryAllByTestId(/submiteditbutton/i);
     expect(query.length).toBe(0);
-  });*/
+  });
+  it('should change content after edit', async () => {
+    render(commentBlockUserSame);
+    let query;
+    await wait(() => {
+      query = screen.getByTestId(/editbutton/i);
+    });
+    await wait(() => {
+      fireEvent.click(query);
+    });
+    await wait(() => {
+      query = screen.getByPlaceholderText(/write your comment here/i);
+    });
+    fireEvent.change(query, { target: { value: 'TEST_CHANGE' } });
+    query = screen.queryAllByText('TEST_CHANGE');
+    expect(query.length).toBe(1);
+  });
+  it('should call deleteComment', async () => {
+    render(commentBlockUserSame);
+    let query;
+    await wait(() => {
+      query = screen.getByTestId(/deletebutton/i);
+    });
+    fireEvent.click(query);
+    expect(spyDeleteComment).toHaveBeenCalledTimes(1);
+  });
 });

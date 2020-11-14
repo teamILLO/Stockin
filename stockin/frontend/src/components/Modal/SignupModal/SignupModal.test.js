@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  fireEvent,
-  queryAllByTestId,
-  getByPlaceholderText,
-} from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import SignupModal from './SignupModal';
 import store from '../../../store/store';
 import { Provider } from 'react-redux';

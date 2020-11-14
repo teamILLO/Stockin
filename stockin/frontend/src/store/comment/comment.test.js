@@ -172,7 +172,7 @@ describe('comment ', () => {
   });
 
   it(`should not work when 'getComments' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'get').mockImplementation((url) => {
+    jest.spyOn(api, 'get').mockImplementation((url) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -205,7 +205,7 @@ describe('comment ', () => {
   });
 
   it(`should not work when 'editComment' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'put').mockImplementation((url, atc) => {
+    jest.spyOn(api, 'put').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -237,7 +237,7 @@ describe('comment ', () => {
   });
 
   it(`should not work when 'deleteComment' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'delete').mockImplementation((url, atc) => {
+    jest.spyOn(api, 'delete').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -270,7 +270,7 @@ describe('comment ', () => {
   });
 
   it(`should not work when 'postComment' calls with error`, (done) => {
-    const spyError = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
+    jest.spyOn(api, 'post').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,

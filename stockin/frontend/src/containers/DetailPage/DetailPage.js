@@ -43,12 +43,12 @@ const DetailPage = (props) => {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (loggingIn == undefined) dispatch(checkLogin());
+    if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
     }
     dispatch(getStockHistory(+props.match.params.id));
-  }, [loggingIn, props.match.params.id]);
+  }, [dispatch, loggingIn, props.match.params.id]);
 
   let graph = priceList.length === 0 ? 'Loading...' : <DetailData data={priceList} />;
 

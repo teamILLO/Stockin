@@ -31,14 +31,14 @@ const mockStore = getMockStore(
 );
 
 describe('<CommentList />', () => {
-  let commentList, spyHistoryPush;
+  let commentList;
   beforeEach(() => {
     commentList = (
       <Provider store={mockStore}>
         <CommentList history={history} {...defaultProps} />
       </Provider>
     );
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+    jest.spyOn(history, 'push').mockImplementation((text) => {
       return (dispatch) => {};
     });
   });

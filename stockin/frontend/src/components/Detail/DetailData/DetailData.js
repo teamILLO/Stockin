@@ -79,17 +79,4 @@ const DetailData = (props) => {
   );
 };
 
-/*
-DetailData.propTypes = {
-	data: PropTypes.array.isRequired,
-	width: PropTypes.number.isRequired,
-	ratio: PropTypes.number.isRequired,
-	type: PropTypes.oneOf(["svg", "hybrid"]).isRequired,
-};
-
-DetailData.defaultProps = {
-	type: "svg",
-};
-*/
-
 export default DetailData;

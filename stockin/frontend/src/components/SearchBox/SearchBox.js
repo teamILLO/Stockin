@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import React, { useEffect } from 'react';
-import { Search, Grid, Header, Segment, Label } from 'semantic-ui-react';
-
+import { Search } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock/stock';
 import { history } from '../../store/store';
@@ -26,9 +24,8 @@ function exampleReducer(state, action) {
       return { ...state, loading: false, results: fin_results };
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection };
-
-    // default:
-    //   throw new Error();
+    default:
+      return;
   }
 }
 
@@ -50,6 +47,7 @@ const SearchBox = () => {
   const handleSearchChange = React.useCallback(
     (e, data) => {
       clearTimeout(timeoutRef.current);
+      dispatch({ type: 'DEFAULT' });
       dispatch({ type: 'START_SEARCH', query: data.value });
 
       timeoutRef.current = setTimeout(() => {
@@ -98,7 +96,7 @@ const SearchBox = () => {
   return (
     <Search
       data-testid="SearchBox"
-      action
+      // action
       fluid
       loading={loading}
       onSearchChange={handleSearchChange}

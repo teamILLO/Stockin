@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import { Tab } from 'semantic-ui-react';
 
 import YearTable from './YearTable';

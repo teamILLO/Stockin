@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Comment, Form, Header } from 'semantic-ui-react';
+import { Button, Comment, Form } from 'semantic-ui-react';
 import { deleteComment, editComment } from '../../store/comment/comment';
 
 const CommentBlock = (props) => {
@@ -19,16 +19,19 @@ const CommentBlock = (props) => {
   };
 
   const buttons =
-    user && user.nickname == props.author ? (
+    user && user.nickname === props.author ? (
       <Comment.Actions>
         <Comment.Action
+          data-testid="editButton"
           onClick={() => {
             setEdit(true);
           }}
         >
           Edit
         </Comment.Action>
-        <Comment.Action onClick={() => onDeleteHandler()}>Delete</Comment.Action>
+        <Comment.Action data-testid="deleteButton" onClick={() => onDeleteHandler()}>
+          Delete
+        </Comment.Action>
       </Comment.Actions>
     ) : (
       <Comment.Actions />
@@ -40,11 +43,12 @@ const CommentBlock = (props) => {
         <Comment.Author as="a">{props.author}</Comment.Author>
 
         <Form.TextArea
-          data-testid="EditTextArea"
           onChange={(event) => setEditContent(event.target.value)}
+          placeholder="Write your comment here"
           value={editContent}
         />
         <Button
+          data-testid="submitEditButton"
           primary
           content="Edit"
           labelPosition="right"

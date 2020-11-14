@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  render,
-  screen,
-  fireEvent,
-  act,
-  wait,
-  queryAllByTestId,
-  getByPlaceholderText,
-} from '@testing-library/react';
+import { render, screen, fireEvent, wait } from '@testing-library/react';
 import FindPasswdModal from './FindPasswdModal';
 import store from '../../../store/store';
 import { Provider } from 'react-redux';
 import { api } from '../../../api/index';
 
 describe('<SignupModal />', () => {
-  let find, spyPost, spyPut;
+  let find, spyPost;
   beforeEach(() => {
     find = (
       <Provider store={store}>
@@ -25,7 +17,7 @@ describe('<SignupModal />', () => {
     spyPost = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
         return new Promise((resolve, reject) => {
             let result
-            if(url =='/users/duplicate/')
+            if(url === '/users/duplicate/')
                 result = {
                     status: 200,
                     data: {'duplicate': true},
@@ -38,7 +30,7 @@ describe('<SignupModal />', () => {
         });
     });
 
-    spyPut = jest.spyOn(api, 'put').mockImplementation((url, atc) => null);
+    jest.spyOn(api, 'put').mockImplementation((url, atc) => null);
 
   });
 
@@ -80,7 +72,7 @@ describe('<SignupModal />', () => {
     spyPost = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
         return new Promise((resolve, reject) => {
             let result
-            if(url =='/users/duplicate/')
+            if(url === '/users/duplicate/')
                 result = {
                     status: 200,
                     data: {'duplicate': false},

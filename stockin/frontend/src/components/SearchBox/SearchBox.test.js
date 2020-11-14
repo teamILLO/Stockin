@@ -1,29 +1,10 @@
-import React, { Children } from 'react';
-import {
-  render,
-  wait,
-  screen,
-  fireEvent,
-  getByText,
-  queryAllByTestId,
-  getByPlaceholderText,
-  getByTestId,
-  getByDisplayValue,
-  waitForElement,
-  unmount,
-} from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent, waitForElement } from '@testing-library/react';
 import SearchBox from './SearchBox';
-import store, { history } from '../../store/store';
-import * as redux from 'react-redux';
+import { history } from '../../store/store';
 import { Provider } from 'react-redux';
-import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
-import { head, wrap } from 'lodash';
 import { getMockStore } from '../../test-utils/mocks';
-import reducer, { getStocks } from '../../store/stock/stock';
 import axios from 'axios';
-import { shallow, mount } from 'enzyme';
-import { Simulate } from 'react-dom/test-utils';
-import { timeDay } from 'd3-time';
 
 // const localStorageMock = {
 //   getItem: jest.fn(a=>{
@@ -52,7 +33,7 @@ const stubStock = [
 const mockStore = getMockStore(initialAuthState, initialStockState);
 
 describe('<SearchBox />', () => {
-  let searchbox, spy, spyHistoryPush, parser;
+  let searchbox;
   jest.useFakeTimers();
 
   beforeEach(() => {
@@ -62,7 +43,7 @@ describe('<SearchBox />', () => {
       </Provider>
     );
 
-    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => true);
+    jest.spyOn(history, 'push').mockImplementation((text) => true);
 
     jest.spyOn(axios, 'get').mockImplementation(() => {
       const response = {
@@ -78,14 +59,14 @@ describe('<SearchBox />', () => {
   });
 
   it('it should render without errors', () => {
-    const { container, getByText, unmount, debug } = render(searchbox);
+    const { getByText, unmount, debug } = render(searchbox);
     const query = document.body.querySelector('.prompt');
     fireEvent.change(query, { target: { value: 'foo1_title' } });
     screen.localStorage = { setItem: jest.fn(() => [{ id: 1 }]) };
-    let text;
+
     jest.useFakeTimers();
     setTimeout(() => {
-      text = waitForElement(() => getByText('foo1_title'));
+      waitForElement(() => getByText('foo1_title'));
     }, 3000);
     jest.runAllTimers();
     // expect(text).toHaveTextContent('');
@@ -94,7 +75,7 @@ describe('<SearchBox />', () => {
 
     jest.useFakeTimers();
     setTimeout(() => {
-      text = waitForElement(() => getByText(''));
+      waitForElement(() => getByText(''));
     }, 3000);
     jest.runAllTimers();
 
@@ -102,7 +83,7 @@ describe('<SearchBox />', () => {
 
     jest.useFakeTimers();
     setTimeout(() => {
-      text = waitForElement(() => getByText('foo1_title'));
+      waitForElement(() => getByText('foo1_title'));
     }, 3000);
     jest.runAllTimers();
 
@@ -120,7 +101,7 @@ describe('<SearchBox />', () => {
 
     jest.useFakeTimers();
     setTimeout(() => {
-      text = waitForElement(() => getByText(''));
+      waitForElement(() => getByText(''));
     }, 3000);
     jest.runAllTimers();
 
@@ -128,7 +109,7 @@ describe('<SearchBox />', () => {
 
     jest.useFakeTimers();
     setTimeout(() => {
-      text = waitForElement(() => getByText('foo2_title'));
+      waitForElement(() => getByText('foo2_title'));
     }, 3000);
     jest.runAllTimers();
 
@@ -146,7 +127,7 @@ describe('<SearchBox />', () => {
 
     jest.useFakeTimers();
     setTimeout(() => {
-      text = waitForElement(() => getByText(''));
+      waitForElement(() => getByText(''));
     }, 3000);
     jest.runAllTimers();
 

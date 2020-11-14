@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, screen, getByText, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { render, queryAllByTestId } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { history } from '../../../store/store';
 import { getMockStore } from '../../../test-utils/mocks';
 import DetailNews from './DetailNews';
 
