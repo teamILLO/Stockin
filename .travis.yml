@@ -34,8 +34,6 @@ matrix:
         - cd stockin/backend
       install:
         - pip install -r requirements.txt
-        - apt-get install mysql-server
-        - apt-get install libmysqlclient-dev
       script:
         - pylint **/*.py --load-plugins pylint_django
         - coverage run --source='.' manage.py test
