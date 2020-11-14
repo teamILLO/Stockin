@@ -53,4 +53,5 @@ matrix:
         - coverage xml
         - cd ../.. && sonar-scanner
       after_success:
+        - cd stockin/backend
         - coveralls
