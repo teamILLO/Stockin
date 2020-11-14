@@ -24,6 +24,7 @@ matrix:
         - yarn test --coverage --watchAll=false
         - cd ../.. && sonar-scanner
       after_success:
+        - cd stockin/frontend 
         - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
     - language: python
