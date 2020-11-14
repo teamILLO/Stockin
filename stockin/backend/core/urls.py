@@ -1,3 +1,6 @@
+'''
+urls.py
+'''
 from django.urls import path
 import core.views as views
 
@@ -18,13 +21,17 @@ urlpatterns = [
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
 
     # news model
-    path('news/stocks/<int:stock_id>/date/<str:news_date>/', views.get_news_list, name='get_news_list'),
-    
+    path('news/stocks/<int:stock_id>/date/<str:news_date>/',
+        views.get_news_list,
+        name='get_news_list'),
+
     # group model
     path('groups/', views.group_list_and_create, name='group_list_and_create'),
     path('groups/<int:id>/', views.group_edit, name='group_edit'),
     path('groups/<int:id>/stocks/', views.group_stock_list, name='group_stock edit'),
-    path('groups/<int:group_id>/stocks/<int:stock_id>/', views.group_stock_delete, name='group_stock_delete'),
+    path('groups/<int:group_id>/stocks/<int:stock_id>/',
+        views.group_stock_delete,
+        name='group_stock_delete'),
 
     # comment model
     path('stocks/<int:stock_id>/comments/', views.comment_list, name='comment_list'),

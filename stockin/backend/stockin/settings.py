@@ -140,7 +140,7 @@ DATABASES = {
         'PORT': '3306',  
         'TEST': {
             'NAME': 'test_stockinDB',
-        },                        
+        },
     }
 }
 
