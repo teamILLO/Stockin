@@ -209,7 +209,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
 | | ``` api/groups/:group_id/stocks/:stock_id ``` | X | X | X | Delete stock |
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
-| | ``` api/stocks/price/:stock_id ``` | Get stock price info | X | X | X |
+| StockHistory | ``` api/stocks/price/:stock_id ``` | Get stock price info | X | X | X |
 | | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
 | | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
 | Comment | ``` api/stocks/:stock_id/comments/  ``` | Get stock's comment list   | Create comment | X | X |
@@ -335,13 +335,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/stocks/:stock_id ```
-- GET
-   * response form : ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
 ### StockHistory Model
 #### ``` api/stocks/history/:stockhistory_date ```
 - GET
@@ -362,6 +355,33 @@ That is, “Group” model and “Stock” model is “many to many” relations
   - response form(list) : each element : `{“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer}`
   - Success : status 200
 - AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+### Comment Model
+#### `api/stocks/:stock_id/comments`
+- GET
+  - response form : list : each element : `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - Success : status 200
+- DoesNotExistError : status 404
+- NotAllowedMethod : status 405
+- POST
+  - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - KeyError : status 400
+  - Success : status 201
+- DoesNotExistError : status 404
+- NotAllowedMethod : status 405
+
+#### `api/comments/:comment_id`
+- GET
+  - response form : list : `{“stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - Success : status 200
+- DoesNotExistError : status 404
+- NotAllowedMethod : status 405
+- PUT
+  - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - KeyError : status 400
+  - Success : status 200
+- DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 
 ### News Model
