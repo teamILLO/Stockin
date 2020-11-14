@@ -136,7 +136,7 @@ DATABASES = {
         'NAME': 'stockinDB',
         'USER': 'swpp',                         # mysql user-id
         'PASSWORD': 'Swpp2020-team15!',         # mysql user-password
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '3306',
         'TEST': {
             'NAME': 'test_stockinDB',
