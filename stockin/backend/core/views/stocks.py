@@ -26,7 +26,7 @@ def stock_fs(request, stock_id=''):
         return JsonResponse(response_list, safe=False)
 
     else:
-        HttpResponseNotAllowed['GET']
+        return HttpResponseNotAllowed(['GET'])
 
 
 def price_list(request, stock_id=""):

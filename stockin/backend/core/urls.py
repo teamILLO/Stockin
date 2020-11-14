@@ -9,9 +9,8 @@ urlpatterns = [
     path('users/signout/', views.signout, name='sign_out'),
     path('users/duplicate/', views.duplicate, name='duplicate'),
     path('users/sendCode/', views.send_code, name='send_code'),
-    path('users/userInfo/', views.user_info_2, name='user_info_2'),
+    path('users/userInfo/', views.user_info, name='user_info'),
     path('users/token/', views.token, name='token'),
-    path('users/<int:id>/', views.user_info_1, name='user_info_1'),
 
     # stock model
     path('stocks/', views.stock_list, name='stock list'),
