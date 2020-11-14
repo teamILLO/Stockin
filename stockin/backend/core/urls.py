@@ -21,10 +21,10 @@ urlpatterns = [
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
 
     # news model
-    path('news/stocks/<int:stock_id>/date/<str:news_date>/', 
+    path('news/stocks/<int:stock_id>/date/<str:news_date>/',
         views.get_news_list,
         name='get_news_list'),
-    
+
     # group model
     path('groups/', views.group_list_and_create, name='group_list_and_create'),
     path('groups/<int:id>/', views.group_edit, name='group_edit'),
