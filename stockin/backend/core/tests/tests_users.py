@@ -263,36 +263,36 @@ class UsersTestCase(TestCase):
         self.assertEqual(response.status_code, 405)
 
 
-#     def test_logout(self):
-#         client = Client(enforce_csrf_checks=True)
-#         response = client.get('/api/users/token/')
-#         csrftoken = response.cookies['csrftoken'].value
+    def test_logout(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
 
-#         client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
-#                                                       'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
+                                                      'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
-#         # test 1
-#         response = client.get('/api/users/token/')
-#         csrftoken = response.cookies['csrftoken'].value
+        # test 1
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
 
-#         client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
-#                                                       'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
+                                                      'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
-#         response = client.get('/api/users/logout/')
-#         self.assertEqual(response.status_code, 204)
+        response = client.get('/api/users/logout/')
+        self.assertEqual(response.status_code, 204)
 
-#         # test 2
-#         response = client.get('/api/users/token/')
-#         csrftoken = response.cookies['csrftoken'].value
+        # test 2
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
 
-#         response = client.get(
-#             '/api/users/logout/', content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
-#         self.assertEqual(response.status_code, 401)
+        response = client.get(
+            '/api/users/logout/', content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 401)
 
-#         # HttpResponseNotAllowed tests
-#         response = client.get('/api/users/token/')
-#         csrftoken = response.cookies['csrftoken'].value
+        # HttpResponseNotAllowed tests
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
 
-#         response = client.post('/api/users/logout/',
-#                                HTTP_X_CSRFTOKEN=csrftoken)
-#         self.assertEqual(response.status_code, 405)
+        response = client.post('/api/users/logout/',
+                               HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)

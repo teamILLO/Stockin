@@ -8,7 +8,6 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, Stock, StockHistory, FinancialStat, News, Group, Comment
 
 
-# User admin
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     '''
