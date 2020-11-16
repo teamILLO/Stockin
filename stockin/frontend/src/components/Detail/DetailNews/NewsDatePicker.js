@@ -41,7 +41,7 @@ function getStockId() {
   return b;
 }
 
-const NewsDatePicker = () => {
+const NewsDatePicker = (props) => {
   var curDate = new Date(Date.now());
   // const timeoutRef = React.useRef();
   const dispatch = useDispatch();
@@ -59,7 +59,7 @@ const NewsDatePicker = () => {
     if (stock_id !== -1) {
       dispatch(getNews(stock_id, dateFormat));
     }
-  }, [dateFormat, dispatch]);
+  }, [dateFormat, dispatch, props.id]);
 
   return (
     <DatePicker

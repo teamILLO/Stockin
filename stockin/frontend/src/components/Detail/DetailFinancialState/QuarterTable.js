@@ -54,7 +54,7 @@ const RenderTableItem = (item) => {
   return response;
 };
 
-const QuarterTable = () => {
+const QuarterTable = (props) => {
   const dispatch = useDispatch();
   const { fs } = useSelector((state) => state.fs);
 
@@ -64,7 +64,7 @@ const QuarterTable = () => {
     if (stock_id !== -1) {
       dispatch(getFs(stock_id));
     }
-  }, [dispatch]);
+  }, [dispatch, props.id]);
 
   return (
     <Segment style={{ overflowX: 'scroll' }} data-testid="QuarterTable">

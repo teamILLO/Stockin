@@ -21,7 +21,7 @@ const panes = (id) => [
   },
   {
     menuItem: { key: 'News', className: 'News', content: 'News' },
-    render: () => <DetailNews />,
+    render: () => <DetailNews id={id} />,
   },
   {
     menuItem: { key: 'Price Trends', className: 'Price Trends', content: 'Price Trends' },
@@ -29,7 +29,7 @@ const panes = (id) => [
   },
   {
     menuItem: { key: 'FinancialState', className: 'FinancialState', content: 'Financial State' },
-    render: () => <DetailFinancialState />,
+    render: () => <DetailFinancialState id={id} />,
   },
   {
     menuItem: { key: 'Comments', className: 'Comments', content: 'Comments' },
