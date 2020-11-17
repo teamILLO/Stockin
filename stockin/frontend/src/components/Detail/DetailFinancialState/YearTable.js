@@ -54,7 +54,7 @@ const RenderTableItem = (item) => {
   return response;
 };
 
-const YearTable = () => {
+const YearTable = (props) => {
   const dispatch = useDispatch();
   const { fs } = useSelector((state) => state.fs);
   const [year_fs, setYearFS] = useState([]);
@@ -64,7 +64,7 @@ const YearTable = () => {
     if (stock_id !== -1) {
       dispatch(getFs(stock_id));
     }
-  }, [dispatch]);
+  }, [dispatch, props.id]);
 
   React.useEffect(() => {
     var temp_fs = [];

@@ -14,10 +14,14 @@ from core.models import Stock, StockHistory, FinancialStat
 
 def stock_fs(request, stock_id=''):
     if request.method == 'GET':
-        response_list = []
-        fs_list = [fs for fs in FinancialStat.objects.all()
-                   if fs.stock.id == stock_id]
+        
+        # For debugging
+        # print(FinancialStat.objects.all().explain())
+        # print(FinancialStat.objects.filter(stock__id = stock_id).explain())
 
+        response_list = []
+        fs_list = FinancialStat.objects.filter(stock__id = stock_id)
+        
         for fs in fs_list:
             response_dict = {'id': fs.id, 'stock_id': fs.stock.id, 'quarter': fs.quarter, 'sales': fs.sales, 'operatingProfit': fs.operatingProfit,
                              'netIncome': fs.netIncome, 'operatingMargin': fs.operatingMargin, 'netProfitMargin': fs.netProfitMargin, 'PER': fs.PER, 'PBR': fs.PBR, 'ROE': fs.ROE}

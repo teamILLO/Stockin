@@ -20,12 +20,12 @@ const RenderListItem = (item) => (
   </List.Item>
 );
 
-const DetailNews = () => {
+const DetailNews = (props) => {
   const { news } = useSelector((state) => state.news);
 
   return (
     <div id="DetailNews" data-testid="DetailNews">
-      <NewsDatePicker />
+      <NewsDatePicker id={props.id}/>
       <List divided>{news.map((e) => RenderListItem(e))}</List>
     </div>
   );

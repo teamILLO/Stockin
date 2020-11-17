@@ -19,11 +19,18 @@ def get_news_list(request, stock_id='', news_date='') :
         year = int(news_date[0:4])
         month = int(news_date[4:6])
         day = int(news_date[6:8])
-        news_list = [news for news in News.objects.all() 
-                        if news.stock.id == stock_id 
-                           and news.date.year == year
-                           and news.date.month == month
-                           and news.date.day == day ]
+
+        # For debugging
+        # print(News.objects.all().explain())
+        # print(News.objects.filter(stock__id = stock_id).explain())
+        # print(News.objects.filter(date__year = year).explain())
+        # print(News.objects.filter(date__month = month).explain())
+        # print(News.objects.filter(date__day = day).explain())
+
+        q = News.objects.filter(stock__id = stock_id)
+        news_list = [news for news in q if news.date.year == year
+                                           and news.date.month == month
+                                           and news.date.day == day]
 
         response_list = []
         for news in news_list:
