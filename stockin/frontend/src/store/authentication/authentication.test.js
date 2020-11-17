@@ -199,7 +199,7 @@ describe('authentication ', () => {
     });
 
     store.dispatch(trySignup(testuser)).then(() => {
-      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledTimes(2);
       done();
     });
   });

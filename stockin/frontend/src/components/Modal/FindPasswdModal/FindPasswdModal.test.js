@@ -5,7 +5,7 @@ import store from '../../../store/store';
 import { Provider } from 'react-redux';
 import { api } from '../../../api/index';
 
-describe('<SignupModal />', () => {
+describe('<FindPasswdModal />', () => {
   let find, spyPost;
   beforeEach(() => {
     find = (

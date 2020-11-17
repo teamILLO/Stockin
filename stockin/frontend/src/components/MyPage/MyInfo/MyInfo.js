@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, Label, Grid } from 'semantic-ui-react';
 import { updateUserInfo } from '../../../store/authentication/authentication';
+import { api } from '../../../api/index';
 
 const MyInfo = (props) => {
   const { user } = useSelector((state) => state.authentication);
@@ -9,10 +10,21 @@ const MyInfo = (props) => {
   const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
 
-  const changeNick = () => {
-    dispatch(updateUserInfo({ change: 'nickname', email: user.email, nickname: nicknameInput }));
-    setEdit(false);
-    alert('nickname changed succesfully');
+  const changeNick = async () => {
+    let is_duplicated = false;
+
+    await api.post('/users/duplicate/', { email: '', nickname : nicknameInput }).then((response) => {
+      if (response.data['duplicate']) {
+        alert('Nickname exists, try another.');
+        is_duplicated = true;
+      } 
+    });
+
+    if(!is_duplicated) {
+      dispatch(updateUserInfo({ change: 'nickname', email: user.email, nickname: nicknameInput }));
+      setEdit(false);
+      alert('nickname changed succesfully');
+    }
   };
 
   const clickEdit = () => {
