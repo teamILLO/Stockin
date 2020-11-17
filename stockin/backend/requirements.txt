@@ -5,3 +5,7 @@ pylint-django==2.3.0
 coveralls==2.1.2
 django-cors-headers
 mysqlclient
+requests
+bs4
+selenium
+pandas
