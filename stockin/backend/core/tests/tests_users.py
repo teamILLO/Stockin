@@ -161,16 +161,30 @@ class UsersTestCase(TestCase):
             {'email': 'normal@normal.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # POST request
+        # Email duplicate
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/duplicate/', json.dumps(
-            {'email': 'normal@normal.com'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@normal.com', 'nickname' : ''}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 203)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/duplicate/', json.dumps(
-            {'email': 'foo@foo.com'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'foo@foo.com', 'nickname' : ''}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 203)
+
+        # Nickname duplicate
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/users/duplicate/', json.dumps(
+            {'email': '', 'nickname' : 'user'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 203)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/users/duplicate/', json.dumps(
+            {'email': '', 'nickname' : 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 203)
         
         # HttpResponseNotAllowed tests

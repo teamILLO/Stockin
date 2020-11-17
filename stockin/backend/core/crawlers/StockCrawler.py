@@ -6,7 +6,7 @@ sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings')
 import django
 django.setup()
-from core.models import Stock, StockHistory
+from core.models import Stock, StockHistory, FinancialStat
 
 import pandas as pd
 import requests
@@ -73,8 +73,12 @@ def initialStockAddFromExcel():
 
 # DB 첨 스타팅용~
 def initialStockAdd():
+    Stock.objects.all().delete()
+    FinancialStat.objects.all().delete()
+
     stock_list=[]
-    with open('stocks.csv', 'r') as f:
+    financial_list=[]
+    with open('data/stocks.csv', 'r') as f:
         reader = csv.DictReader(f)
         for stock in reader:
             stock_list.append(Stock(
@@ -85,6 +89,27 @@ def initialStockAdd():
             ))
     
     Stock.objects.bulk_create(stock_list)
+
+    with open('data/Financial_State.csv', 'r') as f:
+        reader = csv.DictReader(f)
+        
+        for FS in reader:
+            target_stock = Stock.objects.get(title=FS['stock'])
+            financial_list.append(FinancialStat(
+                stock=target_stock,
+                quarter=FS['quarter'],
+                sales=FS['sales'],
+                operatingProfit=FS['operatingProfit'],
+                netIncome=FS['netIncome'],
+                operatingMargin=FS['operatingMargin'],
+                netProfitMargin=FS['netProfitMargin'],
+                PER=FS['PER'],
+                PBR=FS['PBR'],
+                ROE=FS['ROE']
+            ))
+
+    FinancialStat.objects.bulk_create(financial_list)
+            
                         
     
 
@@ -187,7 +212,7 @@ def pastStockHistory_(stock, count):
 # 과거 주가 기록 가져오는용
 def pastStockHistory(count, process=32):
     stocks = Stock.objects.all()
-   
+    StockHistory.objects.delete()
     
     pool = Pool(process)
 
