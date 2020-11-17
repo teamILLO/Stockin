@@ -88,7 +88,14 @@ def duplicate(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
         email = req_data['email']
-        filter_result = User.objects.filter(email=email)
+        nickname = req_data['nickname']
+
+        # Check email duplicate
+        if(email and not nickname) :
+            filter_result = User.objects.filter(email = email)
+        # Check nickname duplicate
+        if(nickname and not email) :
+            filter_result = User.objects.filter(nickname = nickname)
 
         if len(filter_result) >= 1:
             response_dict = {'duplicate': True}

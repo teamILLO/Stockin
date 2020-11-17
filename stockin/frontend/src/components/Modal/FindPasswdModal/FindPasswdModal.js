@@ -25,7 +25,7 @@ const FindPasswdModal = (props) => {
 
   const emailConfirmHandler = async () => {
 
-    await api.post('/users/duplicate/', { email: email }).then((response) => {
+    await api.post('/users/duplicate/', { email: email, nickname : '' }).then((response) => {
       if (response.data['duplicate']) {
         sendEmail();
         setNext(2);
