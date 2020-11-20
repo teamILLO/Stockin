@@ -3,6 +3,7 @@ import { Search } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock/stock';
 import { history } from '../../store/store';
+
 const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
 const initialState = {
