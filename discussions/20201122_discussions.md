@@ -25,12 +25,13 @@ outlier - ++--+ > 2개를뺄것인가 1.not assessable
 1. not easy >> need more easy approach
 
 ## 4 ML
-1. stock price + news frequency - Down
+1. stock price + news frequency to ML - Down
 2. F&S scoring - Junhyeok (~11/22)
 6. ~~main page stock block,**new group/ delete stock/delete group/add to group** 1~~ - G1
 8. edit group - G1 (~11/23)
 9. liability rate(crawling, backend) - Woo0 (~11/23)
 10. cashflow (backend)
+11. crawl graph data & create graphs
 - detail page - chart, *, comment
 - ~~main page stock block~~ -DAUN >> easy, user-friendly design
 + feedback - question marked additional detail, stock-chart line
