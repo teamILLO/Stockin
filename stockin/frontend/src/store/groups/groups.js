@@ -8,12 +8,8 @@ const slice = createSlice({
     groupList: [],
   },
   reducers: {
-    postgroup: (state, action) => {
-      return { ...state, group: action.payload.name };
-    },
-    getgrouplist: (state, action) => {
-        return { ...state, groupList: action.payload };
-      },
+    postgroup: (state, action) => ({ ...state, group: action.payload.name }),
+    getgrouplist: (state, action) => ({ ...state, groupList: action.payload }),
   },
 });
 
@@ -38,4 +34,13 @@ export const getGroupList = () => async (dispatch) => {
     } catch (e) {
       return console.error(e.message);
     }
-  };
+};
+
+export const deleteGroupStock = (group_id, stock_id) => async (dispatch) => {
+  try {
+    await api.delete('/groups/' + group_id + '/stocks/' + stock_id + '/')
+      .then((response) => {})
+  } catch (e) {
+    return console.error(e.message);
+  }
+};

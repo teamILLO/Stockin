@@ -1,63 +1,49 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useDispatch } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Checkbox, Form, Button } from 'semantic-ui-react';
 import { getGroupList } from '../../../store/groups/groups';
 
 import MakeNewGroupModal from './MakeNewGroupModal';
-  
 
+/** 
+  * Make array with value in checkbox, which composed to "stock's id"
+  */
 const EditGroup = () => {
   const { groupList } = useSelector((state) => state.groups);
   const [ renderItem, setRenderItem ] = useState([]);
   const [ checkedItems, setCheckedItems ] = useState([]);
 
   useEffect(() => {
-    setCheckedItems(groupList.map((e) => {
+    setCheckedItems(checkedItems => groupList.map((e) => {
       let dict = {};
       dict['id'] = e.id; 
       dict['checked'] = false;
+      console.log(dict);
       return dict;
     }));
+    setRenderItem(groupList.map((e) => RenderListItem(e)));
   }, [groupList]);
 
-  useEffect(() => {
-    console.log("checkedItems changed");
-    setRenderItem(groupList.map((e) => RenderListItem(e)));
-  }, [checkedItems]);
-
+  /** 
+   * Iterate `checked`, If id exists, delete it from `checked`. O.W. push it to `checked`
+   */
   const onChangeHandler = (id) => {
+    console.log(checkedItems);
     let newCheckedItems = checkedItems;
+    let i;
 
-    for(let i = 0; i < newCheckedItems.length; i++) {
+    for(i = 0; i < newCheckedItems.length; i++) {
       if(newCheckedItems[i].id === id) {
         newCheckedItems[i] = {...newCheckedItems[i], 'checked' : !newCheckedItems[i].checked};
         break;
       }
     }
+    console.log(newCheckedItems);
     setCheckedItems(newCheckedItems);
-    console.log(checkedItems);
-  };
-
-  const selectAllHandler = (data) => {
-    let newCheckedItems = checkedItems;
-    let checked = data.checked;
-    for(let i = 0; i < newCheckedItems.length; i++) {
-        newCheckedItems[i] = {...newCheckedItems[i], 'checked' : checked};
-    }
-    setCheckedItems(newCheckedItems);
-    console.log(checkedItems);
-  };
-
+  }
+  
   const deleteButtonHandler = () => {
     console.log("delete button clicked");
-  };
-
-  const isChecked = (id) => {
-    checkedItems.forEach((e) => {
-        if(e.id === id)
-            console.log("called");
-            return e.checked;
-    })
   };
 
   /** 
@@ -71,7 +57,6 @@ const EditGroup = () => {
             value={e.id}
             label={e.name} 
             onChange={() => onChangeHandler(e.id)}
-            checked = { (console.log("called")) }
           />
         </List.Header>
       </List.Content>
@@ -81,7 +66,7 @@ const EditGroup = () => {
   return (
     <Form>
       <Form.Field>
-        <Checkbox onChange={(event,data) => selectAllHandler(data)}/>
+        <Checkbox  />
         <Button content='delete' onClick = {() => deleteButtonHandler()}/>
         <List>
           {renderItem}
@@ -107,3 +92,12 @@ export default EditGroup;
 //       </List.Item>
 //   );
   
+//   return (
+//       <List.Item key={e.id}>
+//           <List.Content>
+//               <List.Header><Checkbox />{e.name}</List.Header>
+//               <List.List>{stocks}</List.List>
+//           </List.Content>
+//       </List.Item>
+//   );
+// };
