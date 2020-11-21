@@ -9,7 +9,7 @@ let groupOptions = [];
 
 const EditStock = () => {
   const dispatch = useDispatch();
-  const groupList = useSelector((state) => state.groups.groupList, shallowEqual);
+  const { groupList } = useSelector((state) => state.groups);
   const [renderItem, setRenderItem] = useState([]);
   const checkedItem = useRef([]);
 
@@ -19,6 +19,19 @@ const EditStock = () => {
 
   useEffect(() => {
     groupOptions = groupList.map((e) => ({key : e.id, text : e.name, value : e.id}));
+    console.log(groupList);
+    if(checkedItem.current.length != 0) {
+      let group_id = checkedItem.current[0].split(' ')[0];
+      let stocks;
+      groupList.forEach((e) => {
+        if(e.id == group_id) {
+          stocks = e.stocks;
+          group_id = e.id;
+          checkedItem.current = [];
+          setRenderItem(RenderListItem(group_id, stocks));
+        }
+      });
+    }
   }, [groupList]);
 
   const itemOnchangeHandler = (event, data) => {
@@ -62,7 +75,6 @@ const EditStock = () => {
       stock_id = e.split(' ')[1];
       dispatch(deleteGroupStock(group_id, stock_id));
     });
-    dispatch(getGroupList());
   };
 
   const dropDownOnChangeHandler = (event, data) => {

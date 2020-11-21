@@ -9,7 +9,10 @@ const slice = createSlice({
   },
   reducers: {
     postgroup: (state, action) => ({ ...state, group: action.payload.name }),
-    getgrouplist: (state, action) => ({ ...state, groupList: action.payload }),
+    getgrouplist: (state, action) => {
+      state.groupList = action.payload;
+      console.log(state.groupList);
+    },
   },
 });
 
@@ -39,7 +42,13 @@ export const getGroupList = () => async (dispatch) => {
 export const deleteGroupStock = (group_id, stock_id) => async (dispatch) => {
   try {
     await api.delete('/groups/' + group_id + '/stocks/' + stock_id + '/')
-      .then((response) => {})
+      .then(async (response) => {
+        try {
+          await api.get('/groups/')
+            .then((response) => dispatch(getgrouplist(response.data)));
+        } catch (e) {
+          return console.error(e.message);
+      }})
   } catch (e) {
     return console.error(e.message);
   }
