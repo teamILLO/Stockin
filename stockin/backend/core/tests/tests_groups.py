@@ -42,8 +42,15 @@ class GroupsTestCase(TestCase):
         self.assertEqual(response.status_code, 201)
 
         # test 4 
+        test_stock = Stock.objects.create(title='test_stock1', code='test_code1', sector='test_sector1')
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/groups/1/stocks/', json.dumps({'id': '1'}),
+                    content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+
         response = client.get('/api/groups/')
-        # TODO : test 추가
+        self.assertEqual(response.status_code, 200)
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
