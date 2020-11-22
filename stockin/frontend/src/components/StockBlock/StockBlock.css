@@ -1,0 +1,72 @@
+.ui.card.stockBlock{
+    background-color: #fafafa;     
+    width: 230px;
+    height: 300px;
+    border : 40px;
+    border-radius: 18px;
+    
+}
+
+
+.stockTitle{
+    font-size : 25px;
+    color: black;
+    font-weight: 900;
+    position: relative;
+    left : 6px;
+    white-space:nowrap;
+}
+
+.stockInfo{
+    font-size : 10px;
+  
+    position: relative;
+    left : 10px;
+}
+
+.dashboard{
+    width: 180px;
+}
+
+.dashboard .CircularProgressbar-text {
+    fill: #f00101;
+    font-size: 20px;
+    font-weight: 1000;
+    text-anchor: middle;
+}
+.dashboard .CircularProgressbar-path {
+    stroke: red;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.dashboardContent{
+    height: 10%;
+}
+
+.priceZone{
+
+    background-color: #f00101;
+    height: 55px;
+    border-radius: 0px 0px 15px 15px;
+    
+}
+
+.stockPrice{
+    font-size : 40px;
+    font-weight: 900;
+    color: white;
+
+    position: relative;
+    top: 10px;
+    left: 5px;
+}
+
+.variation{
+    font-size : 15px;
+    font-weight: 700;
+    color: white;
+    position: relative;
+    top: 10px;
+    left: 10px;
+}

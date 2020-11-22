@@ -4,6 +4,8 @@ import Footer from '../../components/Footer/Footer';
 import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
+import StockBlock from '../../components/StockBlock/StockBlock';
+
 
 const MainPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
@@ -19,7 +21,7 @@ const MainPage = (props) => {
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
-      <div>MainPage</div>
+      <StockBlock id={1}/>
       <Footer history={props.history} />
     </div>
   );
