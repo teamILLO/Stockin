@@ -21,7 +21,7 @@ const MainPage = (props) => {
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
-      <StockBlock id={1}/>
+        <StockBlock id={1}/>
       <Footer history={props.history} />
     </div>
   );
