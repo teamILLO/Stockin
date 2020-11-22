@@ -21,7 +21,29 @@ export const { postgroup, getgrouplist } = slice.actions;
 export const postGroup = (name) => async (dispatch) => {
   try {
     await api.post('/groups/', name)
-      .then((response) => dispatch(postgroup(response.data)));
+    .then(async (response) => {
+      try {
+        await api.get('/groups/')
+          .then((response) => dispatch(getgrouplist(response.data)));
+      } catch (e) {
+        return console.error(e.message);
+        }
+    })
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+
+export const deleteGroup = (group_id) => async (dispatch) => {
+  try {
+    await api.delete('/groups/' + group_id + '/')
+      .then(async (response) => {
+        try {
+          await api.get('/groups/')
+            .then((response) => dispatch(getgrouplist(response.data)));
+        } catch (e) {
+          return console.error(e.message);
+      }})
   } catch (e) {
     return console.error(e.message);
   }

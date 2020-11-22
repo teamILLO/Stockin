@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Checkbox, Form, Button } from 'semantic-ui-react';
-import { getGroupList } from '../../../store/groups/groups';
+import { deleteGroup } from '../../../store/groups/groups';
 
 import MakeNewGroupModal from './MakeNewGroupModal';
   
 
 const EditGroup = () => {
+  const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [ renderItem, setRenderItem ] = useState([]);
   const [ checkedItems, setCheckedItems ] = useState([]);
@@ -21,16 +22,17 @@ const EditGroup = () => {
   }, [groupList]);
 
   useEffect(() => {
-    console.log("checkedItems changed");
     setRenderItem(groupList.map((e) => RenderListItem(e)));
   }, [checkedItems]);
 
-  const onChangeHandler = (id) => {
+  const onChangeHandler = (event, data) => {
+    let id = data.value;
+    let checked = data.checked;
     let newCheckedItems = checkedItems;
 
     for(let i = 0; i < newCheckedItems.length; i++) {
       if(newCheckedItems[i].id === id) {
-        newCheckedItems[i] = {...newCheckedItems[i], 'checked' : !newCheckedItems[i].checked};
+        newCheckedItems[i] = {...newCheckedItems[i], 'checked' : checked};
         break;
       }
     }
@@ -49,20 +51,13 @@ const EditGroup = () => {
   };
 
   const deleteButtonHandler = () => {
-    console.log("delete button clicked");
-  };
-
-  const isChecked = (id) => {
     checkedItems.forEach((e) => {
-        if(e.id === id)
-            console.log("called");
-            return e.checked;
-    })
+        if(e.checked) {
+            dispatch(deleteGroup(e.id)); 
+        }
+    });
   };
 
-  /** 
-   * List items rendering
-   */
   const RenderListItem = (e) => ( 
     <List.Item key={e.id}>
       <List.Content>
@@ -70,7 +65,7 @@ const EditGroup = () => {
           <Checkbox 
             value={e.id}
             label={e.name} 
-            onChange={() => onChangeHandler(e.id)}
+            onChange={(event, data) => onChangeHandler(event, data)}
           />
         </List.Header>
       </List.Content>

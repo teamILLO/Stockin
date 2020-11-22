@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Modal, Form } from 'semantic-ui-react';
 import { postGroup, getGroupList } from '../../../store/groups/groups';
