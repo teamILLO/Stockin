@@ -71,7 +71,6 @@ const EditGroup = () => {
             value={e.id}
             label={e.name} 
             onChange={() => onChangeHandler(e.id)}
-            checked = { (console.log("called")) }
           />
         </List.Header>
       </List.Content>
@@ -95,15 +94,4 @@ const EditGroup = () => {
 }
 
 export default EditGroup;
-
-
-// const RenderListItem = (e) => {
-//   var stocks = e.stocks.map((s) => 
-//       <List.Item key={s.id}>
-//           <List.Icon name='file' />
-//           <List.Content>
-//               <List.Header>{s.title}<Checkbox/></List.Header>
-//           </List.Content>
-//       </List.Item>
-//   );
   

@@ -9,10 +9,7 @@ const slice = createSlice({
   },
   reducers: {
     postgroup: (state, action) => ({ ...state, group: action.payload.name }),
-    getgrouplist: (state, action) => {
-      state.groupList = action.payload;
-      console.log(state.groupList);
-    },
+    getgrouplist: (state, action) => ({ ...state, groupList: action.payload }),
   },
 });
 

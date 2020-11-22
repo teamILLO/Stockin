@@ -1,9 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { List, Checkbox, Form, Button, Dropdown } from 'semantic-ui-react'
 
 import { getGroupList, deleteGroupStock } from '../../../store/groups/groups';
-
 
 let groupOptions = [];
 
@@ -19,12 +18,11 @@ const EditStock = () => {
 
   useEffect(() => {
     groupOptions = groupList.map((e) => ({key : e.id, text : e.name, value : e.id}));
-    console.log(groupList);
-    if(checkedItem.current.length != 0) {
+    if(checkedItem.current.length !== 0) {
       let group_id = checkedItem.current[0].split(' ')[0];
       let stocks;
       groupList.forEach((e) => {
-        if(e.id == group_id) {
+        if(e.id === Number(group_id)) {
           stocks = e.stocks;
           group_id = e.id;
           checkedItem.current = [];
@@ -44,7 +42,6 @@ const EditStock = () => {
         checkedItem.current.splice(idx, 1);
       } 
     }
-    console.log(checkedItem.current);
   };
 
   const RenderListItem = (group_id, stocks) => {
@@ -54,7 +51,6 @@ const EditStock = () => {
           <List.Content>
               <List.Header>
                 <Checkbox 
-                  defaultChecked={false}
                   label={s.title} 
                   value={group_id + ' ' + s.id}
                   onChange={(event, data) => itemOnchangeHandler(event, data)}
@@ -68,7 +64,6 @@ const EditStock = () => {
   const deleteButtonHandler = () => {
     let group_id = '';
     let stock_id = '';
-    let stocks = [];
 
     checkedItem.current.forEach((e) => {
       group_id = e.split(' ')[0];
@@ -78,17 +73,6 @@ const EditStock = () => {
   };
 
   const dropDownOnChangeHandler = (event, data) => {
-    // 1. get value // 
-    // 2. value -> get stocks // 
-    // 3. stocks -> rendering  // 
-    // 4. stocks : value change, re-rendering should executed. // 
-    //    -> onChange handler : can capture value changes -> re-rendering.. how??
-    //    -> rendering function call, re-rendering, using `reducer` state??
-    // 5. stocks : each rendered component should have checkbox. //
-    // 6. checkbox checked, just push value(A). //
-    // 7. when delete button clicked, using (A), delete stocks from group in real DB. //
-    // 8. re-rendering stock list -> how?? -> useEffect with dep `dispatch` or `groupList`
-    
     let stocks = [];
     let group_id = '';
     
@@ -112,6 +96,7 @@ const EditStock = () => {
             options={groupOptions}
             onChange={(event, data) => dropDownOnChangeHandler(event, data)}
         />
+        <Checkbox />
         <Button content='delete' onClick = {() => deleteButtonHandler()}/>
         <List>
           {renderItem}
