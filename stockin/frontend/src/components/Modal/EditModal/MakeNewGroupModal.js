@@ -4,7 +4,7 @@ import { Button, Modal, Form } from 'semantic-ui-react';
 import { postGroup, getGroupList } from '../../../store/groups/groups';
 
 
-const MakeNewGroupModal = () => {
+const MakeNewGroupModal = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [groupName, setGroupName] = useState('');
@@ -17,10 +17,9 @@ const MakeNewGroupModal = () => {
 
   return (
     <Modal
-      onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Make New Group</Button>}
+      trigger={props.trigger}
     >
       <Modal.Header>Create New Group</Modal.Header>
       <Modal.Content>
@@ -39,9 +38,11 @@ const MakeNewGroupModal = () => {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
-          Cancel
-        </Button>
+        <Button 
+          content="Cancel"
+          color='black' 
+          onClick={() => setOpen(false)}
+        />
         <Button
           content="Confirm"
           labelPosition='right'

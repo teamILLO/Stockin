@@ -31,7 +31,7 @@ const MyInterestsDetail = () => {
 
   return (
     <div className="MyInterestsDetail" data-testid="MyInterestsDetail">
-      <EditModal />
+      <EditModal trigger={<Button>Edit</Button>}/>
       <Tab panes={panes} />
     </div>
   );

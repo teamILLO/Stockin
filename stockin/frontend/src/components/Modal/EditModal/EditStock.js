@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Checkbox, Form, Button, Dropdown } from 'semantic-ui-react'
 
@@ -10,7 +10,7 @@ const EditStock = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [renderItem, setRenderItem] = useState([]);
-  const checkedItem = useRef([]);
+  const checkedItem = React.useRef([]);
 
   useEffect(() => {
     dispatch(getGroupList());
@@ -38,9 +38,7 @@ const EditStock = () => {
     }
     else {
       const idx = checkedItem.current.indexOf(data.value);
-      if (idx > -1) {
-        checkedItem.current.splice(idx, 1);
-      } 
+      checkedItem.current.splice(idx, 1); 
     }
   };
 
@@ -107,4 +105,5 @@ const EditStock = () => {
 }
 
 export default EditStock;
+
 

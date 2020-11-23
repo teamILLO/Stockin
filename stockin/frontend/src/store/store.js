@@ -19,8 +19,8 @@ const rootReducer = combineReducers({
   stockHistory,
   comment,
   news,
-  groups,
   fs: financialstats,
+  groups,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 

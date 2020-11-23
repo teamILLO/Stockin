@@ -11,25 +11,26 @@ const panes = [
   { menuItem: 'Group Edit', render: () => <Tab.Pane><EditGroup /></Tab.Pane> },
 ]
 
-const EditModal = () => {
+const EditModal = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   return (
     <Modal
-      onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Edit</Button>}
+      trigger={props.trigger}
     >
       <Modal.Header>Edit Page</Modal.Header>
       <Modal.Content>
         <Tab panes={panes} />
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
-          Cancel
-        </Button>
+        <Button 
+          color='black' 
+          content="Cancel" 
+          onClick={() => setOpen(false)} 
+        />
         <Button
           content="Confirm"
           labelPosition='right'

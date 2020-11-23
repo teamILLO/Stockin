@@ -6,7 +6,7 @@ import { deleteGroup } from '../../../store/groups/groups';
 import MakeNewGroupModal from './MakeNewGroupModal';
   
 
-const EditGroup = () => {
+const EditGroup = (props) => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [ renderItem, setRenderItem ] = useState([]);
@@ -37,17 +37,6 @@ const EditGroup = () => {
       }
     }
     setCheckedItems(newCheckedItems);
-    console.log(checkedItems);
-  };
-
-  const selectAllHandler = (data) => {
-    let newCheckedItems = checkedItems;
-    let checked = data.checked;
-    for(let i = 0; i < newCheckedItems.length; i++) {
-        newCheckedItems[i] = {...newCheckedItems[i], 'checked' : checked};
-    }
-    setCheckedItems(newCheckedItems);
-    console.log(checkedItems);
   };
 
   const deleteButtonHandler = () => {
@@ -75,14 +64,13 @@ const EditGroup = () => {
   return (
     <Form>
       <Form.Field>
-        <Checkbox onChange={(event,data) => selectAllHandler(data)}/>
         <Button content='delete' onClick = {() => deleteButtonHandler()}/>
         <List>
           {renderItem}
         </List>
       </Form.Field>
       <Form.Field>
-        <MakeNewGroupModal />
+        <MakeNewGroupModal trigger={<Button>Make New Group</Button>}/>
       </Form.Field>
     </Form> 
   );

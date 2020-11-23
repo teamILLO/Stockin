@@ -4,11 +4,9 @@ import { api } from '../../api/index';
 const slice = createSlice({
   name: 'groups',
   initialState: {
-    group: [],
     groupList: [],
   },
   reducers: {
-    postgroup: (state, action) => ({ ...state, group: action.payload.name }),
     getgrouplist: (state, action) => ({ ...state, groupList: action.payload }),
   },
 });
@@ -16,7 +14,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { postgroup, getgrouplist } = slice.actions;
+export const { getgrouplist } = slice.actions;
 
 export const postGroup = (name) => async (dispatch) => {
   try {
