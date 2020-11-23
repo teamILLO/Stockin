@@ -1,32 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tab, Button, Menu, Input } from 'semantic-ui-react';
-
-import GroupStock from './GroupStock';
+import { Tab, Button } from 'semantic-ui-react';
 import EditModal from '../../Modal/EditModal/EditModal';
 import { getGroupList } from '../../../store/groups/groups';
+import GroupStock from './GroupStock';
 
-/*
- Using dyanmic pane,
- add, edit, show groups 
-*/
+
 const MyInterestsDetail = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [panes, setPanes] = useState([]);
-
-  const groupListChangeHandler = (li) => {
-    var results = [];
-    li.map((e) => results.push({ menuItem : { key: e.id, content: e.name }, render: () => <Tab.Pane>Content</Tab.Pane>}));
-    setPanes(results);
-  };
 
   useEffect(() => {
     dispatch(getGroupList());
   }, []);
 
   useEffect(() => {
-    groupListChangeHandler(groupList);
+    var results = [];
+    results = groupList.map((e) => ({ menuItem : { key: e.id, content: e.name }, render : () => <Tab.Pane><GroupStock stocks={e.stocks} /></Tab.Pane> }));
+    setPanes(results);
   }, [groupList]);
 
   return (

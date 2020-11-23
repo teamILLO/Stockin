@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Button, Modal, Form, Tab } from 'semantic-ui-react';
-import { postGroup, getGroupList } from '../../../store/groups/groups';
+import React, { useState } from 'react';
+import { Button, Modal, Tab } from 'semantic-ui-react';
 
 import EditGroup from './EditGroup';
 import EditStock from './EditStock';
@@ -12,7 +10,6 @@ const panes = [
 ]
 
 const EditModal = (props) => {
-  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   return (
