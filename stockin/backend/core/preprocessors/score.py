@@ -1,43 +1,110 @@
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
-def base_score(fs, cf):
+def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, operatingMargin, avgOperatingMargin):
     # input must be in following structure
-    # fs:
-    # {
-    #   'opratingProfit': list, must contain data of '2019-09-01' to '2020-09-01'
-    #   'netIncome': list, must contain data of '2019-09-01' to '2020-09-01'
-    #   'PER': current PER,
-    #   'avgPER' : average PER of other stocks in same sector,
-    #   'operatingCashFlow': must contain data of '2018-12-01' and '2019-12-01'
     # 
-    # }
-    operatingProfit = fs['operatingProfit']
-    netIncome = fs['netIncome']
-    PER = fs['PER']
-    operatingCashFlow = cf['operatingCashFlow']
-
-    # change all '-' to 0, and if there are too many, set value to N/A
+    #   opratingProfit: list, must contain data of '2019-06-01' to '2020-06-01'
+    #   operatingCashFlow: list, must contain data of '2018-12-01' and '2019-12-01'
+    #   liability : number, liability ratio,
+    #   PER: number, current PER,
+    #   avgPER : number, average PER of other stocks in same sector,
+    #   operatingMargin: number, current operatingMargin,
+    #   avgOperatingMargin: number, average operatingMargin,
+    #
+    # 
 
     OP_CHANGE_GOOD = 0.1 # increase rate per year, compared to initial value
     OP_CHANGE_BAD = -0.1
-    NI_CHANGE_GOOD = 0.1
-    NI_CHANGE_BAD = -0.1
+    OC_GOOD = 0.8
+    OC_BAD = 0.5
+    LIABILITY_GOOD = 1
+    LIABILITY_BAD = 1.5
+
+    OPERATING_PROFIT_MISSING = 1
+    OPERATING_CASHFLOW_MISSING = 1<<1
+    
+    
+    OP_PASS = False
+    OC_PASS = False
+    OP_COUNT = 5
+    OP_score = 0
+    OC_score = 0
 
     ############
     # objective scores
+    # ----------------
+    # operatingProfit
+    # cashflow
+    # liability ratio
     ############
+    
+    NOT_ASSESSABLE = {'score': None, 'status' : 0}
+    trimmed_OP_list = []
+    # dropout non-existing data
+    # if recent data does not exist, NOT_ASSESSABLE
+    if operatingProfit[4] == '' or operatingProfit[3] == '':
+        NOT_ASSESSABLE['status'] |= OPERATING_PROFIT_MISSING
+        return NOT_ASSESSABLE
+    elif operatingProfit[2] == '':
+        OP_PASS = True
+    elif operatingProfit[1] == '' and operatingProfit[0] == '':
+        OP_COUNT = 3
+        trimmed_OP_list = operatingProfit[2:4]
+    elif operatingProfit[1] == '':
+        OP_COUNT = 4
+        for i in (0,2,3,4):
+            trimmed_OP_list.append(operatingProfit[i])
+    elif operatingProfit[0] == '':
+        OP_COUNT = 4
+        for i in (1,2,3,4):
+            trimmed_OP_list.append(operatingProfit[i])  
+
+    if operatingCashFlow[1] == '':
+        NOT_ASSESSABLE['status'] |= OPERATING_CASHFLOW_MISSING
+        return NOT_ASSESSABLE
+    elif operatingCashFlow[0] == '':
+        OC_PASS = True
 
     # calculate trend of operatingProfit
-    x = [[0], [0.25], [0.5], [0.75], [1]]
-    OP_slope = LinearRegression().fit(x, operatingProfit).coef_
+    # x 
+    x = []
+    for i in range(0, OP_COUNT):
+        x.append(i/4)
+    
+    OP_model = LinearRegression().fit(x, operatingProfit)
+    OP_slope = OP_model.coef_
+    OP_midpoint = OP_model.coef_ * (OP_COUNT//2)/4 + OP_model.intercept_
     OP_increase_rate = OP_slope/operatingProfit[0]
 
-    # calculate trend of netIncome
-    NI_slope = LinearRegression().fit(x, netIncome).coef_
-    NI_increase_rate = OP_slope/netIncome[0]
+    if OP_increase_rate > OP_CHANGE_GOOD:
+        if OP_midpoint <= 0:
+            # it seems OP will be negative in next quarter
+            if OP_midpoint + OP_slope / 4 * (OP_COUNT-OP_COUNT//2) <0:
+                #TODO: BAD
+                pass
+            else:
+                OC_PASS= True
+                pass
+        else:
+            #TODO: GOOD
+            pass
+    elif OP_increase_rate < OP_CHANGE_BAD:
+        #TODO: BAD
+        pass
+            
+        
 
-    # check if operatingCashFlow outlies from OP and NI
+    # check if operatingCashFlow outlies from OP
+    
+    if operatingCashFlow[0]/OP_midpoint > OC_GOOD and operatingCashFlow[1]/OP_midpoint > OC_GOOD :
+        #TODO: GOOD
+        pass
+    elif operatingCashFlow[0]/OP_midpoint < OC_BAD and operatingCashFlow[1]/OP_midpoint < OC_BAD :
+        #TODO: BAD
+        pass
+
+    # check liability ratio
 
 
     # calculate objective score
@@ -46,6 +113,9 @@ def base_score(fs, cf):
 
     ############
     # subjective scores
+    # ---------------
+    # PER
+    # operatingmargin
     ############
 
     # calculate PER score
