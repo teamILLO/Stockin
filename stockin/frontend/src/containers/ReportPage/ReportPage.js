@@ -2,7 +2,7 @@ import React, { useState, useEffect, createRef } from 'react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { useSelector, useDispatch } from 'react-redux';
-import { Sticky, Menu, Input } from 'semantic-ui-react';
+import { Sticky, Menu, Input, Container } from 'semantic-ui-react';
 
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
@@ -33,6 +33,7 @@ const ReportPage = (props) => {
   return (
     <div className="ReportPage" data-testid="ReportPage" ref={contextRef}>
       <Header history={props.history} />
+      <Container>
       <Sticky context={contextRef} offset={64.8}>
         <Menu attached="top" tabular style={{ backgroundColor: '#fff', paddingTop: '1em' }}>
           <Menu.Item as="a" active={up} onClick={() => onClickUpHandler()} name="up" />
@@ -298,6 +299,7 @@ const ReportPage = (props) => {
       <div>248</div>
       <div>249</div>
       <div>250</div>
+      </Container>
       <Footer history={props.history} />
     </div>
   );
