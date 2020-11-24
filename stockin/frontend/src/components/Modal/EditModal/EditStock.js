@@ -88,17 +88,18 @@ const EditStock = () => {
     <Form>
       <Form.Field>
         <Dropdown
-            placeholder='Select Group'
+            placeholder='그룹 선택'
             fluid
             selection
             options={groupOptions}
             onChange={(event, data) => dropDownOnChangeHandler(event, data)}
         />
-        <Checkbox />
-        <Button content='delete' onClick = {() => deleteButtonHandler()}/>
         <List>
           {renderItem}
         </List>
+      </Form.Field>
+      <Form.Field>
+        <Button content='삭제' onClick = {() => deleteButtonHandler()}/>
       </Form.Field>
     </Form> 
   );

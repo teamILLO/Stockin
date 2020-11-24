@@ -146,7 +146,6 @@ def stockUpdate(process=32):
 
     stocks = Stock.objects.all()
    
-    
     pool = Pool(process)
     
     for stock in stocks:

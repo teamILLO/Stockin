@@ -64,13 +64,13 @@ const EditGroup = (props) => {
   return (
     <Form>
       <Form.Field>
-        <Button content='delete' onClick = {() => deleteButtonHandler()}/>
         <List>
           {renderItem}
         </List>
       </Form.Field>
       <Form.Field>
-        <MakeNewGroupModal trigger={<Button>Make New Group</Button>}/>
+        <Button content='삭제' onClick = {() => deleteButtonHandler()}/>
+        <MakeNewGroupModal trigger={<Button content='추가' />}/>
       </Form.Field>
     </Form> 
   );

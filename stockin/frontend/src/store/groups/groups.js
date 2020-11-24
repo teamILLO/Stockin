@@ -70,3 +70,19 @@ export const deleteGroupStock = (group_id, stock_id) => async (dispatch) => {
     return console.error(e.message);
   }
 };
+
+export const postStock = (group_id, stock) => async (dispatch) => {
+  try {
+    await api.post('/groups/' + group_id + '/stocks/', stock)
+    .then(async (response) => {
+      try {
+        await api.get('/groups/')
+          .then((response) => dispatch(getgrouplist(response.data)));
+      } catch (e) {
+        return console.error(e.message);
+        }
+    })
+  } catch (e) {
+    return console.error(e.message);
+  }
+};

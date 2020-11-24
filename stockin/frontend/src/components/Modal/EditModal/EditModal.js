@@ -5,8 +5,8 @@ import EditGroup from './EditGroup';
 import EditStock from './EditStock';
 
 const panes = [
-  { menuItem: 'Stock Edit', render: () => <Tab.Pane><EditStock /></Tab.Pane> },
-  { menuItem: 'Group Edit', render: () => <Tab.Pane><EditGroup /></Tab.Pane> },
+  { menuItem: '종목 수정', render: () => <Tab.Pane><EditStock /></Tab.Pane> },
+  { menuItem: '그룹 수정', render: () => <Tab.Pane><EditGroup /></Tab.Pane> },
 ]
 
 const EditModal = (props) => {
@@ -18,18 +18,18 @@ const EditModal = (props) => {
       open={open}
       trigger={props.trigger}
     >
-      <Modal.Header>Edit Page</Modal.Header>
+      <Modal.Header>나의 관심 관리</Modal.Header>
       <Modal.Content>
         <Tab panes={panes} />
       </Modal.Content>
       <Modal.Actions>
         <Button 
           color='black' 
-          content="Cancel" 
+          content="취소" 
           onClick={() => setOpen(false)} 
         />
         <Button
-          content="Confirm"
+          content="확인"
           labelPosition='right'
           icon='checkmark'
           onClick={() => setOpen(false)}

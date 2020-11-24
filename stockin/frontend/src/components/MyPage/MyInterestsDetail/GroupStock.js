@@ -1,5 +1,6 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
+import EditModal from '../../Modal/EditModal/EditModal';
 
 
 const RenderTableItem = (stock) => 
@@ -10,10 +11,6 @@ const RenderTableItem = (stock) =>
     <Table.Cell >{stock.lowestPrice ? stock.lowestPrice : '-'}</Table.Cell>
     <Table.Cell >{stock.tradeVolume ? stock.tradeVolume : '-'}</Table.Cell>
     <Table.Cell >{stock.tradeValue ? stock.tradeValue : '-'}</Table.Cell>
-    <Table.Cell >{stock.startPrice ? stock.startPrice : '-'}</Table.Cell>
-    <Table.Cell >{stock.yesterdayPrice ? stock.yesterdayPrice : '-'}</Table.Cell>
-    <Table.Cell >{stock.amount ? stock.amount : '-'}</Table.Cell>
-    <Table.Cell >{stock.isKOSPI ? 'O' : 'X'}</Table.Cell>
   </Table.Row>
 
 const GroupStock = (props) => {
@@ -21,16 +18,12 @@ const GroupStock = (props) => {
     <Table celled>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell>title</Table.HeaderCell>
-        <Table.HeaderCell>price</Table.HeaderCell>
-        <Table.HeaderCell>highest price</Table.HeaderCell>
-        <Table.HeaderCell>lowest price</Table.HeaderCell>
-        <Table.HeaderCell>trade volume</Table.HeaderCell>
-        <Table.HeaderCell>trade value</Table.HeaderCell>
-        <Table.HeaderCell>start price</Table.HeaderCell>
-        <Table.HeaderCell>yesterday price</Table.HeaderCell>
-        <Table.HeaderCell>amount</Table.HeaderCell>
-        <Table.HeaderCell>is KOSPI</Table.HeaderCell>
+        <Table.HeaderCell>종목명</Table.HeaderCell>
+        <Table.HeaderCell>현재가</Table.HeaderCell>
+        <Table.HeaderCell>최고가</Table.HeaderCell>
+        <Table.HeaderCell>최저가</Table.HeaderCell>
+        <Table.HeaderCell>총거래량</Table.HeaderCell>
+        <Table.HeaderCell>총거래가격</Table.HeaderCell>
       </Table.Row>
     </Table.Header>
 

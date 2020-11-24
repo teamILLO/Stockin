@@ -50,7 +50,7 @@ const DetailPage = (props) => {
     dispatch(getStockHistory(+props.match.params.id));
   }, [dispatch, loggingIn, props.match.params.id]);
 
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData data={priceList} />;
+  let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
 
   const changeScroll = () => {
     let style = document.body.style.overflow;
