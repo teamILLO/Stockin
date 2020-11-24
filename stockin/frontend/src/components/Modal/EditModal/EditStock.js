@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { List, Checkbox, Form, Button, Dropdown } from 'semantic-ui-react'
 
+import AddStockModal from '../../Modal/EditModal/AddStockModal';
 import { getGroupList, deleteGroupStock } from '../../../store/groups/groups';
+
 
 let groupOptions = [];
 
@@ -10,6 +12,7 @@ const EditStock = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [renderItem, setRenderItem] = useState([]);
+  const [selectedGroupID, setSelectedGroupID] = useState(0);
   const checkedItem = React.useRef([]);
 
   useEffect(() => {
@@ -18,6 +21,7 @@ const EditStock = () => {
 
   useEffect(() => {
     groupOptions = groupList.map((e) => ({key : e.id, text : e.name, value : e.id}));
+
     if(checkedItem.current.length !== 0) {
       let group_id = checkedItem.current[0].split(' ')[0];
       let stocks;
@@ -27,6 +31,15 @@ const EditStock = () => {
           group_id = e.id;
           checkedItem.current = [];
           setRenderItem(RenderListItem(group_id, stocks));
+        }
+      });
+    }
+
+    if(selectedGroupID) {
+      groupList.forEach((e) => {
+        if(e.id === selectedGroupID) {
+          checkedItem.current = [];
+          setRenderItem(RenderListItem(e.id, e.stocks));
         }
       });
     }
@@ -82,6 +95,7 @@ const EditStock = () => {
     });
     checkedItem.current = [];
     setRenderItem(RenderListItem(group_id, stocks));
+    setSelectedGroupID(group_id);
   };
 
   return (
@@ -100,6 +114,10 @@ const EditStock = () => {
       </Form.Field>
       <Form.Field>
         <Button content='삭제' onClick = {() => deleteButtonHandler()}/>
+        <AddStockModal 
+          trigger={<Button content='추가' disabled={selectedGroupID === 0 ? true : false} />} 
+          group_id={selectedGroupID} 
+        />
       </Form.Field>
     </Form> 
   );
