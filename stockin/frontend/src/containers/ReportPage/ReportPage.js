@@ -1,9 +1,9 @@
 import React, { useState, useEffect, createRef } from 'react';
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
 import { useSelector, useDispatch } from 'react-redux';
 import { Sticky, Menu, Input, Container } from 'semantic-ui-react';
-
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import StockReportBlock from '../../components/StockReportBlock/StockReportBlock';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 
@@ -29,7 +29,7 @@ const ReportPage = (props) => {
     setDown(true);
     setUp(false);
   };
-
+  let priceList = []
   return (
     <div className="ReportPage" data-testid="ReportPage" ref={contextRef}>
       <Header history={props.history} />
@@ -49,6 +49,10 @@ const ReportPage = (props) => {
           </Menu.Menu>
         </Menu>
       </Sticky>
+      <StockReportBlock 
+        rank="1"
+        id="332"
+      />
       <div>1</div>
       <div>2</div>
       <div>3</div>
