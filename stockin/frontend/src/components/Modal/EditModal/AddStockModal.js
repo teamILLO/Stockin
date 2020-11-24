@@ -10,7 +10,6 @@ const initialState = {
   loading: false,
   results: [],
   value: '',
-  selected_stock_id : '',
 };
 
 function addStockReducer(state, action) {
@@ -22,7 +21,7 @@ function addStockReducer(state, action) {
     case 'FINISH_SEARCH':
       return { ...state, loading: false, results: action.results };
     case 'UPDATE_SELECTION':
-      return { ...state, value: action.selection, selected_stock_id : action.id };
+      return { ...state, value: action.selection};
     default:
       return;
   }
@@ -31,9 +30,11 @@ function addStockReducer(state, action) {
 const AddStockModal = (props) => {
   const _dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [isDuplicated, setIsDuplicated] = useState(false);
   const { stockList } = useSelector((state) => state.stock);
+  const { groupList } = useSelector((state) => state.groups);
   const [state, dispatch] = React.useReducer(addStockReducer, initialState);
-  const { loading, results, value, selected_stock_id } = state;
+  const { loading, results, value } = state;
   const timeoutRef = React.useRef();
  
   useEffect(() => {
@@ -74,15 +75,31 @@ const AddStockModal = (props) => {
   );
 
   const handleResultSelect = (e, data) => {
-    var selected_stock = data.result;
-    dispatch({ type: 'UPDATE_SELECTION', selection: selected_stock.title, id : selected_stock.id });
+    let is_dup = false;
+
+    groupList.forEach((e) => {
+        if(e.id === props.group_id) {
+            e.stocks.forEach((stock) => {
+                if(stock.id === data.result.id) {
+                    is_dup = true;
+                    setIsDuplicated(true);
+                }
+            });
+        }
+    });
+    dispatch({ type: 'UPDATE_SELECTION', selection: data.result.title, id : data.result.id });
+    
+    if(!is_dup) {
+        _dispatch(postStock(props.group_id, {'id' : data.result.id}));
+        dispatch({ type: 'CLEAN_QUERY' });
+        setIsDuplicated(false);
+        setOpen(false);
+    }
   };
 
-  const onClickConfirmHandler = () => {
-    console.log(selected_stock_id);
-    if(selected_stock_id != 0) {
-        _dispatch(postStock(props.group_id, {'id' : selected_stock_id}));
-    }
+  const onClickCancelHandler = () => {
+    dispatch({ type: 'CLEAN_QUERY' });
+    setIsDuplicated(false);
     setOpen(false);
   };
 
@@ -102,19 +119,13 @@ const AddStockModal = (props) => {
                 results={results}
                 value={value}
             />
+            {isDuplicated ? <label>같은 종목이 이미 존재합니다.</label> : ""}
         </Modal.Content>
         <Modal.Actions>
             <Button 
             color='black' 
             content="취소" 
-            onClick={() => setOpen(false)} 
-            />
-            <Button
-            content="확인"
-            labelPosition='right'
-            icon='checkmark'
-            onClick={() => onClickConfirmHandler()}
-            positive
+            onClick={() => onClickCancelHandler()} 
             />
         </Modal.Actions>
     </Modal>

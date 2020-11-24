@@ -1,6 +1,5 @@
 import React from 'react';
-import { Table, Button } from 'semantic-ui-react';
-import EditModal from '../../Modal/EditModal/EditModal';
+import { Table } from 'semantic-ui-react';
 
 
 const RenderTableItem = (stock) => 

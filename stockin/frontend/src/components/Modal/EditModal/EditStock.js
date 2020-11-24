@@ -113,7 +113,7 @@ const EditStock = () => {
         </List>
       </Form.Field>
       <Form.Field>
-        <Button content='삭제' onClick = {() => deleteButtonHandler()}/>
+        <Button content='삭제' disabled={selectedGroupID === 0 ? true : false} onClick = {() => deleteButtonHandler()}/>
         <AddStockModal 
           trigger={<Button content='추가' disabled={selectedGroupID === 0 ? true : false} />} 
           group_id={selectedGroupID} 

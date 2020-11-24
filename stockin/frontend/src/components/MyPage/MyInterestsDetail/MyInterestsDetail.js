@@ -24,7 +24,7 @@ const MyInterestsDetail = () => {
   return (
     <div className="MyInterestsDetail" data-testid="MyInterestsDetail">
       <EditModal 
-        trigger={<Button>수정</Button>}
+        trigger={<Button>편집</Button>}
       />
       <Tab panes={panes} />
     </div>
