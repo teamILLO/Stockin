@@ -15,6 +15,7 @@ import time
 from multiprocessing import Pool, Process
 
 from selenium import webdriver
+from bs4 import BeautifulSoup
 
 import re
 
@@ -30,11 +31,11 @@ def initialStockAddFromExcel():
     
     driver.implicitly_wait(3)
     f = open('stocks.csv','w', newline='')
-    writer = csv.DictWriter(f, fieldnames = ['title','code','sector','isKOSPI'])
+    writer = csv.DictWriter(f, fieldnames = ['title','code','sector','isKOSPI', 'saleGrowthRate', 'saleGrowthRateAvg', 'operatingMarginRate', 'operatingMarginRateAvg', 'crawledPER', 'crawledPERAvg'])
     writer.writeheader()
-
+    i = 0
     try:
-        code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSPI.xls'))[['종목코드', '기업명']]
+        code_title = pd.read_excel(os.path.join(BASE_DIR,'core/crawlers/KOSPI.xls'))[['종목코드', '기업명']]
         code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
         
         for stock in code_title.iloc:
@@ -43,15 +44,29 @@ def initialStockAddFromExcel():
             # try:
             #     Stock.objects.get(code=code)
             # except:
-            driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
-            # time.sleep(1)
-            sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-            # Stock(title = title, code=code, sector=sector, isKOSPI=True).save()
-            writer.writerow({'title':title, 'code':code, 'sector':sector, 'isKOSPI':True})
-            
-            
+            driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code + '/analysis')
+            time.sleep(1)            
+            raw = driver.page_source
+            soup = BeautifulSoup(raw, 'html.parser')
+            print(i)
+            i+=1
+            try:
+                saleGrowthRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(1) > li > div > div.graph > span > em')
+                operatingMarginRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(2) > li > div > div.graph > span > em')
+                crawledPER = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(3) > li > div > div.graph > span > em')
+                sector = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.titleB > em')
+                sector = sector[0].get_text().replace('업종 : ', '')
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':True, 'saleGrowthRate': saleGrowthRate[0].get_text(), 'saleGrowthRateAvg': saleGrowthRate[1].get_text(), 'operatingMarginRate': operatingMarginRate[0].get_text(), 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': crawledPER[0].get_text(), 'crawledPERAvg': crawledPER[1].get_text()})
+                # print('title : ' + title + ' code : ' + code + ' sector : '+ sector +  ' isKOSPI : False')
+                # print('sgr : ' + saleGrowthRate[0].get_text() + ' sgrAvg : ' + saleGrowthRate[1].get_text() + ' omrRate : ' + operatingMarginRate[0].get_text() + ' omrAvg : ' + operatingMarginRate[1].get_text() + ' per : ' + crawledPER[0].get_text() + ' perAvg : ' + crawledPER[1].get_text())
+            except:
+                driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code)
+                time.sleep(1)
+                sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':True})
+
         
-        code_title = pd.read_excel(os.path.join(BASE_DIR,'apps/stocks/stock-Excel/KOSDAQ.xls'))[['종목코드', '기업명']]
+        code_title = pd.read_excel(os.path.join(BASE_DIR,'core/crawlers/KOSDAQ.xls'))[['종목코드', '기업명']]
         code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
 
         for stock in code_title.iloc:
@@ -60,11 +75,33 @@ def initialStockAddFromExcel():
             # try:
             #     Stock.objects.get(code=code)
             # except:
-            driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
+            # driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
             # time.sleep(1)
-            sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
+            # sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
             # Stock(title = title, code=code, sector=sector, isKOSPI=False).save()
-            writer.writerow({'title':title, 'code':code, 'sector':sector, 'isKOSPI':False})
+            # writer.writerow({'title':title, 'code':code, 'sector':sector, 'isKOSPI':False})
+
+            driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code + '/analysis')
+            time.sleep(1)
+            raw = driver.page_source
+            soup = BeautifulSoup(raw, 'html.parser')
+            print(i)
+            i+=1
+            try:
+                saleGrowthRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(1) > li > div > div.graph > span > em')
+                operatingMarginRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(2) > li > div > div.graph > span > em')
+                crawledPER = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(3) > li > div > div.graph > span > em')
+                sector = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.titleB > em')
+                sector = sector[0].get_text().replace('업종 : ', '')
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':False, 'saleGrowthRate': saleGrowthRate[0].get_text(), 'saleGrowthRateAvg': saleGrowthRate[1].get_text(), 'operatingMarginRate': operatingMarginRate[0].get_text(), 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': crawledPER[0].get_text(), 'crawledPERAvg': crawledPER[1].get_text()})
+                # print('title : ' + title + ' code : ' + code + ' sector : '+ sector +  ' isKOSPI : False')
+                # print('sgr : ' + saleGrowthRate[0].get_text() + ' sgrAvg : ' + saleGrowthRate[1].get_text() + ' omrRate : ' + operatingMarginRate[0].get_text() + ' omrAvg : ' + operatingMarginRate[1].get_text() + ' per : ' + crawledPER[0].get_text() + ' perAvg : ' + crawledPER[1].get_text())
+            except:
+                driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code)
+                time.sleep(1)
+                sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':False})
+            
     finally:
         driver.quit()
         f.close()
@@ -83,9 +120,15 @@ def initialStockAdd():
         for stock in reader:
             stock_list.append(Stock(
                 title=stock['title'],
-                sector=stock['sector'],
                 code=stock['code'],
-                isKOSPI=stock['isKOSPI']
+                sector=stock['sector'],
+                isKOSPI=stock['isKOSPI'],
+                saleGrowthRate=stock['saleGrowthRate'],
+                saleGrowthRateAvg=stock['saleGrowthRateAvg'],
+                operatingMarginRate=stock['operatingMarginRate'],
+                operatingMarginRateAvg=stock['operatingMarginRateAvg'],
+                crawledPER=stock['crawledPER'],
+                crawledPERAvg=stock['crawledPERAvg']
             ))
     
     Stock.objects.bulk_create(stock_list)
@@ -253,7 +296,7 @@ if __name__ == '__main__':
     # stockHistory(s)
     
     if sys.argv[1] == 'initial':
-        print(' initial stock-adding start!')
+        print('initial stock-adding start!')
         initialStockAdd()
         print('finish!')
     
@@ -266,4 +309,9 @@ if __name__ == '__main__':
         count = int(sys.argv[2])
         print('past stock-info start!')
         pastStockHistory(count)
+        print('finish!')
+
+    elif sys.argv[1] == 'crawl':
+        print('crawling start!')
+        initialStockAddFromExcel()
         print('finish!')
