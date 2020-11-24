@@ -77,7 +77,13 @@ def stock_info(request, stock_id=''):
                         'startPrice' : target_stock.startPrice,
                         'yesterdayPrice' : target_stock.yesterdayPrice,
                         'amount' : target_stock.amount,
-                        'isKOSPI' : kospi
+                        'isKOSPI' : kospi,
+                        'saleGrowthRate' : target_stock.saleGrowthRate,
+                        'saleGrowthRateAvg' : target_stock.saleGrowthRateAvg,
+                        'operatingMarginRate' : target_stock.operatingMarginRate,
+                        'operatingMarginRateAvg' : target_stock.operatingMarginRateAvg,
+                        'crawledPER' : target_stock.crawledPER,
+                        'crawledPERAvg' : target_stock.crawledPERAvg,
                         }
         return HttpResponse(content=json.dumps(response_dict), status=203)
     
