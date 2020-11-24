@@ -113,6 +113,8 @@ def initialStockAdd():
     Stock.objects.all().delete()
     FinancialStat.objects.all().delete()
 
+    print("insert Stock")
+
     stock_list=[]
     financial_list=[]
     with open('data/stocks.csv', 'r') as f:
@@ -132,6 +134,8 @@ def initialStockAdd():
             ))
     
     Stock.objects.bulk_create(stock_list)
+
+    print("insert FinancialStat")
 
     with open('data/Financial_State.csv', 'r') as f:
         reader = csv.DictReader(f)
