@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Segment } from 'semantic-ui-react'
 import { api } from '../../api/index';
 import DetailData from '../../components/Detail/DetailData/DetailData';
+import { timeParse } from 'd3-time-format';
 
 
 const StockReportBlock = (props) => {
@@ -22,9 +23,21 @@ const StockReportBlock = (props) => {
       else
         setVariation((Number(response.data['price'])-Number(response.data['yesterdayPrice'])).toLocaleString() + '▲')
     });
-  });
+    api.get('/stocks/price/' + props.id + '/').then((response) => {
+        let parseDate = timeParse('%Y-%m-%d');
+        let prices = response.data
+        prices.forEach((d) => {
+            d.date = parseDate(d.date);
+            d.open = +d.open;
+            d.high = +d.high;
+            d.low = +d.low;
+            d.close = +d.close;
+        });
+      setPriceList(prices);
+    });
+  }, []);
   
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData data={priceList} />;
+  let graph = priceList  === '' ? 'Loading...' : <DetailData data={priceList} />;
 
   return(
     <Segment color='red'>

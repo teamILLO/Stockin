@@ -215,7 +215,7 @@ def pastStockHistory_(stock, count):
 # 과거 주가 기록 가져오는용
 def pastStockHistory(count, process=32):
     stocks = Stock.objects.all()
-    StockHistory.objects.delete()
+    StockHistory.objects.all().delete()
     
     pool = Pool(process)
 
