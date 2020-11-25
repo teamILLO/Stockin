@@ -52,6 +52,7 @@ class Stock(models.Model):
     operatingMarginRateAvg = models.CharField(max_length=15, null=True)     #영업이익율 업종 평균
     crawledPER = models.CharField(max_length=15, null=True)                 #per
     crawledPERAvg = models.CharField(max_length=15, null=True)              #per 업종 평균
+    debtRatio = models.CharField(max_length=15, null=True)                  #부채비율
 
     def __str__(self):
         return self.title

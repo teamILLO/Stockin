@@ -18,6 +18,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 
 import re
+import OpenDartReader
 
 from django import db
 import csv
@@ -30,8 +31,12 @@ def initialStockAddFromExcel():
     driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'core/crawlers/phantomjs/phantomjs-2.1.1-macosx/bin/phantomjs')) 
     
     driver.implicitly_wait(3)
+
+    api_key = '365c9909f6ce1ba811ec45d3dc46cfc9853ce05f'
+    dart = OpenDartReader(api_key) 
+
     f = open('stocks.csv','w', newline='')
-    writer = csv.DictWriter(f, fieldnames = ['title','code','sector','isKOSPI', 'saleGrowthRate', 'saleGrowthRateAvg', 'operatingMarginRate', 'operatingMarginRateAvg', 'crawledPER', 'crawledPERAvg'])
+    writer = csv.DictWriter(f, fieldnames = ['title','code','sector','isKOSPI', 'saleGrowthRate', 'saleGrowthRateAvg', 'operatingMarginRate', 'operatingMarginRateAvg', 'crawledPER', 'crawledPERAvg', 'debtRatio'])
     writer.writeheader()
     i = 0
     try:
@@ -41,29 +46,34 @@ def initialStockAddFromExcel():
         for stock in code_title.iloc:
             code = str(stock['종목코드'])
             title = str(stock['기업명'])
-            # try:
-            #     Stock.objects.get(code=code)
-            # except:
+
             driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code + '/analysis')
             time.sleep(1)            
             raw = driver.page_source
             soup = BeautifulSoup(raw, 'html.parser')
             print(i)
             i+=1
+
+            try:
+                finstate = dart.finstate(code, 2019)
+                liabilities = finstate[(finstate['account_nm'] == '부채총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
+                equality = finstate[(finstate['account_nm'] == '자본총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
+                debtRatio = "%0.3f" % ((float(liabilities) / float(equality)) * 100)
+            except:
+                debtRatio = ''
+
             try:
                 saleGrowthRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(1) > li > div > div.graph > span > em')
                 operatingMarginRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(2) > li > div > div.graph > span > em')
                 crawledPER = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(3) > li > div > div.graph > span > em')
                 sector = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.titleB > em')
                 sector = sector[0].get_text().replace('업종 : ', '')
-                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':True, 'saleGrowthRate': saleGrowthRate[0].get_text(), 'saleGrowthRateAvg': saleGrowthRate[1].get_text(), 'operatingMarginRate': operatingMarginRate[0].get_text(), 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': crawledPER[0].get_text(), 'crawledPERAvg': crawledPER[1].get_text()})
-                # print('title : ' + title + ' code : ' + code + ' sector : '+ sector +  ' isKOSPI : False')
-                # print('sgr : ' + saleGrowthRate[0].get_text() + ' sgrAvg : ' + saleGrowthRate[1].get_text() + ' omrRate : ' + operatingMarginRate[0].get_text() + ' omrAvg : ' + operatingMarginRate[1].get_text() + ' per : ' + crawledPER[0].get_text() + ' perAvg : ' + crawledPER[1].get_text())
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':True, 'saleGrowthRate': saleGrowthRate[0].get_text(), 'saleGrowthRateAvg': saleGrowthRate[1].get_text(), 'operatingMarginRate': operatingMarginRate[0].get_text(), 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': crawledPER[0].get_text(), 'crawledPERAvg': crawledPER[1].get_text(), 'debtRatio': debtRatio})
             except:
                 driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code)
                 time.sleep(1)
                 sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':True})
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':True, 'debtRatio': debtRatio})
 
         
         code_title = pd.read_excel(os.path.join(BASE_DIR,'core/crawlers/KOSDAQ.xls'))[['종목코드', '기업명']]
@@ -72,14 +82,6 @@ def initialStockAddFromExcel():
         for stock in code_title.iloc:
             code = str(stock['종목코드'])
             title = str(stock['기업명'])
-            # try:
-            #     Stock.objects.get(code=code)
-            # except:
-            # driver.get('https://stockplus.com/m/stocks/KOREA-A'+code)
-            # time.sleep(1)
-            # sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-            # Stock(title = title, code=code, sector=sector, isKOSPI=False).save()
-            # writer.writerow({'title':title, 'code':code, 'sector':sector, 'isKOSPI':False})
 
             driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code + '/analysis')
             time.sleep(1)
@@ -87,25 +89,32 @@ def initialStockAddFromExcel():
             soup = BeautifulSoup(raw, 'html.parser')
             print(i)
             i+=1
+
+            try:
+                finstate = dart.finstate(code, 2019)
+                liabilities = finstate[(finstate['account_nm'] == '부채총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
+                equality = finstate[(finstate['account_nm'] == '자본총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
+                debtRatio = "%0.3f" % ((float(liabilities) / float(equality)) * 100)
+            except:
+                debtRatio = ''
+               
             try:
                 saleGrowthRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(1) > li > div > div.graph > span > em')
                 operatingMarginRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(2) > li > div > div.graph > span > em')
                 crawledPER = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(3) > li > div > div.graph > span > em')
                 sector = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.titleB > em')
                 sector = sector[0].get_text().replace('업종 : ', '')
-                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':False, 'saleGrowthRate': saleGrowthRate[0].get_text(), 'saleGrowthRateAvg': saleGrowthRate[1].get_text(), 'operatingMarginRate': operatingMarginRate[0].get_text(), 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': crawledPER[0].get_text(), 'crawledPERAvg': crawledPER[1].get_text()})
-                # print('title : ' + title + ' code : ' + code + ' sector : '+ sector +  ' isKOSPI : False')
-                # print('sgr : ' + saleGrowthRate[0].get_text() + ' sgrAvg : ' + saleGrowthRate[1].get_text() + ' omrRate : ' + operatingMarginRate[0].get_text() + ' omrAvg : ' + operatingMarginRate[1].get_text() + ' per : ' + crawledPER[0].get_text() + ' perAvg : ' + crawledPER[1].get_text())
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':False, 'saleGrowthRate': saleGrowthRate[0].get_text(), 'saleGrowthRateAvg': saleGrowthRate[1].get_text(), 'operatingMarginRate': operatingMarginRate[0].get_text(), 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': crawledPER[0].get_text(), 'crawledPERAvg': crawledPER[1].get_text(), 'debtRatio': debtRatio})
             except:
                 driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code)
                 time.sleep(1)
                 sector=driver.find_element_by_css_selector('.ftHiLowB.pt0').find_elements_by_tag_name('tr')[5].find_element_by_tag_name('td').text
-                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':False})
-            
+                writer.writerow({'title': title, 'code': code, 'sector': sector, 'isKOSPI':False, 'debtRatio': debtRatio})
+
     finally:
         driver.quit()
         f.close()
-        print('intial 종료')
+        print('crawling 종료')
 
 
 # DB 첨 스타팅용~
@@ -130,7 +139,8 @@ def initialStockAdd():
                 operatingMarginRate=stock['operatingMarginRate'],
                 operatingMarginRateAvg=stock['operatingMarginRateAvg'],
                 crawledPER=stock['crawledPER'],
-                crawledPERAvg=stock['crawledPERAvg']
+                crawledPERAvg=stock['crawledPERAvg'],
+                debtRatio=stock['debtRatio']
             ))
     
     Stock.objects.bulk_create(stock_list)
@@ -158,9 +168,59 @@ def initialStockAdd():
     FinancialStat.objects.bulk_create(financial_list)
             
                         
+
+# daily update scoring data
+def scoringUpdate():
+    Stock.objects.all().delete()
+
+    driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'core/crawlers/phantomjs/phantomjs-2.1.1-macosx/bin/phantomjs')) 
+    driver.implicitly_wait(3)
+    stock_list = []
+    stock_list_csv = []
+    with open('data/stocks.csv', 'r') as f:
+        reader = csv.DictReader(f)
+        for stock in reader:
+
+            driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code + '/analysis')
+            time.sleep(1)            
+            raw = driver.page_source
+            soup = BeautifulSoup(raw, 'html.parser')
+
+            try:
+                saleGrowthRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(1) > li > div > div.graph > span > em')
+                operatingMarginRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(2) > li > div > div.graph > span > em')
+                crawledPER = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(3) > li > div > div.graph > span > em')
+                sgr = saleGrowthRate[0].get_text()
+                sgrAvg = saleGrowthRate[1].get_text()
+                omr = operatingMarginRate[0].get_text()
+                omrAvg = operatingMarginRate[1].get_text()
+                per = crawledPER[0].get_text()
+                perAvg = crawledPER[1].get_text()
+            except:
+                sgr, sgrAvg, omr, omrAvg, per, perAvg = '', '', '', '', '', ''
+
+            stock_list.append(Stock(
+                title=stock['title'],
+                code=stock['code'],
+                sector=stock['sector'],
+                isKOSPI=stock['isKOSPI'],
+                saleGrowthRate=sgr,
+                saleGrowthRateAvg=sgrAvg,
+                operatingMarginRate=omr,
+                operatingMarginRateAvg=omrAvg,
+                crawledPER=per,
+                crawledPERAvg=perAvg,
+                debtRatio=stock['debtRatio']
+            ))
+            stock_list_csv.append({'title': stock['title'], 'code': stock['code'], 'sector': stock['sector'], 'isKOSPI': stock['isKOSPI'], 'saleGrowthRate': sgr, 'saleGrowthRateAvg': sgrAvg, 'operatingMarginRate': omr, 'operatingMarginRateAvg': operatingMarginRate[1].get_text(), 'crawledPER': per, 'crawledPERAvg': perAvg, 'debtRatio': stock['debtRatio']})
+
+    Stock.objects.bulk_create(stock_list)
+    f = open('stocks.csv','w', newline='')
+    writer = csv.DictWriter(f, fieldnames = ['title','code','sector','isKOSPI', 'saleGrowthRate', 'saleGrowthRateAvg', 'operatingMarginRate', 'operatingMarginRateAvg', 'crawledPER', 'crawledPERAvg', 'debtRatio'])
+    writer.writeheader()
+    writer.writerows(stock_list_csv)
+    f.close()
     
-
-
    
 
 
