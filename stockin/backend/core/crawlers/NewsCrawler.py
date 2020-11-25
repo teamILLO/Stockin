@@ -140,7 +140,7 @@ def newsScaling_(stock, today, count=10):
                     'scale': scale
                     })
 
-def newsScaling(today, count=100, process=16):
+def newsScaling(today, count=10, process=16):
     stocks = Stock.objects.all()
     with open('./data/News_Scaling/news_data.csv','w', newline='') as file:
         writer = csv.DictWriter(file, fieldnames = ['title','startDate','endDate','raw','scale'])
@@ -157,12 +157,66 @@ def newsScaling(today, count=100, process=16):
         pool.join()
 
 def newsScalingUpdate(today):
+    oneDay = datetime.timedelta(days=1)
     with open('./data/News_Scaling/news_data.csv','r') as file:
-        reader = csv.DictReader(file)
-        
-        for a in reader:
-            endDate = a['endDate']
+        with open('./data/News_Scaling/news_data.csv','w', newline='') as file2:
+            reader = csv.DictReader(file)
+            wr = csv.DictWriter(file2, fieldnames = ['title','startDate','endDate','raw','scale'])
+            wr.writeheader()
             
+            for a in reader:
+                endDate = a['endDate']
+                
+                stockTitle = a['title']
+        
+                newsdata =[]
+                dateIndex = datetime.date(endDate.split('.')[0], endDate.split('.')[1], endDate.split('.')[2]) + datetime.timedelta(days=1)
+                newsstart = 1
+                newsend = 400
+                allCount=0
+                while dateIndex <= today:
+                    date = dateIndex.strftime('%Y.%m.%d')
+                    
+                    while True:
+                        middle = int((newsstart+newsend)/2)
+                        
+                        raw = requests.get(url.format(stockTitle, date, date, 10*(middle-1)+1, headers=headers))
+                        soup = BeautifulSoup(raw.text, 'html.parser')
+
+                        titles = soup.select('.news_tit')
+
+                        # 이진탐색
+                        if newsstart == middle:
+                            allCount = len(titles) + (middle-1)*10
+                            newsdata.append(allCount)
+                            break
+
+                        if len(titles) == 0:
+                            newsend = middle
+                        elif len(titles) == 10:
+                            newsstart = middle
+                        else:
+                            allCount = len(titles) + (middle-1)*10
+                            newsdata.append(allCount)
+                            break
+
+
+                    print(dateIndex.strftime('%Y.%m.%d'), stockTitle, allCount,"개")
+                    dateIndex += oneDay
+                    newsstart = 1
+                    newsend = 400
+
+                startindex = len(newsdata)
+                new_newsdata = a['raw'][startindex:]+ newsdata
+                scale = minMaxScaler(new_newsdata)
+                
+                wr.writerow({
+                            'title':stockTitle,
+                            'startDate':(today- datetime.timedelta(days=len(new_newsdata)-1)).strftime('%Y.%m.%d'),
+                            'endDate':today.strftime('%Y.%m.%d'),
+                            'raw': new_newsdata,
+                            'scale': scale
+                            })
 
 
 
@@ -184,6 +238,6 @@ if __name__ == '__main__':
     #     end = datetime.date(int(sys.argv[2][:4]), int(sys.argv[2][4:6]), int(sys.argv[2][6:]))
     #     NewsCrawler(start, end)
    
-    newsScaling(datetime.datetime.now()-datetime.timedelta(days=1))
+    newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
     # newsScalingUpdate(1)
  

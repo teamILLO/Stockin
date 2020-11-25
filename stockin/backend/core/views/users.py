@@ -98,10 +98,10 @@ def duplicate(request):
             filter_result = User.objects.filter(nickname = nickname)
 
         if len(filter_result) >= 1:
-            response_dict = {'duplicate': True}
+            response_dict = {'duplicate': True }
             return HttpResponse(content=json.dumps(response_dict), status=203)
         else:
-            response_dict = {'duplicate': False}
+            response_dict = {'duplicate': False }
             return HttpResponse(content=json.dumps(response_dict), status=203)
 
     else:
