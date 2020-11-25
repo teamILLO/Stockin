@@ -56,12 +56,24 @@ def initialStockAddFromExcel():
 
             try:
                 finstate = dart.finstate(code, 2019)
-                liabilities = finstate[(finstate['account_nm'] == '부채총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
-                equality = finstate[(finstate['account_nm'] == '자본총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
+
+                liabilities = finstate[finstate['account_nm'] == '부채총계']
+                if len(liabilities) > 1 :
+                    liabilities = liabilities[liabilities['fs_div'] == 'CFS']['thstrm_amount'].iloc[0].replace(",","")
+                else:
+                    liabilities = liabilities['thstrm_amount'].iloc[0].replace(",","")
+
+                equality = finstate[finstate['account_nm'] == '자본총계']
+                if len(equality) > 1 :
+                    equality = equality[equality['fs_div'] == 'CFS']['thstrm_amount'].iloc[0].replace(",","")
+                else:
+                    equality = equality['thstrm_amount'].iloc[0].replace(",","")
+
                 debtRatio = "%0.3f" % ((float(liabilities) / float(equality)) * 100)
+                
             except:
                 debtRatio = ''
-
+               
             try:
                 saleGrowthRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(1) > li > div > div.graph > span > em')
                 operatingMarginRate = soup.select('body > div:nth-child(1) > div > div:nth-child(1) > main > article > div.contW02 > div.udGraphB > div > div > ul:nth-child(2) > li > div > div.graph > span > em')
@@ -92,9 +104,21 @@ def initialStockAddFromExcel():
 
             try:
                 finstate = dart.finstate(code, 2019)
-                liabilities = finstate[(finstate['account_nm'] == '부채총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
-                equality = finstate[(finstate['account_nm'] == '자본총계') & (finstate['fs_div'] == 'CFS')]['thstrm_amount'].iloc[0].replace(",","")
+
+                liabilities = finstate[finstate['account_nm'] == '부채총계']
+                if len(liabilities) > 1 :
+                    liabilities = liabilities[liabilities['fs_div'] == 'CFS']['thstrm_amount'].iloc[0].replace(",","")
+                else:
+                    liabilities = liabilities['thstrm_amount'].iloc[0].replace(",","")
+                    
+                equality = finstate[finstate['account_nm'] == '자본총계']
+                if len(equality) > 1 :
+                    equality = equality[equality['fs_div'] == 'CFS']['thstrm_amount'].iloc[0].replace(",","")
+                else:
+                    equality = equality['thstrm_amount'].iloc[0].replace(",","")
+
                 debtRatio = "%0.3f" % ((float(liabilities) / float(equality)) * 100)
+
             except:
                 debtRatio = ''
                
@@ -181,7 +205,7 @@ def scoringUpdate():
         reader = csv.DictReader(f)
         for stock in reader:
 
-            driver.get('https://stockplus.com/m/stocks/KOREA-A'+ code + '/analysis')
+            driver.get('https://stockplus.com/m/stocks/KOREA-A'+ stock['code'] + '/analysis')
             time.sleep(1)            
             raw = driver.page_source
             soup = BeautifulSoup(raw, 'html.parser')
@@ -378,4 +402,9 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'crawl':
         print('crawling start!')
         initialStockAddFromExcel()
+        print('finish!')
+
+    elif sys.argv[1] == 'scoring':
+        print('crawling for scoring start!')
+        scoringUpdate()
         print('finish!')

@@ -86,6 +86,7 @@ def stock_info(request, stock_id=''):
                         'operatingMarginRateAvg' : target_stock.operatingMarginRateAvg,
                         'crawledPER' : target_stock.crawledPER,
                         'crawledPERAvg' : target_stock.crawledPERAvg,
+                        'debtRatio' : target_stock.debtRatio
                         }
         return HttpResponse(content=json.dumps(response_dict), status=203)
     
