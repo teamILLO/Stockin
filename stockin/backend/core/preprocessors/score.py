@@ -50,15 +50,16 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
         OP_PASS = True
     elif operatingProfit[1] == '' and operatingProfit[0] == '':
         OP_COUNT = 3
-        trimmed_OP_list = operatingProfit[2:4]
+        trimmed_OP_list = operatingProfit[2:]
     elif operatingProfit[1] == '':
         OP_COUNT = 4
         for i in (0,2,3,4):
             trimmed_OP_list.append(operatingProfit[i])
     elif operatingProfit[0] == '':
         OP_COUNT = 4
-        for i in (1,2,3,4):
-            trimmed_OP_list.append(operatingProfit[i])  
+        trimmed_OP_list = operatingProfit[1:]
+    else:
+        trimmed_OP_list = operatingProfit
 
     if operatingCashFlow[1] == '':
         NOT_ASSESSABLE['status'] |= OPERATING_CASHFLOW_MISSING
@@ -72,15 +73,15 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
     for i in range(0, OP_COUNT):
         x.append(i/4)
     
-    OP_model = LinearRegression().fit(x, operatingProfit)
+    OP_model = LinearRegression().fit(x, trimmed_OP_list)
     OP_slope = OP_model.coef_
-    OP_midpoint = OP_model.coef_ * (OP_COUNT//2)/4 + OP_model.intercept_
-    OP_increase_rate = OP_slope/operatingProfit[0]
+    OP_midpoint = OP_model.coef_ * (OP_COUNT-1)/8 + OP_model.intercept_
+    OP_increase_rate = OP_slope/OP_model.intercept_
 
     if OP_increase_rate > OP_CHANGE_GOOD:
         if OP_midpoint <= 0:
             # it seems OP will be negative in next quarter
-            if OP_midpoint + OP_slope / 4 * (OP_COUNT-OP_COUNT//2) <0:
+            if OP_model.coef_ * OP_COUNT/4 + OP_model.intercept_ <0:
                 #TODO: BAD
                 pass
             else:
@@ -105,6 +106,13 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
         pass
 
     # check liability ratio
+    if liability > LIABILITY_GOOD:
+        #TODO: GOOD
+        pass
+    elif liability < LIABILITY_BAD:
+        #TODO: BAD
+        pass
+
 
 
     # calculate objective score
@@ -119,3 +127,17 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
     ############
 
     # calculate PER score
+    if PER < avgPER:
+        #TODO: GOOD
+        pass
+    else:
+        #TODO: BAD
+        pass
+
+    # calculate operatingMargin
+    if operatingMargin > avgOperatingMargin:
+        #TODO: GOOD
+        pass
+    else:
+        #TODO: BAD
+        pass
