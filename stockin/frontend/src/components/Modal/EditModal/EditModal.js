@@ -18,7 +18,7 @@ const EditModal = (props) => {
       open={open}
       trigger={props.trigger}
     >
-      <Modal.Header>나의 관심 관리</Modal.Header>
+      <Modal.Header>관심종목 관리</Modal.Header>
       <Modal.Content>
         <Tab panes={panes} />
       </Modal.Content>

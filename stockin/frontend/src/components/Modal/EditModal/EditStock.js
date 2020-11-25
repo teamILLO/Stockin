@@ -11,8 +11,8 @@ let groupOptions = [];
 const EditStock = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
-  const [renderItem, setRenderItem] = useState([]);
-  const [selectedGroupID, setSelectedGroupID] = useState(0);
+  const [renderItem, setRenderItem] = React.useState([]);
+  const [selectedGroupID, setSelectedGroupID] = React.useState(0);
   const checkedItem = React.useRef([]);
 
   useEffect(() => {
@@ -35,14 +35,12 @@ const EditStock = () => {
       });
     }
 
-    if(selectedGroupID) {
-      groupList.forEach((e) => {
-        if(e.id === selectedGroupID) {
-          checkedItem.current = [];
-          setRenderItem(RenderListItem(e.id, e.stocks));
-        }
-      });
-    }
+    groupList.forEach((e) => {
+      if(e.id === selectedGroupID) {
+        checkedItem.current = [];
+        setRenderItem(RenderListItem(e.id, e.stocks));
+      }
+    });
   }, [groupList]);
 
   const itemOnchangeHandler = (event, data) => {

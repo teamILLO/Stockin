@@ -58,7 +58,7 @@ describe('<EditGroup />', () => {
 
     it('should render without errors', () => {
         render(editGroup);
-        const query = screen.queryAllByText(/delete/i, { selector: 'button' });
+        const query = screen.queryAllByText(/삭제/i, { selector: 'button' });
         expect(query.length).toBe(1);
     });
 
@@ -75,6 +75,6 @@ describe('<EditGroup />', () => {
         const query = screen.queryAllByText(/custom group1/i, { selector: 'label' });
         expect(query.length).toBe(1);
         fireEvent.click(container.querySelector('input[value="1"]'));
-        fireEvent.click(screen.getByText(/delete/i, { selector: 'button' }));
+        fireEvent.click(screen.getByText(/삭제/i, { selector: 'button' }));
     });
 });

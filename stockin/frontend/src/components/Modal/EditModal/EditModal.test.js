@@ -38,32 +38,32 @@ describe('<EditModal />', () => {
     it('should render without errors', () => {
         render(editModal);
         fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
-        const query = screen.queryAllByText(/Edit Page/i);
+        const query = screen.queryAllByText(/관심종목 관리/i);
         expect(query.length).toBe(1);
     });
 
     it('should change panes', () => {
         const { container } = render(editModal);
         fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
-        fireEvent.click(screen.getByText(/Group Edit/i, { selector: 'a' }));
+        fireEvent.click(screen.getByText(/그룹 수정/i, { selector: 'a' }));
     });
 
     it('should close with close button', () => {
         const { container } = render(editModal);
         fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
-        fireEvent.click(screen.getByText(/Cancel/i, { selector: 'button' }));
-        const query = screen.queryAllByText(/Edit Page/i);
+        fireEvent.click(screen.getByText(/취소/i, { selector: 'button' }));
+        const query = screen.queryAllByText(/관심종목 관리/i);
         expect(query.length).toBe(0);
     });
 
     it('should close with confirm button', () => {
         const { container } = render(editModal);
         fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
-        fireEvent.click(screen.getByText(/Confirm/i, { selector: 'button' }));
-        let query = screen.queryAllByText(/Edit Page/i);
+        fireEvent.click(screen.getByText(/확인/i, { selector: 'button' }));
+        let query = screen.queryAllByText(/관심종목 관리/i);
         expect(query.length).toBe(0);
         fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
-        query = screen.queryAllByText(/Edit Page/i);
+        query = screen.queryAllByText(/관심종목 관리/i);
         expect(query.length).toBe(1);
     });
 });

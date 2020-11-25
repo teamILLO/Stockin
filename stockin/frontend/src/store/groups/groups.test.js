@@ -3,6 +3,7 @@ import groups, {
     getgrouplist,
     getGroupList,
     postGroup,
+    postStock,
     deleteGroup,
     deleteGroupStock,
 } from './groups';
@@ -155,6 +156,90 @@ describe('groups', () => {
       });
 
     store.dispatch(postGroup()).then(() => {
+      expect(spyApiPost).toHaveBeenCalledTimes(1);
+      expect(spyApiGet).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  it(`should work when 'postStock' calls`, (done) => {
+    const spyApiPost = jest.spyOn(api, 'post').mockImplementation((url) => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 201,
+          data: {},
+        };
+        resolve(result);
+      });
+    });
+
+    const spyApiGet = jest.spyOn(api, 'get').mockImplementation((url) => {
+        return new Promise((resolve, reject) => {
+          const result = {
+            status: 201,
+            data: testList,
+          };
+          resolve(result);
+        });
+      });
+
+    store.dispatch(postStock()).then(() => {
+      expect(spyApiPost).toHaveBeenCalledTimes(1);
+      expect(spyApiGet).toHaveBeenCalledTimes(1);
+      done();
+    });
+  });
+
+  it(`should not work when 'postStock' calls with post error`, (done) => {
+    const spyApiPost = jest.spyOn(api, 'post').mockImplementation((url) => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+          data: {},
+        };
+        reject(result);
+      });
+    });
+
+    const spyApiGet = jest.spyOn(api, 'get').mockImplementation((url) => {
+        return new Promise((resolve, reject) => {
+          const result = {
+            status: 201,
+            data: testList,
+          };
+          resolve(result);
+        });
+      });
+
+    store.dispatch(postStock()).then(() => {
+      expect(spyApiPost).toHaveBeenCalledTimes(1);
+      expect(spyApiGet).toHaveBeenCalledTimes(0);
+      done();
+    });
+  });
+
+  it(`should not work when 'postStock' calls with get error`, (done) => {
+    const spyApiPost = jest.spyOn(api, 'post').mockImplementation((url) => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 201,
+          data: {},
+        };
+        resolve(result);
+      });
+    });
+
+    const spyApiGet = jest.spyOn(api, 'get').mockImplementation((url) => {
+        return new Promise((resolve, reject) => {
+          const result = {
+            status: 400,
+            data: testList,
+          };
+          reject(result);
+        });
+      });
+
+    store.dispatch(postStock()).then(() => {
       expect(spyApiPost).toHaveBeenCalledTimes(1);
       expect(spyApiGet).toHaveBeenCalledTimes(1);
       done();

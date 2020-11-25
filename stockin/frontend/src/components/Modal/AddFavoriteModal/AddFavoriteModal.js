@@ -74,6 +74,7 @@ const AddFavoriteModal = (props) => {
       <List.Content>
         <List.Header>
           <Checkbox 
+            data-testid="checkbox"
             value={e.id}
             label={e.name} 
             onChange={(event, data) => onChangeHandler(event, data)}
