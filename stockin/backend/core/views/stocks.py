@@ -57,3 +57,29 @@ def stock_list(request):
     
     else :
         return HttpResponseNotAllowed(['GET'])
+
+
+def stock_info(request, stock_id=''):
+    if request.method == 'GET':
+        target_stock = Stock.objects.get(id = stock_id)
+        kospi = 'KOSDAQ'
+        if target_stock.isKOSPI:
+            kospi = 'KOSPI'
+        response_dict = {
+                        'title' : target_stock.title,
+                        'code' : target_stock.code,
+                        'sector' : target_stock.sector,
+                        'price' : target_stock.price,
+                        'highestPrice' : target_stock.highestPrice,
+                        'lowestPrice' : target_stock.lowestPrice,
+                        'tradeVolume' : target_stock.tradeVolume,
+                        'tradeValue' : target_stock.tradeValue,
+                        'startPrice' : target_stock.startPrice,
+                        'yesterdayPrice' : target_stock.yesterdayPrice,
+                        'amount' : target_stock.amount,
+                        'isKOSPI' : kospi
+                        }
+        return HttpResponse(content=json.dumps(response_dict), status=203)
+    
+    else:
+        return HttpResponseNotAllowed(['GET'])

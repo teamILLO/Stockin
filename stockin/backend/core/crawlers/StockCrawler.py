@@ -118,9 +118,10 @@ def initialStockAdd():
 
 
 def stockUpdate_(stock):
-    
+   
+    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
     url = 'http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=' + str(stock.code)
-    html = requests.get(url).content
+    html = requests.get(url, headers= headers).content
     soup = BeautifulSoup(html, 'html.parser')
 
     stockinfo = soup.select('TBL_StockInfo')[0]
@@ -129,6 +130,7 @@ def stockUpdate_(stock):
     lowestPrice = stockinfo['lowjuka'].replace(',','')
     tradeVolume = stockinfo['volume'].replace(',','')
     tradeValue = stockinfo['money'].replace(',','')
+    yesterdayPrice = stockinfo['prevjuka'].replace(',','')
 
     print("info : ",stock.title,' ', price," ",highestPrice," ",lowestPrice," ",tradeVolume," ",tradeValue)
 
@@ -137,6 +139,7 @@ def stockUpdate_(stock):
     stock.lowestPrice = lowestPrice
     stock.tradeVolume = tradeVolume
     stock.tradeValue = tradeValue
+    stock.yesterdayPrice = yesterdayPrice
     stock.save()
 
 
