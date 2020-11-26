@@ -58,12 +58,13 @@ const AddStockModal = (props) => {
         var _search_result = stockList
           .filter((st) => st.title.toUpperCase().includes(data.value.toUpperCase()))
           .slice(0, 5);
+        console.log(_search_result);
 
         var i;
         for (i = 0; i < _search_result.length; i++) {
           var temp = {
             ..._search_result[i],
-            key: keyGenerator(),
+            key: _search_result[i].id,
             description: _search_result[i].sector,
           };
           search_result.push(temp);
