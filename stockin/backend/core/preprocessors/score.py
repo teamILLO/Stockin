@@ -1,4 +1,4 @@
-import numpy as np
+import math as m
 from sklearn.linear_model import LinearRegression
 
 def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, operatingMargin, avgOperatingMargin):
@@ -14,8 +14,6 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
     #
     # 
 
-    OP_CHANGE_GOOD = 0.1 # increase rate per year, compared to initial value
-    OP_CHANGE_BAD = -0.1
     OC_GOOD = 0.8
     OC_BAD = 0.5
     LIABILITY_GOOD = 1
@@ -29,7 +27,9 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
     OC_PASS = False
     OP_COUNT = 5
     OP_score = 0
+    OP_atan_coef = 1
     OC_score = 0
+    OC_atan_coef = 1
 
     ############
     # objective scores
@@ -69,49 +69,40 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
 
     # calculate trend of operatingProfit
     # x 
-    x = []
-    for i in range(0, OP_COUNT):
-        x.append(i/4)
-    
-    OP_model = LinearRegression().fit(x, trimmed_OP_list)
-    OP_slope = OP_model.coef_
-    OP_midpoint = OP_model.coef_ * (OP_COUNT-1)/8 + OP_model.intercept_
-    OP_increase_rate = OP_slope/OP_model.intercept_
-
-    if OP_increase_rate > OP_CHANGE_GOOD:
-        if OP_midpoint <= 0:
-            # it seems OP will be negative in next quarter
-            if OP_model.coef_ * OP_COUNT/4 + OP_model.intercept_ <0:
-                #TODO: BAD
-                pass
-            else:
-                OC_PASS= True
-                pass
-        else:
-            #TODO: GOOD
-            pass
-    elif OP_increase_rate < OP_CHANGE_BAD:
-        #TODO: BAD
-        pass
-            
+    if OP_PASS == False:
+        x = []
+        for i in range(0, OP_COUNT):
+            x.append([i/4])
         
-
-    # check if operatingCashFlow outlies from OP
-    
-    if operatingCashFlow[0]/OP_midpoint > OC_GOOD and operatingCashFlow[1]/OP_midpoint > OC_GOOD :
-        #TODO: GOOD
-        pass
-    elif operatingCashFlow[0]/OP_midpoint < OC_BAD and operatingCashFlow[1]/OP_midpoint < OC_BAD :
-        #TODO: BAD
-        pass
+        OP_model = LinearRegression().fit(x, trimmed_OP_list)
+        OP_slope = OP_model.coef_
+        OP_midpoint = OP_model.coef_ * (OP_COUNT-1)/8 + OP_model.intercept_
+        OP_increase_rate = OP_slope/OP_model.intercept_
+        OP_score = OP_atan_coef *(m.atan(OP_increase_rate)+m.atan(OP_model.intercept_/10))
+                    
+        # check if operatingCashFlow outlies from OP
+        if OC_PASS == False:
+            if operatingCashFlow[0] <= 0 or operatingCashFlow[1] <= 0 or OP_midpoint <= 0:
+                pass
+            elif operatingCashFlow[0]/OP_midpoint > OC_GOOD and operatingCashFlow[1]/OP_midpoint > OC_GOOD :
+                #TODO: GOOD
+                OC_score = OC_atan_coef * m.atan(min(operatingCashFlow[0]/OP_midpoint,operatingCashFlow[1]/OP_midpoint))
+            elif operatingCashFlow[0]/OP_midpoint < OC_BAD and operatingCashFlow[1]/OP_midpoint < OC_BAD :
+                #TODO: BAD
+                OC_score = OC_atan_coef * m.atan(max(operatingCashFlow[0]/OP_midpoint, operatingCashFlow[1]/OP_midpoint))
 
     # check liability ratio
-    if liability > LIABILITY_GOOD:
-        #TODO: GOOD
+    liability_score = 0
+    liability_atan_coef = 1
+    if liability == '':
         pass
-    elif liability < LIABILITY_BAD:
-        #TODO: BAD
-        pass
+    else:
+        liability = float(liability)
+        if liability > LIABILITY_GOOD:
+            liability_score = liability_atan_coef * m.atan(liability-LIABILITY_GOOD)
+        elif liability < LIABILITY_BAD:
+            liability_score = liability_atan_coef * m.atan(LIABILITY_BAD-liability)
+            pass
 
 
 
@@ -127,17 +118,19 @@ def base_score(operatingProfit, operatingCashFlow, liability, PER, avgPER, opera
     ############
 
     # calculate PER score
-    if PER < avgPER:
-        #TODO: GOOD
+    PER_score = 0
+    PER_atan_coef = 1
+    if PER=='' or avgPER=='':
         pass
     else:
-        #TODO: BAD
-        pass
+        PER_score = PER_atan_coef * m.atan(float(PER)-float(avgPER))
 
     # calculate operatingMargin
-    if operatingMargin > avgOperatingMargin:
-        #TODO: GOOD
+    OM_score = 0
+    OM_atan_coef = 1
+    if operatingMargin == '' or avgOperatingMargin == '':
         pass
     else:
-        #TODO: BAD
-        pass
+        OM_score =  OM_atan_coef * m.atan(float(operatingMargin)-float(avgOperatingMargin))
+
+    return {'score': OP_score + OC_score + liability_score + PER_score + OM_score}

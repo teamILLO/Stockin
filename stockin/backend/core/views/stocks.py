@@ -95,41 +95,34 @@ def stock_info(request, stock_id=''):
 
 def fs_score(request, stock_id=""):
     if request.method == 'GET':
-        # ob
-        # operatingProfit
-        # cashflow //TODO:
-        # liability ratio //TODO:
-        # sub
-        # PER //TODO:
-        # operatingmargin //TODO:
-        # extreme value 
         stock = get_object_or_404(Stock, id=stock_id)
         fs_stock = FinancialStat.objects.filter(stock_id=stock_id)
-        op = []
+        op = ['','','','','']
         try:
-            op[4] = fs_stock.get(quarter='19년 6월')['operatingProfit']
+            op[4] = fs_stock.get(quarter='20년 6월').operatingProfit
         except ObjectDoesNotExist as e:
-            op[4] = ''
+            pass
         try:
-            op[3] = fs_stock.get(quarter='19년 9월')['operatingProfit']
+            op[3] = fs_stock.get(quarter='20년 3월').operatingProfit
         except ObjectDoesNotExist as e:
-            op[3] = ''
+            pass
         try:
-            op[2] = fs_stock.get(quarter='19년 12월')['operatingProfit']
+            op[2] = fs_stock.get(quarter='19년 12월').operatingProfit
         except ObjectDoesNotExist as e:
-            op[2] = ''
+            pass
         try:
-            op[1] = fs_stock.get(quarter='20년 3월')['operatingProfit']
+            op[1] = fs_stock.get(quarter='19년 6월').operatingProfit
         except ObjectDoesNotExist as e:
-            op[1] = ''
+            pass
         try:
-            op[0] = fs_stock.get(quarter='20년 6월')['operatingProfit']
+            op[0] = fs_stock.get(quarter='19년 3월').operatingProfit
         except ObjectDoesNotExist as e:
-            op[0] = ''
-
-
-
+            pass
+        for i in range(5):
+            if op[i] == '-':
+                op[i] = ''
         # liability rate
+
         # operatingCashflow
         script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
         rel_path = "../crawlers/data/Cash_Flow.csv"
@@ -138,29 +131,24 @@ def fs_score(request, stock_id=""):
         rdr = csv.reader(f)
         operatingCashflow = []
         for line in rdr:
-            if line[0] == 'title':
-                pass
-            elif line[0] == stock.title and line[1] == '18년 12월':
-                if line[3] == ' ':
+            if line[0] == stock.title and line[1] == '18년 12월':
+                if line[2] == ' ':
                     operatingCashflow.append('')
                 else:
-                    operatingCashflow.append(float(str(line[3]).replace(',','')))
+                    operatingCashflow.append(float(str(line[2]).replace(',','')))
             elif line[0] == stock.title and line[1] == '19년 12월':
-                if line[3] == ' ':
+                if line[2] == ' ':
                     operatingCashflow.append('')
                 else:
-                    operatingCashflow.append(float(str(line[3]).replace(',','')))
+                    operatingCashflow.append(float(str(line[2]).replace(',','')))
                 break
-            
-
-
-                
         f.close()  
-        # (crawl PER, avgPER)
-        # (crawl operationalProfitMargin, avg...)
 
-        response = base_score(op, operatingCashflow, )
+        # response = {'score' : score, 'status': if score is None, operatingProfitNotEnough 1, operatingCashflowNotEnough 2, Both 3}
+        response = base_score(op, operatingCashflow, stock.debtRatio, stock.crawledPER, stock.crawledPERAvg, stock.operatingMarginRate, stock.operatingMarginRateAvg)
         return JsonResponse(response, status=201)
+    else:
+        return HttpResponseNotAllowed(['GET'])
 
 
         
