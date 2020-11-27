@@ -1,7 +1,10 @@
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model
+import os
 import json
 
+pwd = os.getenv("BACK_TEST_PWD").split(',')[0]
+new_pwd = os.getenv("BACK_TEST_PWD").split(',')[1]
 
 class UsersTestCase(TestCase):
 
@@ -9,7 +12,7 @@ class UsersTestCase(TestCase):
     def test_create_user(self):
         User = get_user_model()
         user = User.objects.create_user(
-            email='normal@user.com', password='foo')
+            email='normal@user.com', password=pwd)
         self.assertEqual(str(user), 'normal@user.com')
         self.assertEqual(user.email, 'normal@user.com')
         self.assertTrue(user.is_active)
@@ -26,7 +29,7 @@ class UsersTestCase(TestCase):
         with self.assertRaises(TypeError):
             User.objects.create_user(email='')
         with self.assertRaises(ValueError):
-            User.objects.create_user(email='', password="foo")
+            User.objects.create_user(email='', password=pwd)
 
     def test_create_superuser(self):
         User = get_user_model()
@@ -43,16 +46,16 @@ class UsersTestCase(TestCase):
             pass
         with self.assertRaises(ValueError):
             User.objects.create_superuser(
-                email='super@user.com', password='foo', is_staff=False)
+                email='super@user.com', password=pwd, is_staff=False)
         with self.assertRaises(ValueError):
             User.objects.create_superuser(
-                email='super@user.com', password='foo', is_superuser=False)
+                email='super@user.com', password=pwd, is_superuser=False)
 
     def test_csrf(self):
         # By default, csrf checks are disabled in test client
         # To test csrf protection we enforce csrf checks here
         client = Client(enforce_csrf_checks=True)
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                                content_type='application/json')
         # Request without csrf token returns 403 response
         self.assertEqual(response.status_code, 403)
@@ -61,7 +64,7 @@ class UsersTestCase(TestCase):
         # Get csrf token from cookie
         csrftoken = response.cookies['csrftoken'].value
 
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                                content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)  # Pass csrf protection
 
@@ -79,8 +82,8 @@ class UsersTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 406)
          
         # HttpResponseNotAllowed tests
@@ -93,7 +96,7 @@ class UsersTestCase(TestCase):
         csrftoken = response.cookies['csrftoken'].value
 
         response = client.post('/api/users/signup/', json.dumps(
-            {'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # POST request
         response = client.get('/api/users/token/')
@@ -105,13 +108,13 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signin/', json.dumps(
-            {'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signin/', json.dumps(
-            {'email': 'invalid@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'invalid@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
 
         # HttpResponseNotAllowed tests
@@ -127,7 +130,7 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signup/', json.dumps(
-            {'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # POST request
         response = client.get('/api/users/token/')
@@ -139,13 +142,13 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signout/', json.dumps(
-            {'email': 'foo@foo.com', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'foo@foo.com', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
         
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signout/', json.dumps(
-            {'email': 'normal@user.com', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@user.com', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 204)
 
         # HttpResponseNotAllowed tests
@@ -158,7 +161,7 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signup/', json.dumps(
-            {'email': 'normal@normal.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@normal.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # POST request
         # Email duplicate
@@ -197,7 +200,7 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signup/', json.dumps(
-            {'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # POST request
         response = client.get('/api/users/token/')
@@ -218,7 +221,7 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signup/', json.dumps(
-            {'email': 'normal@normal.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@normal.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # When user is not authenticated in GET, PUT request
         response = client.get('/api/users/userInfo/')
@@ -233,7 +236,7 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signin/', json.dumps(
-            {'email': 'normal@normal.com', 'nickname': 'user', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@normal.com', 'nickname': 'user', 'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/userInfo/')
         self.assertEqual(response.status_code, 203)
@@ -242,17 +245,17 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.put('/api/users/userInfo/', json.dumps(
-            {'change': 'password', 'email': 'invalid@invalid.com', 'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'change': 'password', 'email': 'invalid@invalid.com', 'password': new_pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 404)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.put('/api/users/userInfo/', json.dumps(
-            {'change': 'password', 'email': 'normal@normal.com', 'password': 'foo_new'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'change': 'password', 'email': 'normal@normal.com', 'password': new_pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
         response = client.post('/api/users/signin/', json.dumps(
-            {'email': 'normal@normal.com', 'nickname': 'user', 'password': 'foo_new'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+            {'email': 'normal@normal.com', 'nickname': 'user', 'password': new_pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
@@ -283,14 +286,14 @@ class UsersTestCase(TestCase):
         csrftoken = response.cookies['csrftoken'].value
 
         client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
-                                                      'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+                                                      'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # test 1
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
 
         client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user',
-                                                      'password': 'foo'}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+                                                      'password': pwd}), content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/logout/')
         self.assertEqual(response.status_code, 204)

@@ -1,6 +1,9 @@
 from django.test import TestCase, Client
 from core.models import Group, Stock
+import os
 import json
+
+pwd = os.getenv("BACK_TEST_PWD").split(',')[0]
 
 class GroupsTestCase(TestCase):
     def test_group_create(self):
@@ -20,12 +23,12 @@ class GroupsTestCase(TestCase):
         # test 2
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
@@ -77,12 +80,12 @@ class GroupsTestCase(TestCase):
         # PUT request
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
@@ -112,12 +115,12 @@ class GroupsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
@@ -130,7 +133,7 @@ class GroupsTestCase(TestCase):
         # DELETE request
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
@@ -175,12 +178,12 @@ class GroupsTestCase(TestCase):
         # GET request
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/groups/1/stocks/')
@@ -199,12 +202,12 @@ class GroupsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/groups/1/stocks/')
@@ -227,7 +230,7 @@ class GroupsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         # TODO : stock 모델 추가 후 group 에 stock 추가
@@ -277,12 +280,12 @@ class GroupsTestCase(TestCase):
         # DELETE request
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
@@ -323,12 +326,12 @@ class GroupsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal2@user.com', 'nickname': 'user2', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
