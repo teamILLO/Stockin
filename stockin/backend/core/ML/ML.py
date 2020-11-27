@@ -130,7 +130,43 @@ def after60():
      
 
 
-        
+
+def minMax(l):
+    min_= min(l)
+    max_= max(l)
+    result=[]
+    for a in l:
+        result.append( (a-min_)*100/(max_-min_+1e-7) )
+    return result
+
 
 
 after1()
+after20()
+after60()
+
+stocks = Stock.objects.all()
+day1=[]
+day20=[]
+day60=[]
+
+
+for stock in stocks:
+    price = StockHistory.objects.filter(stock_id=stock.id).order_by('-date')[0].endPrice
+    if stock.after1 == -1:
+        day1.append(1)
+        day60.append(1)
+        day20.append(1)
+        continue
+    day1.append(stock.after1 / price)
+    day20.append(stock.after20 / price)
+    day60.append(stock.after60 / price)
+
+day1= minMax(day1)
+day20 = minMax(day20)
+day60 = minMax(day60)
+
+
+for stock, d1,d2,d3 in zip(stocks, day1, day20, day60):
+    stock.score = int((d1+d2+d3)/3)
+    stock.save()
