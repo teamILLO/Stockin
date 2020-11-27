@@ -82,8 +82,7 @@ const SearchBox = () => {
       retrieve_list.length === 0 ||
       !retrieve_list.find((element) => element.id === selected_stock.id)
     ) {
-      selected_stock.key = keyGenerator();
-      selected_stock = { ...selected_stock, key: keyGenerator(), description: '최근 검색' };
+      selected_stock = { ...selected_stock, key: 'recent-serach_' + selected_stock.id, description: '최근 검색' };
       retrieve_list.push(selected_stock);
       localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
     }
