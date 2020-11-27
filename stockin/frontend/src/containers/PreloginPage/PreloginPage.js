@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import { Tab } from 'semantic-ui-react';
-
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react';
-import { tryLogin } from '../../store/authentication';
-import { useDispatch } from 'react-redux';
+import { Tab, Button, Form, Grid, Checkbox, Item } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { history } from '../../store/store';
+import { tryLogin, checkLogin } from '../../store/authentication/authentication';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
+import FindPasswdModal from '../../components/Modal/FindPasswdModal/FindPasswdModal';
 
 const panes = [
   {
-    menuItem: 'Stockin',
+    menuItem: 'About Stockin',
     render: () => <Stockin />,
   },
   {
@@ -29,15 +29,21 @@ const panes = [
 const PreloginPage = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const { loggingIn } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
   const submitHandler = () => {
     const submitEmail = email;
     const submitPassword = password;
-    console.log(submitEmail, submitPassword);
     dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
   };
+
+  useEffect(() => {
+    if (loggingIn === undefined) dispatch(checkLogin());
+    if (loggingIn === true) {
+      history.push('/main');
+    }
+  }, [dispatch, loggingIn]);
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">
@@ -68,18 +74,19 @@ const PreloginPage = (props) => {
                   onChange={(event) => setPassword(event.target.value)}
                 />
 
+                <Checkbox label="Remember Me" />
+                <FindPasswdModal trigger={<Item as="a" content="Forget Password?" />} />
 
-                <Button color="primary" size="large" onClick={submitHandler}>
+                <Button primary size="large" onClick={submitHandler}>
                   Login
                 </Button>
                 <SignupModal
                   trigger={
-                    <Button basic color="primary" size="large">
+                    <Button basic primary size="large">
                       Sign up
                     </Button>
                   }
                 />
-
               </Form>
             </Grid.Column>
           </Grid.Column>

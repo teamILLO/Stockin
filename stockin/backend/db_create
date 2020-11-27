@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS stockinDB;
+CREATE DATABASE stockinDB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+GRANT ALL PRIVILEGES ON stockinDB.* TO 'swpp'@'%';
+flush privileges;

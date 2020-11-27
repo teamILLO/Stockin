@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { render, queryAllByTestId } from '@testing-library/react';
 import Stockin from './Stockin';
 
 describe('<Stockin />', () => {

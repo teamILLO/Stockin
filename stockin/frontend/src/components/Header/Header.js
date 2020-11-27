@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import logo from '../../images/logo.png';
 import { Container, Menu, Button, Image, Visibility } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
 import SearchBox from '../SearchBox/SearchBox';
+import { tryLogout } from '../../store/authentication/authentication';
 import './Header.css';
 
 const Header = (props) => {
   const [isVisible, setIsVisible] = useState(false);
+  const dispatch = useDispatch();
 
   const onClickNavHandler = (dest) => {
     props.history.push(dest);
   };
-  // const clickLogoutHandler = () => {};
+
+  const onClickLogoutHandler = () => {
+    dispatch(tryLogout());
+  };
+
   const handleOnScreen = () => {
     setIsVisible(false);
   };
+
   const handleOffScreen = () => {
     setIsVisible(true);
   };
@@ -27,7 +35,9 @@ const Header = (props) => {
         onBottomPassed={() => handleOffScreen()}
       >
         <Container textAlign="right">
-          <Button secondary>LOGOUT</Button>
+          <Button secondary onClick={onClickLogoutHandler}>
+            LOGOUT
+          </Button>
         </Container>
         <Image
           src={logo}
@@ -86,7 +96,9 @@ const Header = (props) => {
                 onClick={() => onClickNavHandler('/mypage')}
               />
               <Menu.Item>
-                <Button secondary>LOGOUT</Button>
+                <Button secondary onClick={onClickLogoutHandler}>
+                  LOGOUT
+                </Button>
               </Menu.Item>
             </Menu.Menu>
           </Container>

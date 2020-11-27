@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Form, Header, Icon, Image, Input, Modal } from 'semantic-ui-react';
+import { Button, Form, Image, Modal } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { trySignup } from '../../../store/signup';
+import { trySignup } from '../../../store/authentication/authentication';
+import { api } from '../../../api/index';
 
 import logo from '../../../images/logo.png';
 import './SignupModal.css';
@@ -15,17 +16,40 @@ const SignupModal = (props) => {
 
   const dispatch = useDispatch();
 
-  const signupHandler = () => {
-    let submitEmail = email;
-    let submitNickname = nickname;
-    let submitPassword = password;
-    dispatch(trySignup({ email: submitEmail, nickname: submitNickname, password: submitPassword }));
-    alert('Sign up succesfully'); //TODO: need to catch signup unsuccessfully
-    setOpen(false);
+  const signupHandler = async () => {
+    let is_duplicated = false
+
+    await api.post('/users/duplicate/', { email: '', nickname : nickname }).then((response) => {
+      if (response.data['duplicate']) {
+        alert('Nickname exists, try another.');
+        is_duplicated = true;
+      } 
+    });
+
+    if(!is_duplicated) {
+      dispatch(trySignup({ email: email, nickname: nickname, password: password }));
+      alert('Sign up succesfully'); 
+      setOpen(false);
+    }
+  };
+
+  const nextHandler = async () => {
+    let is_duplicated = false
+
+    await api.post('/users/duplicate/', { email: email, nickname : '' }).then((response) => {
+      if (response.data['duplicate']) {
+        alert('Email exists, try another.');
+        is_duplicated = true
+      } 
+    });
+    
+    if(!is_duplicated) {
+      setNext(true);
+    }
   };
 
   const inputs = next ? (
-    <Form size="medium">
+    <Form size="small">
       <Form.Input
         fluid
         icon="id card outline"
@@ -36,7 +60,7 @@ const SignupModal = (props) => {
       />
     </Form>
   ) : (
-    <Form size="medium">
+    <Form size="small">
       <Form.Input
         fluid
         icon="user"
@@ -58,11 +82,11 @@ const SignupModal = (props) => {
   );
 
   const nextButton = next ? (
-    <Button color="primary" onClick={() => signupHandler()}>
+    <Button primary onClick={() => signupHandler()}>
       Sign Up
     </Button>
   ) : (
-    <Button color="primary" onClick={() => setNext(true)}>
+    <Button primary onClick={() => nextHandler()}>
       Next
     </Button>
   );
