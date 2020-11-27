@@ -20,25 +20,28 @@ const StockReportBlock = (props) => {
         setVariation((Number(response.data['yesterdayPrice'])-Number(response.data['price'])).toLocaleString() + '▼')
       else
         setVariation((Number(response.data['price'])-Number(response.data['yesterdayPrice'])).toLocaleString() + '▲')
-    });
-    api.get('/stocks/price/' + props.id + '/').then((response) => {
-        let parseDate = timeParse('%Y-%m-%d');
-        let prices = response.data
-        prices.forEach((d) => {
-            d.date = parseDate(d.date);
-            d.open = +d.open;
-            d.high = +d.high;
-            d.low = +d.low;
-            d.close = +d.close;
-        });
-        setPriceList(prices);
-    });
-  }, []);
+    }).catch((e) => {console.error(e)});
+  }, [props.id]);
+
+  // useEffect(() => {
+  //   api.get('/stocks/price/' + props.id + '/').then((response) => {
+  //       let parseDate = timeParse('%Y-%m-%d');
+  //       let prices = response.data
+  //       prices.forEach((d) => {
+  //           d.date = parseDate(d.date);
+  //           d.open = +d.open;
+  //           d.high = +d.high;
+  //           d.low = +d.low;
+  //           d.close = +d.close;
+  //       });
+  //       setPriceList(prices);
+  //     }).catch((e) => {console.log(e)});
+  // }, [props.id]);
   
   // let graph = priceList  === '' ? 'Loading...' : <DetailData data={priceList} />;
 
   return(
-    <Segment color='red'>
+    <Segment color='red' data-testid='StockReportBlock'>
         <div>rank: {props.rank}</div> 
         <div>{title}</div>
         <div>{info}</div>
