@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock/stock';
 import { history } from '../../store/store';
 
-const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
-
 const initialState = {
   loading: false,
   results: [],
@@ -65,7 +63,7 @@ const SearchBox = () => {
         for (i = 0; i < _search_result.length; i++) {
           var temp = {
             ..._search_result[i],
-            key: keyGenerator(),
+            key: _search_result[i].id,
             description: _search_result[i].sector,
           };
           search_result.push(temp);

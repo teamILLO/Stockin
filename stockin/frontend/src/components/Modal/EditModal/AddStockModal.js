@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../../store/stock/stock';
 import { postStock } from '../../../store/groups/groups';
 
-const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
-
 const initialState = {
   loading: false,
   results: [],
