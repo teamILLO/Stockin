@@ -32,6 +32,13 @@ describe('<StockBlock />', () => {
   });
 
   it('should render without errors', () => {
+    const { container } = render(<StockBlock />);
+    const query = queryAllByTestId(container, 'StockBlock');
+    expect(query.length).toBe(1);
+  });
+
+
+  it('should render without errors', () => {
     spyPost = jest.spyOn(api, 'get').mockImplementation(() => {
       return new Promise((resolve, reject) => {
           let result

@@ -77,9 +77,24 @@ def stock_info(request, stock_id=''):
                         'startPrice' : target_stock.startPrice,
                         'yesterdayPrice' : target_stock.yesterdayPrice,
                         'amount' : target_stock.amount,
-                        'isKOSPI' : kospi
+                        'isKOSPI' : kospi,
+                        'score' : target_stock.score
                         }
         return HttpResponse(content=json.dumps(response_dict), status=203)
     
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+
+def stock_top5(requset):
+    if requset.method =='GET':
+        stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:5]
+        response_list=[]
+        for stock in stocks:
+            response_list.append({
+                'id': stock[0],
+                'score':stock[1]
+            })
+        return JsonResponse(response_list, safe=False)
     else:
         return HttpResponseNotAllowed(['GET'])

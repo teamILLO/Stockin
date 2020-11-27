@@ -63,6 +63,16 @@ class StocksTestCase(TestCase):
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
         test_stockHistory = StockHistory.objects.create(stock = test_stock, date = '2020-02-02')
         self.assertEqual(str(test_stockHistory), 'foo_title 2020-02-02')
+    
+
+    def test_stock_info(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get('/api/stocks/1/')
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/api/stocks/top5/')
+        self.assertEqual(response.status_code, 200)
+
+
 
         
         
