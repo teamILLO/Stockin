@@ -20,6 +20,7 @@ urlpatterns = [
     path('stocks/<int:stock_id>/', views.stock_info, name='stock_info'),
     path('stocks/financialstats/stock/<int:stock_id>/', views.stock_fs, name='stock_fs'),
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
+    path('stocks/top5/', views.stock_top5, name='stock_top5'),
 
     # news model
     path('news/stocks/<int:stock_id>/date/<str:news_date>/',
