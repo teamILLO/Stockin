@@ -50,6 +50,7 @@ class Stock(models.Model):
     after1 = models.IntegerField(null=True, blank=True)
     after20 = models.IntegerField(null=True, blank=True)
     after60 = models.IntegerField(null=True, blank=True)
+    score = models.SmallIntegerField(null=True, default=50)
 
     def __str__(self):
         return self.title

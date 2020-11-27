@@ -118,22 +118,24 @@ def initialStockAdd():
 
 
 def stockUpdate_(stock):
-   
+
     headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
-    url = 'http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=' + str(stock.code)
+    url = 'https://finance.naver.com/item/main.nhn?code=' + str(stock.code)
     html = requests.get(url, headers= headers).content
     soup = BeautifulSoup(html, 'html.parser')
 
-    stockinfo = soup.select('TBL_StockInfo')[0]
-    price = stockinfo['curjuka'].replace(',','')
-    highestPrice = stockinfo['highjuka'].replace(',','')
-    lowestPrice = stockinfo['lowjuka'].replace(',','')
-    tradeVolume = stockinfo['volume'].replace(',','')
-    tradeValue = stockinfo['money'].replace(',','')
-    yesterdayPrice = stockinfo['prevjuka'].replace(',','')
+    stockinfo = soup.select_one('#chart_area > div.rate_info')
+    
+    price = stockinfo.select_one('.blind dd').get_text().split(' ')[1].replace(',','')
+    list_ = stockinfo.select('.no_info .blind')
+    highestPrice = list_[1].get_text().replace(',','')
+    lowestPrice = list_[5].get_text().replace(',','')
+    tradeVolume = list_[3].get_text().replace(',','')
+    tradeValue = list_[6].get_text().replace(',','')+'000000'
+    yesterdayPrice = list_[0].get_text().replace(',','')
 
-    print("info : ",stock.title,' ', price," ",highestPrice," ",lowestPrice," ",tradeVolume," ",tradeValue)
-
+    print(stock.code,": ",stock.title,' ', price," ",highestPrice," ",lowestPrice," ",tradeVolume," ",tradeValue)
+    
     stock.price = price
     stock.highestPrice = highestPrice
     stock.lowestPrice = lowestPrice
@@ -144,21 +146,22 @@ def stockUpdate_(stock):
 
 
 # 실시간 주가 업데이트용
-def stockUpdate(process=32):
+def stockUpdate(process=16):
     # start = time.time()
 
     stocks = Stock.objects.all()
    
     
-    pool = Pool(process)
+    # pool = Pool(process)
     
+    # for stock in stocks:
+    #     pool.apply_async(stockUpdate_, args=(stock,))
+
+    # pool.close()
+    # pool.join()
+
     for stock in stocks:
-        pool.apply_async(stockUpdate_, args=(stock,))
-
-    pool.close()
-    pool.join()
-
-
+        stockUpdate_(stock)
     # print('time: ' , time.time()-start)
 
 
@@ -208,28 +211,32 @@ def pastStockHistory_(stock, count):
             upDown=upDown
         )
         StockHistory_list.append(s)
+    try:
+        StockHistory.objects.bulk_create(StockHistory_list)
+    except Exception as ex:
+        print(ex)
     print(stock.title)
-    StockHistory.objects.bulk_create(StockHistory_list)
+    # print(StockHistory_list)
 
 
 # 과거 주가 기록 가져오는용
-def pastStockHistory(count, process=32):
+def pastStockHistory(count, process=4):
     stocks = Stock.objects.all()
     StockHistory.objects.all().delete()
     
     pool = Pool(process)
 
-    try:
-        for stock in stocks:
-            pool.apply_async(pastStockHistory_, args=(stock, count))
+    # try:
+    #     for stock in stocks:
+    #         pool.apply_async(pastStockHistory_, args=(stock, count))
 
    
-    finally:
-        pool.close()
-        pool.join()
+    # finally:
+    #     pool.close()
+    #     pool.join()
 
-    # for stock in stocks:
-    #     pastStockHistory(stock)
+    for stock in stocks:
+        pastStockHistory_(stock,count)
 
         
 
