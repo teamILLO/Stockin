@@ -11,7 +11,7 @@ from json import JSONDecodeError
 import json, csv, os
 
 from core.models import Stock, StockHistory, FinancialStat
-from core.preprocessors.score import base_score
+from core.crawlers.preprocessors.score import base_score
 
 
 def stock_fs(request, stock_id=''):
