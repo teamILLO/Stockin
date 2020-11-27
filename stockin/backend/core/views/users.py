@@ -135,8 +135,6 @@ def user_info(request):
         return HttpResponse(content=json.dumps(response_dict), status=203)
 
     if request.method == 'PUT':
-        if not request.user.is_authenticated:
-            return HttpResponse(status=401)
         try:
             req_data = json.loads(request.body.decode())
             if req_data['change'] == 'password':
@@ -148,6 +146,9 @@ def user_info(request):
                 response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
                                     'password': target_user.password, 'id': target_user.id}
                 return JsonResponse(response_dict, status=201)
+
+            elif not request.user.is_authenticated:
+                        return HttpResponse(status=401)
 
             elif req_data['change'] == 'nickname':
                 email = req_data['email']

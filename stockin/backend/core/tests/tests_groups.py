@@ -150,7 +150,7 @@ class GroupsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')

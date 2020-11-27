@@ -229,7 +229,8 @@ class UsersTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.put('/api/users/userInfo/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.put('/api/users/userInfo/', json.dumps(
+            {'change': 'nickname', 'email': 'invalid@invalid.com', 'password': new_pwd}), HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
 
         # GET request
