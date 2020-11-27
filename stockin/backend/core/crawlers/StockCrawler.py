@@ -78,7 +78,7 @@ def initialStockAdd():
 
     stock_list=[]
     financial_list=[]
-    with open('data/stocks.csv', 'r') as f:
+    with open('data/stocks.csv', 'r', encoding='UTF-8') as f:
         reader = csv.DictReader(f)
         for stock in reader:
             stock_list.append(Stock(
@@ -90,7 +90,7 @@ def initialStockAdd():
     
     Stock.objects.bulk_create(stock_list)
 
-    with open('data/Financial_State.csv', 'r') as f:
+    with open('data/Financial_State.csv', 'r', encoding='UTF-8') as f:
         reader = csv.DictReader(f)
         
         for FS in reader:
@@ -196,7 +196,7 @@ def pastStockHistory_(stock, count):
         tradeVolume = info[5]
         upDown = int(endPrice) - int(startPrice)
 
-        print(stock.title,' ',date)
+        
         s = StockHistory(
             stock=stock,
             date=date,
@@ -208,14 +208,14 @@ def pastStockHistory_(stock, count):
             upDown=upDown
         )
         StockHistory_list.append(s)
-
+    print(stock.title)
     StockHistory.objects.bulk_create(StockHistory_list)
 
 
 # 과거 주가 기록 가져오는용
 def pastStockHistory(count, process=32):
     stocks = Stock.objects.all()
-    StockHistory.objects.delete()
+    StockHistory.objects.all().delete()
     
     pool = Pool(process)
 

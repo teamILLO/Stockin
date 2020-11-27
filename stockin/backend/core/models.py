@@ -47,6 +47,10 @@ class Stock(models.Model):
     amount = models.IntegerField(null=True, blank=True)                     #상장주식수
     isKOSPI = models.BooleanField(null=True, blank=True)                    #is코스피?   코스피|코스닥
 
+    after1 = models.IntegerField(null=True, blank=True)
+    after20 = models.IntegerField(null=True, blank=True)
+    after60 = models.IntegerField(null=True, blank=True)
+
     def __str__(self):
         return self.title
 
@@ -66,6 +70,7 @@ class StockHistory(models.Model):
     lowestPrice = models.IntegerField(null=True)
     tradeVolume = models.IntegerField(null=True)
     upDown = models.IntegerField(null=True)
+    news = models.PositiveSmallIntegerField(null=True, default=0)
 
     def __str__(self):
         return str(self.stock.title) + ' ' + str(self.date)
@@ -79,15 +84,15 @@ class FinancialStat(models.Model):
         Stock,
         on_delete = models.CASCADE
     )
-    quarter = models.CharField(max_length=10, null=True)                    #분기
-    sales = models.CharField(max_length=10, null=True)                      #매출액
-    operatingProfit = models.CharField(max_length=10, null=True)            #영업이익
-    netIncome = models.CharField(max_length=10, null=True)                  #당기순이익
-    operatingMargin = models.CharField(max_length=10, null=True)            #영업이익률
-    netProfitMargin = models.CharField(max_length=10, null=True)            #순이익률
-    PER = models.CharField(max_length=10, null=True)                        #PER
-    PBR = models.CharField(max_length=10, null=True)                        #PBR
-    ROE = models.CharField(max_length=10, null=True)                        #ROE
+    quarter = models.CharField(max_length=15, null=True)                    #분기
+    sales = models.CharField(max_length=15, null=True)                      #매출액
+    operatingProfit = models.CharField(max_length=15, null=True)            #영업이익
+    netIncome = models.CharField(max_length=15, null=True)                  #당기순이익
+    operatingMargin = models.CharField(max_length=15, null=True)            #영업이익률
+    netProfitMargin = models.CharField(max_length=15, null=True)            #순이익률
+    PER = models.CharField(max_length=15, null=True)                        #PER
+    PBR = models.CharField(max_length=15, null=True)                        #PBR
+    ROE = models.CharField(max_length=15, null=True)                        #ROE
 
 
 class News(models.Model):
