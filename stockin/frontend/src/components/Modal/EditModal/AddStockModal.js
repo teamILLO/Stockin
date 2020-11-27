@@ -56,7 +56,6 @@ const AddStockModal = (props) => {
         var _search_result = stockList
           .filter((st) => st.title.toUpperCase().includes(data.value.toUpperCase()))
           .slice(0, 5);
-        console.log(_search_result);
 
         var i;
         for (i = 0; i < _search_result.length; i++) {
