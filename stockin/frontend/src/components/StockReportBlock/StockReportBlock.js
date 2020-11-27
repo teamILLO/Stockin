@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Segment } from 'semantic-ui-react'
 import { api } from '../../api/index';
-import DetailData from '../../components/Detail/DetailData/DetailData';
 import { timeParse } from 'd3-time-format';
 
 
@@ -10,7 +9,6 @@ const StockReportBlock = (props) => {
   const [info, setInfo] = useState('')
   const [price, setPrice] = useState('')
   const [variation, setVariation] = useState('')
-  const [BuyorSell, setBuyorSell] = useState('Buy!')
   const [priceList, setPriceList] = useState('')
 
   useEffect(()=>{
@@ -33,11 +31,11 @@ const StockReportBlock = (props) => {
             d.low = +d.low;
             d.close = +d.close;
         });
-      setPriceList(prices);
+        setPriceList(prices);
     });
   }, []);
   
-  let graph = priceList  === '' ? 'Loading...' : <DetailData data={priceList} />;
+  // let graph = priceList  === '' ? 'Loading...' : <DetailData data={priceList} />;
 
   return(
     <Segment color='red'>
@@ -45,7 +43,7 @@ const StockReportBlock = (props) => {
         <div>{title}</div>
         <div>{info}</div>
         <div>{price} {variation}</div>
-        {graph}
+        {/* {graph} */}
         
     </Segment>
 

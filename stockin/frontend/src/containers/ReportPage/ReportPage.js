@@ -18,26 +18,16 @@ const ReportPage = (props) => {
     }
   }, [dispatch, loggingIn]);
 
-  const [up, setUp] = useState(true);
-  const [down, setDown] = useState(false);
-
-  const onClickUpHandler = () => {
-    setUp(true);
-    setDown(false);
-  };
-  const onClickDownHandler = () => {
-    setDown(true);
-    setUp(false);
-  };
-  let priceList = []
+  const [active, setActive] = useState('up');
+  
   return (
     <div className="ReportPage" data-testid="ReportPage" ref={contextRef}>
       <Header history={props.history} />
       <Container>
       <Sticky context={contextRef} offset={64.8}>
         <Menu attached="top" tabular style={{ backgroundColor: '#fff', paddingTop: '1em' }}>
-          <Menu.Item as="a" active={up} onClick={() => onClickUpHandler()} name="up" />
-          <Menu.Item as="a" active={down} onClick={() => onClickDownHandler()} name="down" />
+          <Menu.Item as="a" active={active === 'up'} onClick={() => setActive('up')} name="up" data-testid="upTab"/>
+          <Menu.Item as="a" active={active === 'down'} onClick={() => setActive('down')} name="down" data-testid="downTab"/>
           <Menu.Menu position="right">
             <Menu.Item>
               <Input
@@ -51,7 +41,7 @@ const ReportPage = (props) => {
       </Sticky>
       <StockReportBlock 
         rank="1"
-        id="332"
+        id="2343"
       />
       <div>1</div>
       <div>2</div>

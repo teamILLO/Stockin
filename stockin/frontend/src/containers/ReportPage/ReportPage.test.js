@@ -1,6 +1,8 @@
 import React from 'react';
-import { render, queryAllByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, queryByTestId, queryAllByTestId } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/extend-expect';
 import { history } from '../../store/store';
 import ReportPage from './ReportPage';
 import { getMockStore } from '../../test-utils/mocks';
@@ -15,6 +17,12 @@ jest.mock('../../components/Header/Header', () => {
 jest.mock('../../components/Footer/Footer', () => {
   return jest.fn((props) => {
     return <div className="spyFooter">a</div>;
+  });
+});
+
+jest.mock('../../components/StockReportBlock/StockReportBlock', () => {
+  return jest.fn((props) => {
+    return <div className="spyReportBlock">{props.id}</div>;
   });
 });
 
@@ -70,5 +78,19 @@ describe('<ReportPage />', () => {
   it('should dispatch checkLogin when loggingIn = undefined', () => {
     render(reportPageUndefined);
     expect(spyCheckLogin).toHaveBeenCalledTimes(1);
+  });
+
+  it('should change tab when Up clicked', () => {
+    const { container } = render(reportPage);
+    fireEvent.click(screen.getByText(/up/i));
+    expect(queryByTestId(container, 'upTab')).toHaveClass('active');
+    expect(queryByTestId(container, 'downTab')).not.toHaveClass('active');
+  });
+
+  it('should change tab when Down clicked', () => {
+    const { container } = render(reportPage);
+    fireEvent.click(screen.getByText(/down/i));
+    expect(queryByTestId(container, 'upTab')).not.toHaveClass('active');
+    expect(queryByTestId(container, 'downTab')).toHaveClass('active');
   });
 });
