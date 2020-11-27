@@ -28,7 +28,6 @@ export PATH=$PATH:/Applications/SonarQube/bin
 1. Run following command to start SonarQube server.
 ```
 sh /Applications/SonarQube/bin/macosx-universal-64/sonar.sh console
-2. You should see console as follows if everything goes well.
 ```
 
 You should see this logs,
