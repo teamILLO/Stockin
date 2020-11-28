@@ -1,0 +1,102 @@
+<div class="rate_info">
+    <dl class="blind">
+    <dt><strong>AJ네트웍스</strong></dt>
+    <dd>오늘의시세 4,610 포인트</dd>
+    <dd>45 포인트 상승</dd>
+    <dd>0.99% 플러스</dd>
+    </dl>
+
+    <div class="today">
+    <p class="no_today">
+    <em class="no_up">
+    <span class="blind">4,610</span>
+    <span class="no4">4</span><span class="shim">,</span><span class="no6">6</span><span class="no1">1</span><span class="no0">0</span>
+    </em>
+    </p>
+
+    <p class="no_exday">
+    <span class="sptxt sp_txt1">전일대비</span>
+    <em class="no_up">
+    <span class="ico up">상승</span>
+    <span class="blind">45</span>
+    <span class="no4">4</span><span class="no5">5</span>
+    </em>
+    <span class="bar">l</span>
+    <em class="no_up">
+    <span class="ico plus">+</span>
+    <span class="blind">0.99</span>
+    <span class="no0">0</span><span class="jum">.</span><span class="no9">9</span><span class="no9">9</span>
+    <span class="per">%</span>
+    </em>
+    </p>
+
+    </div>
+
+    <table class="no_info" summary="주요 시세(전일종가, 시고저가, 거래량, 거래대금)을 제공합니다.">
+    <caption>주요 시세</caption>
+    <colgroup><col/><col width="214"/><col width="157"/></colgroup>
+    <tr>
+    <td class="first">
+    <span class="sptxt sp_txt2">전일</span>
+    <em>
+    <span class="blind">4,565</span>
+    <span class="no4">4</span><span class="shim">,</span><span class="no5">5</span><span class="no6">6</span><span class="no5">5</span>
+    </em>
+    </td>
+
+    <td>
+    <span class="sptxt sp_txt4">고가</span>
+    <em class="no_up">
+    <span class="blind">4,625</span><span class="no4">4</span><span class="shim">,</span><span class="no6">6</span><span class="no2">2</span><span class="no5">5</span>
+    </em>
+    <span class="sptxt sp_txt6">(상한가</span>
+    <em class="no_cha">
+    <span class="blind">5,930</span><span class="no5">5</span><span class="shim">,</span><span class="no9">9</span><span class="no3">3</span><span class="no0">0</span>
+    </em>
+    <span class="sptxt sp_txt8">)</span>
+    </td>
+    
+    <td>
+    <span class="sptxt sp_txt9">거래량</span>
+    <em>
+    <span class="blind">197,124</span>
+    <span class="no1">1</span><span class="no9">9</span><span class="no7">7</span><span class="shim">,</span><span class="no1">1</span><span class="no2">2</span><span class="no4">4</span>
+    </em>
+    </td>
+    </tr>
+    <tr>
+    <td class="first">
+    <span class="sptxt sp_txt3">시가</span>
+    <em>
+    <span class="blind">4,565</span><span class="no4">4</span><span class="shim">,</span><span class="no5">5</span><span class="no6">6</span><span class="no5">5</span>
+    </em>
+    </td>
+    <td>
+    <span class="sptxt sp_txt5">저가</span>
+    <em class="no_down">
+    <span class="blind">4,510</span><span class="no4">4</span><span class="shim">,</span><span class="no5">5</span><span class="no1">1</span><span class="no0">0</span>
+    </em>
+    <span class="sptxt sp_txt7">(하한가</span>
+    <em class="no_cha">
+    <span class="no3">3</span><span class="shim">,</span><span class="no2">2</span><span class="no0">0</span><span class="no0">0</span>
+    </em>
+    <span class="sptxt sp_txt8">)</span>
+    </td>
+    <td>
+    <span class="sptxt sp_txt10">거래대금</span>
+    <em>
+    <span class="blind">900</span>
+    <span class="no9">9</span><span class="no0">0</span><span class="no0">0</span>
+    </em>
+    <span class="sptxt sp_txt11">백만</span>
+    </td>
+    </tr>
+    </table>
+    </div>
+    Traceback (most recent call last):
+      File "StockCrawler.py", line 264, in <module>
+        stockUpdate()
+      File "StockCrawler.py", line 163, in stockUpdate
+        stockUpdate_(stock)
+      File "StockCrawler.py", line 130, in stockUpdate_
+        highestPrice = stockinfo.select_one()

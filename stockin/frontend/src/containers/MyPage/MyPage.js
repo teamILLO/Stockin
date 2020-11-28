@@ -4,7 +4,7 @@ import MyInterests from '../../components/MyPage/MyInterests/MyInterests';
 import MyInterestsDetail from '../../components/MyPage/MyInterestsDetail/MyInterestsDetail';
 import MyInfo from '../../components/MyPage/MyInfo/MyInfo';
 import Footer from '../../components/Footer/Footer';
-import { Button } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { trySignout, checkLogin } from '../../store/authentication/authentication';
@@ -48,11 +48,13 @@ const MyPage = (props) => {
   return (
     <div data-testid="MyPage">
       <Header history={props.history} />
+      <Container>
       <div>MyPage</div>
       <Button secondary onClick={onClickSignoutHandler}>
         SIGNOUT
       </Button>
       <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+      </Container>
       <Footer history={props.history} />
     </div>
   );

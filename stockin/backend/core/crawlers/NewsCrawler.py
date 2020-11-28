@@ -6,7 +6,7 @@ import datetime
 import csv
 from multiprocessing import Pool, Process
 import pandas as pd
-
+import json
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(BASE_DIR)
@@ -14,7 +14,7 @@ sys.path.append(BASE_DIR)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings')
 django.setup()
 
-from core.models import News, Stock
+from core.models import News, Stock, StockHistory
 
 url = 'https://search.naver.com/search.naver?&where=news&query={}&sm=tab_pge&sort=2&photo=0&field=1&reporter_article=&pd=3&ds={}&de={}&docid=&nso=so:dd,a:all&mynews=0&start={}&refresh_start=0'
 headers={'User-Agent': 'Mozilla/5.0'}
@@ -219,7 +219,50 @@ def newsScalingUpdate(today):
                             })
 
 
+def newsTransform():
+    stocksdata=[]
+    with open ('./data/newsdata.csv', 'r',  encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        stocksdata=list(reader)
 
+    stocksdata = sorted(stocksdata, key=lambda x: x['title'])
+
+    with open('./data/newdata_trans.csv','w', newline='', encoding='utf-8') as file:
+        writer = csv.DictWriter(file, fieldnames = ['title','data'])
+        writer.writeheader()
+
+        for s in stocksdata:
+            stockdict={}
+
+            for oneday in json.loads(s['data'].replace("\'","\"")):
+                stockdict[oneday['date']] = oneday['count']
+
+            print(s['title'])
+            writer.writerow({
+                'title': s['title'],
+                'data' : stockdict
+            })
+
+    
+
+def newsTomodel():
+    stocksdata=[]
+    with open('./data/newdata_trans.csv','r', newline='', encoding='utf-8') as file:
+        reader = csv.DictReader(file)
+        stocksdata=list(reader)
+
+    stocks = Stock.objects.all().values_list('id', 'title').order_by('title')
+
+    index=0
+    for stock in stocks:
+        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2019-11-29').filter(date__lte='2020-11-26')
+        data = stocksdata[index]
+        print(data['title'], stock[1], index)
+    
+        for h in history:
+            h.news = json.loads(data['data'].replace("\'","\""))[str(h.date).replace('-','')]
+            h.save()
+        index +=1
 
 
 
@@ -238,6 +281,6 @@ if __name__ == '__main__':
     #     end = datetime.date(int(sys.argv[2][:4]), int(sys.argv[2][4:6]), int(sys.argv[2][6:]))
     #     NewsCrawler(start, end)
    
-    newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
+    # newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
     # newsScalingUpdate(1)
- 
+    newsTomodel()

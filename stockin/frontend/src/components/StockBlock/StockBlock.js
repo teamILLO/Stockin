@@ -14,18 +14,25 @@ const StockBlock = (props) => {
   const [price, setPrice] = useState('')
   const [variation, setVariation] = useState('')
   const [BuyorSell, setBuyorSell] = useState('Buy!')
+  
+
+
+
 
   useEffect(()=>{
-   
-    api.get('stocks/'+String(props.id)+'/').then((response) => {
-      setTitle(response.data['title']);
-      setInfo(response.data['isKOSPI']+' '+response.data['code']);
-      setPrice(Number(response.data['price']).toLocaleString());
-      if(Number(response.data['price'])-Number(response.data['yesterdayPrice']) < 0 )
-        setVariation((Number(response.data['yesterdayPrice'])-Number(response.data['price'])).toLocaleString() + '▼')
-      else
-        setVariation((Number(response.data['price'])-Number(response.data['yesterdayPrice'])).toLocaleString() + '▲')
-    });
+    
+    if (props.id)
+      api.get('stocks/'+String(props.id)+'/').then((response) => {
+        setTitle(response.data['title']);
+        setInfo(response.data['isKOSPI']+' '+response.data['code']);
+        setPrice(Number(response.data['price']).toLocaleString());
+        if(Number(response.data['price'])-Number(response.data['yesterdayPrice']) < 0 )
+          setVariation((Number(response.data['yesterdayPrice'])-Number(response.data['price'])).toLocaleString() + '▼')
+        else
+          setVariation((Number(response.data['price'])-Number(response.data['yesterdayPrice'])).toLocaleString() + '▲')
+      });
+
+    
   });
   
 
@@ -41,12 +48,12 @@ const StockBlock = (props) => {
       <span className='stockInfo'>{info}</span>
       </Card.Meta>
       <Card.Content centered="true" className='dashboardContent'>
-      <ChangingProgressProvider values={[0, 80]}>
+      <ChangingProgressProvider values={[0, props.score]}>
         {value => (
           <CircularProgressbar
             className='dashboard'
             value={value}
-            text={BuyorSell}
+            text={props.score}
             circleRatio={0.75}
             styles={buildStyles({
               rotation: 1 / 2 + 1 / 8,

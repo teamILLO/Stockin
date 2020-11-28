@@ -129,7 +129,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+#create user 'swpp'@'%' identified by 'Swpp2020-team15!';
 # DATABASES = {
 #     'default' : {
 #         'ENGINE': 'django.db.backends.mysql',
