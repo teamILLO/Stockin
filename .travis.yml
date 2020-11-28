@@ -18,6 +18,7 @@ matrix:
         - cd stockin/frontend
         - yarn install
         - cd ../backend
+        - source ~/virtualenv/python3.7/bin/activate
         - pip3 install -r requirements.txt
       script:
         - python manage.py makemigrations core
