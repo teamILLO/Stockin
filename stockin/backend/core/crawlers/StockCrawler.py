@@ -151,12 +151,7 @@ def stockUpdate(process=16):
 
     stocks = Stock.objects.all()
    
-<<<<<<< HEAD
     pool = Pool(process)
-=======
-    
-    # pool = Pool(process)
->>>>>>> mid-presentation
     
     # for stock in stocks:
     #     pool.apply_async(stockUpdate_, args=(stock,))
