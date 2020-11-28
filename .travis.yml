@@ -56,3 +56,4 @@ matrix:
       after_success:
         - cd stockin/backend
         - coveralls
+

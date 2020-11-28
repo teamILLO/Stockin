@@ -36,7 +36,7 @@ const FindPasswdModal = (props) => {
   };
 
   const codeConfirmHandler = () => {
-    if (codeInput === codeSent) setNext(3);
+    if (Number(codeInput) === Number(codeSent)) setNext(3);
     else alert('Invalid Code!');
   };
 

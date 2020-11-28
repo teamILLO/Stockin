@@ -12,10 +12,7 @@ const slice = createSlice({
     },
   },
 });
-
 export default slice.reducer;
-
-// Actions
 
 export const { getfs } = slice.actions;
 
