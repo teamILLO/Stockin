@@ -8,19 +8,11 @@ import ReportPage from './containers/ReportPage/ReportPage';
 import MyPage from './containers/MyPage/MyPage';
 import AboutUsPage from './containers/AboutUsPage/AboutUsPage';
 import DetailPage from './containers/DetailPage/DetailPage';
-<<<<<<< HEAD
-=======
-// import CSRFToken from './csrftoken';
->>>>>>> mid-presentation
 
 const App = (props) => {
   return (
     <ConnectedRouter history={props.history}>
       <div className="App" data-testid="App">
-<<<<<<< HEAD
-=======
-        {/* <CSRFToken /> */}
->>>>>>> mid-presentation
         <Switch>
           <Route path="/prelogin" exact component={PreloginPage} />
           <Route path="/main" exact component={MainPage} />
