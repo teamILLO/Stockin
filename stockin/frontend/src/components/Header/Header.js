@@ -28,12 +28,7 @@ const Header = (props) => {
 
   return (
     <div className="Header" data-testid="Header">
-      <Visibility
-        continuous
-        once
-        onBottomVisible={() => handleOnScreen()}
-        onBottomPassed={() => handleOffScreen()}
-      >
+      
         <Container textAlign="right">
           <Button secondary onClick={onClickLogoutHandler}>
             LOGOUT
@@ -50,6 +45,12 @@ const Header = (props) => {
           <Menu compact secondary>
             <SearchBox />
           </Menu>
+          <Visibility
+            continuous
+            once
+            onBottomVisible={() => handleOnScreen()}
+            onBottomPassed={() => handleOffScreen()}
+          ></Visibility>
         </div>
         <Menu secondary compact size="massive">
           <Menu.Item
@@ -68,7 +69,6 @@ const Header = (props) => {
             onClick={() => onClickNavHandler('/aboutus')}
           />
         </Menu>
-      </Visibility>
       <div className={'stickyHeader ' + (isVisible ? '' : 'hidden')} data-testid="StickyHeader">
         <Menu borderless fixed="top">
           <Container>
