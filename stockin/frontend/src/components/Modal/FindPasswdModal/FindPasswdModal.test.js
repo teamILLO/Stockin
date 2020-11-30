@@ -7,6 +7,13 @@ import { api } from '../../../api/index';
 
 describe('<FindPasswdModal />', () => {
   let find, spyPost;
+
+  beforeAll(() => {
+    Object.defineProperty(window, 'crypto', {
+      value: { getRandomValues: arr => (['111111']) },
+    });
+  })
+  
   beforeEach(() => {
     find = (
       <Provider store={store}>
@@ -31,7 +38,6 @@ describe('<FindPasswdModal />', () => {
     });
 
     jest.spyOn(api, 'put').mockImplementation((url, atc) => null);
-
   });
 
   afterEach(() => {
@@ -100,9 +106,7 @@ describe('<FindPasswdModal />', () => {
   });
 
   test(`should code checking`, async () => {
-    jest.spyOn(Math, 'floor').mockImplementation((num)=>1);
     render(find);
-    
     fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
     const query = screen.getByPlaceholderText('Email');
     fireEvent.change(query, { target: { value: 'test@email.com' } });
@@ -112,8 +116,7 @@ describe('<FindPasswdModal />', () => {
     await wait(() => {
         screen.getByText(/next!/i, { selector: 'button' })
     })
-    fireEvent.click(screen.getByText(/next!/i, { selector: 'button' }));
-   
+
     const code = screen.getByPlaceholderText('CODE');
     fireEvent.change(code, { target: { value: '111111' } });
     fireEvent.click(screen.getByText(/next!/i, { selector: 'button' }));
@@ -125,9 +128,7 @@ describe('<FindPasswdModal />', () => {
     const password = screen.getByPlaceholderText('New Password');
     fireEvent.change(password, { target: { value: '1' } });
     fireEvent.click(screen.getByText(/Confirm/i, { selector: 'button' }));
-    expect(window.alert).toHaveBeenCalledTimes(2)
-   
-
+    expect(window.alert).toHaveBeenCalledTimes(1);
   });
 
 });

@@ -15,7 +15,7 @@ const FindPasswdModal = (props) => {
   const sendEmail = async () => {
     const crypto = window.crypto;
     var array = new Uint32Array(1);
-    crypto.getRandomValues(array);
+    array = crypto.getRandomValues(array);
     let number = array[0] + '';
     setCodeSent(number);
 
