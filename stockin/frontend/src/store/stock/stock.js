@@ -23,7 +23,7 @@ export default slice.reducer;
 export const { updateStockList } = slice.actions;
 export const getStocks = () => async (dispatch) => {
   try {
-    await api.get('http://localhost:8000/api/stocks/').then((response) => {
+    await api.get('/stocks/').then((response) => {
       dispatch(updateStockList(response.data));
     });
   } catch (e) {

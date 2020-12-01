@@ -15,14 +15,26 @@ function getCookie(name) {
         break;
       }
     }
+  } else {
+    axios.get('/api/users/token/').then((response) => {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].replace(' ', '');
+        if (cookie.substring(0, name.length + 1) === name + '=') {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    })
   }
   return cookieValue;
 }
 
 export const api = axios.create({
-  baseURL: 'http://localhost:8000/api/',
+	baseURL: 'http://ec2-52-23-152-17.compute-1.amazonaws.com:8000/api/',
   headers: {
     'Content-Type': 'application/json',
     'X-CSRFToken': getCookie('csrftoken'),
   },
 });
+

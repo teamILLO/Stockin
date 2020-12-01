@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Container } from 'semantic-ui-react';
 import { api } from '../../api/index';
 
 const MainPage = (props) => {
@@ -52,6 +52,7 @@ const MainPage = (props) => {
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
+	  <Container>
         <Grid>
           
           <StockBlock id={top1} score ={score1}/>
@@ -62,7 +63,7 @@ const MainPage = (props) => {
           
           
         </Grid>
-        
+	</Container>        
       <Footer history={props.history} />
     </div>
   );

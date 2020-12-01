@@ -26,8 +26,7 @@ SECRET_KEY = '^6ha-gdjwl#96*n5d5j#^)w0$k7chwa)trbyh@ju5u#1*ex166'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['ec2-52-23-152-17.compute-1.amazonaws.com', 'localhost']
 
 # Application definition
 
@@ -81,7 +80,8 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://ec2-52-23-152-17.compute-1.amazonaws.com:3000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True

@@ -1470,7 +1470,7 @@
 
 "@semantic-ui-react/craco-less@^1.2.1":
   version "1.2.1"
-  resolved "https://registry.npmjs.org/@semantic-ui-react/craco-less/-/craco-less-1.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/@semantic-ui-react/craco-less/-/craco-less-1.2.1.tgz#8267e5d252a1a3551fc9c2f531c4cd09c162bf96"
   integrity sha512-GfAwiyTOS19AWccxg5HOhOfmT6b0Q9bbTs4rRXgKURIpJvAnYdA2zdpbhQD6CeAj5CQukHAn/26fvk+ZuyNE7g==
   dependencies:
     craco-less "^1.15.0"
@@ -10516,6 +10516,13 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "^0.10.0"
 
+semantic-ui-css@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.4.1.tgz#f5aea39fafb787cbd905ec724272a3f9cba9004a"
+  integrity sha512-Pkp0p9oWOxlH0kODx7qFpIRYpK1T4WJOO4lNnpNPOoWKCrYsfHqYSKgk5fHfQtnWnsAKy7nLJMW02bgDWWFZFg==
+  dependencies:
+    jquery x.*
+
 semantic-ui-less@^2.4.1:
   version "2.4.1"
   resolved "https://registry.npmjs.org/semantic-ui-less/-/semantic-ui-less-2.4.1.tgz"
@@ -10525,7 +10532,7 @@ semantic-ui-less@^2.4.1:
 
 semantic-ui-react@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.npmjs.org/semantic-ui-react/-/semantic-ui-react-2.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-2.0.1.tgz#a69aa65001c437ae0b3ed747d1f43ee5b4e88407"
   integrity sha512-l1g9ZTRHqe+nSgcTuaTTxnnIdPAgyzoAZY35ciL0pjopeC7mWxNVhBqm98tmR0kgoL7NvWjY+Dy/AUc3l6FVKw==
   dependencies:
     "@babel/runtime" "^7.10.5"

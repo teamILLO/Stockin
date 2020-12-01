@@ -8,7 +8,7 @@ import { history } from '../../store/store';
 import { tryLogin, checkLogin } from '../../store/authentication/authentication';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 import FindPasswdModal from '../../components/Modal/FindPasswdModal/FindPasswdModal';
-
+import { api } from '../../api/index';
 const panes = [
   {
     menuItem: 'About Stockin',
