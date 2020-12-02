@@ -52,18 +52,18 @@ const MainPage = (props) => {
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
-	  <Container>
-        <Grid>
-          
-          <StockBlock id={top1} score ={score1}/>
-          <StockBlock id={top2} score ={score2}/>
-          <StockBlock id={top3} score ={score3}/>
-          <StockBlock id={top4} score ={score4}/>
-          <StockBlock id={top5} score ={score5}/>
-          
-          
-        </Grid>
-	</Container>        
+      <Container>
+          <Grid>
+            
+            <StockBlock id={top1} score ={score1}/>
+            <StockBlock id={top2} score ={score2}/>
+            <StockBlock id={top3} score ={score3}/>
+            <StockBlock id={top4} score ={score4}/>
+            <StockBlock id={top5} score ={score5}/>
+            
+            
+          </Grid>
+    </Container>        
       <Footer history={props.history} />
     </div>
   );
