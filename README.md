@@ -5,7 +5,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=swsnu_swpp2020-team15&metric=alert_status)](https://sonarcloud.io/dashboard?id=swsnu_swpp2020-team15)
 
  
-### Current working branch : mid-presentation
+### Current working branch : master
 # Frontend
 ### How to run frontend:
 ```
