@@ -38,7 +38,7 @@ CSRF_COOKIE_SECURE = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ec2-52-23-152-17.compute-1.amazonaws.com', 'localhost']
+ALLOWED_HOSTS = ['ec2-3-239-43-2.compute-1.amazonaws.com', 'localhost']
 
 # Application definition
 
@@ -93,7 +93,7 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://localhost:3000',
-    'http://ec2-52-23-152-17.compute-1.amazonaws.com:3000'
+    'http://ec2-3-239-43-2.compute-1.amazonaws.com:3000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
