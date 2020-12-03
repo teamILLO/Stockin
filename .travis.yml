@@ -35,4 +35,5 @@ matrix:
         - sonar-scanner
       after_success:
         - cd stockin/backend
+        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
         - coveralls
