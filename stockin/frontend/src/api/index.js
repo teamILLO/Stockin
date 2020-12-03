@@ -31,7 +31,7 @@ function getCookie(name) {
 }
 
 export const api = axios.create({
-	baseURL: 'http://localhost:8000/api/',
+  baseURL: '/api/',
   headers: {
     'Content-Type': 'application/json',
     'X-CSRFToken': getCookie('csrftoken'),
