@@ -14,7 +14,7 @@ import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
 import { Container, Tab } from 'semantic-ui-react';
 
-const panes = (id) => [
+const panes = (id, data) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => <DetailOverview />,
@@ -25,7 +25,7 @@ const panes = (id) => [
   },
   {
     menuItem: { key: 'Price Trends', className: 'Price Trends', content: 'Price Trends' },
-    render: () => <DetailPriceTrends />,
+    render: () => <DetailPriceTrends data={data} />,
   },
   {
     menuItem: { key: 'FinancialState', className: 'FinancialState', content: 'Financial State' },
@@ -50,21 +50,30 @@ const DetailPage = (props) => {
     dispatch(getStockHistory(+props.match.params.id));
   }, [dispatch, loggingIn, props.match.params.id]);
 
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
+  let graph =
+    priceList.length === 0 ? (
+      'Loading...'
+    ) : (
+      <DetailData id={props.match.params.id} data={priceList} />
+    );
 
   const changeScroll = () => {
     let style = document.body.style.overflow;
     document.body.style.overflow = style === 'hidden' ? 'auto' : 'hidden';
   };
+  console.log(priceList);
 
   return (
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <Container>
-      <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
-        {graph}
-      </div>
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
+        <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
+          {graph}
+        </div>
+        <Tab
+          menu={{ secondary: true, pointing: true }}
+          panes={panes(props.match.params.id, priceList)}
+        />
       </Container>
 
       <Footer history={props.history} />
