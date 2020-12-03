@@ -12,10 +12,11 @@ const DetailPriceTrends = (props) => {
   console.log(data);
 
   const changeCalculator = (curr, prev) => {
-    if (prev === curr) return `0`;
-    else if (prev == 0) return `N/A`;
-    else if (prev > curr) return `${((1 - curr / prev) * 100).toFixed(2)}%`;
-    else return `${((curr / prev - 1) * 100).toFixed(2)}%`;
+    if (prev === curr) return { img: dash, output: '0' };
+    else if (prev == 0) return { img: '', output: 'N/A' };
+    else if (prev > curr)
+      return { img: decrease, output: `${((1 - curr / prev) * 100).toFixed(2)}%` };
+    else return { img: increase, output: `${((curr / prev - 1) * 100).toFixed(2)}%` };
   };
 
   const monthGetter = (date) => {
@@ -27,14 +28,15 @@ const DetailPriceTrends = (props) => {
   };
   const rows = reversedData.slice(0, rowLength).map((dat, i) => {
     return (
-      <div key={i}>
-        <Table.Row>
-          <Table.Cell>{monthGetter(dat.date) + '.' + dayGetter(dat.date)}</Table.Cell>
-          <Table.Cell>{dat.close}</Table.Cell>
-          <Table.Cell>{dat.close - reversedData[i + 1].close}</Table.Cell>
-          <Table.Cell>{changeCalculator(dat.close, reversedData[i + 1])}</Table.Cell>
-        </Table.Row>
-      </div>
+      <Table.Row key={i}>
+        <Table.Cell>{monthGetter(dat.date) + '.' + dayGetter(dat.date)}</Table.Cell>
+        <Table.Cell>{dat.close}</Table.Cell>
+        <Table.Cell>{dat.close - reversedData[i + 1].close}</Table.Cell>
+        <Table.Cell verticalAlign="middle">
+          <Image as="i" src={changeCalculator(dat.close, reversedData[i + 1].close).img} />
+          <span>{' ' + changeCalculator(dat.close, reversedData[i + 1].close).output}</span>
+        </Table.Cell>
+      </Table.Row>
     );
   });
   return (
