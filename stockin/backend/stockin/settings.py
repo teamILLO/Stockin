@@ -29,16 +29,16 @@ SECURE_HSTS_SECONDS = 3600 # will change by 31536000 = 365 * 24 * 60 * 60 second
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
-SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = False
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ec2-3-239-43-2.compute-1.amazonaws.com', 'localhost']
+ALLOWED_HOSTS = ['52.200.16.214', 'localhost']
 
 # Application definition
 

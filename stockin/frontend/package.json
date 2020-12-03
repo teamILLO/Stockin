@@ -67,7 +67,6 @@
     "miragejs": "^0.1.41",
     "semantic-ui-less": "^2.4.1"
   },
-  "proxy": "http://localhost:8000",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",

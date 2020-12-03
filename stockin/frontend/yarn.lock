@@ -10511,7 +10511,7 @@ selfsigned@^1.10.7:
 
 semantic-ui-css@^2.4.1:
   version "2.4.1"
-  resolved "https://registry.npmjs.org/semantic-ui-css/-/semantic-ui-css-2.4.1.tgz"
+  resolved "https://registry.yarnpkg.com/semantic-ui-css/-/semantic-ui-css-2.4.1.tgz#f5aea39fafb787cbd905ec724272a3f9cba9004a"
   integrity sha512-Pkp0p9oWOxlH0kODx7qFpIRYpK1T4WJOO4lNnpNPOoWKCrYsfHqYSKgk5fHfQtnWnsAKy7nLJMW02bgDWWFZFg==
   dependencies:
     jquery x.*
@@ -10525,7 +10525,7 @@ semantic-ui-less@^2.4.1:
 
 semantic-ui-react@^2.0.1:
   version "2.0.1"
-  resolved "https://registry.npmjs.org/semantic-ui-react/-/semantic-ui-react-2.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-2.0.1.tgz#a69aa65001c437ae0b3ed747d1f43ee5b4e88407"
   integrity sha512-l1g9ZTRHqe+nSgcTuaTTxnnIdPAgyzoAZY35ciL0pjopeC7mWxNVhBqm98tmR0kgoL7NvWjY+Dy/AUc3l6FVKw==
   dependencies:
     "@babel/runtime" "^7.10.5"
