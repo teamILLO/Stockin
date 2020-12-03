@@ -25,7 +25,7 @@ export const RenderTableItem = (item) => {
     var response = {};
   
     /* Header */
-    const quarter = <Table.HeaderCell key={item.id}>{item.quarter}</Table.HeaderCell>;
+    const quarter = <Table.HeaderCell key={item.id}><div>{item.quarter}<br/>IFRS 연결</div></Table.HeaderCell>;
   
     /* Body */
     const sales = <Table.Cell key={item.id}>{item.sales}</Table.Cell>;

@@ -8,7 +8,7 @@ const slice = createSlice({
   },
   reducers: {
     getfs: (state, action) => {
-      return { ...state, fs: action.payload.reverse() };
+      return { ...state, fs: action.payload };
     },
   },
 });

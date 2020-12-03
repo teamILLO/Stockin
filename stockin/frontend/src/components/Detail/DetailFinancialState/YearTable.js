@@ -26,7 +26,6 @@ const YearTable = (props) => {
         temp_fs.push(e);
       }
     });
-    // console.log(temp_fs);
     setYearFS(temp_fs);
   }, [fs]);
 
@@ -42,23 +41,23 @@ const YearTable = (props) => {
 
         <Table.Body>
           <Table.Row>
-            <Table.Cell>매출액</Table.Cell>
+            <Table.Cell>매출액(억원)</Table.Cell>
             {year_fs.map((e) => RenderTableItem(e).sales)}
           </Table.Row>
           <Table.Row>
-            <Table.Cell>영업이익</Table.Cell>
+            <Table.Cell>영업이익(억원)</Table.Cell>
             {year_fs.map((e) => RenderTableItem(e).operatingProfit)}
           </Table.Row>
           <Table.Row>
-            <Table.Cell>당기순이익</Table.Cell>
+            <Table.Cell>당기순이익(억원)</Table.Cell>
             {year_fs.map((e) => RenderTableItem(e).netIncome)}
           </Table.Row>
           <Table.Row>
-            <Table.Cell>영업이익률</Table.Cell>
+            <Table.Cell>영업이익률(%)</Table.Cell>
             {year_fs.map((e) => RenderTableItem(e).operatingMargin)}
           </Table.Row>
           <Table.Row>
-            <Table.Cell>순이익률</Table.Cell>
+            <Table.Cell>순이익률(%)</Table.Cell>
             {year_fs.map((e) => RenderTableItem(e).netProfitMargin)}
           </Table.Row>
           <Table.Row>
