@@ -98,3 +98,39 @@ def stock_top5(requset):
         return JsonResponse(response_list, safe=False)
     else:
         return HttpResponseNotAllowed(['GET'])
+
+
+# n : loading 횟수 for scroll data fetching
+def stock_get_20_each(requset, n=''):
+    if requset.method =='GET':
+        response_list=[]
+        start_idx = n * 20
+        end_idx = n * 20 + 19
+        stock_end_idx = Stock.objects.count()-1
+
+        if start_idx <= stock_end_idx and stock_end_idx <= end_idx :
+            end_idx = stock_len
+
+        if start_idx > stock_end_idx :
+            return JsonResponse(response_list, safe=False)
+        
+        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[start_idx : end_idx+1] #DB hit per request : caching?
+        
+        cnt = start_idx + 1
+        for stock in stocks:
+            response_list.append({
+                'id': stock['id'],
+                'rank' : cnt,
+                'title' : stock['title'],
+                'isKOSPI' : stock['isKOSPI'],
+                'code' : stock['code'],
+                'price' : stock['price'],
+                'yesterdayPrice' : stock['yesterdayPrice'],
+                'score':stock['score']
+            })
+            cnt = cnt + 1
+
+
+        return JsonResponse(response_list, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])

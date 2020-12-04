@@ -1,8 +1,14 @@
 import { api } from '../../api/index';
-import stock, { updateStockList, getStocks } from './stock';
+import stock, { updateStockList, getStocks, getScrollData, updateScrollData } from './stock';
 import store from '../store';
 
 const testList = [
+  { id: 1, name: 'a' },
+  { id: 2, name: 'b' },
+  { id: 3, name: 'c' },
+];
+
+const scrollData = [
   { id: 1, name: 'a' },
   { id: 2, name: 'b' },
   { id: 3, name: 'c' },
@@ -21,6 +27,7 @@ describe('stock ', () => {
   it('should handle initial state', () => {
     expect(stock(undefined, {})).toEqual({
       stockList: [],
+      scrollData: [],
     });
   });
 
@@ -29,6 +36,7 @@ describe('stock ', () => {
       stock(
         {
           stockList: [],
+          scrollData: []
         },
         {
           type: updateStockList.type,
@@ -37,6 +45,7 @@ describe('stock ', () => {
       ),
     ).toEqual({
       stockList: testList,
+      scrollData :[]
     });
   });
 

@@ -26,12 +26,33 @@ jest.mock('../../components/StockReportBlock/StockReportBlock', () => {
   });
 });
 
-const initialAuthState = { loggingIn: true, user: {} };
-const initialAuthStateLogout = { loggingIn: false, user: null };
-const initialAuthStateUndefined = { loggingIn: undefined, user: null };
-const mockStore = getMockStore(initialAuthState);
-const mockStoreLogout = getMockStore(initialAuthStateLogout);
-const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
+// const initialAuthState = { loggingIn: true, user: {} };
+// const initialAuthStateLogout = { loggingIn: false, user: null };
+// const initialAuthStateUndefined = { loggingIn: undefined, user: null };
+const mockStore = getMockStore(
+  { loggingIn: true, user: { id: 1 } },
+  { stockList: [], scrollData : [] },
+  { priceList: [] },
+  { commentList: [] },
+  { news: [] },
+  { fs: [] },
+);
+const mockStoreLogout = getMockStore(
+  { loggingIn: false, user: {} },
+  { stockList: [], scrollData : [] },
+  { priceList: [] },
+  { commentList: [] },
+  { news: [] },
+  { fs: [] },
+);
+const mockStoreUndefined = getMockStore(
+  { loggingIn: undefined, user: null },
+  { stockList: [], scrollData : [] },
+  { priceList: [] },
+  { commentList: [] },
+  { news: [] },
+  { fs: [] },
+);
 
 describe('<ReportPage />', () => {
   let reportPage, reportPageLogout, reportPageUndefined, spyHistoryPush, spyCheckLogin;
@@ -62,6 +83,7 @@ describe('<ReportPage />', () => {
     spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
       return (dispatch) => {};
     });
+
   });
 
   it('should render without errors', () => {
