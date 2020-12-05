@@ -104,14 +104,14 @@ describe('<ReportPage />', () => {
 
   it('should change tab when Up clicked', () => {
     const { container } = render(reportPage);
-    fireEvent.click(screen.getByText(/up/i));
+    fireEvent.click(screen.getByText(/매수 추천/i));
     expect(queryByTestId(container, 'upTab')).toHaveClass('active');
     expect(queryByTestId(container, 'downTab')).not.toHaveClass('active');
   });
 
   it('should change tab when Down clicked', () => {
     const { container } = render(reportPage);
-    fireEvent.click(screen.getByText(/down/i));
+    fireEvent.click(screen.getByText(/매도 추천/i));
     expect(queryByTestId(container, 'upTab')).not.toHaveClass('active');
     expect(queryByTestId(container, 'downTab')).toHaveClass('active');
   });

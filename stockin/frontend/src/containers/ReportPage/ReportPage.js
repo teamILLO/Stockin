@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useState, useEffect, createRef, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Sticky, Menu, Input, Container } from 'semantic-ui-react';
 import Header from '../../components/Header/Header';
@@ -15,9 +15,21 @@ const ReportPage = (props) => {
   const contextRef = createRef();
   const [active, setActive] = useState('up');
   const [renderReportBlock, setRenderReportBlock] = useState([]);
+  const endCounter = useRef(0);
+
+  const infinityScroll = () => {
+    let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+    let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+    let clientHeight = document.documentElement.clientHeight
+
+    if(scrollTop + clientHeight === scrollHeight) {
+      dispatch(getScrollData(endCounter.current + ''));
+      endCounter.current += 1;
+    }
+  };
 
   const handleRenderReportBlock = (li) => {
-    let result_list = []
+    let result_list = [];
 
     li.forEach((stock) => {
       result_list.push(
@@ -41,6 +53,10 @@ const ReportPage = (props) => {
   };
 
   useEffect(() => {
+    window.addEventListener('scroll', infinityScroll, true);
+  }, []);
+
+  useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
@@ -48,12 +64,9 @@ const ReportPage = (props) => {
   }, [dispatch, loggingIn]);
 
   useEffect(() => {
-    dispatch(getScrollData('2'));
-  }, [])
-
-  useEffect(() => {
     handleRenderReportBlock(scrollData)
-  }, [scrollData])
+    infinityScroll()
+  }, [scrollData]);
 
   return (
     <div className="ReportPage" data-testid="ReportPage" ref={contextRef}>
@@ -61,14 +74,14 @@ const ReportPage = (props) => {
       <Container>
       <Sticky context={contextRef} offset={64.8}>
         <Menu attached="top" tabular style={{ backgroundColor: '#fff', paddingTop: '1em' }}>
-          <Menu.Item as="a" active={active === 'up'} onClick={() => setActive('up')} name="up" data-testid="upTab"/>
-          <Menu.Item as="a" active={active === 'down'} onClick={() => setActive('down')} name="down" data-testid="downTab"/>
+          <Menu.Item as="a" active={active === 'up'} onClick={() => setActive('up')} name="매수 추천" data-testid="upTab"/>
+          <Menu.Item as="a" active={active === 'down'} onClick={() => setActive('down')} name="매도 추천" data-testid="downTab"/>
           <Menu.Menu position="right">
             <Menu.Item>
               <Input
                 transparent
                 icon={{ name: 'search', link: true }}
-                placeholder="Search users..."
+                placeholder="종목 검색"
               />
             </Menu.Item>
           </Menu.Menu>

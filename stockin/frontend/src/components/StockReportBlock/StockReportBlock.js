@@ -5,29 +5,13 @@ import { timeParse } from 'd3-time-format';
 
 
 const StockReportBlock = (props) => {
-  // const [title, setTitle] = useState('')
-  // const [info, setInfo] = useState('')
-  // const [price, setPrice] = useState('')
-  // const [variation, setVariation] = useState('')
-  // const [priceList, setPriceList] = useState('')
-
-  // useEffect(()=>{
-  //   api.get('stocks/'+String(props.id)+'/').then((response) => {
-  //     setTitle(response.data['title']);
-  //     setInfo(response.data['isKOSPI']+' '+response.data['code']);
-  //     setPrice(Number(response.data['price']).toLocaleString());
-  //     if(Number(response.data['price'])-Number(response.data['yesterdayPrice']) < 0 )
-  //       setVariation((Number(response.data['yesterdayPrice'])-Number(response.data['price'])).toLocaleString() + '▼')
-  //     else
-  //       setVariation((Number(response.data['price'])-Number(response.data['yesterdayPrice'])).toLocaleString() + '▲')
-  //   }).catch((e) => {console.error(e)});
-  // }, [props.id]);
-
   const title = props.title;
   const rank = props.rank;
   const info = (props.isKOSPI ? 'KOSPI' : 'KOSDAQ') + ' ' + props.code;
   const price = props.price;
   const variation = (props.price + 0) > (props.yesterdayPrice + 0) ? props.price - props.yesterdayPrice : props.yesterdayPrice - props.price;
+
+  /* TODO : FOR GRAPH */
   //const priceList
 
   // useEffect(() => {

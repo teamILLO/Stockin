@@ -101,11 +101,11 @@ def stock_top5(requset):
 
 
 # n : loading 횟수 for scroll data fetching
-def stock_get_20_each(requset, n=''):
+def stock_get_10_each(requset, n=''):
     if requset.method =='GET':
         response_list=[]
-        start_idx = n * 20
-        end_idx = n * 20 + 19
+        start_idx = n * 10
+        end_idx = n * 10 + 9
         stock_end_idx = Stock.objects.count()-1
 
         if start_idx <= stock_end_idx and stock_end_idx <= end_idx :
