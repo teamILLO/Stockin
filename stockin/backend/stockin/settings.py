@@ -38,7 +38,7 @@ CSRF_COOKIE_SECURE = False
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['52.200.16.214', 'localhost']
+ALLOWED_HOSTS = ['ec2-3-235-170-90.compute-1.amazonaws.com', 'localhost', 'stockin.kr']
 
 # Application definition
 
@@ -93,7 +93,9 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
     'http://localhost:3000',
-    'http://ec2-3-239-43-2.compute-1.amazonaws.com:3000'
+    'http://stockin.kr',
+    'https://stockin.kr',
+    'http://ec2-3-235-170-90.compute-1.amazonaws.com:3000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -136,26 +138,26 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # For testing
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#    }
+#}
+#create user 'swpp'@'%' identified by 'Swpp2020-team15!';
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'default' : {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'stockinDB',
+        'USER': 'swpp',                         # mysql user-id
+        'PASSWORD': 'Swpp2020-team15!',         # mysql user-password
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'TEST': {
+            'NAME': 'test_stockinDB',
+        },
     }
 }
-#create user 'swpp'@'%' identified by 'Swpp2020-team15!';
-# DATABASES = {
-#     'default' : {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'stockinDB',
-#         'USER': 'swpp',                         # mysql user-id
-#         'PASSWORD': 'Swpp2020-team15!',         # mysql user-password
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#         'TEST': {
-#             'NAME': 'test_stockinDB',
-#         },
-#     }
-# }
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 
@@ -194,4 +196,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
