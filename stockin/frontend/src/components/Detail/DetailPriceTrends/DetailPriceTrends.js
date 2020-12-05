@@ -12,8 +12,8 @@ const DetailPriceTrends = (props) => {
   console.log(data);
 
   const changeCalculator = (curr, prev) => {
-    if (prev === curr) return { img: dash, output: '0' };
-    else if (prev == 0) return { img: '', output: 'N/A' };
+    if (prev == 0) return { img: '', output: 'N/A' };
+    else if (prev === curr) return { img: dash, output: '0' };
     else if (prev > curr)
       return { img: decrease, output: `${((1 - curr / prev) * 100).toFixed(2)}%` };
     else return { img: increase, output: `${((curr / prev - 1) * 100).toFixed(2)}%` };
@@ -27,21 +27,31 @@ const DetailPriceTrends = (props) => {
     return date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
   };
   const rows = reversedData.slice(0, rowLength).map((dat, i) => {
-    return (
-      <Table.Row key={i}>
-        <Table.Cell>{monthGetter(dat.date) + '.' + dayGetter(dat.date)}</Table.Cell>
-        <Table.Cell>{dat.close}</Table.Cell>
-        <Table.Cell>{dat.close - reversedData[i + 1].close}</Table.Cell>
-        <Table.Cell verticalAlign="middle">
-          <Image as="i" src={changeCalculator(dat.close, reversedData[i + 1].close).img} />
-          <span>{' ' + changeCalculator(dat.close, reversedData[i + 1].close).output}</span>
-        </Table.Cell>
-      </Table.Row>
-    );
+    if (data.length <= ROW_LENGTH && i + 1 == rowLength)
+      return (
+        <Table.Row key={i}>
+          <Table.Cell>{monthGetter(dat.date) + '.' + dayGetter(dat.date)}</Table.Cell>
+          <Table.Cell>{dat.close}</Table.Cell>
+          <Table.Cell>{'N/A'}</Table.Cell>
+          <Table.Cell>{'N/A'}</Table.Cell>
+        </Table.Row>
+      );
+    else
+      return (
+        <Table.Row key={i}>
+          <Table.Cell>{monthGetter(dat.date) + '.' + dayGetter(dat.date)}</Table.Cell>
+          <Table.Cell>{dat.close}</Table.Cell>
+          <Table.Cell>{dat.close - reversedData[i + 1].close}</Table.Cell>
+          <Table.Cell verticalAlign="middle">
+            <Image as="i" src={changeCalculator(dat.close, reversedData[i + 1].close).img} />
+            <span>{' ' + changeCalculator(dat.close, reversedData[i + 1].close).output}</span>
+          </Table.Cell>
+        </Table.Row>
+      );
   });
   return (
     <div data-testid="DetailPriceTrends">
-      <Table basic="very">
+      <Table basic="very" celled selectable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Date</Table.HeaderCell>
