@@ -6,16 +6,32 @@ import Footer from '../../components/Footer/Footer';
 import StockReportBlock from '../../components/StockReportBlock/StockReportBlock';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
+import { api } from '../../api/index';
 
 const ReportPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
   const contextRef = createRef();
+
+  const [top1, setTop1] = useState();
+  const [top2, setTop2] = useState();
+  const [top3, setTop3] = useState();
+
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
     }
+
+    api.get('stocks/top5/').then((response)=>{
+      const stocks=response.data;
+
+      setTop1(stocks[0]['id'])
+      setTop2(stocks[1]['id'])
+      setTop3(stocks[2]['id'])
+      
+    })
+  
   }, [dispatch, loggingIn]);
 
   const [active, setActive] = useState('up');
@@ -41,7 +57,15 @@ const ReportPage = (props) => {
       </Sticky>
       <StockReportBlock 
         rank="1"
-        id="2343"
+        id={top1}
+      />
+      <StockReportBlock 
+        rank="2"
+        id={top2}
+      />
+      <StockReportBlock 
+        rank="3"
+        id={top3}
       />
       <div>1</div>
       <div>2</div>
