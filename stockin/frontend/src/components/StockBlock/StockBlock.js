@@ -37,15 +37,16 @@ const StockBlock = (props) => {
   });
   
   const clickCard=()=>{
-    history.push('/detail/'+props.id)
+      history.push('/detail/'+props.id)
   }
 
   const dashname = (props.score >=50)? 'dashboard':'dashboard2';
   const zonename = (props.score >=50)? 'priceZone':'priceZone2';
 
   return(
-  
-    <Card className='stockBlock' centered="true" onClick={()=>clickCard()}>
+    <div data-testid='StockBlock' >
+      <br/>
+    <Card className='stockBlock' data-testid='stockBlock' onClick={()=>clickCard()}>
       <Card.Header textAlign='left'>
         <br/>
         <span className='stockTitle'>{title}</span>
@@ -54,7 +55,7 @@ const StockBlock = (props) => {
       <Card.Meta textAlign='left'>
       <span className='stockInfo'>{info}</span>
       </Card.Meta>
-      <Card.Content  className='dashboardContent'>
+      <Card.Content  className='dashboardContent' >
       <ChangingProgressProvider values={[0, props.score]}>
         {value => (
           <CircularProgressbar
@@ -80,6 +81,7 @@ const StockBlock = (props) => {
       </div>
       
     </Card>
+    </div>
   
   );
 };

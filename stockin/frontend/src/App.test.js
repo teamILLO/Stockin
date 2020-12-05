@@ -12,6 +12,12 @@ import { history } from './store/store';
 //   });
 // });
 
+jest.mock('react-slick',()=>{
+  return jest.fn((props)=>{
+    return <div></div>
+  })
+})
+
 describe('App', () => {
   let app;
   //store and history needs to be mocked

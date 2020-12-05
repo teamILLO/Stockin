@@ -17,9 +17,6 @@ function exampleReducer(state, action) {
     case 'START_SEARCH':
       return { ...state, loading: true, value: action.query };
     case 'FINISH_SEARCH':
-      const fin_results = (JSON.parse(localStorage.getItem('recent-search')) || []).concat(
-        action.results,
-      );
       return { ...state, loading: false, results: action.results };
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection };
@@ -84,7 +81,7 @@ const SearchBox = () => {
     ) {
       selected_stock = { ...selected_stock, key: 'recent-serach_' + selected_stock.id, description: '최근 검색' };
       retrieve_list.unshift(selected_stock);
-      localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
+      localStorage.setItem('recent-search', JSON.stringify(retrieve_list.slice(0,5)));
     }
 
     dispatch({ type: 'UPDATE_SELECTION', selection: selected_stock.title });

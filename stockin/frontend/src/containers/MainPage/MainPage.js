@@ -11,7 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './MainPage.css';
-import { useStore } from 'react-redux/lib/hooks/useStore';
+
 
 
 var sliderSettings = {
@@ -19,7 +19,7 @@ var sliderSettings = {
   infinite: false,
   speed: 500,
   slidesToShow: 5,
-  slidesToScroll: 1,
+  slidesToScroll: 2,
   initialSlide: 0,
   arrows : true,
   
@@ -69,17 +69,17 @@ const MainPage = (props) => {
       return(
         <Grid.Row centered>
           <Grid.Column width={13} style={{height: '350px'}} >
-            <Slider className='topSlider' {...sliderSettings}>
-            {topStock.map((top)=>{
-              return <StockBlock id={top['id']} score={top['score']}/>;
+            <Slider className='topSlider' {...sliderSettings} draggable={false}>
+            {topStock.map((top, index)=>{
+              return <StockBlock id={top['id']} score={top['score']} key={index}/>;
             })}
             </Slider>
           </Grid.Column>
 
           <Grid.Column width={13}  style={{height: '350px'}}>
-            <Slider className='topSlider' {...sliderSettings}>
-            {bottomStock.map((bottom)=>{
-              return <StockBlock id={bottom['id']} score={bottom['score']}/>;
+            <Slider className='topSlider' {...sliderSettings} draggable={false}>
+            {bottomStock.map((bottom, index)=>{
+              return <StockBlock id={bottom['id']} score={bottom['score']} key={index}/>;
             })}
             </Slider>
           </Grid.Column>
@@ -131,12 +131,12 @@ const MainPage = (props) => {
 
           <Grid.Row style={{height: '160px'}}>
           <Grid.Column  width={3} textAlign='right'>
-            <div onClick={()=>clickDaily()} style={{...dailyStyle(), fontSize:'32px', height:'70px',cursor:'pointer'}}>
+            <div data-testid='dailyTab' onClick={()=>clickDaily()} style={{...dailyStyle(), fontSize:'32px', height:'70px',cursor:'pointer'}}>
               <br/>
               Daily Report
             </div>
             
-            <div onClick={()=>clickInterest()} style={{...interestStyle(), fontSize:'32px',height:'70px', cursor:'pointer'}}>
+            <div data-testid='interestTab' onClick={()=>clickInterest()} style={{...interestStyle(), fontSize:'32px',height:'70px', cursor:'pointer'}}>
               <br/>
               My Interests
             </div>

@@ -84,7 +84,27 @@ describe('<SearchBox />', () => {
     }, 3000);
     await jest.runAllTimers();
 
+    fireEvent.change(query, { target: { value: 'foo1_title' } });
+
+    await jest.useFakeTimers();
+    setTimeout(() => {
+      fireEvent.keyDown(query, { key: 'ArrowDown', code: 'ArrowDown' });
+      fireEvent.keyDown(query, { key: 'Enter', code: 'Enter' });
+    }, 3000);
+    await jest.runAllTimers();
+
+    
+
     fireEvent.change(query, { target: { value: 'foo2_title' } });
+
+    await jest.useFakeTimers();
+    setTimeout(() => {
+      fireEvent.keyDown(query, { key: 'ArrowDown', code: 'ArrowDown' });
+      fireEvent.keyDown(query, { key: 'Enter', code: 'Enter' });
+    }, 3000);
+    await jest.runAllTimers();
+
+    fireEvent.change(query, { target: { value: 'foo1_title' } });
 
     await jest.useFakeTimers();
     setTimeout(() => {
