@@ -247,7 +247,7 @@ def newsTransform():
 
 def newsTomodel():
     stocksdata=[]
-    with open('./data/newdata_trans.csv','r', newline='', encoding='utf-8') as file:
+    with open('./data/newsdata.csv','r', newline='', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         stocksdata=list(reader)
 
@@ -255,7 +255,7 @@ def newsTomodel():
 
     index=0
     for stock in stocks:
-        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2019-11-29').filter(date__lte='2020-11-26')
+        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2019-11-29').filter(date__lte='2020-12-03')
         data = stocksdata[index]
         print(data['title'], stock[1], index)
     

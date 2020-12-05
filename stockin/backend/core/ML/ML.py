@@ -37,8 +37,8 @@ net20 = Net(6, 30, 1, 1)
 net60 = Net(6, 40, 1, 1)
 
 net1.load_state_dict(torch.load('./Models/1day_models.pt'))
-# net20.load_state_dict(torch.load('./Models/20day_models.pt'))
-# net60.load_state_dict(torch.load('./Models/60day_models.pt'))
+net20.load_state_dict(torch.load('./Models/20day_models.pt'))
+net60.load_state_dict(torch.load('./Models/60day_models.pt'))
 
 
 
@@ -90,7 +90,7 @@ def after20():
         train_input.append(After_normalization[80:])
         d=torch.FloatTensor(np.array(train_input))
 
-        result = net1(d).data.numpy()
+        result = net20(d).data.numpy()
         data=[[]]
         data[0].append(result[0][0])
         for i in range(5):
@@ -118,7 +118,7 @@ def after60():
         train_input.append(After_normalization[120:])
         d=torch.FloatTensor(np.array(train_input))
 
-        result = net1(d).data.numpy()
+        result = net60(d).data.numpy()
         data=[[]]
         data[0].append(result[0][0])
         for i in range(5):
@@ -151,22 +151,36 @@ day20=[]
 day60=[]
 
 
+non_index=[]
+index=0
 for stock in stocks:
     price = StockHistory.objects.filter(stock_id=stock.id).order_by('-date')[0].endPrice
-    if stock.after1 == -1:
-        day1.append(1)
-        day60.append(1)
-        day20.append(1)
+    if stock.after60 == -1:
+        
+        non_index.append(index)
+        index += 1
         continue
     day1.append(stock.after1 / price)
     day20.append(stock.after20 / price)
     day60.append(stock.after60 / price)
+    index += 1
+
 
 day1= minMax(day1)
 day20 = minMax(day20)
 day60 = minMax(day60)
 
-
-for stock, d1,d2,d3 in zip(stocks, day1, day20, day60):
-    stock.score = int((d1+d2+d3)/3)
+index=0
+index2=0
+non_index.append(-1)
+for stock in stocks:
+    if index2 == non_index[index]:
+        index += 1
+        index2 += 1
+        stock.score = 50
+        stock.save()
+        continue
+    stock.score = int((day1[index2-index]+day20[index2-index]+day60[index2-index])/3)
     stock.save()
+
+    index2 += 1

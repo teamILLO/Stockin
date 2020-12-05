@@ -42,10 +42,10 @@ class StocksTestCase(TestCase):
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
         test_stockHistory = StockHistory.objects.create(stock=test_stock)
 
-        response = client.get('/api/stocks/price/2/')
+        response = client.get('/api/stocks/price/'+str(test_stock.id+1)+'/')
         self.assertEqual(response.status_code, 404)
 
-        response = client.get('/api/stocks/price/1/')
+        response = client.get('/api/stocks/price/'+str(test_stock.id)+'/')
         self.assertEqual(response.status_code, 200)
 
         # HttpResponseNotAllowed tests
@@ -72,9 +72,16 @@ class StocksTestCase(TestCase):
         test_stock3 = Stock.objects.create(title='foo_title3', code='foo_code', sector='foo_sector')
         test_stock4 = Stock.objects.create(title='foo_title4', code='foo_code', sector='foo_sector')
         test_stock5 = Stock.objects.create(title='foo_title5', code='foo_code', sector='foo_sector')
-        response = client.get('/api/stocks/1/')
+        test_stock6 = Stock.objects.create(title='foo_title1', code='foo_code', sector='foo_sector')
+        test_stock7 = Stock.objects.create(title='foo_title2', code='foo_code', sector='foo_sector')
+        test_stock8 = Stock.objects.create(title='foo_title3', code='foo_code', sector='foo_sector')
+        test_stock9 = Stock.objects.create(title='foo_title4', code='foo_code', sector='foo_sector')
+        test_stock10 = Stock.objects.create(title='foo_title5', code='foo_code', sector='foo_sector')
+        response = client.get('/api/stocks/'+str(test_stock1.id)+'/')
         self.assertEqual(response.status_code, 203)
-        response = client.get('/api/stocks/top5/')
+        response = client.get('/api/stocks/top10/')
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/api/stocks/bottom10/')
         self.assertEqual(response.status_code, 200)
 
 

@@ -13,14 +13,14 @@ const initialState = {
 function exampleReducer(state, action) {
   switch (action.type) {
     case 'CLEAN_QUERY':
-      return initialState;
+      return {...initialState, results: (JSON.parse(localStorage.getItem('recent-search')) || []).slice(0,5) };
     case 'START_SEARCH':
       return { ...state, loading: true, value: action.query };
     case 'FINISH_SEARCH':
       const fin_results = (JSON.parse(localStorage.getItem('recent-search')) || []).concat(
         action.results,
       );
-      return { ...state, loading: false, results: fin_results };
+      return { ...state, loading: false, results: action.results };
     case 'UPDATE_SELECTION':
       return { ...state, value: action.selection };
     default:
@@ -36,7 +36,7 @@ const SearchBox = () => {
   const timeoutRef = React.useRef();
 
   useEffect(() => {
-    state.results = JSON.parse(localStorage.getItem('recent-search')) || [];
+    state.results = (JSON.parse(localStorage.getItem('recent-search')) || []).slice(0,5);
     _dispatch(getStocks());
     return () => {
       clearTimeout(timeoutRef.current);
@@ -83,7 +83,7 @@ const SearchBox = () => {
       !retrieve_list.find((element) => element.id === selected_stock.id)
     ) {
       selected_stock = { ...selected_stock, key: 'recent-serach_' + selected_stock.id, description: '최근 검색' };
-      retrieve_list.push(selected_stock);
+      retrieve_list.unshift(selected_stock);
       localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
     }
 
@@ -96,6 +96,7 @@ const SearchBox = () => {
       data-testid="SearchBox"
       // action
       fluid
+      minCharacters={0}
       loading={loading}
       onSearchChange={handleSearchChange}
       onResultSelect={handleResultSelect}
