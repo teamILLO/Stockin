@@ -109,7 +109,7 @@ def stock_get_10_each(requset, n=''):
         stock_end_idx = Stock.objects.count()-1
 
         if start_idx <= stock_end_idx and stock_end_idx <= end_idx :
-            end_idx = stock_len
+            end_idx = stock_end_idx
 
         if start_idx > stock_end_idx :
             return JsonResponse(response_list, safe=False)
@@ -130,7 +130,7 @@ def stock_get_10_each(requset, n=''):
             })
             cnt = cnt + 1
 
-
         return JsonResponse(response_list, safe=False)
+
     else:
         return HttpResponseNotAllowed(['GET'])

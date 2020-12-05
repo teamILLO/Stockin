@@ -67,16 +67,44 @@ class StocksTestCase(TestCase):
 
     def test_stock_info(self):
         client = Client(enforce_csrf_checks=True)
-        test_stock1 = Stock.objects.create(title='foo_title1', code='foo_code', sector='foo_sector')
-        test_stock2 = Stock.objects.create(title='foo_title2', code='foo_code', sector='foo_sector')
-        test_stock3 = Stock.objects.create(title='foo_title3', code='foo_code', sector='foo_sector')
-        test_stock4 = Stock.objects.create(title='foo_title4', code='foo_code', sector='foo_sector')
-        test_stock5 = Stock.objects.create(title='foo_title5', code='foo_code', sector='foo_sector')
+        test_stock1 = Stock.objects.create(title='foo_title1', isKOSPI = True, code='foo_code', price=1, yesterdayPrice = 1, sector='foo_sector', score = 1)
+        test_stock2 = Stock.objects.create(title='foo_title2', isKOSPI = True, code='foo_code', price=2, yesterdayPrice = 1, sector='foo_sector', score = 2)
+        test_stock3 = Stock.objects.create(title='foo_title3', isKOSPI = True, code='foo_code', price=3, yesterdayPrice = 1, sector='foo_sector', score = 3)
+        test_stock4 = Stock.objects.create(title='foo_title4', isKOSPI = True, code='foo_code', price=4, yesterdayPrice = 1, sector='foo_sector', score = 4)
+        test_stock5 = Stock.objects.create(title='foo_title5', isKOSPI = True, code='foo_code', price=5, yesterdayPrice = 1, sector='foo_sector', score = 5)
         response = client.get('/api/stocks/1/')
         self.assertEqual(response.status_code, 203)
         response = client.get('/api/stocks/top5/')
         self.assertEqual(response.status_code, 200)
+        # HttpResponseNotAllowed tests
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/1/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
 
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/top5/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+        
+
+    def test_stock_get_10_each(self):
+        client = Client(enforce_csrf_checks=True)
+        test_stock1 = Stock.objects.create(title='foo_title1', isKOSPI = True, code='foo_code', price=1, yesterdayPrice = 1, sector='foo_sector', score = 1)
+        test_stock2 = Stock.objects.create(title='foo_title2', isKOSPI = True, code='foo_code', price=2, yesterdayPrice = 1, sector='foo_sector', score = 2)
+        test_stock3 = Stock.objects.create(title='foo_title3', isKOSPI = True, code='foo_code', price=3, yesterdayPrice = 1, sector='foo_sector', score = 3)
+        test_stock4 = Stock.objects.create(title='foo_title4', isKOSPI = True, code='foo_code', price=4, yesterdayPrice = 1, sector='foo_sector', score = 4)
+        test_stock5 = Stock.objects.create(title='foo_title5', isKOSPI = True, code='foo_code', price=5, yesterdayPrice = 1, sector='foo_sector', score = 5)
+        response = client.get('/api/stocks/scrolldata/0/')
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/api/stocks/scrolldata/3/')
+        self.assertEqual(response.status_code, 200)
+
+        # HttpResponseNotAllowed tests
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/scrolldata/3/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
 
 
         
