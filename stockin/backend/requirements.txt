@@ -9,3 +9,4 @@ requests
 bs4
 selenium
 pandas
+OpenDartReader
