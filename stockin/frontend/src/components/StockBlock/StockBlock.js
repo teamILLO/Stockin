@@ -14,7 +14,6 @@ const StockBlock = (props) => {
   const [info, setInfo] = useState('')
   const [price, setPrice] = useState('')
   const [variation, setVariation] = useState('')
-  const [BuyorSell, setBuyorSell] = useState('Buy!')
   
 
 
@@ -34,7 +33,7 @@ const StockBlock = (props) => {
       });
 
     
-  });
+  },[]);
   
   const clickCard=()=>{
       history.push('/detail/'+props.id)

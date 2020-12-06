@@ -20,6 +20,7 @@ import re
 
 from django import db
 import csv
+import json
 
 
 
@@ -119,30 +120,52 @@ def initialStockAdd():
 
 def stockUpdate_(stock):
 
-    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
-    url = 'https://finance.naver.com/item/main.nhn?code=' + str(stock.code)
-    html = requests.get(url, headers= headers).content
-    soup = BeautifulSoup(html, 'html.parser')
+    # headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
+    # url = 'https://finance.naver.com/item/main.nhn?code=' + str(stock.code)
+    # html = requests.get(url, headers= headers).content
+    # soup = BeautifulSoup(html, 'html.parser')
 
-    stockinfo = soup.select_one('#chart_area > div.rate_info')
+    # stockinfo = soup.select_one('#chart_area > div.rate_info')
     
-    price = stockinfo.select_one('.blind dd').get_text().split(' ')[1].replace(',','')
-    list_ = stockinfo.select('.no_info .blind')
-    highestPrice = list_[1].get_text().replace(',','')
-    lowestPrice = list_[5].get_text().replace(',','')
-    tradeVolume = list_[3].get_text().replace(',','')
-    tradeValue = list_[6].get_text().replace(',','')+'000000'
-    yesterdayPrice = list_[0].get_text().replace(',','')
+    # price = stockinfo.select_one('.blind dd').get_text().split(' ')[1].replace(',','')
+    # list_ = stockinfo.select('.no_info .blind')
+    # highestPrice = list_[1].get_text().replace(',','')
+    # lowestPrice = list_[5].get_text().replace(',','')
+    # tradeVolume = list_[3].get_text().replace(',','')
+    # tradeValue = list_[6].get_text().replace(',','')+'000000'
+    # yesterdayPrice = list_[0].get_text().replace(',','')
 
-    print(stock.code,": ",stock.title,' ', price," ",highestPrice," ",lowestPrice," ",tradeVolume," ",tradeValue)
+    # print(stock.code,": ",stock.title,' ', price," ",highestPrice," ",lowestPrice," ",tradeVolume," ",tradeValue)
     
-    stock.price = price
-    stock.highestPrice = highestPrice
-    stock.lowestPrice = lowestPrice
-    stock.tradeVolume = tradeVolume
-    stock.tradeValue = tradeValue
-    stock.yesterdayPrice = yesterdayPrice
+    # stock.price = price
+    # stock.highestPrice = highestPrice
+    # stock.lowestPrice = lowestPrice
+    # stock.tradeVolume = tradeVolume
+    # stock.tradeValue = tradeValue
+    # stock.yesterdayPrice = yesterdayPrice
+    # stock.save()
+    url = 'https://finance.daum.net/api/quotes/A{}?changeStatistics=true&chartSlideImage=true&isMobile=true'.format(stock.code)
+    headers = {
+            'Accept': 'application/json, text/plain, */*',
+            'authority': 'finance.daum.net',
+            'Referer': 'https://m.finance.daum.net/',
+            'User-Agent':'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
+            }
+    r = json.loads(requests.get(url, headers = headers).content)
+
+    stock.price = int(r['tradePrice'])
+    stock.highestPrice = int(r['highPrice'])
+    stock.lowestPrice = int(r['lowPrice'])
+    stock.tradeVolume = r['accTradeVolume']
+    stock.tradeValue = r['accTradePrice']
+    stock.yesterdayPrice = int(r['prevClosingPrice'])
+    stock.startPrice = int(r['openingPrice'])
+    stock.amount = int(r['marketCap'])
+   
     stock.save()
+    print(stock.title, int(r['tradePrice']))
+
+    
 
 
 # 실시간 주가 업데이트용
@@ -162,6 +185,8 @@ def stockUpdate(process=16):
     for stock in stocks:
         stockUpdate_(stock)
     # print('time: ' , time.time()-start)
+
+
 
 
 #손보는중

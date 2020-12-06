@@ -1,0 +1,28 @@
+.stock_title{
+    font-size: 26px;
+    font-weight: 500;
+}
+
+.stock_price{
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.stock_info_index{
+    font-size: 12px;
+    font-weight: 800;
+    color: #777777;
+}
+
+.stock_title_code{
+    font-size: 12px;
+    font-weight: 600;
+    color: #777777;
+}
+
+.stock_info_su{
+    font-size: 13px;
+    font-weight: 600;
+    color: #000000;
+    float: right;
+}
