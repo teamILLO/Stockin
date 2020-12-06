@@ -247,7 +247,7 @@ def pastStockHistory(count, process=4):
     stocks = Stock.objects.all()
     StockHistory.objects.all().delete()
     
-    pool = Pool(process)
+    #pool = Pool(process)
 
     # try:
     #     for stock in stocks:
@@ -260,8 +260,43 @@ def pastStockHistory(count, process=4):
 
     for stock in stocks:
         pastStockHistory_(stock,count)
+    
 
-        
+
+def beforeMarket():
+    stocks = Stock.objects.all()
+
+    for stock in stocks:
+        headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
+        url = 'https://fchart.stock.naver.com/sise.nhn?symbol={}&timeframe=day&count={}&requestType=0'.format(stock.code, 1)
+        rs = requests.get(url, headers= headers).content
+        soup = BeautifulSoup(rs, 'html.parser')
+        datas = soup.select('item')
+
+        for data in datas:
+            info = data['data'].split('|')
+            date = info[0]
+            date = date[0:4]+'-'+date[4:6]+'-'+date[6:]
+            startPrice = info[1]
+            high = info[2]
+            low = info[3]
+            endPrice = info[4]
+            tradeVolume = info[5]
+            upDown = int(endPrice) - int(startPrice)
+
+            
+            s = StockHistory(
+                stock=stock,
+                date=date,
+                startPrice=startPrice,
+                endPrice=endPrice,
+                highestPrice=high,
+                lowestPrice=low,
+                tradeVolume=tradeVolume,
+                upDown=upDown
+            )
+            s.save()
+
 
     
 # 크롤링 실험해볼려면 아래에서
@@ -297,3 +332,6 @@ if __name__ == '__main__':
         print('past stock-info start!')
         pastStockHistory(count)
         print('finish!')
+
+    elif sys.argv[1] == 'before':
+        pastStockHistory(1)

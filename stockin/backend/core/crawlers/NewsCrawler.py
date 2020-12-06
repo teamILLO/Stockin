@@ -265,6 +265,53 @@ def newsTomodel():
         index +=1
 
 
+def beforeMarket():
+    stocks = Stock.objects.all()
+
+    for stock in stocks:
+        history = StockHistory.objects.filter(stock_id=stock.id).order_by('-date')[0]
+
+        news_list=[]
+        newsCount = 1
+        while True:
+            date_ = str(history.date)
+            date = date_[:4]+'.'+date_[5:7]+'.'+date_[8:]
+            raw = requests.get(url.format(stock.title, date, date, newsCount), headers=headers)
+            soup= BeautifulSoup(raw.text, 'html.parser')
+
+            titles = soup.select('.news_tit')
+            presses = soup.select('.info.press')
+            
+            for title, press in zip(titles, presses):
+                
+                # print(dateIndex.strftime('%Y-%m-%d'),stockTitle, press.text.split(' ')[0])
+                news_list.append(
+                    News(
+                    stock=stock,
+                    title=title.text,
+                    press=press.text.split(' ')[0],
+                    date=date_[:4]+'-'+date_[5:7]+'-'+date_[8:],
+                    link=title['href']
+                    )
+                )
+                
+                
+               
+            print(stock.title, date, len(titles))
+            if len(titles) < 10:
+                break
+
+            newsCount += 10
+        if len(news_list) != 0:
+            News.objects.bulk_create(news_list)
+        
+        history.news = len(news_list)
+        history.save()
+        print(stock.title, len(news_list))
+
+
+
+
 
 # a=datetime.date(2020,11,7)
 # b=datetime.date(2020,11,1)
@@ -283,4 +330,5 @@ if __name__ == '__main__':
    
     # newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
     # newsScalingUpdate(1)
-    newsTomodel()
+    #newsTomodel()
+    beforeMarket()
