@@ -54,6 +54,11 @@ class Stock(models.Model):
     crawledPERAvg = models.CharField(max_length=15, null=True)              #per 업종 평균
     debtRatio = models.CharField(max_length=15, null=True)                  #부채비율
 
+    after1 = models.IntegerField(null=True, blank=True)
+    after20 = models.IntegerField(null=True, blank=True)
+    after60 = models.IntegerField(null=True, blank=True)
+    score = models.SmallIntegerField(null=True, default=50)
+
     def __str__(self):
         return self.title
 
@@ -73,6 +78,7 @@ class StockHistory(models.Model):
     lowestPrice = models.IntegerField(null=True)
     tradeVolume = models.IntegerField(null=True)
     upDown = models.IntegerField(null=True)
+    news = models.PositiveSmallIntegerField(null=True, default=0)
 
     def __str__(self):
         return str(self.stock.title) + ' ' + str(self.date)

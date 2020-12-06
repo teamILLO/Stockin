@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 //import PropTypes from "prop-types";
 
 import { scaleTime } from 'd3-scale';
@@ -13,8 +13,9 @@ import { XAxis, YAxis } from 'react-stockcharts/lib/axes';
 import { last, timeIntervalBarWidth } from 'react-stockcharts/lib/utils';
 import { HoverTooltip } from 'react-stockcharts/lib/tooltip';
 
+import AddFavoriteModal from '../../Modal/AddFavoriteModal/AddFavoriteModal';
+
 const DetailData = (props) => {
-  const onClickInterest = () => {};
   const dateFormat = timeFormat('%Y-%m-%d');
   const numberFormat = format(',');
   const tooltipContent = (ys) => {
@@ -55,7 +56,7 @@ const DetailData = (props) => {
 
   return (
     <div className="DetailData" data-testid="DetailData">
-      <Icon name="star outline" data-testid="detailInterest" onClick={() => onClickInterest()} />
+      <AddFavoriteModal trigger={<Button content="관심 등록" />}/>
       <ChartCanvas
         height={400}
         ratio={2}

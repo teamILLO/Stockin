@@ -12,7 +12,7 @@ import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailP
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
-import { Tab } from 'semantic-ui-react';
+import { Container, Tab } from 'semantic-ui-react';
 
 const panes = (id) => [
   {
@@ -50,7 +50,7 @@ const DetailPage = (props) => {
     dispatch(getStockHistory(+props.match.params.id));
   }, [dispatch, loggingIn, props.match.params.id]);
 
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData data={priceList} />;
+  let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
 
   const changeScroll = () => {
     let style = document.body.style.overflow;
@@ -60,10 +60,12 @@ const DetailPage = (props) => {
   return (
     <div data-testid="DetailPage">
       <Header history={props.history} />
+      <Container>
       <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
         {graph}
       </div>
       <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
+      </Container>
 
       <Footer history={props.history} />
     </div>

@@ -6,6 +6,7 @@ import authentication from './authentication/authentication';
 import comment from './comment/comment';
 import stock from './stock/stock';
 import news from './news/news';
+import groups from './groups/groups';
 import financialstats from './financialstats/financialstats';
 import stockHistory from './stockHistory/stockHistory';
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   comment,
   news,
   fs: financialstats,
+  groups,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 

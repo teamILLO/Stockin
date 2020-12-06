@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -113,7 +114,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = 'stockinswpp@gmail.com'
-EMAIL_HOST_PASSWORD = 'swpp2020'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
@@ -123,27 +124,27 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # For testing
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
-    'default' : {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'stockinDB',
-        'USER': 'root',                         # mysql user-id
-        'PASSWORD': '',         # mysql user-password
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'TEST': {
-            'NAME': 'test_stockinDB',
-        },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
+#create user 'swpp'@'%' identified by 'Swpp2020-team15!';
+# DATABASES = {
+#     'default' : {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'stockinDB',
+#         'USER': 'swpp',                         # mysql user-id
+#         'PASSWORD': 'Swpp2020-team15!',         # mysql user-password
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#         'TEST': {
+#             'NAME': 'test_stockinDB',
+#         },
+#     }
+# }
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
 

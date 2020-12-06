@@ -73,10 +73,17 @@ describe('<QuarterTable />', () => {
       return (dispatch) => {};
     });
   });
-  it('should render without errors', () => {
+
+  it('should handle with invalid url', () => {
     const { container } = render(quarterTable);
     const query = queryAllByTestId(container, 'QuarterTable');
     expect(query.length).toBe(1);
-    // expect(spyGetFs).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render without errors', () => {
+    window.history.pushState({}, '', '/localhost:3000/detail/1/');
+    const { container } = render(quarterTable);
+    const query = queryAllByTestId(container, 'QuarterTable');
+    expect(query.length).toBe(1);
   });
 });

@@ -3,7 +3,6 @@ import { Search } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStocks } from '../../store/stock/stock';
 import { history } from '../../store/store';
-const keyGenerator = () => '_' + Math.random().toString(36).substr(2, 9);
 
 const initialState = {
   loading: false,
@@ -64,7 +63,7 @@ const SearchBox = () => {
         for (i = 0; i < _search_result.length; i++) {
           var temp = {
             ..._search_result[i],
-            key: keyGenerator(),
+            key: _search_result[i].id,
             description: _search_result[i].sector,
           };
           search_result.push(temp);
@@ -83,8 +82,7 @@ const SearchBox = () => {
       retrieve_list.length === 0 ||
       !retrieve_list.find((element) => element.id === selected_stock.id)
     ) {
-      selected_stock.key = keyGenerator();
-      selected_stock = { ...selected_stock, key: keyGenerator(), description: '최근 검색' };
+      selected_stock = { ...selected_stock, key: 'recent-serach_' + selected_stock.id, description: '최근 검색' };
       retrieve_list.push(selected_stock);
       localStorage.setItem('recent-search', JSON.stringify(retrieve_list));
     }

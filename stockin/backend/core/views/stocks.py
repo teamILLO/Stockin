@@ -86,7 +86,8 @@ def stock_info(request, stock_id=''):
                         'operatingMarginRateAvg' : target_stock.operatingMarginRateAvg,
                         'crawledPER' : target_stock.crawledPER,
                         'crawledPERAvg' : target_stock.crawledPERAvg,
-                        'debtRatio' : target_stock.debtRatio
+                        'debtRatio' : target_stock.debtRatio,
+                        'score' : target_stock.score
                         }
         return HttpResponse(content=json.dumps(response_dict), status=203)
     
@@ -153,3 +154,16 @@ def fs_score(request, stock_id=""):
 
         
         
+
+def stock_top5(requset):
+    if requset.method =='GET':
+        stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:5]
+        response_list=[]
+        for stock in stocks:
+            response_list.append({
+                'id': stock[0],
+                'score':stock[1]
+            })
+        return JsonResponse(response_list, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])

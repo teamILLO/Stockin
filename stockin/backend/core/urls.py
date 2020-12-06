@@ -22,6 +22,8 @@ urlpatterns = [
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
     path('stocks/financialstats/score/<int:stock_id>/', views.fs_score, name='fs_score'),
     
+    path('stocks/top5/', views.stock_top5, name='stock_top5'),
+
     # news model
     path('news/stocks/<int:stock_id>/date/<str:news_date>/',
         views.get_news_list,

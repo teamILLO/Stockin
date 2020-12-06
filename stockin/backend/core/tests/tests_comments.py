@@ -2,7 +2,10 @@ from django.test import TestCase, Client
 from core.models import News, Stock, Comment, CustomUser
 from django.contrib.auth import get_user_model
 
+import os
 import json
+
+pwd = os.getenv("BACK_TEST_PWD").split(',')[0]
 
 class NewsTestCase(TestCase):
     def test_comment_list(self):
@@ -22,12 +25,12 @@ class NewsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
@@ -80,12 +83,12 @@ class NewsTestCase(TestCase):
     
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': 'foo'}),
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')

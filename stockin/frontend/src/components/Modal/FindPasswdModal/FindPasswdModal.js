@@ -13,13 +13,12 @@ const FindPasswdModal = (props) => {
   const [next, setNext] = useState(1);
 
   const sendEmail = async () => {
-    let random = 0;
-    let number = '';
-    for (let i = 0; i < 6; i++) {
-      random = Math.floor(Math.random() * 10);
-      number += random;
-    }
+    const crypto = window.crypto;
+    var array = new Uint32Array(1);
+    array = crypto.getRandomValues(array);
+    let number = array[0] + '';
     setCodeSent(number);
+
     await api.post('/users/sendCode/', { email: email, code: number });
   };
 
@@ -36,7 +35,7 @@ const FindPasswdModal = (props) => {
   };
 
   const codeConfirmHandler = () => {
-    if (codeInput === codeSent) setNext(3);
+    if (Number(codeInput) === Number(codeSent)) setNext(3);
     else alert('Invalid Code!');
   };
 

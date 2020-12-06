@@ -19,8 +19,37 @@ def group_list_and_create(request):
 
         response_list = []
         group_list = [group for group in Group.objects.all() if group.user == request.user]
+
         for group in group_list : 
-            response_dict = {'id' : group.id, 'user' : group.user.email, 'name' : group.name}
+            # Make stock list
+            response_stock_list = []
+
+            stock_list = [stock for stock in group.stocks.all()]
+            
+            for stock in stock_list :
+                stock_info_dict = {
+                    'id' : stock.id,
+                    'title' : stock.title,
+                    'code' : stock.code,
+                    'sector' : stock.sector,
+                    'price' : stock.price,
+                    'highestPrice' : stock.highestPrice,
+                    'lowestPrice' : stock.lowestPrice,
+                    'tradeVolume' : stock.tradeVolume,
+                    'tradeValue' : stock.tradeValue,
+                    'startPrice' : stock.startPrice,
+                    'yesterdayPrice' : stock.yesterdayPrice,
+                    'amount' : stock.amount,
+                    'isKOSPI' : stock.isKOSPI,
+                }
+                response_stock_list.append(stock_info_dict)
+
+            response_dict = {
+                'id' : group.id, 
+                'user' : group.user.email, 
+                'name' : group.name,
+                'stocks' : response_stock_list,
+            }
             response_list.append(response_dict)
 
         return JsonResponse(response_list, safe=False)

@@ -6,11 +6,11 @@ import store from './store/store';
 import App from './App';
 import { history } from './store/store';
 
-jest.mock('./csrftoken', () => {
-  return jest.fn((props) => {
-    return <div className="spyCsrftoken"></div>;
-  });
-});
+// jest.mock('./csrftoken', () => {
+//   return jest.fn((props) => {
+//     return <div className="spyCsrftoken"></div>;
+//   });
+// });
 
 describe('App', () => {
   let app;
