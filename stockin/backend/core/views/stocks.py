@@ -9,7 +9,7 @@ from django.db.utils import IntegrityError
 from json import JSONDecodeError
 import json
 
-from core.models import Stock, StockHistory, FinancialStat
+from core.models import Stock, StockHistory, FinancialStat, News
 
 
 def stock_fs(request, stock_id=''):

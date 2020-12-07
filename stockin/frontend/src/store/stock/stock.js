@@ -18,16 +18,17 @@ const slice = createSlice({
     updateScrollData: (state, action) => {
       return {
         ...state,
-        scrollData: action.payload,
-      };
-    }
+        scrollData : state.scrollData.concat(action.payload),
+      }
+    },
   },
 });
 
 export default slice.reducer;
 
 // Actions
-export const { updateStockList, updateScrollData } = slice.actions;
+export const { updateStockList, updateScrollData, clearScrollData } = slice.actions;
+
 export const getStocks = () => async (dispatch) => {
   try {
     await api.get('http://localhost:8000/api/stocks/').then((response) => {
@@ -47,3 +48,5 @@ export const getScrollData = (n) => async (dispatch) => {
     return console.error(e.message);
   }
 };
+
+

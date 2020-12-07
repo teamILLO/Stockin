@@ -26,9 +26,6 @@ jest.mock('../../components/StockReportBlock/StockReportBlock', () => {
   });
 });
 
-// const initialAuthState = { loggingIn: true, user: {} };
-// const initialAuthStateLogout = { loggingIn: false, user: null };
-// const initialAuthStateUndefined = { loggingIn: undefined, user: null };
 const mockStore = getMockStore(
   { loggingIn: true, user: { id: 1 } },
   { stockList: [], scrollData : [] },
@@ -36,6 +33,7 @@ const mockStore = getMockStore(
   { commentList: [] },
   { news: [] },
   { fs: [] },
+  { increment : 0 },
 );
 const mockStoreLogout = getMockStore(
   { loggingIn: false, user: {} },
@@ -44,6 +42,7 @@ const mockStoreLogout = getMockStore(
   { commentList: [] },
   { news: [] },
   { fs: [] },
+  { increment : 0 },
 );
 const mockStoreUndefined = getMockStore(
   { loggingIn: undefined, user: null },
@@ -52,6 +51,7 @@ const mockStoreUndefined = getMockStore(
   { commentList: [] },
   { news: [] },
   { fs: [] },
+  { increment : 0 },
 );
 
 describe('<ReportPage />', () => {

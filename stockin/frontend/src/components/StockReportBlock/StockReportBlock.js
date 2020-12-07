@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, Header, Grid, Item, Image, Statistic } from 'semantic-ui-react'
+import { Segment, Header, Grid, Image, Statistic, Container } from 'semantic-ui-react'
 import { api } from '../../api/index';
 import { timeParse } from 'd3-time-format';
 
@@ -13,29 +13,29 @@ const StockReportBlock = (props) => {
   const variation = (props.price + 0) > (props.yesterdayPrice + 0) ? props.price - props.yesterdayPrice : props.yesterdayPrice - props.price;
 
   const rankComponent =
-    <Segment>
-      <Header as='h1' color='red'>{rank + '위'}</Header>
-    </Segment>;
+    <Segment inverted color='red'>
+      <Header as='h1'>{rank + '위'}</Header>
+    </Segment>
 
   const titleComponent = 
-  <Segment>
-    <div>
-      <Header as='h1'>
-        {title}
-      </Header>
-      <Header as='h1'>
-        {info}
-      </Header>
-      <Header as='h2' color='grey'>
-        현재가 : 10000원
-      </Header>
-    </div>
-  </Segment>
+    <Segment basic>
+      <Container textAlign='left'>
+        <Header as='h1'>{title}</Header>
+        <p style={{ color: 'grey' }}>
+          {info}<br/>
+          현재가 : 10000원<br/>
+          목표가 : 20000원<br/>
+        </p>
+      </Container>
+    </Segment>
 
   const scoreComponent = 
-  <Segment>
-    <Statistic horizontal label='점' value={score + '/100'} />
-  </Segment>;
+  <Segment basic>
+    <Container>
+      <Header as='h1'>Stockin 점수</Header>
+      <Statistic horizontal label='점' value={score + '/100'} />
+    </Container>
+  </Segment>
 
   const graphComponent = 
   <Segment>
@@ -43,7 +43,7 @@ const StockReportBlock = (props) => {
         그래프
       </Header>
     <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-  </Segment>;
+  </Segment>
 
   const newsComponent = 
   <Segment>
@@ -53,7 +53,7 @@ const StockReportBlock = (props) => {
       </Header>
       <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />;
     </div>
-  </Segment>;
+  </Segment>
 
   /* TODO : FOR GRAPH */
   //const priceList
@@ -81,13 +81,13 @@ const StockReportBlock = (props) => {
     <Segment color='red' data-testid='StockReportBlock'>
       <Grid divided='vertically'>
         <Grid.Row columns={3}>
-          <Grid.Column>
+          <Grid.Column width={2}>
             {rankComponent}
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={7}>
             {titleComponent}
           </Grid.Column>
-          <Grid.Column>
+          <Grid.Column width={7}>
             {scoreComponent}
           </Grid.Column>
         </Grid.Row>

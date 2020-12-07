@@ -7,24 +7,27 @@ import StockReportBlock from '../../components/StockReportBlock/StockReportBlock
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import { getScrollData } from '../../store/stock/stock';
+import { updateIncrement } from '../../store/stock/increment';
 
 const ReportPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const { scrollData } = useSelector((state) => state.stock);
+  const { increment } = useSelector((state) => state.increment);
   const dispatch = useDispatch();
   const contextRef = createRef();
   const [active, setActive] = useState('up');
   const [renderReportBlock, setRenderReportBlock] = useState([]);
-  const endCounter = useRef(0);
+  const initCall = useRef(true);
 
-  const infinityScroll = () => {
+  const infinityScroll = async () => {
+    if(document.getElementsByClassName("ReportPage").length === 0) return;
+
     let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
     let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
     let clientHeight = document.documentElement.clientHeight
 
     if(scrollTop + clientHeight === scrollHeight) {
-      dispatch(getScrollData(endCounter.current + ''));
-      endCounter.current += 1;
+      dispatch(updateIncrement());
     }
   };
 
@@ -47,14 +50,8 @@ const ReportPage = (props) => {
         />
       )
     });
-      
-    result_list = renderReportBlock.concat(result_list);
     setRenderReportBlock(result_list);
   };
-
-  useEffect(() => {
-    window.addEventListener('scroll', infinityScroll, true);
-  }, []);
 
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
@@ -64,8 +61,21 @@ const ReportPage = (props) => {
   }, [dispatch, loggingIn]);
 
   useEffect(() => {
-    handleRenderReportBlock(scrollData)
-    infinityScroll()
+    if(increment === 0) dispatch(getScrollData(increment));
+    window.addEventListener('scroll', infinityScroll, true);
+  }, []);
+
+  useEffect(() => {
+    if(initCall.current) {
+      initCall.current = false;
+    }
+    else {
+      dispatch(getScrollData(increment));
+    }
+  }, [increment]);
+
+  useEffect(() => {
+    handleRenderReportBlock(scrollData);
   }, [scrollData]);
 
   return (

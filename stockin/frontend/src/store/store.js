@@ -4,6 +4,7 @@ import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import authentication from './authentication/authentication';
 import comment from './comment/comment';
+import increment from './stock/increment';
 import stock from './stock/stock';
 import news from './news/news';
 import groups from './groups/groups';
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   news,
   fs: financialstats,
   groups,
+  increment,
 });
 export const middlewares = [thunk, routerMiddleware(history)];
 
