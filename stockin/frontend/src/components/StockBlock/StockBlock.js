@@ -5,13 +5,13 @@ import { api } from '../../api/index';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import ChangingProgressProvider from './ChangeProvider';
 import './StockBlock.css';
+import { history } from '../../store/store';
 
 const StockBlock = (props) => {
   const [title, setTitle] = useState('');
   const [info, setInfo] = useState('');
   const [price, setPrice] = useState('');
   const [variation, setVariation] = useState('');
-  const [BuyorSell, setBuyorSell] = useState('Buy!');
 
   useEffect(() => {
     if (props.id)
@@ -32,11 +32,19 @@ const StockBlock = (props) => {
             ).toLocaleString() + '▲',
           );
       });
-  });
+  }, []);
+
+  const clickCard = () => {
+    history.push('/detail/' + props.id);
+  };
+
+  const dashname = props.score >= 50 ? 'dashboard' : 'dashboard2';
+  const zonename = props.score >= 50 ? 'priceZone' : 'priceZone2';
 
   return (
     <div data-testid="StockBlock">
-      <Card className="stockBlock">
+      <br />
+      <Card className="stockBlock" data-testid="stockBlock" onClick={() => clickCard()}>
         <Card.Header textAlign="left">
           <br />
           <span className="stockTitle">{title}</span>
@@ -44,11 +52,11 @@ const StockBlock = (props) => {
         <Card.Meta textAlign="left">
           <span className="stockInfo">{info}</span>
         </Card.Meta>
-        <Card.Content centered="true" className="dashboardContent">
+        <Card.Content className="dashboardContent">
           <ChangingProgressProvider values={[0, props.score]}>
             {(value) => (
               <CircularProgressbar
-                className="dashboard"
+                className={dashname}
                 value={value}
                 text={props.score}
                 circleRatio={0.75}
@@ -63,7 +71,7 @@ const StockBlock = (props) => {
         </Card.Content>
 
         <div>
-          <Card.Content className="priceZone" textAlign="left">
+          <Card.Content className={zonename} textAlign="left">
             <span className="stockPrice">{price}</span>
             <span className="variation">{variation}</span>
           </Card.Content>

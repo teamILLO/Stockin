@@ -1,10 +1,11 @@
 import React from 'react';
-import { render, queryAllByTestId } from '@testing-library/react';
+import { render, queryAllByTestId, screen, fireEvent } from '@testing-library/react';
 import StockBlock from './StockBlock';
 import { api } from '../../api/index';
+import { history } from '../../store/store';
 
 describe('<StockBlock />', () => {
-  let spyPost;
+  let spyPost, spyHistory;
   beforeEach(() => {
     spyPost = jest.spyOn(api, 'get').mockImplementation(() => {
       return new Promise((resolve, reject) => {
@@ -23,10 +24,14 @@ describe('<StockBlock />', () => {
           resolve(result);
       });
     });
+
+    spyHistory = jest.spyOn(history, 'push').mockImplementation((url)=>{
+    })
+
   });
 
   it('should render without errors', () => {
-    const { container } = render(<StockBlock id={1}/>);
+    const { container } = render(<StockBlock id={1} score={50}/>);
     const query = queryAllByTestId(container, 'StockBlock');
     expect(query.length).toBe(1);
   });
@@ -73,8 +78,13 @@ describe('<StockBlock />', () => {
           resolve(result);
       });
     });
-    const { container } = render(<StockBlock id={1}/>);
+    const { container } = render(<StockBlock id={1} score={50}/>);
     const query = queryAllByTestId(container, 'StockBlock');
     expect(query.length).toBe(1);
+  });
+
+  it('should render without errors', () => {
+    render(<StockBlock />);
+    fireEvent.click(screen.getByTestId('stockBlock'))
   });
 });

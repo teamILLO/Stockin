@@ -44,7 +44,7 @@ class Stock(models.Model):
     tradeValue = models.BigIntegerField(null=True, blank=True)              #거래대금
     startPrice = models.IntegerField(null=True, blank=True)                 #시작가
     yesterdayPrice = models.IntegerField(null=True, blank=True)             #전가
-    amount = models.IntegerField(null=True, blank=True)                     #상장주식수
+    amount = models.BigIntegerField(null=True, blank=True)                  #시가총액
     isKOSPI = models.BooleanField(null=True, blank=True)                    #is코스피?   코스피|코스닥
     saleGrowthRate = models.CharField(max_length=15, null=True)             #매출액증가율
     saleGrowthRateAvg = models.CharField(max_length=15, null=True)          #매출액증가율 업종 평균

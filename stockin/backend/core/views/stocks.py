@@ -155,9 +155,22 @@ def fs_score(request, stock_id=""):
         
         
 
-def stock_top5(requset):
+def stock_top10(requset):
     if requset.method =='GET':
-        stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:5]
+        stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:10]
+        response_list=[]
+        for stock in stocks:
+            response_list.append({
+                'id': stock[0],
+                'score':stock[1]
+            })
+        return JsonResponse(response_list, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+def stock_bottom10(requset):
+    if requset.method =='GET':
+        stocks=Stock.objects.all().values_list('id','score').order_by('score')[:10]
         response_list=[]
         for stock in stocks:
             response_list.append({
