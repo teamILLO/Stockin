@@ -9,8 +9,9 @@ from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from json import JSONDecodeError
 import json, csv, os
+import pytz
 
-from core.models import Stock, StockHistory, FinancialStat
+from core.models import Stock, StockHistory, FinancialStat, News
 from core.crawlers.preprocessors.score import base_score
 
 
@@ -198,6 +199,28 @@ def stock_get_10_each(requset, n=''):
         
         cnt = start_idx + 1
         for stock in stocks:
+            # Get News
+            q = News.objects.filter(stock__id = stock['id'])
+            _news_list = [news for news in q if news.date.year == 2020
+                                           and news.date.month == 11
+                                           and news.date.day == 7]
+
+            news_list = []
+            for news in _news_list[:5]:
+                response_dict = { 'id' : news.id, 'title' : news.title, 'press' : news.press, 'link' : news.link, 'date' : news.date}
+                news_list.append(response_dict)
+
+            # Get StockHistory(1 month)
+            q = StockHistory.objects.filter(stock__id = stock['id'])
+            _stockhis_list = [stockhis for stockhis in q if stockhis.date.year == 2020
+                                           and news.date.month == 11
+                                           and news.date.day == 7]
+
+            stockhis_list = []
+            for stockhis in _stockhis_list:
+                response_dict = { 'id' : stockhis.id, 'date' : stockhis.title, 'endPrice' : stockhis.endPrice }
+                stockhis_list.append(response_dict)
+
             response_list.append({
                 'id': stock['id'],
                 'rank' : cnt,
@@ -206,7 +229,9 @@ def stock_get_10_each(requset, n=''):
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score':stock['score']
+                'score' : stock['score'],
+                'news' : news_list,
+                'stockhistory' : stockhis_list,
             })
             cnt = cnt + 1
 

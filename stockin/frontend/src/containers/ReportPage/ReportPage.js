@@ -47,6 +47,7 @@ const ReportPage = (props) => {
           yesterdayPrice={stock.yesterdayPrice}
           score={stock.score}
           rank={stock.id}
+          news={stock.news}
         />
       )
     });

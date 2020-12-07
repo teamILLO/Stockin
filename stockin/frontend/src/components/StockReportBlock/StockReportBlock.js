@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Segment, Header, Grid, Image, Statistic, Container } from 'semantic-ui-react'
+import { Segment, Header, Grid, Image, Statistic, Container, List } from 'semantic-ui-react'
 import { api } from '../../api/index';
 import { timeParse } from 'd3-time-format';
+
+import GraphComponent from './GraphComponent';
 
 
 const StockReportBlock = (props) => {
@@ -11,6 +13,7 @@ const StockReportBlock = (props) => {
   const score = props.score;
   const price = props.price;
   const variation = (props.price + 0) > (props.yesterdayPrice + 0) ? props.price - props.yesterdayPrice : props.yesterdayPrice - props.price;
+  const news = props.news;
 
   const rankComponent =
     <Segment inverted color='red'>
@@ -45,14 +48,21 @@ const StockReportBlock = (props) => {
     <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
   </Segment>
 
+  const newsListComponent = news.map((item) =>
+    <List.Item>
+      <List.Header as="a" href={item.link}>{item.title}</List.Header>
+      <List.Content>{item.press} {item.date}</List.Content>
+    </List.Item>
+  )
+
   const newsComponent = 
   <Segment>
-    <div>
-      <Header as='h1'>
-        주목할만한 뉴스
-      </Header>
-      <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />;
-    </div>
+    <Header as='h2'>
+      주목할만한 뉴스
+    </Header>
+    <List relaxed>
+      {newsListComponent}
+    </List>
   </Segment>
 
   /* TODO : FOR GRAPH */
@@ -94,7 +104,7 @@ const StockReportBlock = (props) => {
 
         <Grid.Row columns={2}>
           <Grid.Column>
-            {graphComponent}
+            <GraphComponent/>
           </Grid.Column>
           <Grid.Column>
             {newsComponent}
