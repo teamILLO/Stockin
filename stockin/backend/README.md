@@ -16,7 +16,7 @@ $ sudo mysql -u root -p
 
 mysql> CREATE DATABASE stockinDB CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 mysql> create user 'swpp'@'%' identified by 'Swpp2020-team15!';
-mysql> grant all on stockinDB.* to 'team15'@'%';
+mysql> grant all on stockinDB.* to 'swpp'@'%';
 mysql> flush privileges;
 ```
 
