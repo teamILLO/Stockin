@@ -26,7 +26,15 @@
 
 .dashboard{
     width: 180px;
+    position: relative;
+    left : 10px;
 }
+.dashboard2{
+    width: 180px;
+    position: relative;
+    left : 10px;
+}
+
 
 .dashboard .CircularProgressbar-text {
     fill: #f00101;
@@ -36,6 +44,18 @@
 }
 .dashboard .CircularProgressbar-path {
     stroke: red;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.dashboard2 .CircularProgressbar-text {
+    fill: #1c0ca8;
+    font-size: 20px;
+    font-weight: 1000;
+    text-anchor: middle;
+}
+.dashboard2 .CircularProgressbar-path {
+    stroke:  #1c0ca8;
     stroke-linecap: round;
     transition: stroke-dashoffset 0.5s ease 0s;
 }
@@ -52,8 +72,16 @@
     
 }
 
+.priceZone2{
+
+    background-color:  #1c0ca8;
+    height: 55px;
+    border-radius: 0px 0px 15px 15px;
+    
+}
+
 .stockPrice{
-    font-size : 40px;
+    font-size : 35px;
     font-weight: 900;
     color: white;
 

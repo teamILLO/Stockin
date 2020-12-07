@@ -21,6 +21,10 @@ matrix:
         - cd ../backend
         - source ~/virtualenv/python3.7/bin/activate
         - pip3 install -r requirements.txt
+        - mysql -e "CREATE DATABASE stockinDB DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
+        - mysql -e "CREATE USER 'swpp'@'localhost' IDENTIFIED BY 'Swpp2020-team15!';"
+        - mysql -e "GRANT ALL PRIVILEGES ON stockinDB.* to 'swpp'@'localhost';"
+        - mysql -e "GRANT ALL PRIVILEGES ON test_stockinDB.* to 'swpp'@'localhost';"
       script:
         - python manage.py makemigrations core
         - python manage.py migrate
@@ -29,10 +33,12 @@ matrix:
         - coverage xml
         - pylint **/*.py --load-plugins pylint_django
         - cd ../frontend
-        - yarn test --coverage --watchAll=false
         - ./node_modules/.bin/eslint src
+        - yarn test --coverage --watchAll=false
         - cd ../..
-        - sonar-scanner
       after_success:
-        - cd stockin/backend
+        - sonar-scanner
+        - cd stockin/frontend
+        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+        - cd ../backend
         - coveralls

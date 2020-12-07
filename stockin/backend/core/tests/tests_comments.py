@@ -14,13 +14,13 @@ class NewsTestCase(TestCase):
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
         
         # GET request when user is not logged_in
-        response = client.get('/api/stocks/1/comments/')
+        response = client.get('/api/stocks/'+str(test_stock.id)+'/comments/')
         self.assertEqual(response.status_code, 401)
 
         # POST request
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/1/comments/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
 
         response = client.get('/api/users/token/')
@@ -35,29 +35,29 @@ class NewsTestCase(TestCase):
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/2/comments/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/stocks/'+str(test_stock.id+1)+'/comments/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 404)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/1/comments/', json.dumps({'invalid': 'foo'}),
+        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/', json.dumps({'invalid': 'foo'}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/1/comments/', json.dumps({'content': 'foo', 'author' : 'user'}),
+        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/', json.dumps({'content': 'foo', 'author' : 'user'}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
         # GET request
-        response = client.get('/api/stocks/1/comments/')
+        response = client.get('/api/stocks/'+str(test_stock.id)+'/comments/')
         self.assertEqual(response.status_code, 200) 
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.delete('/api/stocks/1/comments/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.delete('/api/stocks/'+str(test_stock.id)+'/comments/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
 
     def test_comment(self):

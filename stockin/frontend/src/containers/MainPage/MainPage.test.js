@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, queryAllByTestId } from '@testing-library/react';
+import { render, queryAllByTestId, screen, fireEvent } from '@testing-library/react';
 import MainPage from './MainPage';
 import { Provider } from 'react-redux';
 import { history } from '../../store/store';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
 import { api } from '../../api/index';
+
 
 
 
@@ -32,6 +33,12 @@ jest.mock('../../components/StockBlock/StockBlock', ()=>{
   return jest.fn((props) => {
     return <div className="stockBlock"></div>;
   });
+})
+
+jest.mock('react-slick',()=>{
+  return jest.fn((props)=>{
+    return <div></div>
+  })
 })
 
 describe('<MainPage />', () => {
@@ -100,4 +107,15 @@ describe('<MainPage />', () => {
     render(mainPageUndefined);
     expect(spyCheckLogin).toHaveBeenCalledTimes(1);
   });
+
+  it('should change tab when click tab', () => {
+    const { container } = render(mainPage);
+    fireEvent.click(screen.getByTestId('interestTab'));
+    fireEvent.click(screen.getByTestId('interestTab'));
+    fireEvent.click(screen.getByTestId('dailyTab'));
+    fireEvent.click(screen.getByTestId('dailyTab'));
+    const query = queryAllByTestId(container, 'interestTab');
+    expect(query.length).toBe(1);
+  });
+
 });

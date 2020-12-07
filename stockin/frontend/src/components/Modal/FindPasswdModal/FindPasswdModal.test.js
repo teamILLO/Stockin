@@ -118,6 +118,9 @@ describe('<FindPasswdModal />', () => {
     })
 
     const code = screen.getByPlaceholderText('CODE');
+    fireEvent.change(code, { target: { value: '11111@' } });
+    fireEvent.click(screen.getByText(/next!/i, { selector: 'button' }));
+
     fireEvent.change(code, { target: { value: '111111' } });
     fireEvent.click(screen.getByText(/next!/i, { selector: 'button' }));
 
@@ -128,7 +131,7 @@ describe('<FindPasswdModal />', () => {
     const password = screen.getByPlaceholderText('New Password');
     fireEvent.change(password, { target: { value: '1' } });
     fireEvent.click(screen.getByText(/Confirm/i, { selector: 'button' }));
-    expect(window.alert).toHaveBeenCalledTimes(1);
+    expect(window.alert).toHaveBeenCalledTimes(2);
   });
 
 });

@@ -218,7 +218,6 @@ def newsScalingUpdate(today):
                             'scale': scale
                             })
 
-
 def newsTransform():
     stocksdata=[]
     with open ('./data/newsdata.csv', 'r',  encoding='utf-8') as f:
@@ -247,7 +246,7 @@ def newsTransform():
 
 def newsTomodel():
     stocksdata=[]
-    with open('./data/newdata_trans.csv','r', newline='', encoding='utf-8') as file:
+    with open('./data/newsdata.csv','r', newline='', encoding='utf-8') as file:
         reader = csv.DictReader(file)
         stocksdata=list(reader)
 
@@ -255,7 +254,7 @@ def newsTomodel():
 
     index=0
     for stock in stocks:
-        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2019-11-29').filter(date__lte='2020-11-26')
+        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2019-11-29').filter(date__lte='2020-12-03')
         data = stocksdata[index]
         print(data['title'], stock[1], index)
     
@@ -263,6 +262,53 @@ def newsTomodel():
             h.news = json.loads(data['data'].replace("\'","\""))[str(h.date).replace('-','')]
             h.save()
         index +=1
+
+
+def beforeMarket():
+    stocks = Stock.objects.all()
+
+    for stock in stocks:
+        history = StockHistory.objects.filter(stock_id=stock.id).order_by('-date')[0]
+
+        news_list=[]
+        newsCount = 1
+        while True:
+            date_ = str(history.date)
+            date = date_[:4]+'.'+date_[5:7]+'.'+date_[8:]
+            raw = requests.get(url.format(stock.title, date, date, newsCount), headers=headers)
+            soup= BeautifulSoup(raw.text, 'html.parser')
+
+            titles = soup.select('.news_tit')
+            presses = soup.select('.info.press')
+            
+            for title, press in zip(titles, presses):
+                
+                # print(dateIndex.strftime('%Y-%m-%d'),stockTitle, press.text.split(' ')[0])
+                news_list.append(
+                    News(
+                    stock=stock,
+                    title=title.text,
+                    press=press.text.split(' ')[0],
+                    date=date_[:4]+'-'+date_[5:7]+'-'+date_[8:],
+                    link=title['href']
+                    )
+                )
+                
+                
+               
+            print(stock.title, date, len(titles))
+            if len(titles) < 10:
+                break
+
+            newsCount += 10
+        if len(news_list) != 0:
+            News.objects.bulk_create(news_list)
+        
+        history.news = len(news_list)
+        history.save()
+        print(stock.title, len(news_list))
+
+
 
 
 
@@ -281,6 +327,7 @@ if __name__ == '__main__':
     #     end = datetime.date(int(sys.argv[2][:4]), int(sys.argv[2][4:6]), int(sys.argv[2][6:]))
     #     NewsCrawler(start, end)
    
-    # newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
+    newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
     # newsScalingUpdate(1)
-    newsTomodel()
+    #newsTomodel()
+    beforeMarket()
