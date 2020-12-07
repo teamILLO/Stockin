@@ -94,6 +94,7 @@ def stock_info(request, stock_id=''):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+
 def fs_score(request, stock_id=""):
     if request.method == 'GET':
         stock = get_object_or_404(Stock, id=stock_id)
@@ -152,9 +153,6 @@ def fs_score(request, stock_id=""):
         return HttpResponseNotAllowed(['GET'])
 
 
-        
-        
-
 def stock_top10(requset):
     if requset.method =='GET':
         stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:10]
@@ -180,3 +178,40 @@ def stock_bottom10(requset):
         return JsonResponse(response_list, safe=False)
     else:
         return HttpResponseNotAllowed(['GET'])
+
+
+# n : loading 횟수 for scroll data fetching
+def stock_get_10_each(requset, n=''):
+    if requset.method =='GET':
+        response_list=[]
+        start_idx = n * 10
+        end_idx = n * 10 + 9
+        stock_end_idx = Stock.objects.count()-1
+
+        if start_idx <= stock_end_idx and stock_end_idx <= end_idx :
+            end_idx = stock_end_idx
+
+        if start_idx > stock_end_idx :
+            return JsonResponse(response_list, safe=False)
+        
+        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[start_idx : end_idx+1] #DB hit per request : caching?
+        
+        cnt = start_idx + 1
+        for stock in stocks:
+            response_list.append({
+                'id': stock['id'],
+                'rank' : cnt,
+                'title' : stock['title'],
+                'isKOSPI' : stock['isKOSPI'],
+                'code' : stock['code'],
+                'price' : stock['price'],
+                'yesterdayPrice' : stock['yesterdayPrice'],
+                'score':stock['score']
+            })
+            cnt = cnt + 1
+
+        return JsonResponse(response_list, safe=False)
+
+    else:
+        return HttpResponseNotAllowed(['GET'])
+

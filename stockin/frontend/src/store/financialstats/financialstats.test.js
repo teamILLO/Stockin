@@ -8,12 +8,6 @@ const testList = [
   { id: 3, name: 'c' },
 ];
 
-const testListReverse = [
-  { id: 3, name: 'c' },
-  { id: 2, name: 'b' },
-  { id: 1, name: 'a' },
-];
-
 describe('financialstats ', () => {
   beforeEach(() => {
     console.error = jest.fn();
@@ -42,7 +36,7 @@ describe('financialstats ', () => {
         },
       ),
     ).toEqual({
-      fs: testListReverse,
+      fs: testList,
     });
   });
 
