@@ -14,6 +14,7 @@ const StockReportBlock = (props) => {
   const price = props.price;
   const variation = (props.price + 0) > (props.yesterdayPrice + 0) ? props.price - props.yesterdayPrice : props.yesterdayPrice - props.price;
   const news = props.news;
+  const stockhistory = props.stockhistory;
 
   const rankComponent =
     <Segment inverted color='red'>
@@ -41,12 +42,9 @@ const StockReportBlock = (props) => {
   </Segment>
 
   const graphComponent = 
-  <Segment>
-    <Header as='h1'>
-        그래프
-      </Header>
-    <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-  </Segment>
+    <GraphComponent
+      stockhistory={stockhistory}
+    />
 
   const newsListComponent = news.map((item) =>
     <List.Item>
@@ -104,7 +102,7 @@ const StockReportBlock = (props) => {
 
         <Grid.Row columns={2}>
           <Grid.Column>
-            <GraphComponent/>
+            {graphComponent}
           </Grid.Column>
           <Grid.Column>
             {newsComponent}

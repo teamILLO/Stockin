@@ -7,9 +7,11 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+from django.core import serializers
+from datetime import timedelta
 from json import JSONDecodeError
 import json, csv, os
-import pytz
 
 from core.models import Stock, StockHistory, FinancialStat, News
 from core.crawlers.preprocessors.score import base_score
@@ -184,6 +186,10 @@ def stock_bottom10(requset):
 # n : loading 횟수 for scroll data fetching
 def stock_get_10_each(requset, n=''):
     if requset.method =='GET':
+        # For stock history (1 month)
+        enddate = timezone.now().date()
+        startdate = enddate - timedelta(days=30)
+
         response_list=[]
         start_idx = n * 10
         end_idx = n * 10 + 9
@@ -200,26 +206,16 @@ def stock_get_10_each(requset, n=''):
         cnt = start_idx + 1
         for stock in stocks:
             # Get News
-            q = News.objects.filter(stock__id = stock['id'])
-            _news_list = [news for news in q if news.date.year == 2020
-                                           and news.date.month == 11
-                                           and news.date.day == 7]
-
+            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).filter(date="2020-11-07")
             news_list = []
-            for news in _news_list[:5]:
-                response_dict = { 'id' : news.id, 'title' : news.title, 'press' : news.press, 'link' : news.link, 'date' : news.date}
-                news_list.append(response_dict)
+            for news in news_qs[:5]:
+                news_list.append(news)
 
             # Get StockHistory(1 month)
-            q = StockHistory.objects.filter(stock__id = stock['id'])
-            _stockhis_list = [stockhis for stockhis in q if stockhis.date.year == 2020
-                                           and news.date.month == 11
-                                           and news.date.day == 7]
-
+            stockhis_qs = StockHistory.objects.values('id', 'date', 'endPrice').filter(stock__id = stock['id']).filter(date__range=[startdate, enddate])
             stockhis_list = []
-            for stockhis in _stockhis_list:
-                response_dict = { 'id' : stockhis.id, 'date' : stockhis.title, 'endPrice' : stockhis.endPrice }
-                stockhis_list.append(response_dict)
+            for stockhis in stockhis_qs :
+                stockhis_list.append(stockhis)
 
             response_list.append({
                 'id': stock['id'],

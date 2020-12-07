@@ -48,6 +48,7 @@ const ReportPage = (props) => {
           score={stock.score}
           rank={stock.id}
           news={stock.news}
+          stockhistory={stock.stockhistory}
         />
       )
     });
