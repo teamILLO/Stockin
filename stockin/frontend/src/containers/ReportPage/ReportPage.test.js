@@ -7,6 +7,9 @@ import { history } from '../../store/store';
 import ReportPage from './ReportPage';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
+import * as stock from '../../store/stock/stock';
+import * as increment from '../../store/stock/increment';
+
 
 jest.mock('../../components/Header/Header', () => {
   return jest.fn((props) => {
@@ -55,7 +58,8 @@ const mockStoreUndefined = getMockStore(
 );
 
 describe('<ReportPage />', () => {
-  let reportPage, reportPageLogout, reportPageUndefined, spyHistoryPush, spyCheckLogin;
+  let reportPage, reportPageLogout, reportPageUndefined;
+  let spyHistoryPush, spyCheckLogin, spyGetScrollData, spyUpdateIncrement;
 
   beforeEach(() => {
     reportPage = (
@@ -84,6 +88,13 @@ describe('<ReportPage />', () => {
       return (dispatch) => {};
     });
 
+    spyGetScrollData = jest.spyOn(stock, 'getScrollData').mockImplementation(() => {
+      return (dispatch) => {};
+    });
+
+    spyUpdateIncrement = jest.spyOn(increment, 'updateIncrement').mockImplementation(() => {
+      return (dispatch) => {};
+    })
   });
 
   it('should render without errors', () => {
