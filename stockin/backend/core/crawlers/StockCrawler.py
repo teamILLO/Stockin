@@ -170,13 +170,10 @@ def initialStockAdd():
     
     Stock.objects.bulk_create(stock_list)
 
-<<<<<<< HEAD
     print("insert FinancialStat")
-
-    with open('data/Financial_State.csv', 'r') as f:
-=======
+    
     with open('data/Financial_State.csv', 'r', encoding='UTF-8') as f:
->>>>>>> master
+
         reader = csv.DictReader(f)
         
         for FS in reader:
@@ -254,22 +251,6 @@ def scoringUpdate():
 
 
 def stockUpdate_(stock):
-<<<<<<< HEAD
-   
-    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
-    url = 'http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code=' + str(stock.code)
-    html = requests.get(url, headers= headers).content
-    soup = BeautifulSoup(html, 'html.parser')
-
-    stockinfo = soup.select('TBL_StockInfo')[0]
-    price = stockinfo['curjuka'].replace(',','')
-    highestPrice = stockinfo['highjuka'].replace(',','')
-    lowestPrice = stockinfo['lowjuka'].replace(',','')
-    tradeVolume = stockinfo['volume'].replace(',','')
-    tradeValue = stockinfo['money'].replace(',','')
-    yesterdayPrice = stockinfo['prevjuka'].replace(',','')
-=======
->>>>>>> master
 
     # headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'}
     # url = 'https://finance.naver.com/item/main.nhn?code=' + str(stock.code)
@@ -484,10 +465,9 @@ if __name__ == '__main__':
         pastStockHistory(count)
         print('finish!')
 
-<<<<<<< HEAD
     elif sys.argv[1] == 'before':
         pastStockHistory(1)
-=======
+        
     elif sys.argv[1] == 'crawl':
         print('crawling start!')
         initialStockAddFromExcel()
@@ -497,4 +477,3 @@ if __name__ == '__main__':
         print('crawling for scoring start!')
         scoringUpdate()
         print('finish!')
->>>>>>> master

@@ -34,15 +34,16 @@
     "reactstrap": "^8.6.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1",
     "slick-carousel": "^1.8.1",
     "use-react-router": "^1.0.7"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "craco eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -60,8 +61,6 @@
     ]
   },
   "devDependencies": {
-    "@craco/craco": "^5.7.0",
-    "@semantic-ui-react/craco-less": "^1.2.1",
     "@testing-library/react": "9.5.0",
     "axios-mock-adapter": "^1.19.0",
     "miragejs": "^0.1.41",
