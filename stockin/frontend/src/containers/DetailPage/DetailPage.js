@@ -15,6 +15,7 @@ import Footer from '../../components/Footer/Footer';
 import { Container, Tab } from 'semantic-ui-react';
 import StockInfo from '../../components/StockInfo/StockInfo';
 import './DetailPage.css';
+import { getGroupList } from '../../store/groups/groups';
 
 const panes = (id) => [
   {
@@ -42,6 +43,7 @@ const panes = (id) => [
 const DetailPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const { priceList } = useSelector((state) => state.stockHistory);
+  const { groupList } = useSelector((state) => state.groups);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -52,7 +54,12 @@ const DetailPage = (props) => {
     dispatch(getStockHistory(+props.match.params.id));
   }, [dispatch, loggingIn, props.match.params.id]);
 
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
+  let graph =
+    priceList.length === 0 ? (
+      'Loading...'
+    ) : (
+      <DetailData id={props.match.params.id} data={priceList} />
+    );
 
   const changeScroll = () => {
     let style = document.body.style.overflow;
@@ -63,15 +70,15 @@ const DetailPage = (props) => {
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <Container>
-      <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
-        {graph}
-      </div>
-      
-      <StockInfo id={props.match.params.id} />
-      
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
+        <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
+          {graph}
+        </div>
+
+        <StockInfo id={props.match.params.id} />
+
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
       </Container>
-      
+
       <Footer history={props.history} />
     </div>
   );
