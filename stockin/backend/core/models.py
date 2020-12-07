@@ -46,6 +46,13 @@ class Stock(models.Model):
     yesterdayPrice = models.IntegerField(null=True, blank=True)             #전가
     amount = models.BigIntegerField(null=True, blank=True)                  #시가총액
     isKOSPI = models.BooleanField(null=True, blank=True)                    #is코스피?   코스피|코스닥
+    saleGrowthRate = models.CharField(max_length=15, null=True)             #매출액증가율
+    saleGrowthRateAvg = models.CharField(max_length=15, null=True)          #매출액증가율 업종 평균
+    operatingMarginRate = models.CharField(max_length=15, null=True)        #영업이익율
+    operatingMarginRateAvg = models.CharField(max_length=15, null=True)     #영업이익율 업종 평균
+    crawledPER = models.CharField(max_length=15, null=True)                 #per
+    crawledPERAvg = models.CharField(max_length=15, null=True)              #per 업종 평균
+    debtRatio = models.CharField(max_length=15, null=True)                  #부채비율
 
     after1 = models.IntegerField(null=True, blank=True)
     after20 = models.IntegerField(null=True, blank=True)

@@ -9,6 +9,7 @@ import { api } from '../../api/index';
 
 
 
+
 const initialAuthState = { loggingIn: true, user: { id: 1 } };
 const initialAuthStateLogout = { loggingIn: false, user: null };
 const initialAuthStateUndefined = { loggingIn: undefined, user: null };
