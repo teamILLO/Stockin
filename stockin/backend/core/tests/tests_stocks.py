@@ -1,4 +1,4 @@
-from _typeshed import OpenBinaryModeUpdating
+
 from django.test import TestCase, Client
 from core.models import Stock, StockHistory, FinancialStat
 import json
