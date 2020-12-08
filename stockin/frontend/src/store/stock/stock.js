@@ -31,7 +31,7 @@ export const { updateStockList, updateScrollData, clearScrollData } = slice.acti
 
 export const getStocks = () => async (dispatch) => {
   try {
-    await api.get('http://localhost:8000/api/stocks/').then((response) => {
+    await api.get('/stocks/').then((response) => {
       dispatch(updateStockList(response.data));
     });
   } catch (e) {

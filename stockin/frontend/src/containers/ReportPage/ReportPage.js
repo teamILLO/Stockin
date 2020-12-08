@@ -58,6 +58,16 @@ const ReportPage = (props) => {
     if (loggingIn === false) {
       history.push('/prelogin');
     }
+
+    api.get('stocks/top5/').then((response)=>{
+      const stocks=response.data;
+
+      setTop1(stocks[0]['id'])
+      setTop2(stocks[1]['id'])
+      setTop3(stocks[2]['id'])
+      
+    })
+  
   }, [dispatch, loggingIn]);
 
   useEffect(() => {
