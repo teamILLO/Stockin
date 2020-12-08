@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Segment, Header, Grid, Image, Statistic, Container } from 'semantic-ui-react'
-import { api } from '../../api/index';
-import { timeParse } from 'd3-time-format';
+
 
 
 const StockReportBlock = (props) => {
@@ -9,8 +8,8 @@ const StockReportBlock = (props) => {
   const rank = props.rank;
   const info = (props.isKOSPI ? 'KOSPI' : 'KOSDAQ') + ' ' + props.code;
   const score = props.score;
-  const price = props.price;
-  const variation = (props.price + 0) > (props.yesterdayPrice + 0) ? props.price - props.yesterdayPrice : props.yesterdayPrice - props.price;
+  // const price = props.price;
+  // const variation = (props.price + 0) > (props.yesterdayPrice + 0) ? props.price - props.yesterdayPrice : props.yesterdayPrice - props.price;
 
   const rankComponent =
     <Segment inverted color='red'>

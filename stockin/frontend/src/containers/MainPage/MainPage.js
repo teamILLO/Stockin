@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid, Segment, Divider } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { api } from '../../api/index';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -56,7 +56,7 @@ const MainPage = (props) => {
   }, [dispatch, loggingIn]);
 
   const tabmenu = () => {
-    if (tab == 1) {
+    if (tab === 1) {
       return (
         <Grid.Row centered>
           <Grid.Column width={13} style={{ height: '350px' }}>
@@ -82,21 +82,21 @@ const MainPage = (props) => {
   };
 
   const dailyStyle = () => {
-    if (tab == 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
+    if (tab === 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
     else return { borderTop: '2px solid #000000', fontWeight: 'normal' };
   };
 
   const interestStyle = () => {
-    if (tab != 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
+    if (tab !== 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
     else return { borderTop: '2px solid #000000', fontWeight: 'normal' };
   };
 
   const clickDaily = () => {
-    if (tab != 1) setTab(1);
+    if (tab !== 1) setTab(1);
   };
 
   const clickInterest = () => {
-    if (tab != 2) setTab(2);
+    if (tab !== 2) setTab(2);
   };
 
   return (
