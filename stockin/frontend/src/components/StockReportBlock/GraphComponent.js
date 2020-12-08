@@ -1,11 +1,7 @@
-import React, { PureComponent } from 'react';
-import { Segment, Header, Grid, Image, Statistic, Container, List } from 'semantic-ui-react'
+import React from 'react';
 import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
   } from 'recharts';
-import { extent as d3Extent, max as d3Max } from 'd3-array';
-import { scaleLinear as d3ScaleLinear, scaleTime as d3ScaleTime} from 'd3-scale';
-import { format as d3Format } from 'd3-format';
 
 const GraphComponent = (props) => {
     const stockhistory = props.stockhistory;
@@ -21,10 +17,9 @@ const GraphComponent = (props) => {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis domain={['dataMin', 'dataMax']}/>
           <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="endPrice" stroke="#8884d8" />
+          <Line type="monotone" dataKey="endPrice" stroke={props.isUp ? "#cc0000" : "#0000b3"} />
         </LineChart>
       );
 }
