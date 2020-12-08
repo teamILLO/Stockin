@@ -1,3 +1,4 @@
+
 from django.test import TestCase, Client
 from core.models import Stock, StockHistory, FinancialStat
 import json
@@ -42,16 +43,39 @@ class StocksTestCase(TestCase):
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
         test_stockHistory = StockHistory.objects.create(stock=test_stock)
 
-        response = client.get('/api/stocks/price/2/')
+        response = client.get('/api/stocks/price/'+str(test_stock.id+1)+'/')
         self.assertEqual(response.status_code, 404)
 
-        response = client.get('/api/stocks/price/1/')
+        response = client.get('/api/stocks/price/'+str(test_stock.id)+'/')
         self.assertEqual(response.status_code, 200)
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.delete('/api/stocks/price/1/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+    
+    def test_fs_score(self):
+        client = Client(enforce_csrf_checks=True)
+
+        # GET request
+        test_stock = Stock.objects.create(title='f', sector='foo_sector', debtRatio='',crawledPER = '', crawledPERAvg= '', operatingMarginRate= '', operatingMarginRateAvg = '')
+        test_stock_2 = Stock.objects.create(title='f2', sector='goo_sector', debtRatio='', crawledPER = '', crawledPERAvg = '', operatingMarginRate='', operatingMarginRateAvg= '')
+        test_fs = FinancialStat.objects.create(stock=test_stock)
+        test_fs2 = FinancialStat.objects.create(stock=test_stock_2)
+        response = client.get('/api/stocks/financialstats/score/'+str(test_stock.id)+'/')
+        self.assertEqual(response.status_code, 201)
+        response = client.get('/api/stocks/financialstats/score/'+str(test_stock_2.id)+'/')
+        self.assertEqual(response.status_code, 201)
+
+        #GET request on invalid stock_id
+        response =client.get('/api/stocks/financialstats/score/340/')
+        self.assertEqual(response.status_code, 404)
+
+        # HttpResponseNotAllowed tests
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/financialstats/score/1/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
 
     def test_stock_model(self):
@@ -72,11 +96,46 @@ class StocksTestCase(TestCase):
         test_stock3 = Stock.objects.create(title='foo_title3', code='foo_code', sector='foo_sector')
         test_stock4 = Stock.objects.create(title='foo_title4', code='foo_code', sector='foo_sector')
         test_stock5 = Stock.objects.create(title='foo_title5', code='foo_code', sector='foo_sector')
-        response = client.get('/api/stocks/1/')
+        test_stock6 = Stock.objects.create(title='foo_title1', code='foo_code', sector='foo_sector')
+        test_stock7 = Stock.objects.create(title='foo_title2', code='foo_code', sector='foo_sector')
+        test_stock8 = Stock.objects.create(title='foo_title3', code='foo_code', sector='foo_sector')
+        test_stock9 = Stock.objects.create(title='foo_title4', code='foo_code', sector='foo_sector')
+        test_stock10 = Stock.objects.create(title='foo_title5', code='foo_code', sector='foo_sector')
+        response = client.get('/api/stocks/'+str(test_stock1.id)+'/')
         self.assertEqual(response.status_code, 203)
-        response = client.get('/api/stocks/top5/')
+        response = client.get('/api/stocks/top10/')
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/api/stocks/bottom10/')
+        self.assertEqual(response.status_code, 200)
+        # HttpResponseNotAllowed tests
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/1/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/top5/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+        
+
+    def test_stock_get_10_each(self):
+        client = Client(enforce_csrf_checks=True)
+        test_stock1 = Stock.objects.create(title='foo_title1', isKOSPI = True, code='foo_code', price=1, yesterdayPrice = 1, sector='foo_sector', score = 1)
+        test_stock2 = Stock.objects.create(title='foo_title2', isKOSPI = True, code='foo_code', price=2, yesterdayPrice = 1, sector='foo_sector', score = 2)
+        test_stock3 = Stock.objects.create(title='foo_title3', isKOSPI = True, code='foo_code', price=3, yesterdayPrice = 1, sector='foo_sector', score = 3)
+        test_stock4 = Stock.objects.create(title='foo_title4', isKOSPI = True, code='foo_code', price=4, yesterdayPrice = 1, sector='foo_sector', score = 4)
+        test_stock5 = Stock.objects.create(title='foo_title5', isKOSPI = True, code='foo_code', price=5, yesterdayPrice = 1, sector='foo_sector', score = 5)
+        response = client.get('/api/stocks/scrolldata/0/')
+        self.assertEqual(response.status_code, 200)
+        response = client.get('/api/stocks/scrolldata/3/')
         self.assertEqual(response.status_code, 200)
 
+        # HttpResponseNotAllowed tests
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/scrolldata/3/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
 
 
         

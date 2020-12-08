@@ -8,7 +8,8 @@ import ReportPage from './containers/ReportPage/ReportPage';
 import MyPage from './containers/MyPage/MyPage';
 import AboutUsPage from './containers/AboutUsPage/AboutUsPage';
 import DetailPage from './containers/DetailPage/DetailPage';
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+
 const App = (props) => {
   return (
     <ConnectedRouter history={props.history}>

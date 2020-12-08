@@ -138,13 +138,14 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 # For testing
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-#create user 'swpp'@'%' identified by 'Swpp2020-team15!';
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+# create user 'swpp'@'%' identified by 'Swpp2020-team15!';
+
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',

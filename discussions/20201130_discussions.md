@@ -23,13 +23,17 @@
 
 
 ## 5 
-1. sonarcloud(G1)/deploy(Woo0)
-2. more stocks(plus buttons redirect to report page, arrow buttons to traverse) - DAUN and then G1
-3. stock info(redirect to detail page) + testing - Woo0, Junhyeok
-1. graph in mypage of stocks
-3. detail page price trends
-2. graph in detail page
-4. infinity scroll on report page
-8. user-friendly, easy UI helpers, question marks -G1
+1. ~~sonarcloud(G1)~~/~~deploy(Woo0)~
+2. docker - Wooyoung_god
+3. about us image
+2. more stocks(plus buttons redirect to report page, arrow buttons to traverse) - DAUN
+4. MySQL testing - DAUN (good luck)
+3. report page stock block + testing - Woo0(BORYU)
+4. infinity scroll on report page - G1
+1. graph in mypage of stocks - Junhyeok
+2. schduler for crawling - DAUN
+3. detail page price trends - Junhyeok
+2. graph in detail page - Junhyeok
+8. user-friendly, easy UI helpers, question marks - G1
 
-### Next Meeting : 20201202 22:00
+### Next Meeting : 20201203 18:30 (Zoom-coding) 20201204 23:30 (Meeting, can be cancelled)

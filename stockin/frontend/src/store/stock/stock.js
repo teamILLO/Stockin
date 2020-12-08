@@ -6,6 +6,7 @@ const slice = createSlice({
   name: 'stock',
   initialState: {
     stockList: [],
+    scrollData : [],
   },
   reducers: {
     updateStockList: (state, action) => {
@@ -14,13 +15,20 @@ const slice = createSlice({
         stockList: action.payload,
       };
     },
+    updateScrollData: (state, action) => {
+      return {
+        ...state,
+        scrollData : state.scrollData.concat(action.payload),
+      }
+    },
   },
 });
 
 export default slice.reducer;
 
 // Actions
-export const { updateStockList } = slice.actions;
+export const { updateStockList, updateScrollData, clearScrollData } = slice.actions;
+
 export const getStocks = () => async (dispatch) => {
   try {
     await api.get('/stocks/').then((response) => {
@@ -30,3 +38,15 @@ export const getStocks = () => async (dispatch) => {
     return console.error(e.message);
   }
 };
+
+export const getScrollData = (n) => async (dispatch) => {
+  try {
+    await api.get('stocks/scrolldata/' + n + '/').then((response) => {
+      dispatch(updateScrollData(response.data));
+    });
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+
+

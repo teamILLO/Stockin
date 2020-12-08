@@ -20,7 +20,10 @@ urlpatterns = [
     path('stocks/<int:stock_id>/', views.stock_info, name='stock_info'),
     path('stocks/financialstats/stock/<int:stock_id>/', views.stock_fs, name='stock_fs'),
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
-    path('stocks/top5/', views.stock_top5, name='stock_top5'),
+    path('stocks/scrolldata/<int:n>/', views.stock_get_10_each, name='stock_get_10_each'),
+    path('stocks/top10/', views.stock_top10, name='stock_top10'),
+    path('stocks/bottom10/', views.stock_bottom10, name='stock_bottom10'),
+    path('stocks/financialstats/score/<int:stock_id>/', views.fs_score, name='fs_score'),
 
     # news model
     path('news/stocks/<int:stock_id>/date/<str:news_date>/',

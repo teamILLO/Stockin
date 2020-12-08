@@ -13,6 +13,8 @@ import DetailFinancialState from '../../components/Detail/DetailFinancialState/D
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
 import { Container, Tab } from 'semantic-ui-react';
+import StockInfo from '../../components/StockInfo/StockInfo';
+import './DetailPage.css';
 
 const panes = (id) => [
   {
@@ -64,9 +66,12 @@ const DetailPage = (props) => {
       <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
         {graph}
       </div>
+      
+      <StockInfo id={props.match.params.id} />
+      
       <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
       </Container>
-
+      
       <Footer history={props.history} />
     </div>
   );

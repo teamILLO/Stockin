@@ -37,7 +37,7 @@ class StockAdmin(admin.ModelAdmin):
     '''
     StockAdmin
     '''
-    list_display = ('id', 'title', 'code', 'sector', 'price',)
+    list_display = ('id', 'title', 'code', 'sector', 'price', 'isKOSPI')
     list_display_links = ('title',)
     list_editable = ()
     list_per_page = 100
