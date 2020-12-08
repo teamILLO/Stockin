@@ -77,12 +77,12 @@ const PreloginPage = (props) => {
                 <Checkbox label="Remember Me" />
                 <FindPasswdModal trigger={<Item as="a" content="Forget Password?" />} />
 
-                <Button primary size="large" onClick={submitHandler}>
+                <Button color='main' size="large" onClick={submitHandler}>
                   Login
                 </Button>
                 <SignupModal
                   trigger={
-                    <Button basic primary size="large">
+                    <Button color='mainrev' size="large">
                       Sign up
                     </Button>
                   }

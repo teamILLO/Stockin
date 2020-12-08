@@ -82,11 +82,11 @@ const SignupModal = (props) => {
   );
 
   const nextButton = next ? (
-    <Button primary onClick={() => signupHandler()}>
+    <Button color='main' onClick={() => signupHandler()}>
       Sign Up
     </Button>
   ) : (
-    <Button primary onClick={() => nextHandler()}>
+    <Button color='main' onClick={() => nextHandler()}>
       Next
     </Button>
   );

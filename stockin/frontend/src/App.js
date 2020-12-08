@@ -9,6 +9,7 @@ import MyPage from './containers/MyPage/MyPage';
 import AboutUsPage from './containers/AboutUsPage/AboutUsPage';
 import DetailPage from './containers/DetailPage/DetailPage';
 import 'semantic-ui-css/semantic.min.css';
+import './styles/buttons.css';
 
 const App = (props) => {
   return (
