@@ -12,8 +12,9 @@ import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailP
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
-import { Container, Tab } from 'semantic-ui-react';
+import { Container, Tab, Button } from 'semantic-ui-react';
 import StockInfo from '../../components/StockInfo/StockInfo';
+import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
 import './DetailPage.css';
 
 const panes = (id) => [
@@ -63,11 +64,13 @@ const DetailPage = (props) => {
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <Container>
-      <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
+      <StockInfo id={props.match.params.id} />
+      <AddFavoriteModal trigger={<Button content="관심 등록" />}/>
+      <div className='graph' onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
         {graph}
       </div>
       
-      <StockInfo id={props.match.params.id} />
+      
       
       <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
       </Container>

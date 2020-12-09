@@ -45,7 +45,7 @@ const StockInfo = (props) =>{
             setAmount(Number(response.data['amount']).toLocaleString());
         });
 
-    },[])
+    },[props])
 
     
 
