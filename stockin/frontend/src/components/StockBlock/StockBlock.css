@@ -69,6 +69,8 @@
     background-color: #f00101;
     height: 55px;
     border-radius: 0px 0px 15px 15px;
+    padding-top: 6px;
+    padding-left: 4px;
     
 }
 
@@ -77,6 +79,8 @@
     background-color:  #1c0ca8;
     height: 55px;
     border-radius: 0px 0px 15px 15px;
+    padding-top: 6px;
+    padding-left: 4px;
     
 }
 

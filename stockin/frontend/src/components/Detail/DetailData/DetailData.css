@@ -1,0 +1,7 @@
+div.chartCanvas{
+    margin: 0 auto;
+    margin-bottom: 70px;
+}
+svg.chartCanvas{
+    left: 0px;
+}

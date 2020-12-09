@@ -1,21 +1,21 @@
 
-.ui.main.button {
+.ui.mainButton.button {
     background-color: #ff6f61;
     color: #fff;
 }
 
-.ui.main.button:hover {
+.ui.mainButton.button:hover {
     background-color: #fc5849;
     color: #fff;
 }
 
-.ui.mainrev.button {
+.ui.mainBasicButton.button {
     background-color: #fff;
     color: #ff6f61;
     border: 1px solid;
 }
 
-.ui.mainrev.button:hover {
+.ui.mainBasicButton.button:hover {
     background-color: rgb(249, 249, 249);
     color:  #fc5849;
 }

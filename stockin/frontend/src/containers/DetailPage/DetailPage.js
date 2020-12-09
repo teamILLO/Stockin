@@ -12,11 +12,13 @@ import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailP
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
-import { Container, Tab } from 'semantic-ui-react';
+import { Container, Tab, Button } from 'semantic-ui-react';
 import StockInfo from '../../components/StockInfo/StockInfo';
+import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
 import './DetailPage.css';
+import { getGroupList } from '../../store/groups/groups';
 
-const panes = (id) => [
+const panes = (id, data) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => <DetailOverview />,
@@ -27,7 +29,7 @@ const panes = (id) => [
   },
   {
     menuItem: { key: 'Price Trends', className: 'Price Trends', content: 'Price Trends' },
-    render: () => <DetailPriceTrends />,
+    render: () => <DetailPriceTrends data={data} />,
   },
   {
     menuItem: { key: 'FinancialState', className: 'FinancialState', content: 'Financial State' },
@@ -42,6 +44,7 @@ const panes = (id) => [
 const DetailPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const { priceList } = useSelector((state) => state.stockHistory);
+  const { groupList } = useSelector((state) => state.groups);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -50,28 +53,41 @@ const DetailPage = (props) => {
       history.push('/prelogin');
     }
     dispatch(getStockHistory(+props.match.params.id));
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [dispatch, loggingIn, props.match.params.id]);
 
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
+  let graph =
+    priceList.length === 0 ? (
+      'Loading...'
+    ) : (
+      <DetailData id={props.match.params.id} data={priceList} />
+    );
 
-  const changeScroll = () => {
-    let style = document.body.style.overflow;
-    document.body.style.overflow = style === 'hidden' ? 'auto' : 'hidden';
+  const onMouseEnter = () => {
+    document.body.style.overflow = 'hidden';
+  };
+  console.log(priceList);
+
+  const onMouseLeave = () => {
+    document.body.style.overflow = 'auto';
   };
 
   return (
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <Container>
-      <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
-        {graph}
-      </div>
-      
-      <StockInfo id={props.match.params.id} />
-      
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
+        <StockInfo id={props.match.params.id} />
+        <AddFavoriteModal trigger={<Button content="관심 등록" />} />
+        <div className="graph" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          {graph}
+        </div>
+
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
       </Container>
-      
+
       <Footer history={props.history} />
     </div>
   );

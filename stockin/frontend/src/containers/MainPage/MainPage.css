@@ -16,3 +16,15 @@
     color:black; 
 }
 
+.thirteen.wide.column.interest_tab{
+    margin-bottom: 60px !important; 
+}
+
+.ui.grid.mainGrid{
+    margin-bottom: 50px; 
+}
+
+.slick-slider.interestSlider{
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
