@@ -15,18 +15,24 @@
 
 .halfRight {
   height: 100vh;
-  background-color: #fec3b2;
+  /* background-color: #ff6f61; */
   text-align: center;
+  /* color: #fff; */
 }
 
 .loginBlock {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 45vh;
+  margin-top: 40vh;
 }
 
 .previewBlock {
   margin-left: auto;
   margin-right: auto;
   margin-top: 20vh;
+}
+
+.centered {
+  margin-left: auto;
+  margin-right: auto;
 }

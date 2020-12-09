@@ -61,8 +61,7 @@ const PreloginPage = (props) => {
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">
-      <div>
-        {/* <Container> */}
+      <Container>
         <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle" columns={2}>
           <Grid.Column className="halfLeft">
             <Grid.Column style={{ maxWidth: 450 }} className="loginBlock">
@@ -111,13 +110,12 @@ const PreloginPage = (props) => {
             </Grid.Column>
           </Grid.Column>
           <Grid.Column className="halfRight">
-            <Grid.Column style={{ maxWidth: 600 }} className="previewBlock">
+            <Grid.Column style={{ maxWidth: 700 }} className="previewBlock">
               <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
             </Grid.Column>
           </Grid.Column>
         </Grid>
-        {/* </Container> */}
-      </div>
+      </Container>
     </div>
   );
 };
