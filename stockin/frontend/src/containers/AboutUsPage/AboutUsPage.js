@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 
+import AboutUs from '../../components/AboutUs/AboutUs';
+
 const AboutUsPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const AboutUsPage = (props) => {
   return (
     <div data-testid="AboutUsPage">
       <Header history={props.history} />
-      <div>AboutUsPage</div>
+      <AboutUs />
       <Footer history={props.history} />
     </div>
   );
