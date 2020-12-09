@@ -11,11 +11,12 @@ const slice = createSlice({
     updatePriceList: (state, action) => {
       let data = action.payload;
       let parseDate = timeParse('%Y-%m-%d');
+      console.log(data);
       data.forEach((d, i) => {
         d.date = parseDate(d.date);
-        d.open = +d.open;
-        d.high = +d.high;
-        d.low = +d.low;
+        d.open = +d.volume === 0 ? +d.close : +d.open;
+        d.high = +d.volume === 0 ? +d.close : +d.high;
+        d.low = +d.volume === 0 ? +d.close : +d.low;
         d.close = +d.close;
       });
       state.priceList = data;
