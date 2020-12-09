@@ -56,113 +56,113 @@ const MainPage = (props) => {
     });
 
     dispatch(getGroupList());
-    console.log(groupList)
   }, [loggingIn]);
 
-
-
   const myInterest = () => {
-    let stockcount=0
+    let stockcount = 0;
     if (groupList.length == 0)
-      return(
+      return (
         <Grid.Row centered>
           <Grid.Row centered>
-            <Icon.Group size='massive'>
-              <Icon loading size='big' name='circle notch' />
-              <Icon name='user x'/>
+            <Icon.Group size="massive">
+              <Icon loading size="big" name="circle notch" />
+              <Icon name="user x" />
             </Icon.Group>
             <h1>Please make your own group!</h1>
           </Grid.Row>
         </Grid.Row>
-      )
-    
-    groupList.map((e)=>{
-      stockcount += e.stocks.length
-    })
+      );
 
-    if(stockcount==0)
-      return(
+    groupList.map((e) => {
+      stockcount += e.stocks.length;
+    });
+
+    if (stockcount == 0)
+      return (
         <Grid.Row centered>
           <Grid.Row centered>
-            <Icon.Group size='massive'>
-              <Icon loading size='big' name='circle notch' />
-              <Icon name='user plus' />
+            <Icon.Group size="massive">
+              <Icon loading size="big" name="circle notch" />
+              <Icon name="user plus" />
             </Icon.Group>
             <h1>Please add stock to your group!</h1>
           </Grid.Row>
         </Grid.Row>
       );
-    
-    return(
-      <Grid>
-      <Grid.Row centered>
-      {groupList.map((e, index)=>{
-        if(e.stocks.length > 0 )
-          return(
-           
-               
-            <Grid.Column className='interest_tab' width={13} style={{ height: '350px' }} key={index}>
-              <Tab  panes={panes(e)}/>
-            </Grid.Column>
-  
-          )
-      })}
-     </Grid.Row>
-     </Grid>
-    )
-  }
-  const panes =(e) => {
-    return [{
-      menuItem: e.name,
-      render: () =>
-      <Tab.Pane>
-        {panes_slider(e)}
-      </Tab.Pane> 
-    }]
-  }
 
-  const panes_slider = (e) =>{
-    return(
+    return (
+      <Grid>
+        <Grid.Row centered>
+          {groupList.map((e, index) => {
+            if (e.stocks.length > 0)
+              return (
+                <Grid.Column
+                  className="interest_tab"
+                  width={13}
+                  style={{ height: '350px' }}
+                  key={index}
+                >
+                  <Tab panes={panes(e)} />
+                </Grid.Column>
+              );
+          })}
+        </Grid.Row>
+      </Grid>
+    );
+  };
+  const panes = (e) => {
+    return [
+      {
+        menuItem: e.name,
+        render: () => <Tab.Pane>{panes_slider(e)}</Tab.Pane>,
+      },
+    ];
+  };
+
+  const panes_slider = (e) => {
+    return (
       <Slider className="interestSlider" {...sliderSettings} draggable={false}>
         {e.stocks.map((stock, index) => {
           return <StockBlock id={stock['id']} score={stock['score']} key={index} />;
         })}
       </Slider>
-    )
-  }
-
+    );
+  };
 
   const mainpane = [
-    {menuItem: 'DailyReport', render: ()=>
-    <Grid>
-    <Grid.Row centered>
-    <Grid.Column width={13} style={{ height: '350px' }}>
-      <Slider className="topSlider" {...sliderSettings} draggable={false}>
-        {topStock.map((top, index) => {
-          return <StockBlock id={top['id']} score={top['score']} key={index} />;
-        })}
-      </Slider>
-    </Grid.Column>
+    {
+      menuItem: 'DailyReport',
+      render: () => (
+        <Grid>
+          <Grid.Row centered>
+            <Grid.Column width={13} style={{ height: '350px' }}>
+              <Slider className="topSlider" {...sliderSettings} draggable={false}>
+                {topStock.map((top, index) => {
+                  return <StockBlock id={top['id']} score={top['score']} key={index} />;
+                })}
+              </Slider>
+            </Grid.Column>
 
-    <Grid.Column width={13} style={{ height: '350px' }}>
-      <Slider className="topSlider" {...sliderSettings} draggable={false}>
-        {bottomStock.map((bottom, index) => {
-          return <StockBlock id={bottom['id']} score={bottom['score']} key={index} />;
-        })}
-      </Slider>
-    </Grid.Column>
-  </Grid.Row>
-  </Grid>},
-  {menuItem: 'MyInterests', render: ()=>myInterest()}
-
-  ]
+            <Grid.Column width={13} style={{ height: '350px' }}>
+              <Slider className="topSlider" {...sliderSettings} draggable={false}>
+                {bottomStock.map((bottom, index) => {
+                  return <StockBlock id={bottom['id']} score={bottom['score']} key={index} />;
+                })}
+              </Slider>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      ),
+    },
+    { menuItem: 'MyInterests', render: () => myInterest() },
+  ];
 
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
 
-      <Tab panes={mainpane}/>
-      
+      <Tab panes={mainpane} />
+
       <Footer history={props.history} />
     </div>
   );

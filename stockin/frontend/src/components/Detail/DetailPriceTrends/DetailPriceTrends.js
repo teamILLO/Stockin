@@ -9,7 +9,6 @@ const DetailPriceTrends = (props) => {
   const ROW_LENGTH = 50;
   const rowLength = data.length > ROW_LENGTH ? ROW_LENGTH : data.length;
   const reversedData = data.slice().reverse();
-  console.log(data);
 
   const changeCalculator = (curr, prev) => {
     if (prev === 0) return { img: '', output: 'N/A' };

@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Stockin",
+  "name": "Stockin : quick, at-a-glance organized information about stocks",
   "icons": [
     {
       "src": "favicon.ico",
