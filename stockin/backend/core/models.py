@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.core.cache import cache
 
 from .managers import CustomUserManager
 
@@ -58,6 +59,19 @@ class Stock(models.Model):
     after20 = models.IntegerField(null=True, blank=True)
     after60 = models.IntegerField(null=True, blank=True)
     score = models.SmallIntegerField(null=True, default=50)
+
+    # override functions for redis
+    # def save(self, *args, **kwargs):
+    #     cache.delete('stocks')
+    #     cache.delete('up_stockinfo')
+    #     cache.delete('down_stockinfo')
+    #     super().save(*args, **kwargs)
+
+    # def delete(self, *args, **kwargs):
+    #     cache.delete('stocks')
+    #     cache.delete('up_stockinfo')
+    #     cache.delete('down_stockinfo')
+    #     super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.title

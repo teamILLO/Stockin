@@ -9,6 +9,7 @@ from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from django.core import serializers
+from django.core.cache import cache
 from datetime import timedelta
 from json import JSONDecodeError
 import json, csv, os
@@ -52,13 +53,13 @@ def price_list(request, stock_id=""):
 
 def stock_list(request):
     if request.method == 'GET':
-        response_list = []
-        stocks = [stock for stock in Stock.objects.all()]
-        for stock in stocks : 
-            response_dict = {'id' : stock.id, 'title' : stock.title, 'code' : stock.code, 'sector' : stock.sector}
-            response_list.append(response_dict)
+        # using cache
+        # stock_qs = cache.get_or_set('stocks', Stock.objects.values('id', 'title', 'code', 'sector'))
 
-        return JsonResponse(response_list, safe=False)
+        # original
+        stock_qs = Stock.objects.values('id', 'title', 'code', 'sector')
+        
+        return JsonResponse(list(stock_qs), safe=False)
     
     else :
         return HttpResponseNotAllowed(['GET'])
@@ -188,7 +189,12 @@ def stock_bottom10(request):
 def stock_top100_stockinfo(request) :
     if request.method =='GET':
         response_list=[]
-        
+
+        # using cache
+        # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score'))
+        # stocks = stock_qs[0:100]
+
+        # original
         stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[0:100]
         
         cnt = 1
@@ -213,7 +219,7 @@ def stock_top100_stockinfo(request) :
 def stock_top100_news(request) :
     if request.method =='GET':
         response_list=[]
-        
+
         stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
         
         cnt = 1
@@ -263,11 +269,17 @@ def stock_top100_stockhistory(request) :
     else:
         return HttpResponseNotAllowed(['GET'])
 
+
 # For report page down tap
 def stock_bottom100_stockinfo(request) :
     if request.method =='GET':
         response_list=[]
         
+        # using cache
+        # stock_qs = cache.get_or_set('down_stockinfo', Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('score'))
+        # stocks = stock_qs[0:100]
+
+        # original
         stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('score')[0:100]
         
         cnt = 1
