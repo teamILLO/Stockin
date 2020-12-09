@@ -318,16 +318,16 @@ def beforeMarket():
 
 # NewsCrawler(b,a)
 if __name__ == '__main__':
-    # if len(sys.argv) !=3 :
-    #     print('인자를 확인하십시오!')
-    # elif len(sys.argv[1]) != 8 or len(sys.argv[2]) != 8:
-    #     print('잘못된 날짜형식, 인자 확인!')
-    # else:
-    #     start = datetime.date(int(sys.argv[1][:4]), int(sys.argv[1][4:6]), int(sys.argv[1][6:]))
-    #     end = datetime.date(int(sys.argv[2][:4]), int(sys.argv[2][4:6]), int(sys.argv[2][6:]))
-    #     NewsCrawler(start, end)
+    if len(sys.argv) !=3 :
+        print('인자를 확인하십시오!')
+    elif len(sys.argv[1]) != 8 or len(sys.argv[2]) != 8:
+        print('잘못된 날짜형식, 인자 확인!')
+    else:
+        start = datetime.date(int(sys.argv[1][:4]), int(sys.argv[1][4:6]), int(sys.argv[1][6:]))
+        end = datetime.date(int(sys.argv[2][:4]), int(sys.argv[2][4:6]), int(sys.argv[2][6:]))
+        NewsCrawler(start, end)
    
-    newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
+    # newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
     # newsScalingUpdate(1)
     #newsTomodel()
-    beforeMarket()
+    # beforeMarket()
