@@ -7,10 +7,13 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from django.db.utils import IntegrityError
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
+from django.core import serializers
+from datetime import timedelta
 from json import JSONDecodeError
 import json, csv, os
 
-from core.models import Stock, StockHistory, FinancialStat
+from core.models import Stock, StockHistory, FinancialStat, News
 from core.crawlers.preprocessors.score import base_score
 
 
@@ -153,8 +156,8 @@ def fs_score(request, stock_id=""):
         return HttpResponseNotAllowed(['GET'])
 
 
-def stock_top10(requset):
-    if requset.method =='GET':
+def stock_top10(request):
+    if request.method =='GET':
         stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:10]
         response_list=[]
         for stock in stocks:
@@ -166,8 +169,9 @@ def stock_top10(requset):
     else:
         return HttpResponseNotAllowed(['GET'])
 
-def stock_bottom10(requset):
-    if requset.method =='GET':
+
+def stock_bottom10(request):
+    if request.method =='GET':
         stocks=Stock.objects.all().values_list('id','score').order_by('score')[:10]
         response_list=[]
         for stock in stocks:
@@ -180,23 +184,14 @@ def stock_bottom10(requset):
         return HttpResponseNotAllowed(['GET'])
 
 
-# n : loading 횟수 for scroll data fetching
-def stock_get_10_each(requset, n=''):
-    if requset.method =='GET':
+# For report page up tap
+def stock_top100_stockinfo(request) :
+    if request.method =='GET':
         response_list=[]
-        start_idx = n * 10
-        end_idx = n * 10 + 9
-        stock_end_idx = Stock.objects.count()-1
-
-        if start_idx <= stock_end_idx and stock_end_idx <= end_idx :
-            end_idx = stock_end_idx
-
-        if start_idx > stock_end_idx :
-            return JsonResponse(response_list, safe=False)
         
-        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[start_idx : end_idx+1] #DB hit per request : caching?
+        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('score')[0:100]
         
-        cnt = start_idx + 1
+        cnt = 1
         for stock in stocks:
             response_list.append({
                 'id': stock['id'],
@@ -206,7 +201,7 @@ def stock_get_10_each(requset, n=''):
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score':stock['score']
+                'score' : stock['score'],
             })
             cnt = cnt + 1
 
@@ -215,3 +210,134 @@ def stock_get_10_each(requset, n=''):
     else:
         return HttpResponseNotAllowed(['GET'])
 
+def stock_top100_news(request) :
+    if request.method =='GET':
+        response_list=[]
+        
+        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        
+        cnt = 1
+        for stock in stocks:
+            # Get News
+            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).filter(date="2020-11-07")
+            news_list = []
+            for news in news_qs[:5]:
+                news_list.append(news)
+
+            response_list.append({
+                'id' : stock['id'],
+                'news' : news_list,
+            })
+            cnt = cnt + 1
+
+        return JsonResponse(response_list, safe=False)
+
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+def stock_top100_stockhistory(request) :
+    if request.method =='GET':
+        response_list=[]
+
+        enddate = timezone.now().date()
+        startdate = enddate - timedelta(days=30)
+
+        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        
+        cnt = 1
+        for stock in stocks:
+            # Get StockHistory(1 month)
+            stockhis_qs = StockHistory.objects.values('id', 'date', 'endPrice').filter(stock__id = stock['id']).filter(date__range=[startdate, enddate])
+            stockhis_list = []
+            for stockhis in stockhis_qs :
+                stockhis_list.append(stockhis)
+
+            response_list.append({
+                'id' : stock['id'],
+                'stockhistory' : stockhis_list,
+            })
+            cnt = cnt + 1
+
+        return JsonResponse(response_list, safe=False)
+
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+# For report page down tap
+def stock_bottom100_stockinfo(request) :
+    if request.method =='GET':
+        response_list=[]
+        
+        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[0:100]
+        
+        cnt = 1
+        for stock in stocks:
+            response_list.append({
+                'id': stock['id'],
+                'rank' : cnt,
+                'title' : stock['title'],
+                'isKOSPI' : stock['isKOSPI'],
+                'code' : stock['code'],
+                'price' : stock['price'],
+                'yesterdayPrice' : stock['yesterdayPrice'],
+                'score' : stock['score'],
+            })
+            cnt = cnt + 1
+
+        return JsonResponse(response_list, safe=False)
+
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+def stock_bottom100_news(request) :
+    if request.method =='GET':
+        response_list=[]
+        
+        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        
+        cnt = 1
+        for stock in stocks:
+            # Get News
+            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).filter(date="2020-11-07")
+            news_list = []
+            for news in news_qs[:5]:
+                news_list.append(news)
+
+            response_list.append({
+                'id' : stock['id'],
+                'news' : news_list,
+            })
+            cnt = cnt + 1
+
+        return JsonResponse(response_list, safe=False)
+
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+def stock_bottom100_stockhistory(request) :
+    if request.method =='GET':
+        response_list=[]
+
+        enddate = timezone.now().date()
+        startdate = enddate - timedelta(days=30)
+
+        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        
+        cnt = 1
+        for stock in stocks:
+            # Get StockHistory(1 month)
+            stockhis_qs = StockHistory.objects.values('id', 'date', 'endPrice').filter(stock__id = stock['id']).filter(date__range=[startdate, enddate])
+            stockhis_list = []
+            for stockhis in stockhis_qs :
+                stockhis_list.append(stockhis)
+
+            response_list.append({
+                'id' : stock['id'],
+                'stockhistory' : stockhis_list,
+            })
+            cnt = cnt + 1
+
+        return JsonResponse(response_list, safe=False)
+
+    else:
+        return HttpResponseNotAllowed(['GET'])

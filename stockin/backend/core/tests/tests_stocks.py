@@ -1,6 +1,6 @@
 
 from django.test import TestCase, Client
-from core.models import Stock, StockHistory, FinancialStat
+from core.models import Stock, StockHistory, FinancialStat, News
 import json
 
 class StocksTestCase(TestCase):
@@ -112,30 +112,99 @@ class StocksTestCase(TestCase):
         csrftoken = response.cookies['csrftoken'].value
         response = client.delete('/api/stocks/1/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
-
-        response = client.get('/api/users/token/')
-        csrftoken = response.cookies['csrftoken'].value
-        response = client.delete('/api/stocks/top5/', HTTP_X_CSRFTOKEN=csrftoken)
-        self.assertEqual(response.status_code, 405)
         
 
-    def test_stock_get_10_each(self):
+    # Tests stock_top100 views
+    # Tests stock_bottom100 views
+    def test_stock_report_views(self) :
         client = Client(enforce_csrf_checks=True)
-        test_stock1 = Stock.objects.create(title='foo_title1', isKOSPI = True, code='foo_code', price=1, yesterdayPrice = 1, sector='foo_sector', score = 1)
-        test_stock2 = Stock.objects.create(title='foo_title2', isKOSPI = True, code='foo_code', price=2, yesterdayPrice = 1, sector='foo_sector', score = 2)
-        test_stock3 = Stock.objects.create(title='foo_title3', isKOSPI = True, code='foo_code', price=3, yesterdayPrice = 1, sector='foo_sector', score = 3)
-        test_stock4 = Stock.objects.create(title='foo_title4', isKOSPI = True, code='foo_code', price=4, yesterdayPrice = 1, sector='foo_sector', score = 4)
-        test_stock5 = Stock.objects.create(title='foo_title5', isKOSPI = True, code='foo_code', price=5, yesterdayPrice = 1, sector='foo_sector', score = 5)
-        response = client.get('/api/stocks/scrolldata/0/')
-        self.assertEqual(response.status_code, 200)
-        response = client.get('/api/stocks/scrolldata/3/')
+        stock_list = []
+
+        # Create 100 stocks
+        for i in range(100) :
+            stock_list.append( Stock.objects.create(
+                title = 'foo_title', 
+                code = 'foo_code', 
+                sector = 'foo_sector',
+            ))
+
+        # Create news objects
+        for i in range(100) :
+            News.objects.create(
+                stock = stock_list[i],
+                date = '2020-12-07',
+                title = 'foo_title', 
+                press = 'foo_press',
+                link = 'foo_link',
+            )
+        
+        # Create stockhistory objects
+        for i in range(100) :
+            StockHistory.objects.create(
+                stock = stock_list[i],
+                date = '2020-12-07',
+                endPrice = 100,    
+            )
+        
+        # stock_top100_stockinfo
+        response = client.get('/api/stocks/report/up/stockinfo/')
         self.assertEqual(response.status_code, 200)
 
-        # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.delete('/api/stocks/scrolldata/3/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.delete('/api/stocks/report/up/stockinfo/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
+
+        # stock_top100_news
+        response = client.get('/api/stocks/report/up/news/')
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/report/up/news/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+
+        # stock_top100_stockhistory
+        response = client.get('/api/stocks/report/up/stockhistory/')
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/report/up/stockhistory/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+
+        # stock_bottom100_stockinfo 
+        response = client.get('/api/stocks/report/down/stockinfo/')
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/report/down/stockinfo/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+
+        # stock_bottom100_news
+        response = client.get('/api/stocks/report/down/news/')
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/report/down/news/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+
+        # stock_bottom100_stockhistory
+        response = client.get('/api/stocks/report/down/stockhistory/')
+        self.assertEqual(response.status_code, 200)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.delete('/api/stocks/report/down/stockhistory/', HTTP_X_CSRFTOKEN=csrftoken)
+        self.assertEqual(response.status_code, 405)
+
+
+
+        
+
+
 
 
         
