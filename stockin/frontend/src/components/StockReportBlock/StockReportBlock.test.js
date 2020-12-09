@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, queryAllByTestId } from '@testing-library/react';
-import UpReportBlock from './UpReportBlock';
+import StockReportBlock from './StockReportBlock';
 import { api } from '../../api/index';
 
 const testList = [
