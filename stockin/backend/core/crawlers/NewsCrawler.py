@@ -217,10 +217,6 @@ def newsScalingUpdate(today):
                             'raw': new_newsdata,
                             'scale': scale
                             })
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 
 def newsTransform():
     stocksdata=[]
@@ -331,11 +327,7 @@ if __name__ == '__main__':
     #     end = datetime.date(int(sys.argv[2][:4]), int(sys.argv[2][4:6]), int(sys.argv[2][6:]))
     #     NewsCrawler(start, end)
    
-<<<<<<< HEAD
-    newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
-=======
     # newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
->>>>>>> master
     # newsScalingUpdate(1)
     #newsTomodel()
     beforeMarket()
