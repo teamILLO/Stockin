@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid, Icon, MenuItem, Tab, Container } from 'semantic-ui-react';
+import { Grid, Icon, Tab } from 'semantic-ui-react';
 import { getGroupList } from '../../store/groups/groups';
 import { api } from '../../api/index';
 import 'slick-carousel/slick/slick.css';
@@ -29,7 +29,6 @@ const MainPage = (props) => {
 
   const [topStock, setTop] = useState([]);
   const [bottomStock, setBottom] = useState([]);
-  const [tab, setTab] = useState(1);
   const { groupList } = useSelector((state) => state.groups);
 
   useEffect(() => {
@@ -58,33 +57,9 @@ const MainPage = (props) => {
 
     dispatch(getGroupList());
     console.log(groupList)
-  }, [dispatch, loggingIn, tab]);
+  }, [loggingIn]);
 
-  const tabmenu = () => {
-    if (tab === 1) {
-      return (
-        <Grid.Row centered>
-          <Grid.Column width={13} style={{ height: '350px' }}>
-            <Slider className="topSlider" {...sliderSettings} draggable={false}>
-              {topStock.map((top, index) => {
-                return <StockBlock id={top['id']} score={top['score']} key={index} />;
-              })}
-            </Slider>
-          </Grid.Column>
 
-          <Grid.Column width={13} style={{ height: '350px' }}>
-            <Slider className="topSlider" {...sliderSettings} draggable={false}>
-              {bottomStock.map((bottom, index) => {
-                return <StockBlock id={bottom['id']} score={bottom['score']} key={index} />;
-              })}
-            </Slider>
-          </Grid.Column>
-        </Grid.Row>
-      );
-    } else {
-      return myInterest();
-    }
-  };
 
   const myInterest = () => {
     let stockcount=0
@@ -94,7 +69,7 @@ const MainPage = (props) => {
           <Grid.Row centered>
             <Icon.Group size='massive'>
               <Icon loading size='big' name='circle notch' />
-              <Icon name='user x' size='normal'/>
+              <Icon name='user x'/>
             </Icon.Group>
             <h1>Please make your own group!</h1>
           </Grid.Row>
@@ -111,7 +86,7 @@ const MainPage = (props) => {
           <Grid.Row centered>
             <Icon.Group size='massive'>
               <Icon loading size='big' name='circle notch' />
-              <Icon name='user plus' size='normal'/>
+              <Icon name='user plus' />
             </Icon.Group>
             <h1>Please add stock to your group!</h1>
           </Grid.Row>
@@ -119,21 +94,21 @@ const MainPage = (props) => {
       );
     
     return(
+      <Grid>
       <Grid.Row centered>
-      {groupList.map((e)=>{
+      {groupList.map((e, index)=>{
         if(e.stocks.length > 0 )
           return(
            
                
-            <Grid.Column className='interest_tab' width={13} style={{ height: '350px' }}>
+            <Grid.Column className='interest_tab' width={13} style={{ height: '350px' }} key={index}>
               <Tab  panes={panes(e)}/>
             </Grid.Column>
-
-               
-         
+  
           )
       })}
-     </Grid.Row> 
+     </Grid.Row>
+     </Grid>
     )
   }
   const panes =(e) => {
@@ -156,54 +131,37 @@ const MainPage = (props) => {
     )
   }
 
-  const dailyStyle = () => {
-    if (tab === 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
-    else return { borderTop: '2px solid #000000', fontWeight: 'normal' };
-  };
 
-  const interestStyle = () => {
-    if (tab !== 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
-    else return { borderTop: '2px solid #000000', fontWeight: 'normal' };
-  };
+  const mainpane = [
+    {menuItem: 'DailyReport', render: ()=>
+    <Grid>
+    <Grid.Row centered>
+    <Grid.Column width={13} style={{ height: '350px' }}>
+      <Slider className="topSlider" {...sliderSettings} draggable={false}>
+        {topStock.map((top, index) => {
+          return <StockBlock id={top['id']} score={top['score']} key={index} />;
+        })}
+      </Slider>
+    </Grid.Column>
 
-  const clickDaily = () => {
-    if (tab !== 1) setTab(1);
-  };
+    <Grid.Column width={13} style={{ height: '350px' }}>
+      <Slider className="topSlider" {...sliderSettings} draggable={false}>
+        {bottomStock.map((bottom, index) => {
+          return <StockBlock id={bottom['id']} score={bottom['score']} key={index} />;
+        })}
+      </Slider>
+    </Grid.Column>
+  </Grid.Row>
+  </Grid>},
+  {menuItem: 'MyInterests', render: ()=>myInterest()}
 
-  const clickInterest = () => {
-    if (tab !== 2) setTab(2);
-  };
+  ]
 
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
 
-      <Grid className='mainGrid'>
-        <Grid.Row style={{ height: '160px' }}>
-          <Grid.Column width={3} textAlign="right">
-            <div
-              data-testid="dailyTab"
-              onClick={() => clickDaily()}
-              style={{ ...dailyStyle(), fontSize: '32px', height: '70px', cursor: 'pointer' }}
-            >
-              <br />
-              Daily Report
-            </div>
-
-            <div
-              data-testid="interestTab"
-              onClick={() => clickInterest()}
-              style={{ ...interestStyle(), fontSize: '32px', height: '70px', cursor: 'pointer' }}
-            >
-              <br />
-              My Interests
-            </div>
-          </Grid.Column>
-        </Grid.Row>
-
-        {tabmenu()}
-        
-      </Grid>
+      <Tab panes={mainpane}/>
       
       <Footer history={props.history} />
     </div>
