@@ -5,16 +5,11 @@ import { getMockStore } from '../../../test-utils/mocks';
 import YearTable from './YearTable';
 import * as fsStore from '../../../store/financialstats/financialstats';
 
-// jest.mock('./NewsDatePicker', () => {
-//   return jest.fn((props) => {
-//     return <div data-testid="spyNewsDatePicker"></div>;
-//   });
-// });
 
 const fsList = [
   {
     id: 1,
-    quarter: '1',
+    quarter: '20년 12월',
     sales: 10,
     operatingProfit: 1,
     netIncome: 1,
@@ -26,7 +21,7 @@ const fsList = [
   },
   {
     id: 2,
-    quarter: '2',
+    quarter: '19년 12월',
     sales: 20,
     operatingProfit: 2,
     netIncome: 2,
@@ -38,7 +33,7 @@ const fsList = [
   },
   {
     id: 3,
-    quarter: '3',
+    quarter: '18년 9월',
     sales: 30,
     operatingProfit: 3,
     netIncome: 3,
@@ -73,10 +68,17 @@ describe('<YearTable />', () => {
       return (dispatch) => {};
     });
   });
-  it('should render without errors', () => {
+  it('should handle with invalid url', () => {
     const { container } = render(yearTable);
     const query = queryAllByTestId(container, 'YearTable');
     expect(query.length).toBe(1);
     // expect(spyGetFs).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render without errors', () => {
+    window.history.pushState({}, '', '/localhost:3000/detail/1/');
+    const { container } = render(yearTable);
+    const query = queryAllByTestId(container, 'YearTable');
+    expect(query.length).toBe(1);
   });
 });

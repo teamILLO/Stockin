@@ -92,19 +92,19 @@ const FindPasswdModal = (props) => {
   const nextButton = () => {
     if (next === 1)
       return (
-        <Button primary onClick={() => emailConfirmHandler()}>
+        <Button className="mainButton" onClick={() => emailConfirmHandler()}>
           Next
         </Button>
       );
     else if (next === 2)
       return (
-        <Button primary onClick={() => codeConfirmHandler()}>
+        <Button className="mainButton" onClick={() => codeConfirmHandler()}>
           Next!
         </Button>
       );
     else 
       return (
-        <Button primary onClick={() => changeHandler()}>
+        <Button className="mainButton" onClick={() => changeHandler()}>
           Confirm
         </Button>
       );

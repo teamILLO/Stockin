@@ -1,0 +1,1 @@
+lias ls="ls --color" 

@@ -12,7 +12,10 @@ import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailP
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
-import { Container, Tab } from 'semantic-ui-react';
+import { Container, Tab, Button } from 'semantic-ui-react';
+import StockInfo from '../../components/StockInfo/StockInfo';
+import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
+import './DetailPage.css';
 
 const panes = (id, data) => [
   {
@@ -48,6 +51,10 @@ const DetailPage = (props) => {
       history.push('/prelogin');
     }
     dispatch(getStockHistory(+props.match.params.id));
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, [dispatch, loggingIn, props.match.params.id]);
 
   let graph =
@@ -57,23 +64,26 @@ const DetailPage = (props) => {
       <DetailData id={props.match.params.id} data={priceList} />
     );
 
-  const changeScroll = () => {
-    let style = document.body.style.overflow;
-    document.body.style.overflow = style === 'hidden' ? 'auto' : 'hidden';
+  const onMouseEnter = () => {
+    document.body.style.overflow = 'hidden';
   };
   console.log(priceList);
+
+  const onMouseLeave = () => {
+    document.body.style.overflow = 'auto';
+  };
 
   return (
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <Container>
-        <div onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
+        <StockInfo id={props.match.params.id} />
+        <AddFavoriteModal trigger={<Button content="관심 등록" />} />
+        <div className="graph" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
           {graph}
         </div>
-        <Tab
-          menu={{ secondary: true, pointing: true }}
-          panes={panes(props.match.params.id, priceList)}
-        />
+
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
       </Container>
 
       <Footer history={props.history} />

@@ -1,0 +1,18 @@
+.topSlider{
+    width: 100%;
+}
+
+
+.slick-next:before {
+    font-size: 40px;
+    color:black; 
+}
+
+
+
+.slick-prev:before {
+    margin-left:-15px;
+    font-size: 40px;
+    color:black; 
+}
+

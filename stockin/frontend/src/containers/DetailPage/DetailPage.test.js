@@ -55,6 +55,12 @@ jest.mock('../../components/Footer/Footer', () => {
   });
 });
 
+jest.mock('../../components/StockInfo/StockInfo', ()=>{
+  return jest.fn((props) => {
+    return <div className="stockInfo">a</div>;
+  });
+})
+
 const mockStore = getMockStore(
   { loggingIn: true, user: { id: 1 } },
   { stockList: [] },
@@ -90,6 +96,7 @@ describe('<DetailPage />', () => {
     spyHistoryPush,
     spyCheckLogin,
     spyGetStockHistory;
+    
   beforeEach(() => {
     detailPage = (
       <Provider store={mockStore}>

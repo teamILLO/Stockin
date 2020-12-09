@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Button, Form, Image, Modal } from 'semantic-ui-react';
+import { Button, Form, Image, Modal, Input } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { trySignup } from '../../../store/authentication/authentication';
 import { api } from '../../../api/index';
-
 import logo from '../../../images/logo.png';
 import './SignupModal.css';
 
@@ -13,11 +12,11 @@ const SignupModal = (props) => {
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
   const [next, setNext] = useState(false);
-
+  const [emailError, setEmailError] = useState(false);
   const dispatch = useDispatch();
 
   const signupHandler = async () => {
-    let is_duplicated = false
+    let is_duplicated = false;
 
     await api.post('/users/duplicate/', { email: '', nickname : nickname }).then((response) => {
       if (response.data['duplicate']) {
@@ -32,16 +31,27 @@ const SignupModal = (props) => {
       setOpen(false);
     }
   };
+  
+  const isValidEmail = (email) => {
+    const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    return emailRegex.test(email);
+  };
 
   const nextHandler = async () => {
-    let is_duplicated = false
+    let is_duplicated = false;
 
-    await api.post('/users/duplicate/', { email: email, nickname : '' }).then((response) => {
-      if (response.data['duplicate']) {
-        alert('Email exists, try another.');
-        is_duplicated = true
-      } 
-    });
+    if (!isValidEmail(email)) {
+      setEmailError(true);
+      return;
+    }
+    else {
+      await api.post('/users/duplicate/', { email: email, nickname : '' }).then((response) => {
+        if (response.data['duplicate']) {
+          alert('Email exists, try another.');
+          is_duplicated = true
+        } 
+      });
+    }
     
     if(!is_duplicated) {
       setNext(true);
@@ -59,8 +69,33 @@ const SignupModal = (props) => {
         onChange={(event) => setNickname(event.target.value)}
       />
     </Form>
-  ) : (
+  ) : (emailError ? (
     <Form size="small">
+      <Form.Field
+        fluid
+        icon="user"
+        iconPosition="left"
+        placeholder='Email'
+        control={Input}
+        error={{
+          content: 'Please enter a valid email address',
+          pointing: 'below',
+        }}
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+      />
+      <Form.Input
+        fluid
+        icon="lock"
+        iconPosition="left"
+        placeholder="Password"
+        type="password"
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+      />
+    </Form>
+    ) : (
+      <Form size="small">
       <Form.Input
         fluid
         icon="user"
@@ -79,14 +114,14 @@ const SignupModal = (props) => {
         onChange={(event) => setPassword(event.target.value)}
       />
     </Form>
-  );
+    ));
 
   const nextButton = next ? (
-    <Button primary onClick={() => signupHandler()}>
+    <Button className="mainButton" onClick={() => signupHandler()}>
       Sign Up
     </Button>
   ) : (
-    <Button primary onClick={() => nextHandler()}>
+    <Button className="mainButton" onClick={() => nextHandler()}>
       Next
     </Button>
   );
@@ -94,7 +129,13 @@ const SignupModal = (props) => {
   return (
     <Modal
       closeIcon
-      onClose={() => setOpen(false)}
+      onClose={() => {
+        setOpen(false);
+        setEmail('');
+        setPassword('');
+        setNickname('');
+        setEmailError(false);
+      }}
       onOpen={() => {
         setNext(false);
         setOpen(true);
