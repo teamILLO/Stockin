@@ -3005,6 +3005,36 @@
   "resolved" "https://registry.npmjs.org/chardet/-/chardet-0.7.0.tgz"
   "version" "0.7.0"
 
+"chart.js@^2.3", "chart.js@^2.4.0", "chart.js@^2.9.4":
+  "integrity" "sha512-B07aAzxcrikjAPyV+01j7BmOpxtQETxTSlQ26BEYJ+3iUkbNKaOJ/nDbT6JjyqYxseM0ON12COHYdU2cTIjC7A=="
+  "resolved" "https://registry.npmjs.org/chart.js/-/chart.js-2.9.4.tgz"
+  "version" "2.9.4"
+  dependencies:
+    "chartjs-color" "^2.1.0"
+    "moment" "^2.10.2"
+
+"chartjs-color-string@^0.6.0":
+  "integrity" "sha512-TIB5OKn1hPJvO7JcteW4WY/63v6KwEdt6udfnDE9iCAZgy+V4SrbSxoIbTw/xkUIapjEI4ExGtD0+6D3KyFd7A=="
+  "resolved" "https://registry.npmjs.org/chartjs-color-string/-/chartjs-color-string-0.6.0.tgz"
+  "version" "0.6.0"
+  dependencies:
+    "color-name" "^1.0.0"
+
+"chartjs-color@^2.1.0":
+  "integrity" "sha512-haqOg1+Yebys/Ts/9bLo/BqUcONQOdr/hoEr2LLTRl6C5LXctUdHxsCYfvQVg5JIxITrfCNUDr4ntqmQk9+/0w=="
+  "resolved" "https://registry.npmjs.org/chartjs-color/-/chartjs-color-2.4.1.tgz"
+  "version" "2.4.1"
+  dependencies:
+    "chartjs-color-string" "^0.6.0"
+    "color-convert" "^1.9.3"
+
+"chartjs-plugin-annotation@^0.5.7":
+  "integrity" "sha1-G/DjAZmmqf+Yic4PN6HnVagNEL8="
+  "resolved" "https://registry.npmjs.org/chartjs-plugin-annotation/-/chartjs-plugin-annotation-0.5.7.tgz"
+  "version" "0.5.7"
+  dependencies:
+    "chart.js" "^2.4.0"
+
 "cheerio@^1.0.0-rc.3":
   "integrity" "sha512-0td5ijfUPuubwLUu0OBoe98gZj8C/AA+RW3v67GPlGOrvxWjZmBXiBCRU+I8VEiNyJzjth40POfHiz2RB3gImA=="
   "resolved" "https://registry.npmjs.org/cheerio/-/cheerio-1.0.0-rc.3.tgz"
@@ -3194,7 +3224,7 @@
     "map-visit" "^1.0.0"
     "object-visit" "^1.0.0"
 
-"color-convert@^1.9.0", "color-convert@^1.9.1":
+"color-convert@^1.9.0", "color-convert@^1.9.1", "color-convert@^1.9.3":
   "integrity" "sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg=="
   "resolved" "https://registry.npmjs.org/color-convert/-/color-convert-1.9.3.tgz"
   "version" "1.9.3"
@@ -7997,6 +8027,11 @@
   dependencies:
     "minimist" "^1.2.5"
 
+"moment@^2.10.2":
+  "integrity" "sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ=="
+  "resolved" "https://registry.npmjs.org/moment/-/moment-2.29.1.tgz"
+  "version" "2.29.1"
+
 "moo@^0.5.0":
   "integrity" "sha512-I1mnb5xn4fO80BH9BLcF0yLypy2UKl+Cb01Fu0hJRkJjlCRtxZMWkTdAtDd5ZqCOxtCkhmRwyI57vWT+1iZ67w=="
   "resolved" "https://registry.npmjs.org/moo/-/moo-0.5.1.tgz"
@@ -9767,6 +9802,14 @@
     "regenerator-runtime" "^0.13.3"
     "whatwg-fetch" "^3.0.0"
 
+"react-chartjs-2@^2.11.1":
+  "integrity" "sha512-G7cNq/n2Bkh/v4vcI+GKx7Q1xwZexKYhOSj2HmrFXlvNeaURWXun6KlOUpEQwi1cv9Tgs4H3kGywDWMrX2kxfA=="
+  "resolved" "https://registry.npmjs.org/react-chartjs-2/-/react-chartjs-2-2.11.1.tgz"
+  "version" "2.11.1"
+  dependencies:
+    "lodash" "^4.17.19"
+    "prop-types" "^15.7.2"
+
 "react-circular-progressbar@^2.0.3":
   "integrity" "sha512-YKN+xAShXA3gYihevbQZbavfiJxo83Dt1cUxqg/cltj4VVsRQpDr7Fg1mvjDG3x1KHGtd9NmYKvJ2mMrPwbKyw=="
   "resolved" "https://registry.npmjs.org/react-circular-progressbar/-/react-circular-progressbar-2.0.3.tgz"
@@ -9813,7 +9856,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0", "react-dom@^15.0.0 || ^16.0.0", "react-dom@^15.5.x || ^16.x", "react-dom@^16.0.0", "react-dom@^16.0.0-0", "react-dom@^16.11.0", "react-dom@^16.3.0", "react-dom@^16.8.0", "react-dom@^16.9.0", "react-dom@^17.0.1", "react-dom@>= 16.3.0", "react-dom@>=15.0.0":
+"react-dom@*", "react-dom@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react-dom@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0", "react-dom@^15.0.0 || ^16.0.0", "react-dom@^15.5.x || ^16.x", "react-dom@^16.0.0", "react-dom@^16.0.0-0", "react-dom@^16.11.0", "react-dom@^16.3.0", "react-dom@^16.8.0", "react-dom@^16.9.0", "react-dom@^17.0.1", "react-dom@>= 16.3.0", "react-dom@>=15.0.0":
   "integrity" "sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.1.tgz"
   "version" "17.0.1"
@@ -10061,7 +10104,7 @@
     "prop-types" "^15.6.2"
     "react-lifecycles-compat" "^3.0.4"
 
-"react@*", "react@^0.14 || ^15.0.0 || ^16.0.0-alpha", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0", "react@^0.14.7 || ^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.5.x || ^16.x", "react@^16.0.0", "react@^16.0.0-0", "react@^16.11.0", "react@^16.14.0", "react@^16.3.0", "react@^16.4.0", "react@^16.8.0", "react@^16.8.3 || ^17", "react@^16.9.0", "react@^17.0.1", "react@>= 16.3.0", "react@>=15", "react@>=15.0.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0", "react@0.14.x || ^15.0.0 || ^16.0.0", "react@17.0.1":
+"react@*", "react@^0.14 || ^15.0.0 || ^16.0.0-alpha", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^0.14.0 || ^15.0.1 || ^16.0.0 || ^17.0.0", "react@^0.14.7 || ^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.5.x || ^16.x", "react@^16.0.0", "react@^16.0.0-0", "react@^16.11.0", "react@^16.14.0", "react@^16.3.0", "react@^16.4.0", "react@^16.8.0", "react@^16.8.3 || ^17", "react@^16.9.0", "react@^17.0.1", "react@>= 16.3.0", "react@>=15", "react@>=15.0.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0", "react@0.14.x || ^15.0.0 || ^16.0.0", "react@17.0.1":
   "integrity" "sha512-lG9c9UuMHdcAexXtigOZLX8exLWkW0Ku29qPRU8uhF2R9BN96dLCt0psvzPLlHc5OWkgymP3qwTRgbnw5BKx3w=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.1.tgz"
   "version" "17.0.1"
