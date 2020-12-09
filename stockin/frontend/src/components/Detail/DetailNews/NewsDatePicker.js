@@ -3,6 +3,8 @@ import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import { getNews } from '../../../store/news/news';
 import { useDispatch } from 'react-redux';
+import { Button } from 'semantic-ui-react';
+import './DetailNews.css';
 
 /*
   For number padding
@@ -61,12 +63,28 @@ const NewsDatePicker = (props) => {
     }
   }, [dateFormat, dispatch, props.id]);
 
+  const CustomInput = ({ value, onClick }) => (
+    <div className="newsHeader">
+      <h3 className="newsDate">{value} </h3>
+      <Button
+        className="newsPickButton"
+        onClick={onClick}
+        circular
+        size="large"
+        icon="calendar alternate outline"
+      />
+    </div>
+  );
+
   return (
-    <DatePicker
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
-      includeDates={validDate}
-    />
+    <div>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        includeDates={validDate}
+        customInput={<CustomInput />}
+      />
+    </div>
   );
 };
 

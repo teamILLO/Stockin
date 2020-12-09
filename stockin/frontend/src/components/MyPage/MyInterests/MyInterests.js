@@ -59,10 +59,21 @@ const MyInterests = (props) => {
       ...results,
       {
         menuItem: {
-          content: <EditModal trigger={<Button>edit</Button>} />,
+          content: <EditModal trigger={<Button>edit group</Button>} />,
           className: 'disabled',
           key: 'editButton',
         },
+        render: () => (
+          <h5>
+            <br />
+            <br />
+            <br />
+            PLEASE ADD GROUP!
+            <br />
+            <br />
+            <br />
+          </h5>
+        ),
       },
     ];
     setPanes(results);

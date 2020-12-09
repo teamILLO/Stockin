@@ -11,7 +11,6 @@ import { CandlestickSeries } from 'react-stockcharts/lib/series';
 import { XAxis, YAxis } from 'react-stockcharts/lib/axes';
 import { last, timeIntervalBarWidth } from 'react-stockcharts/lib/utils';
 import { HoverTooltip } from 'react-stockcharts/lib/tooltip';
-
 import './DetailData.css';
 
 const DetailData = (props) => {
@@ -56,7 +55,7 @@ const DetailData = (props) => {
   return (
     <div className="DetailData" data-testid="DetailData">
       <ChartCanvas
-        className='chartCanvas'
+        className="chartCanvas"
         height={400}
         ratio={2}
         width={800}
