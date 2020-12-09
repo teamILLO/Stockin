@@ -1,0 +1,25 @@
+/* .newsTitle {
+  float: left;
+}
+
+.newsPress {
+  display: inline-block;
+  float: right;
+} */
+
+.newsCount {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.newsDate {
+  display: inline-block;
+  margin: 10px;
+}
+.datePickButton {
+  display: inline-block;
+}
+
+.newsHeader {
+  margin-bottom: 20px;
+}
