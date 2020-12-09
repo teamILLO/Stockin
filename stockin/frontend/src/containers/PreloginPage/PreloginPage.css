@@ -1,0 +1,8 @@
+.rememberMe {
+  float: left;
+}
+
+.forgetPassword {
+  display: inline-block;
+  float: right;
+}
