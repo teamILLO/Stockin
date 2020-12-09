@@ -170,7 +170,10 @@ def initialStockAdd():
     
     Stock.objects.bulk_create(stock_list)
 
+    print("insert FinancialStat")
+    
     with open('data/Financial_State.csv', 'r', encoding='UTF-8') as f:
+
         reader = csv.DictReader(f)
         
         for FS in reader:
@@ -462,6 +465,9 @@ if __name__ == '__main__':
         pastStockHistory(count)
         print('finish!')
 
+    elif sys.argv[1] == 'before':
+        pastStockHistory(1)
+        
     elif sys.argv[1] == 'crawl':
         print('crawling start!')
         initialStockAddFromExcel()

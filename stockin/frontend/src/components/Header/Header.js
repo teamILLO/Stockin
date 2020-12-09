@@ -40,6 +40,7 @@ const Header = (props) => {
           centered
           className="headerLogo"
           data-testid="Logo"
+          style={{cursor: 'pointer'}}
         />
         <div>
           <Menu compact secondary>

@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid, Segment, Divider } from 'semantic-ui-react';
+import { Grid, Icon, MenuItem, Tab, Container } from 'semantic-ui-react';
+import { getGroupList } from '../../store/groups/groups';
 import { api } from '../../api/index';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -29,6 +30,7 @@ const MainPage = (props) => {
   const [topStock, setTop] = useState([]);
   const [bottomStock, setBottom] = useState([]);
   const [tab, setTab] = useState(1);
+  const { groupList } = useSelector((state) => state.groups);
 
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
@@ -53,10 +55,13 @@ const MainPage = (props) => {
       }
       setBottom(toplist);
     });
-  }, [dispatch, loggingIn]);
+
+    dispatch(getGroupList());
+    console.log(groupList)
+  }, [dispatch, loggingIn, tab]);
 
   const tabmenu = () => {
-    if (tab == 1) {
+    if (tab === 1) {
       return (
         <Grid.Row centered>
           <Grid.Column width={13} style={{ height: '350px' }}>
@@ -77,33 +82,103 @@ const MainPage = (props) => {
         </Grid.Row>
       );
     } else {
-      return <div></div>;
+      return myInterest();
     }
   };
 
+  const myInterest = () => {
+    let stockcount=0
+    if (groupList.length == 0)
+      return(
+        <Grid.Row centered>
+          <Grid.Row centered>
+            <Icon.Group size='massive'>
+              <Icon loading size='big' name='circle notch' />
+              <Icon name='user x' size='normal'/>
+            </Icon.Group>
+            <h1>Please make your own group!</h1>
+          </Grid.Row>
+        </Grid.Row>
+      )
+    
+    groupList.map((e)=>{
+      stockcount += e.stocks.length
+    })
+
+    if(stockcount==0)
+      return(
+        <Grid.Row centered>
+          <Grid.Row centered>
+            <Icon.Group size='massive'>
+              <Icon loading size='big' name='circle notch' />
+              <Icon name='user plus' size='normal'/>
+            </Icon.Group>
+            <h1>Please add stock to your group!</h1>
+          </Grid.Row>
+        </Grid.Row>
+      );
+    
+    return(
+      <Grid.Row centered>
+      {groupList.map((e)=>{
+        if(e.stocks.length > 0 )
+          return(
+           
+               
+            <Grid.Column className='interest_tab' width={13} style={{ height: '350px' }}>
+              <Tab  panes={panes(e)}/>
+            </Grid.Column>
+
+               
+         
+          )
+      })}
+     </Grid.Row> 
+    )
+  }
+  const panes =(e) => {
+    return [{
+      menuItem: e.name,
+      render: () =>
+      <Tab.Pane>
+        {panes_slider(e)}
+      </Tab.Pane> 
+    }]
+  }
+
+  const panes_slider = (e) =>{
+    return(
+      <Slider className="interestSlider" {...sliderSettings} draggable={false}>
+        {e.stocks.map((stock, index) => {
+          return <StockBlock id={stock['id']} score={stock['score']} key={index} />;
+        })}
+      </Slider>
+    )
+  }
+
   const dailyStyle = () => {
-    if (tab == 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
+    if (tab === 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
     else return { borderTop: '2px solid #000000', fontWeight: 'normal' };
   };
 
   const interestStyle = () => {
-    if (tab != 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
+    if (tab !== 1) return { borderTop: '5px solid #000000', fontWeight: 'bold' };
     else return { borderTop: '2px solid #000000', fontWeight: 'normal' };
   };
 
   const clickDaily = () => {
-    if (tab != 1) setTab(1);
+    if (tab !== 1) setTab(1);
   };
 
   const clickInterest = () => {
-    if (tab != 2) setTab(2);
+    if (tab !== 2) setTab(2);
   };
 
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
 
-      <Grid>
+      <Grid className='mainGrid'>
         <Grid.Row style={{ height: '160px' }}>
           <Grid.Column width={3} textAlign="right">
             <div
@@ -127,8 +202,9 @@ const MainPage = (props) => {
         </Grid.Row>
 
         {tabmenu()}
+        
       </Grid>
-
+      
       <Footer history={props.history} />
     </div>
   );

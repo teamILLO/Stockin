@@ -22,7 +22,7 @@ const DetailComment = (props) => {
         onChange={(event) => setComment(event.target.value)}
       />
       <Button
-        primary
+        className="mainButton"
         content="Submit"
         labelPosition="right"
         icon="write"

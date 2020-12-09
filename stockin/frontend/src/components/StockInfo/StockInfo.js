@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../../store/store';
-import { Grid, Tab, Table, Divider, Header } from 'semantic-ui-react';
+import { Grid, Table } from 'semantic-ui-react';
 import { api } from '../../api/index';
 import './StockInfo.css';
 
 
 const StockInfo = (props) =>{
 
-    
     const [color, setColor] = useState({'color': '#777777'})
     const [title, setTitle] = useState('')
     const [info, setInfo] = useState('')
@@ -48,7 +45,7 @@ const StockInfo = (props) =>{
             setAmount(Number(response.data['amount']).toLocaleString());
         });
 
-    },[])
+    },[props])
 
     
 

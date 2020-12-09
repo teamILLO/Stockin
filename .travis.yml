@@ -33,12 +33,11 @@ matrix:
         - coverage xml
         - pylint **/*.py --load-plugins pylint_django
         - cd ../frontend
-        - ./node_modules/.bin/eslint src
         - yarn test --coverage --watchAll=false
+        - ./node_modules/.bin/eslint src
         - cd ../..
-      after_success:
         - sonar-scanner
-        - cd stockin/frontend
+      after_success:
+        - cd stockin/backend
         - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-        - cd ../backend
         - coveralls
