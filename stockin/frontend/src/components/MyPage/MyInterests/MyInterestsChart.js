@@ -1,45 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { api } from '../../../api';
+import React from 'react';
 import { Scatter } from 'react-chartjs-2';
 import 'chartjs-plugin-annotation';
 
 const MyInterestsChart = (props) => {
-  const [graphData, setGraphData] = useState({ labels: [], datasets: [] });
-  useEffect(() => {
-    if (props.data) {
-      const dataStyle = {
-        fill: true,
-        backgroundColor: 'rgba(75,192,192,0.4)',
-        pointBorderColor: 'rgba(75,192,192,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-        pointHoverBorderColor: 'rgba(220,220,220,1)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 3,
-        pointHitRadius: 10,
-      };
-      for (let i = 0; i < props.data.length; i += 1) {
-        api.get('stocks/financialstats/score/' + props.data[i].id + '/').then((response) => {
-          setGraphData({ ...graphData, labels: [...graphData.labels, props.data[i].title] });
-          if (response.data.score)
-            setGraphData({
-              ...graphData,
-              datasets: [
-                ...graphData.datasets,
-                {
-                  ...dataStyle,
-                  label: props.data[i].title,
-                  data: [{ x: response.data.score, y: props.data[i].score - 50 }],
-                },
-              ],
-            });
-        });
-      }
-    }
-  }, []);
-
   const options = {
     scales: {
       yAxes: [
@@ -82,15 +45,22 @@ const MyInterestsChart = (props) => {
       mode: 'point',
       callbacks: {
         label: (tooltipItem, data) => {
-          //console.log(tooltipItem);
           console.log(data.datasets[tooltipItem.datasetIndex]);
-          return data.datasets[tooltipItem.datasetIndex].label; //+'\n'+'profitability: ';
+          return data.datasets[tooltipItem.datasetIndex].label;
         },
       },
     },
   };
-  console.log(graphData);
-  return <Scatter data={graphData} options={options} />;
+
+  return (
+    <div data-testid="MyInterestsChart">
+      <Scatter data={props.data} options={options} />
+      <br />
+      <p style={{ color: 'lightgrey' }}>
+        Stocks not assessable due to lack of data does not appear on the graph
+      </p>
+    </div>
+  );
 };
 
 export default MyInterestsChart;
