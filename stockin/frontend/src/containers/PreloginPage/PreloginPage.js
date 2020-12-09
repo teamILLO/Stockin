@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import { Tab, Button, Form, Grid, Checkbox, Item } from 'semantic-ui-react';
+import { Tab, Button, Form, Grid, Checkbox, Item, Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { tryLogin, checkLogin } from '../../store/authentication/authentication';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 import FindPasswdModal from '../../components/Modal/FindPasswdModal/FindPasswdModal';
 import { api } from '../../api/index';
+import './PreloginPage.css';
 
 const panes = [
   {
@@ -60,12 +61,11 @@ const PreloginPage = (props) => {
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">
-      Prelogin Page
-      <br />
       <div>
-        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
-          <Grid.Column width={7}>
-            <Grid.Column style={{ maxWidth: 450 }}>
+        {/* <Container> */}
+        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle" columns={2}>
+          <Grid.Column className="halfLeft">
+            <Grid.Column style={{ maxWidth: 450 }} className="loginBlock">
               <Form size="large">
                 <Form.Input
                   data-testid="inputEmail"
@@ -86,27 +86,37 @@ const PreloginPage = (props) => {
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
-
-                <Checkbox label="Remember Me" />
-                <FindPasswdModal trigger={<Item as="a" content="Forget Password?" />} />
-
-                <Button className="mainButton" size="large" onClick={submitHandler}>
-                  Login
-                </Button>
-                <SignupModal
-                  trigger={
-                    <Button className="mainBasicButton" size="large">
-                      Sign up
-                    </Button>
-                  }
-                />
+                <div>
+                  <Checkbox label="Remember Me" className="rememberMe" />
+                  <FindPasswdModal
+                    trigger={<Item as="a" content="Forget Password?" className="forgetPassword" />}
+                  />
+                </div>
+                <br />
+                <br />
+                <br />
+                <div>
+                  <Button className="mainButton" size="large" onClick={submitHandler}>
+                    Login
+                  </Button>
+                  <SignupModal
+                    trigger={
+                      <Button className="mainBasicButton" size="large">
+                        Sign up
+                      </Button>
+                    }
+                  />
+                </div>
               </Form>
             </Grid.Column>
           </Grid.Column>
-          <Grid.Column width={7}>
-            <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          <Grid.Column className="halfRight">
+            <Grid.Column style={{ maxWidth: 600 }} className="previewBlock">
+              <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+            </Grid.Column>
           </Grid.Column>
         </Grid>
+        {/* </Container> */}
       </div>
     </div>
   );

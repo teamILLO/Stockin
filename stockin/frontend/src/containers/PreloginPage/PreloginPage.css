@@ -1,0 +1,32 @@
+.rememberMe {
+  float: left;
+}
+
+.forgetPassword {
+  display: inline-block;
+  float: right;
+}
+
+.halfLeft {
+  height: 100vh;
+  /* background-color: #feab92; */
+  text-align: center;
+}
+
+.halfRight {
+  height: 100vh;
+  background-color: #fec3b2;
+  text-align: center;
+}
+
+.loginBlock {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 45vh;
+}
+
+.previewBlock {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20vh;
+}
