@@ -17,7 +17,7 @@ import StockInfo from '../../components/StockInfo/StockInfo';
 import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
 import './DetailPage.css';
 
-const panes = (id) => [
+const panes = (id, data) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => <DetailOverview />,
@@ -28,7 +28,7 @@ const panes = (id) => [
   },
   {
     menuItem: { key: 'Price Trends', className: 'Price Trends', content: 'Price Trends' },
-    render: () => <DetailPriceTrends />,
+    render: () => <DetailPriceTrends data={data} />,
   },
   {
     menuItem: { key: 'FinancialState', className: 'FinancialState', content: 'Financial State' },
@@ -51,37 +51,41 @@ const DetailPage = (props) => {
       history.push('/prelogin');
     }
     dispatch(getStockHistory(+props.match.params.id));
-    
-    return ()=>{
+
+    return () => {
       document.body.style.overflow = 'auto';
-    }
+    };
   }, [dispatch, loggingIn, props.match.params.id]);
 
-  let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
+  let graph =
+    priceList.length === 0 ? (
+      'Loading...'
+    ) : (
+      <DetailData id={props.match.params.id} data={priceList} />
+    );
 
   const onMouseEnter = () => {
     document.body.style.overflow = 'hidden';
   };
+  console.log(priceList);
 
   const onMouseLeave = () => {
     document.body.style.overflow = 'auto';
-  }
+  };
 
   return (
     <div data-testid="DetailPage">
       <Header history={props.history} />
       <Container>
-      <StockInfo id={props.match.params.id} />
-      <AddFavoriteModal trigger={<Button content="관심 등록" />}/>
-      <div className='graph' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-        {graph}
-      </div>
-      
-      
-      
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
+        <StockInfo id={props.match.params.id} />
+        <AddFavoriteModal trigger={<Button content="관심 등록" />} />
+        <div className="graph" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+          {graph}
+        </div>
+
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
       </Container>
-      
+
       <Footer history={props.history} />
     </div>
   );
