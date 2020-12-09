@@ -66,7 +66,6 @@ const DetailPage = (props) => {
   const onMouseEnter = () => {
     document.body.style.overflow = 'hidden';
   };
-  console.log(priceList);
 
   const onMouseLeave = () => {
     document.body.style.overflow = 'auto';
@@ -82,7 +81,10 @@ const DetailPage = (props) => {
           {graph}
         </div>
 
-        <Tab menu={{ secondary: true, pointing: true }} panes={panes(props.match.params.id)} />
+        <Tab
+          menu={{ secondary: true, pointing: true }}
+          panes={panes(props.match.params.id, priceList)}
+        />
       </Container>
 
       <Footer history={props.history} />
