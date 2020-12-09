@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import { Tab, Button, Form, Grid, Checkbox, Item } from 'semantic-ui-react';
+import { Tab, Button, Form, Grid, Checkbox, Item, Container } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { tryLogin, checkLogin } from '../../store/authentication/authentication';
@@ -62,9 +62,10 @@ const PreloginPage = (props) => {
   return (
     <div className="PreloginPage" data-testid="PreloginPage">
       <div>
-        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle">
-          <Grid.Column width={7}>
-            <Grid.Column style={{ maxWidth: 450 }}>
+        {/* <Container> */}
+        <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle" columns={2}>
+          <Grid.Column className="halfLeft">
+            <Grid.Column style={{ maxWidth: 450 }} className="loginBlock">
               <Form size="large">
                 <Form.Input
                   data-testid="inputEmail"
@@ -109,10 +110,13 @@ const PreloginPage = (props) => {
               </Form>
             </Grid.Column>
           </Grid.Column>
-          <Grid.Column width={7}>
-            <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+          <Grid.Column className="halfRight">
+            <Grid.Column style={{ maxWidth: 600 }} className="previewBlock">
+              <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+            </Grid.Column>
           </Grid.Column>
         </Grid>
+        {/* </Container> */}
       </div>
     </div>
   );
