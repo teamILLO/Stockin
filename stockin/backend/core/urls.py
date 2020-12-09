@@ -16,14 +16,14 @@ urlpatterns = [
     path('users/token/', views.token, name='token'),
 
     # stock model
-    path('stocks/', views.stock_list, name='stock list'),
+    path('stocks/', views.stock_list, name='stock list'),   # cached
     path('stocks/<int:stock_id>/', views.stock_info, name='stock_info'),
     path('stocks/financialstats/stock/<int:stock_id>/', views.stock_fs, name='stock_fs'),
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
-    path('stocks/report/up/stockinfo/', views.stock_top100_stockinfo, name='stock_top100_stockinfo'),
+    path('stocks/report/up/stockinfo/', views.stock_top100_stockinfo, name='stock_top100_stockinfo'),   # cached
     path('stocks/report/up/news/', views.stock_top100_news, name='stock_top100_news'),
     path('stocks/report/up/stockhistory/', views.stock_top100_stockhistory, name='stock_top100_stockhistory'),
-    path('stocks/report/down/stockinfo/', views.stock_bottom100_stockinfo, name='stock_bottom100_stockinfo'),
+    path('stocks/report/down/stockinfo/', views.stock_bottom100_stockinfo, name='stock_bottom100_stockinfo'),   # cached
     path('stocks/report/down/news/', views.stock_bottom100_news, name='stock_bottom100_news'),
     path('stocks/report/down/stockhistory/', views.stock_bottom100_stockhistory, name='stock_bottom100_stockhistory'),
     path('stocks/top10/', views.stock_top10, name='stock_top10'),
