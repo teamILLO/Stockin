@@ -2,7 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import { Tab, Button, Form, Grid, Checkbox, Item, Container } from 'semantic-ui-react';
+import {
+  Tab,
+  Button,
+  Form,
+  Grid,
+  Checkbox,
+  Item,
+  Container,
+  Image,
+  Segment,
+  Divider,
+} from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { tryLogin, checkLogin } from '../../store/authentication/authentication';
@@ -10,6 +21,7 @@ import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 import FindPasswdModal from '../../components/Modal/FindPasswdModal/FindPasswdModal';
 import { api } from '../../api/index';
 import './PreloginPage.css';
+import logo from '../../images/logo_big.png';
 
 const panes = [
   {
@@ -65,6 +77,8 @@ const PreloginPage = (props) => {
         <Grid textAlign="center" style={{ height: '100vh' }} verticalAlign="middle" columns={2}>
           <Grid.Column className="halfLeft">
             <Grid.Column style={{ maxWidth: 450 }} className="loginBlock">
+              <Image src={logo} centered size="small" />
+              <br />
               <Form size="large">
                 <Form.Input
                   data-testid="inputEmail"
