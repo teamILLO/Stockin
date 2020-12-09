@@ -9,10 +9,9 @@ const DetailPriceTrends = (props) => {
   const ROW_LENGTH = 50;
   const rowLength = data.length > ROW_LENGTH ? ROW_LENGTH : data.length;
   const reversedData = data.slice().reverse();
-  console.log(data);
 
   const changeCalculator = (curr, prev) => {
-    if (prev == 0) return { img: '', output: 'N/A' };
+    if (prev === 0) return { img: '', output: 'N/A' };
     else if (prev === curr) return { img: dash, output: '0' };
     else if (prev > curr)
       return { img: decrease, output: `${((1 - curr / prev) * 100).toFixed(2)}%` };
@@ -27,7 +26,7 @@ const DetailPriceTrends = (props) => {
     return date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
   };
   const rows = reversedData.slice(0, rowLength).map((dat, i) => {
-    if (data.length <= ROW_LENGTH && i + 1 == rowLength)
+    if (data.length <= ROW_LENGTH && i + 1 === rowLength)
       return (
         <Table.Row key={i}>
           <Table.Cell>{monthGetter(dat.date) + '.' + dayGetter(dat.date)}</Table.Cell>
