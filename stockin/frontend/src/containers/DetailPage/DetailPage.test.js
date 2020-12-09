@@ -96,6 +96,7 @@ describe('<DetailPage />', () => {
     spyHistoryPush,
     spyCheckLogin,
     spyGetStockHistory;
+    
   beforeEach(() => {
     detailPage = (
       <Provider store={mockStore}>
