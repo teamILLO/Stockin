@@ -1,28 +1,29 @@
 {
   "files": {
-    "main.css": "/static/css/main.7097b219.chunk.css",
-    "main.js": "/static/js/main.7f3e736d.chunk.js",
-    "main.js.map": "/static/js/main.7f3e736d.chunk.js.map",
+    "main.css": "/static/css/main.1f6b7397.chunk.css",
+    "main.js": "/static/js/main.318c45d1.chunk.js",
+    "main.js.map": "/static/js/main.318c45d1.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.2bdad756.js",
     "runtime-main.js.map": "/static/js/runtime-main.2bdad756.js.map",
-    "static/css/2.50a59d4e.chunk.css": "/static/css/2.50a59d4e.chunk.css",
-    "static/js/2.b2750d04.chunk.js": "/static/js/2.b2750d04.chunk.js",
-    "static/js/2.b2750d04.chunk.js.map": "/static/js/2.b2750d04.chunk.js.map",
+    "static/css/2.cab99cb1.chunk.css": "/static/css/2.cab99cb1.chunk.css",
+    "static/js/2.1629ad99.chunk.js": "/static/js/2.1629ad99.chunk.js",
+    "static/js/2.1629ad99.chunk.js.map": "/static/js/2.1629ad99.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.7016ff8cf3d40b99d27e3efaf03b299f.js": "/precache-manifest.7016ff8cf3d40b99d27e3efaf03b299f.js",
+    "precache-manifest.ac26fef128a2ee7653f0295cff7661ac.js": "/precache-manifest.ac26fef128a2ee7653f0295cff7661ac.js",
     "service-worker.js": "/service-worker.js",
-    "static/css/2.50a59d4e.chunk.css.map": "/static/css/2.50a59d4e.chunk.css.map",
-    "static/css/main.7097b219.chunk.css.map": "/static/css/main.7097b219.chunk.css.map",
-    "static/js/2.b2750d04.chunk.js.LICENSE.txt": "/static/js/2.b2750d04.chunk.js.LICENSE.txt",
+    "static/css/2.cab99cb1.chunk.css.map": "/static/css/2.cab99cb1.chunk.css.map",
+    "static/css/main.1f6b7397.chunk.css.map": "/static/css/main.1f6b7397.chunk.css.map",
+    "static/js/2.1629ad99.chunk.js.LICENSE.txt": "/static/js/2.1629ad99.chunk.js.LICENSE.txt",
     "static/media/semantic.min.css": "/static/media/outline-icons.ef60a4f6.woff",
     "static/media/logo.png": "/static/media/logo.22dcb26b.png",
-    "static/media/semantic.less": "/static/media/semantic.a33e4a32.less"
+    "static/media/semantic.less": "/static/media/semantic.a33e4a32.less",
+    "static/media/slick-theme.css": "/static/media/slick.f97e3bbf.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.2bdad756.js",
-    "static/css/2.50a59d4e.chunk.css",
-    "static/js/2.b2750d04.chunk.js",
-    "static/css/main.7097b219.chunk.css",
-    "static/js/main.7f3e736d.chunk.js"
+    "static/css/2.cab99cb1.chunk.css",
+    "static/js/2.1629ad99.chunk.js",
+    "static/css/main.1f6b7397.chunk.css",
+    "static/js/main.318c45d1.chunk.js"
   ]
 }
