@@ -5,8 +5,8 @@ import EditGroup from './EditGroup';
 import EditStock from './EditStock';
 
 const panes = [
-  { menuItem: '종목 수정', render: () => <Tab.Pane><EditStock /></Tab.Pane> },
   { menuItem: '그룹 수정', render: () => <Tab.Pane><EditGroup /></Tab.Pane> },
+  { menuItem: '종목 수정', render: () => <Tab.Pane><EditStock /></Tab.Pane> },
 ]
 
 const EditModal = (props) => {

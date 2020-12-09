@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Form, Image, Modal } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
-import { trySignup } from '../../../store/authentication/authentication';
+import { trySignup, tryLogin } from '../../../store/authentication/authentication';
+import { postGroup } from '../../../store/groups/groups';
 import { api } from '../../../api/index';
 
 import logo from '../../../images/logo.png';
@@ -27,8 +28,11 @@ const SignupModal = (props) => {
     });
 
     if(!is_duplicated) {
-      dispatch(trySignup({ email: email, nickname: nickname, password: password }));
+      await dispatch(trySignup({ email: email, nickname: nickname, password: password })).then(async (response) =>{
+          dispatch(postGroup({'name' : '나의 그룹1'}));
+      });
       alert('Sign up succesfully'); 
+      // when user signed up, try login and set default group
       setOpen(false);
     }
   };
