@@ -51,14 +51,21 @@ const DetailPage = (props) => {
       history.push('/prelogin');
     }
     dispatch(getStockHistory(+props.match.params.id));
+    
+    return ()=>{
+      document.body.style.overflow = 'auto';
+    }
   }, [dispatch, loggingIn, props.match.params.id]);
 
   let graph = priceList.length === 0 ? 'Loading...' : <DetailData id={props.match.params.id} data={priceList} />;
 
-  const changeScroll = () => {
-    let style = document.body.style.overflow;
-    document.body.style.overflow = style === 'hidden' ? 'auto' : 'hidden';
+  const onMouseEnter = () => {
+    document.body.style.overflow = 'hidden';
   };
+
+  const onMouseLeave = () => {
+    document.body.style.overflow = 'auto';
+  }
 
   return (
     <div data-testid="DetailPage">
@@ -66,7 +73,7 @@ const DetailPage = (props) => {
       <Container>
       <StockInfo id={props.match.params.id} />
       <AddFavoriteModal trigger={<Button content="관심 등록" />}/>
-      <div className='graph' onMouseEnter={changeScroll} onMouseLeave={changeScroll}>
+      <div className='graph' onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
         {graph}
       </div>
       
