@@ -3,7 +3,6 @@ import { Button, Form, Image, Modal, Input } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { trySignup } from '../../../store/authentication/authentication';
 import { api } from '../../../api/index';
-
 import logo from '../../../images/logo.png';
 import './SignupModal.css';
 
@@ -118,11 +117,11 @@ const SignupModal = (props) => {
     ));
 
   const nextButton = next ? (
-    <Button color='main' onClick={() => signupHandler()}>
+    <Button className="mainButton" onClick={() => signupHandler()}>
       Sign Up
     </Button>
   ) : (
-    <Button color='main' onClick={() => nextHandler()}>
+    <Button className="mainButton" onClick={() => nextHandler()}>
       Next
     </Button>
   );
