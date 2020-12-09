@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Button, Input, Label, Grid } from 'semantic-ui-react';
 import { updateUserInfo } from '../../../store/authentication/authentication';
 import { api } from '../../../api/index';
+import { trySignout } from '../../../store/authentication/authentication';
 
 const MyInfo = (props) => {
   const { user } = useSelector((state) => state.authentication);
@@ -13,14 +14,14 @@ const MyInfo = (props) => {
   const changeNick = async () => {
     let is_duplicated = false;
 
-    await api.post('/users/duplicate/', { email: '', nickname : nicknameInput }).then((response) => {
+    await api.post('/users/duplicate/', { email: '', nickname: nicknameInput }).then((response) => {
       if (response.data['duplicate']) {
         alert('Nickname exists, try another.');
         is_duplicated = true;
-      } 
+      }
     });
 
-    if(!is_duplicated) {
+    if (!is_duplicated) {
       dispatch(updateUserInfo({ change: 'nickname', email: user.email, nickname: nicknameInput }));
       setEdit(false);
       alert('nickname changed succesfully');
@@ -30,6 +31,13 @@ const MyInfo = (props) => {
   const clickEdit = () => {
     setEdit(true);
     setNicknameInput(user.nickname);
+  };
+
+  const onClickSignoutHandler = () => {
+    const r = window.confirm('Do you really want to Sign Out?');
+    if (r == true) {
+      dispatch(trySignout(user));
+    }
   };
 
   if (!edit)
@@ -46,6 +54,7 @@ const MyInfo = (props) => {
           </Grid.Row>
           <Grid.Row>
             <Button onClick={() => clickEdit()}>Edit!</Button>
+            <Button onClick={onClickSignoutHandler}>SIGNOUT</Button>
           </Grid.Row>
         </Grid>
       </div>

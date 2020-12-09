@@ -14,7 +14,7 @@ const MyInterests = (props) => {
 
   useEffect(() => {
     dispatch(getGroupList());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     var results = [];

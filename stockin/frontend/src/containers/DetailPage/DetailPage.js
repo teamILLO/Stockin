@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { getStockHistory } from '../../store/stockHistory/stockHistory';
 import { checkLogin } from '../../store/authentication/authentication';
-
 import Header from '../../components/Header/Header';
 import DetailData from '../../components/Detail/DetailData/DetailData';
 import DetailOverview from '../../components/Detail/DetailOverview/DetailOverview';
@@ -16,7 +15,6 @@ import { Container, Tab, Button } from 'semantic-ui-react';
 import StockInfo from '../../components/StockInfo/StockInfo';
 import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
 import './DetailPage.css';
-import { getGroupList } from '../../store/groups/groups';
 
 const panes = (id, data) => [
   {
@@ -44,7 +42,6 @@ const panes = (id, data) => [
 const DetailPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const { priceList } = useSelector((state) => state.stockHistory);
-  const { groupList } = useSelector((state) => state.groups);
 
   const dispatch = useDispatch();
   useEffect(() => {

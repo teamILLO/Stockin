@@ -1,6 +1,6 @@
-import React, { useState, useEffect, createRef } from 'react';
+import React, { useEffect, createRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Sticky, Container, Tab } from 'semantic-ui-react';
+import { Container, Tab } from 'semantic-ui-react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import UpTab from './UpTab';
@@ -9,8 +9,8 @@ import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 
 const panes = [
-  { menuItem: '매수 추천', render: () => <UpTab/> },
-  { menuItem: '매도 추천', render: () => <DownTab/> },
+  { menuItem: '매수 추천', render: () => <UpTab /> },
+  { menuItem: '매도 추천', render: () => <DownTab /> },
 ];
 
 const ReportPage = (props) => {
@@ -22,7 +22,7 @@ const ReportPage = (props) => {
     if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
-    }  
+    }
   }, [dispatch, loggingIn]);
 
   return (
