@@ -41,6 +41,7 @@ def group_list_and_create(request):
                     'yesterdayPrice' : stock.yesterdayPrice,
                     'amount' : stock.amount,
                     'isKOSPI' : stock.isKOSPI,
+                    'score' : stock.score,
                 }
                 response_stock_list.append(stock_info_dict)
 

@@ -189,7 +189,7 @@ def stock_top100_stockinfo(request) :
     if request.method =='GET':
         response_list=[]
         
-        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[0:100]
         
         cnt = 1
         for stock in stocks:
@@ -214,7 +214,7 @@ def stock_top100_news(request) :
     if request.method =='GET':
         response_list=[]
         
-        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
         
         cnt = 1
         for stock in stocks:
@@ -242,7 +242,7 @@ def stock_top100_stockhistory(request) :
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
         
         cnt = 1
         for stock in stocks:
@@ -268,7 +268,7 @@ def stock_bottom100_stockinfo(request) :
     if request.method =='GET':
         response_list=[]
         
-        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','title','isKOSPI','code','price','yesterdayPrice','score').order_by('score')[0:100]
         
         cnt = 1
         for stock in stocks:
@@ -293,7 +293,7 @@ def stock_bottom100_news(request) :
     if request.method =='GET':
         response_list=[]
         
-        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
         
         cnt = 1
         for stock in stocks:
@@ -321,7 +321,7 @@ def stock_bottom100_stockhistory(request) :
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
         
         cnt = 1
         for stock in stocks:

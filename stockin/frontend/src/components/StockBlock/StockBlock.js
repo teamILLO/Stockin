@@ -32,7 +32,7 @@ const StockBlock = (props) => {
             ).toLocaleString() + '▲',
           );
       });
-  }, []);
+  }, [props]);
 
   const clickCard = () => {
     history.push('/detail/' + props.id);
