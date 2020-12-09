@@ -25,7 +25,7 @@ function getCookie(name) {
           break;
         }
       }
-    })
+    });
   }
   return cookieValue;
 }
@@ -37,4 +37,3 @@ export const api = axios.create({
     'X-CSRFToken': getCookie('csrftoken'),
   },
 });
-

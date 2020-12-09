@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Tab } from 'semantic-ui-react';
+import { Tab, Button } from 'semantic-ui-react';
 import MyInterestsChart from './MyInterestsChart';
+import EditModal from '../../Modal/EditModal/EditModal';
 import { getGroupList } from '../../../store/groups/groups';
+import '../../../styles/buttons.css';
 
 const MyInterests = (props) => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [panes, setPanes] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     dispatch(getGroupList());
@@ -18,12 +21,10 @@ const MyInterests = (props) => {
     results = groupList.map((e) => ({
       menuItem: { key: e.id, content: e.name },
       render: () => {
-        console.log(e.stocks);
         let labels = [];
         let datasets = [];
         for (let i = 0; i < e.stocks.length; i += 1) {
           labels.push(e.stocks[i].title);
-          console.log(e.stocks[i]);
           if (e.stocks[i].fs_score.score) {
             datasets.push({
               fill: true,
@@ -54,12 +55,32 @@ const MyInterests = (props) => {
         );
       },
     }));
+    results = [
+      ...results,
+      {
+        menuItem: {
+          content: <EditModal trigger={<Button>edit</Button>} />,
+          className: 'disabled',
+          key: 'editButton',
+        },
+      },
+    ];
     setPanes(results);
   }, [groupList]);
 
+  const handleTabChange = (e, { activeIndex }) => {
+    if (activeIndex === panes.length - 1) setActiveIndex(0);
+    else setActiveIndex(activeIndex);
+  };
+
   return (
     <div className="MyInterests" data-testid="MyInterests">
-      <Tab panes={panes} />
+      <Tab
+        menu={{ attached: true, tabular: true, className: 'withButton' }}
+        panes={panes}
+        activeIndex={activeIndex}
+        onTabChange={handleTabChange}
+      />
     </div>
   );
 };

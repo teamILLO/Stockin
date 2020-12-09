@@ -49,11 +49,11 @@ const MyPage = (props) => {
     <div data-testid="MyPage">
       <Header history={props.history} />
       <Container>
-      <div>MyPage</div>
-      <Button secondary onClick={onClickSignoutHandler}>
-        SIGNOUT
-      </Button>
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
+        <div>MyPage</div>
+        <Button secondary onClick={onClickSignoutHandler}>
+          SIGNOUT
+        </Button>
+        <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
       </Container>
       <Footer history={props.history} />
     </div>

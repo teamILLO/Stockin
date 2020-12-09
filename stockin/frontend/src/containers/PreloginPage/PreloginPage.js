@@ -37,16 +37,17 @@ const PreloginPage = (props) => {
     const submitEmail = email;
     const submitPassword = password;
     let validUser = false;
-    await api.post('/users/signin/', {email: submitEmail, password: submitPassword}).then((response) => {
-      validUser = true;
-    }). catch((error) => {
-      alert("Wrong email or password.");
-      setEmail('');
-      setPassword('');
-    });
+    await api
+      .post('/users/signin/', { email: submitEmail, password: submitPassword })
+      .then((response) => {
+        validUser = true;
+      })
+      .catch((error) => {
+        alert('Wrong email or password.');
+      });
 
     if (validUser) {
-      dispatch(tryLogin({email: submitEmail, password: submitPassword}));
+      dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
     }
   };
 

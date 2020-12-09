@@ -4,12 +4,13 @@ import { Tab, Button } from 'semantic-ui-react';
 import EditModal from '../../Modal/EditModal/EditModal';
 import { getGroupList } from '../../../store/groups/groups';
 import GroupStock from './GroupStock';
-
+import '../../../styles/buttons.css';
 
 const MyInterestsDetail = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [panes, setPanes] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     dispatch(getGroupList());
@@ -17,16 +18,40 @@ const MyInterestsDetail = () => {
 
   useEffect(() => {
     var results = [];
-    results = groupList.map((e) => ({ menuItem : { key: e.id, content: e.name }, render : () => <Tab.Pane><GroupStock stocks={e.stocks} /></Tab.Pane> }));
+    results = groupList.map((e) => ({
+      menuItem: { key: e.id, content: e.name },
+      render: () => (
+        <Tab.Pane>
+          <GroupStock stocks={e.stocks} />
+        </Tab.Pane>
+      ),
+    }));
+    results = [
+      ...results,
+      {
+        menuItem: {
+          content: <EditModal trigger={<Button>edit</Button>} />,
+          className: 'disabled',
+          key: 'editButton',
+        },
+      },
+    ];
     setPanes(results);
   }, [groupList]);
 
+  const handleTabChange = (e, { activeIndex }) => {
+    if (activeIndex === panes.length - 1) setActiveIndex(0);
+    else setActiveIndex(activeIndex);
+  };
+
   return (
     <div className="MyInterestsDetail" data-testid="MyInterestsDetail">
-      <EditModal 
-        trigger={<Button>편집</Button>}
+      <Tab
+        menu={{ attached: true, tabular: true, className: 'withButton' }}
+        panes={panes}
+        activeIndex={activeIndex}
+        onTabChange={handleTabChange}
       />
-      <Tab panes={panes} />
     </div>
   );
 };
