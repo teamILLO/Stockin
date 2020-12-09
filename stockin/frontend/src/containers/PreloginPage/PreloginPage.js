@@ -8,6 +8,7 @@ import { history } from '../../store/store';
 import { tryLogin, checkLogin } from '../../store/authentication/authentication';
 import SignupModal from '../../components/Modal/SignupModal/SignupModal';
 import FindPasswdModal from '../../components/Modal/FindPasswdModal/FindPasswdModal';
+import { api } from '../../api/index';
 
 const panes = [
   {
@@ -32,10 +33,21 @@ const PreloginPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     const submitEmail = email;
     const submitPassword = password;
-    dispatch(tryLogin({ email: submitEmail, password: submitPassword }));
+    let validUser = false;
+    await api.post('/users/signin/', {email: submitEmail, password: submitPassword}).then((response) => {
+      validUser = true;
+    }). catch((error) => {
+      alert("Wrong email or password.");
+      setEmail('');
+      setPassword('');
+    });
+
+    if (validUser) {
+      dispatch(tryLogin({email: submitEmail, password: submitPassword}));
+    }
   };
 
   useEffect(() => {
