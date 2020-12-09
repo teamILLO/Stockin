@@ -23,11 +23,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '^6ha-gdjwl#96*n5d5j#^)w0$k7chwa)trbyh@ju5u#1*ex166'
 
+SECURE_HSTS_PRELOAD = True
+
+SECURE_HSTS_SECONDS = 3600 # will change by 31536000 = 365 * 24 * 60 * 60 seconds
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_SSL_REDIRECT = False
+
+SESSION_COOKIE_SECURE = False
+
+CSRF_COOKIE_SECURE = False
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['ec2-3-235-170-90.compute-1.amazonaws.com', 'localhost', 'stockin.kr']
 
 # Application definition
 
@@ -81,7 +92,10 @@ CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:8000',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://stockin.kr',
+    'https://stockin.kr',
+    'http://ec2-3-235-170-90.compute-1.amazonaws.com:3000'
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -131,6 +145,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 #     }
 # }
 # create user 'swpp'@'%' identified by 'Swpp2020-team15!';
+
 DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',
@@ -182,4 +197,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')

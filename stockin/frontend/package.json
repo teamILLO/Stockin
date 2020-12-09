@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/helper-regex": "^7.10.5",
     "@reduxjs/toolkit": "^1.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/user-event": "^7.2.1",
@@ -26,7 +27,7 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-script": "^2.0.5",
-    "react-scripts": "3.2.0",
+    "react-scripts": "^3.4.4",
     "react-search-box": "^2.0.2",
     "react-slick": "^0.27.13",
     "react-stockcharts": "^0.7.8",
@@ -61,13 +62,13 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "http://localhost:8000",
   "devDependencies": {
     "@testing-library/react": "9.5.0",
     "axios-mock-adapter": "^1.19.0",
     "miragejs": "^0.1.41",
     "semantic-ui-less": "^2.4.1"
   },
-  "proxy": "http://localhost:8000",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",

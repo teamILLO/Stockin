@@ -22,7 +22,7 @@ const ReportPage = (props) => {
     if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
-    }
+    }  
   }, [dispatch, loggingIn]);
 
   return (
