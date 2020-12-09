@@ -16,6 +16,20 @@ import './DetailData.css';
 const DetailData = (props) => {
   const dateFormat = timeFormat('%Y-%m-%d');
   const numberFormat = format(',');
+  const candlesAppearance = {
+    wickStroke: '#000000',
+    fill: function fill(d) {
+      return d.close > d.open
+        ? 'rgba(255, 8, 0, 0.8)'
+        : d.close === d.open
+        ? 'rgba(0,0,0,0.8)'
+        : 'rgba(0, 8, 200, 0.8)';
+    },
+    stroke: '#000000',
+    candleStrokeWidth: 0.05,
+    widthRatio: 0.8,
+    opacity: 1,
+  };
   const tooltipContent = (ys) => {
     return ({ currentItem, xAccessor }) => {
       return {
@@ -70,7 +84,7 @@ const DetailData = (props) => {
         <Chart id={1} yExtents={(d) => [d.high, d.low]}>
           <XAxis axisAt="bottom" orient="bottom" ticks={6} />
           <YAxis axisAt="left" orient="left" ticks={5} />
-          <CandlestickSeries width={timeIntervalBarWidth(utcDay)} />
+          <CandlestickSeries {...candlesAppearance} width={timeIntervalBarWidth(utcDay)} />
           <HoverTooltip tooltipContent={tooltipContent([])} fontSize={15} />
         </Chart>
       </ChartCanvas>
