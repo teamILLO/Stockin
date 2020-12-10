@@ -12,7 +12,7 @@ const MakeNewGroupModal = (props) => {
 
   const confirmHandler = () => {
       if(groupName.length === 0) {
-        setInvalidInputText(<p style={{color : 'red'}}>  그룹명을 입력해주세요</p>)
+        setInvalidInputText(<p style={{color : 'red'}}>  group name should be more than 1 character</p>)
         return;
       }
       dispatch(postGroup({'name' : groupName}));
