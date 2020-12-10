@@ -15,6 +15,11 @@ const MakeNewGroupModal = (props) => {
       setOpen(false);
   };
 
+  const cancelHandler = () => {
+    setGroupName('');
+    setOpen(false);
+};
+
   return (
     <Modal
       onOpen={() => setOpen(true)}
@@ -41,7 +46,7 @@ const MakeNewGroupModal = (props) => {
         <Button 
           content="Cancel"
           color='black' 
-          onClick={() => setOpen(false)}
+          onClick={() => cancelHandler()}
         />
         <Button
           content="Confirm"
