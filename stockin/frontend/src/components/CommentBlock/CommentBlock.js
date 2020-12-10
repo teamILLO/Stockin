@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Comment, Form } from 'semantic-ui-react';
 import { deleteComment, editComment } from '../../store/comment/comment';
+import './CommentBlock.css';
 
 const CommentBlock = (props) => {
   const { user } = useSelector((state) => state.authentication);
@@ -16,6 +17,20 @@ const CommentBlock = (props) => {
 
   const onDeleteHandler = () => {
     dispatch(deleteComment(props.id));
+  };
+
+  const formatingTime = (time) => {
+    let temp = time.split('T');
+    let result = temp[0].replaceAll('-', '.') + ' at ';
+    let hour = Number(temp[1].substring(0, 2));
+    let meridiem = ' AM';
+    if (hour >= 12) {
+      meridiem = ' PM';
+      hour -= 12;
+    }
+    if (hour == 0) hour = 12;
+    result += String(hour) + ':' + temp[1].substring(3, 5) + meridiem;
+    return result;
   };
 
   const buttons =
@@ -37,11 +52,13 @@ const CommentBlock = (props) => {
       <Comment.Actions />
     );
   const content = edit ? (
-    <Comment>
+    <Comment className="Comment">
       <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
       <Comment.Content>
         <Comment.Author as="a">{props.author}</Comment.Author>
-
+        <Comment.Metadata>
+          <div>{formatingTime(props.time)}</div>
+        </Comment.Metadata>
         <Form.TextArea
           onChange={(event) => setEditContent(event.target.value)}
           placeholder="Write your comment here"
@@ -49,7 +66,7 @@ const CommentBlock = (props) => {
         />
         <Button
           data-testid="submitEditButton"
-          primary
+          className="mainBasicButton"
           content="Edit"
           labelPosition="right"
           icon="edit"
@@ -58,12 +75,12 @@ const CommentBlock = (props) => {
       </Comment.Content>
     </Comment>
   ) : (
-    <Comment>
+    <Comment className="Comment">
       <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
       <Comment.Content>
         <Comment.Author as="a">{props.author}</Comment.Author>
         <Comment.Metadata>
-          <div>{props.time}</div>
+          <div>{formatingTime(props.time)}</div>
         </Comment.Metadata>
         <Comment.Text>{props.content}</Comment.Text>
         {buttons}
