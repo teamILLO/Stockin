@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Modal, Form, Header } from 'semantic-ui-react';
+import { Button, Modal, Form } from 'semantic-ui-react';
 import { postGroup, getGroupList } from '../../../store/groups/groups';
 
 
