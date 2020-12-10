@@ -225,9 +225,9 @@ def stock_top100_news(request) :
         cnt = 1
         for stock in stocks:
             # Get News
-            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).filter(date="2020-11-07")
+            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).order_by('-date')[:5]
             news_list = []
-            for news in news_qs[:5]:
+            for news in news_qs:
                 news_list.append(news)
 
             response_list.append({
@@ -310,7 +310,7 @@ def stock_bottom100_news(request) :
         cnt = 1
         for stock in stocks:
             # Get News
-            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).filter(date="2020-11-07")
+            news_qs = News.objects.values('id', 'title', 'press', 'link', 'date').filter(stock__id = stock['id']).order_by('-date')[:5]
             news_list = []
             for news in news_qs[:5]:
                 news_list.append(news)
