@@ -83,7 +83,7 @@ const DetailData = (props) => {
     };
   };
   const xAccessor = (d) => d.date;
-  const xExtents = [xAccessor(last(props.data)), xAccessor(props.data[props.data.length - 100])];
+  const xExtents = [xAccessor(last(props.data)), xAccessor(props.data[0])];
 
   return (
     <div className="DetailData" data-testid="DetailData">
