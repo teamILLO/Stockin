@@ -32,35 +32,54 @@ const DetailData = (props) => {
   };
   const tooltipContent = (ys) => {
     return ({ currentItem, xAccessor }) => {
-      return {
-        x: dateFormat(xAccessor(currentItem)),
-        y: [
-          {
-            label: 'open',
-            value: currentItem.open && numberFormat(currentItem.open),
-          },
-          {
-            label: 'high',
-            value: currentItem.high && numberFormat(currentItem.high),
-          },
-          {
-            label: 'low',
-            value: currentItem.low && numberFormat(currentItem.low),
-          },
-          {
-            label: 'close',
-            value: currentItem.close && numberFormat(currentItem.close),
-          },
-        ]
-          .concat(
-            ys.map((each) => ({
-              label: each.label,
-              value: each.value(currentItem),
-              stroke: each.stroke,
-            })),
-          )
-          .filter((line) => line.value),
-      };
+      if (currentItem.close === currentItem.open)
+        return {
+          x: 'no transaction',
+          y: [
+            {
+              label: 'last transaction',
+              value: currentItem.close && numberFormat(currentItem.close),
+            },
+          ]
+            .concat(
+              ys.map((each) => ({
+                label: each.label,
+                value: each.value(currentItem),
+                stroke: each.stroke,
+              })),
+            )
+            .filter((line) => line.value),
+        };
+      else
+        return {
+          x: dateFormat(xAccessor(currentItem)),
+          y: [
+            {
+              label: 'open',
+              value: currentItem.open && numberFormat(currentItem.open),
+            },
+            {
+              label: 'high',
+              value: currentItem.high && numberFormat(currentItem.high),
+            },
+            {
+              label: 'low',
+              value: currentItem.low && numberFormat(currentItem.low),
+            },
+            {
+              label: 'close',
+              value: currentItem.close && numberFormat(currentItem.close),
+            },
+          ]
+            .concat(
+              ys.map((each) => ({
+                label: each.label,
+                value: each.value(currentItem),
+                stroke: each.stroke,
+              })),
+            )
+            .filter((line) => line.value),
+        };
     };
   };
   const xAccessor = (d) => d.date;
