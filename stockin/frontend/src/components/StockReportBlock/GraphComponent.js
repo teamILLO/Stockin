@@ -4,7 +4,11 @@ import {
   } from 'recharts';
 
 const GraphComponent = (props) => {
-    const stockhistory = props.stockhistory;
+    const stockhistory = props.stockhistory.map((e) => {
+      return {'date' : e.date.slice(5,10), '종가' : e.endPrice};
+    });
+
+    console.log(stockhistory);
 
     return (
         <div className="GraphComponent" data-testid="GraphComponent">
@@ -18,9 +22,9 @@ const GraphComponent = (props) => {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
-            <YAxis domain={['dataMin', 'dataMax']}/>
+            <YAxis domain={["dataMin", "dataMax"]}/>
             <Tooltip />
-            <Line type="monotone" dataKey="endPrice" stroke={props.isUp ? "#cc0000" : "#0000b3"} />
+            <Line type="monotone" dataKey="종가" stroke={props.isUp ? "#cc0000" : "#0000b3"} />
           </LineChart>
         </div>
       );
