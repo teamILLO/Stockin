@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Modal, Form } from 'semantic-ui-react';
+import { Button, Modal, Form, Header } from 'semantic-ui-react';
 import { postGroup, getGroupList } from '../../../store/groups/groups';
 
 
@@ -8,14 +8,23 @@ const MakeNewGroupModal = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [groupName, setGroupName] = useState('');
+  const [invalidInputText, setInvalidInputText] = useState('');
 
   const confirmHandler = () => {
+      if(groupName.length === 0) {
+        setInvalidInputText(<p style={{color : 'red'}}>  그룹명을 입력해주세요</p>)
+        return;
+      }
       dispatch(postGroup({'name' : groupName}));
       dispatch(getGroupList());
+
+      setInvalidInputText('');
+      setGroupName('');
       setOpen(false);
   };
 
   const cancelHandler = () => {
+    setInvalidInputText('');
     setGroupName('');
     setOpen(false);
 };
@@ -36,9 +45,7 @@ const MakeNewGroupModal = (props) => {
                 value={groupName}
                 onChange={(event) => setGroupName(event.target.value)}
               />
-          </Form.Field>
-          <Form.Field>
-            
+              {invalidInputText}
           </Form.Field>
         </Form>
       </Modal.Content>
