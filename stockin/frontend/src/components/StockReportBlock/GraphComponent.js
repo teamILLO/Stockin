@@ -3,8 +3,13 @@ import {
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip
   } from 'recharts';
 
+import CustomToolTip from './CustomToolTip';
+
+
 const GraphComponent = (props) => {
-    const stockhistory = props.stockhistory;
+    const stockhistory = props.stockhistory.map((e) => {
+      return {...e, date : e.date.slice(5,10)};
+    });
 
     return (
         <div className="GraphComponent" data-testid="GraphComponent">
@@ -18,8 +23,8 @@ const GraphComponent = (props) => {
           >
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="date" />
-            <YAxis domain={['dataMin', 'dataMax']}/>
-            <Tooltip />
+            <YAxis domain={["dataMin", "dataMax"]}/>
+            <Tooltip content={<CustomToolTip isUp={props.isUp}/>}/>
             <Line type="monotone" dataKey="endPrice" stroke={props.isUp ? "#cc0000" : "#0000b3"} />
           </LineChart>
         </div>

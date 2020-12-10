@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Input, Label, Grid } from 'semantic-ui-react';
+import { Button, Input, Label, Grid, Table, Image, Header } from 'semantic-ui-react';
 import { updateUserInfo } from '../../../store/authentication/authentication';
 import { api } from '../../../api/index';
 import { trySignout } from '../../../store/authentication/authentication';
+
+import './MyInfo.css';
 
 const MyInfo = (props) => {
   const { user } = useSelector((state) => state.authentication);
@@ -13,7 +15,10 @@ const MyInfo = (props) => {
 
   const changeNick = async () => {
     let is_duplicated = false;
-
+    if (user.nickname === nicknameInput){
+      alert('Nickname doesn\'t change!')
+      return
+    }
     await api.post('/users/duplicate/', { email: '', nickname: nicknameInput }).then((response) => {
       if (response.data['duplicate']) {
         alert('Nickname exists, try another.');
@@ -45,16 +50,27 @@ const MyInfo = (props) => {
       <div className="MyInfo" data-testid="MyInfo">
         <Grid centered>
           <Grid.Row>
-            <Label content="Mail" />
-            {user && user.email}
+          <Image  src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" size='medium' circular/>
           </Grid.Row>
           <Grid.Row>
-            <Label content="nickname" />
-            {user && user.nickname}
+            <div style={{width:500}}>
+              <Table  basic='very' celled className='myinfoTable'>
+                
+                  <Table.Row>
+                    <Table.Cell width={2}><Header as='h2'>Mail</Header></Table.Cell>
+                    <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.email}</Header></Table.Cell>
+                  </Table.Row>    
+                  <Table.Row>
+                    <Table.Cell width={2}><Header as='h2'>Nickname</Header></Table.Cell>
+                    <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.nickname}</Header></Table.Cell>
+                  </Table.Row>
+              
+                </Table>
+              </div>
           </Grid.Row>
           <Grid.Row>
-            <Button onClick={() => clickEdit()}>Edit!</Button>
-            <Button onClick={onClickSignoutHandler}>SIGNOUT</Button>
+            <Button onClick={() => clickEdit()} color='grey'>Edit!</Button>
+            <Button onClick={onClickSignoutHandler} color='red'>SIGNOUT</Button>
           </Grid.Row>
         </Grid>
       </div>
@@ -63,17 +79,23 @@ const MyInfo = (props) => {
     return (
       <div className="MyInfoEdit" data-testid="MyInfoEdit">
         <Grid centered>
-          <Grid.Row>
-            <Label content="Mail" />
-            {user && user.email}
+        <Grid.Row>
+          <Image  src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" size='medium' circular/>
           </Grid.Row>
           <Grid.Row>
-            <Label content="nickname" />
-            <Input
-              name="nicknameInput"
-              value={nicknameInput}
-              onChange={(event) => setNicknameInput(event.target.value)}
-            />
+            <div style={{width:500}}>
+              <Table  basic='very' celled className='myinfoTable'>
+                
+                  <Table.Row>
+                    <Table.Cell width={2}><Header as='h2'>Mail</Header></Table.Cell>
+                    <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.email}</Header></Table.Cell>
+                  </Table.Row>    
+                  <Table.Row>
+                    <Table.Cell width={2}><Header as='h2'>Nickname</Header></Table.Cell>
+                    <Table.Cell width={5} textAlign='right'><Input name="nicknameInput" value={nicknameInput} onChange={(event) => setNicknameInput(event.target.value)}/></Table.Cell>
+                  </Table.Row>
+                </Table>
+              </div>
           </Grid.Row>
           <Grid.Row>
             <Button onClick={() => changeNick()}>Confirm!</Button>
