@@ -254,7 +254,7 @@ def newsTomodel():
 
     index=0
     for stock in stocks:
-        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2019-11-29').filter(date__lte='2020-12-03')
+        history = StockHistory.objects.filter(stock_id=stock[0]).order_by('date').filter(date__gte='2020-12-04').filter(date__lte='2020-12-09')
         data = stocksdata[index]
         print(data['title'], stock[1], index)
     
@@ -329,5 +329,5 @@ if __name__ == '__main__':
    
     # newsScaling(datetime.datetime.now()-datetime.timedelta(days=3))
     # newsScalingUpdate(1)
-    #newsTomodel()
+    # newsTomodel()
     # beforeMarket()
