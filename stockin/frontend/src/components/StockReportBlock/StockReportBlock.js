@@ -24,11 +24,7 @@ const StockReportBlock = (props) => {
   const titleComponent = 
     <Segment basic>
       <Container textAlign='left'>
-        <Header 
-          as='h1' 
-          style={{color : 'black', cursor:'pointer'}} 
-          onClick={() => history.push('/detail/' + props.id)}
-        >
+        <Header as='h1'>
           {title}
         </Header>
         <p style={{ color: 'grey' }}>
@@ -74,7 +70,11 @@ const StockReportBlock = (props) => {
   return(
     <Segment color={props.isUp ? 'red' : 'blue'} data-testid='StockReportBlock'>
       <Grid divided='vertically'>
-        <Grid.Row columns={3}>
+        <Grid.Row 
+          columns={3} 
+          style={{cursor:'pointer'}} 
+          onClick={() => history.push('/detail/' + props.id)}
+        >
           <Grid.Column width={2}>
             {rankComponent}
           </Grid.Column>
