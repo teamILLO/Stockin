@@ -8,8 +8,6 @@ const GraphComponent = (props) => {
       return {'date' : e.date.slice(5,10), '종가' : e.endPrice};
     });
 
-    console.log(stockhistory);
-
     return (
         <div className="GraphComponent" data-testid="GraphComponent">
           <LineChart
