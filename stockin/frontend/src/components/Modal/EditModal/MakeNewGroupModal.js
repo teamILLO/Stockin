@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { Button, Modal, Form } from 'semantic-ui-react';
 import { postGroup, getGroupList } from '../../../store/groups/groups';
 
-
 const MakeNewGroupModal = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -30,11 +29,7 @@ const MakeNewGroupModal = (props) => {
 };
 
   return (
-    <Modal
-      onOpen={() => setOpen(true)}
-      open={open}
-      trigger={props.trigger}
-    >
+    <Modal onOpen={() => setOpen(true)} open={open} trigger={props.trigger}>
       <Modal.Header>Create New Group</Modal.Header>
       <Modal.Content>
         <Form>
@@ -47,24 +42,25 @@ const MakeNewGroupModal = (props) => {
               />
               {invalidInputText}
           </Form.Field>
+          <Form.Field></Form.Field>
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button 
+        <Button
           content="Cancel"
           color='black' 
           onClick={() => cancelHandler()}
         />
         <Button
           content="Confirm"
-          labelPosition='right'
-          icon='checkmark'
+          labelPosition="right"
+          icon="checkmark"
           onClick={() => confirmHandler()}
           positive
         />
       </Modal.Actions>
     </Modal>
-  )
-}
+  );
+};
 
 export default MakeNewGroupModal;

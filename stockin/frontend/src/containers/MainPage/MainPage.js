@@ -58,13 +58,17 @@ const MainPage = (props) => {
     dispatch(getGroupList());
   }, [loggingIn]);
 
+  const clickPlease=()=>{
+    history.push('/mypage')
+  }
+
   const myInterest = () => {
     let stockcount = 0;
     if (groupList.length == 0)
       return (
         <Grid.Row centered>
           <Grid.Row centered>
-            <Icon.Group size="massive">
+            <Icon.Group size="massive" onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
               <Icon loading size="big" name="circle notch" />
               <Icon name="user x" />
             </Icon.Group>
@@ -81,7 +85,7 @@ const MainPage = (props) => {
       return (
         <Grid.Row centered>
           <Grid.Row centered>
-            <Icon.Group size="massive">
+            <Icon.Group size="massive" onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
               <Icon loading size="big" name="circle notch" />
               <Icon name="user plus" />
             </Icon.Group>
