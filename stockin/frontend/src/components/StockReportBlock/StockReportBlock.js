@@ -52,8 +52,8 @@ const StockReportBlock = (props) => {
 
   const newsListComponent = news ? news.map((item) =>
     <List.Item key={item.id}>
-      <List.Header as="a" href={item.link}>{item.title}</List.Header>
-      <List.Content>{item.press} {item.date}</List.Content>
+      <List.Header as="a" style={{ textAlign : 'left' }} href={item.link}>{item.title}</List.Header>
+      <List.Content style={{ color : 'grey', textAlign : 'left' }}>{item.press} {item.date}</List.Content>
     </List.Item>
   )  : ""
 
