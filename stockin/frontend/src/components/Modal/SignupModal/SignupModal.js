@@ -19,23 +19,25 @@ const SignupModal = (props) => {
   const signupHandler = async () => {
     let is_duplicated = false;
 
-    await api.post('/users/duplicate/', { email: '', nickname : nickname }).then((response) => {
+    await api.post('/users/duplicate/', { email: '', nickname: nickname }).then((response) => {
       if (response.data['duplicate']) {
         alert('Nickname exists, try another.');
         is_duplicated = true;
-      } 
+      }
     });
 
-    if(!is_duplicated) {
-      await dispatch(trySignup({ email: email, nickname: nickname, password: password })).then(async (response) =>{
-          dispatch(postGroup({'name' : '나의 그룹1'}));
-      });
-      alert('Sign up succesfully'); 
+    if (!is_duplicated) {
+      await dispatch(trySignup({ email: email, nickname: nickname, password: password })).then(
+        async (response) => {
+          dispatch(postGroup({ name: '나의 그룹1' }));
+        },
+      );
+      alert('Sign up succesfully');
       // when user signed up, try login and set default group
       setOpen(false);
     }
   };
-  
+
   const isValidEmail = (email) => {
     const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     return emailRegex.test(email);
@@ -47,17 +49,16 @@ const SignupModal = (props) => {
     if (!isValidEmail(email)) {
       setEmailError(true);
       return;
-    }
-    else {
-      await api.post('/users/duplicate/', { email: email, nickname : '' }).then((response) => {
+    } else {
+      await api.post('/users/duplicate/', { email: email, nickname: '' }).then((response) => {
         if (response.data['duplicate']) {
           alert('Email exists, try another.');
-          is_duplicated = true
-        } 
+          is_duplicated = true;
+        }
       });
     }
-    
-    if(!is_duplicated) {
+
+    if (!is_duplicated) {
       setNext(true);
     }
   };
@@ -73,13 +74,13 @@ const SignupModal = (props) => {
         onChange={(event) => setNickname(event.target.value)}
       />
     </Form>
-  ) : (emailError ? (
+  ) : emailError ? (
     <Form size="small">
       <Form.Field
         fluid
         icon="user"
         iconPosition="left"
-        placeholder='Email'
+        placeholder="Email"
         control={Input}
         error={{
           content: 'Please enter a valid email address',
@@ -98,8 +99,8 @@ const SignupModal = (props) => {
         onChange={(event) => setPassword(event.target.value)}
       />
     </Form>
-    ) : (
-      <Form size="small">
+  ) : (
+    <Form size="small">
       <Form.Input
         fluid
         icon="user"
@@ -118,7 +119,7 @@ const SignupModal = (props) => {
         onChange={(event) => setPassword(event.target.value)}
       />
     </Form>
-    ));
+  );
 
   const nextButton = next ? (
     <Button className="mainButton" onClick={() => signupHandler()}>
@@ -151,8 +152,11 @@ const SignupModal = (props) => {
       <Image src={logo} centered className="logo" />
 
       <Modal.Content>
-        <p>Welcome!</p>
+        <br />
         <h2>WELCOME TO STOCKIN!</h2>
+        <br />
+        <p>Please fill out the following fields to sign up for STOCKIN </p>
+
         {inputs}
       </Modal.Content>
       <Modal.Actions>{nextButton}</Modal.Actions>
