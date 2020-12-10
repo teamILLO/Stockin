@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { getStockHistory } from '../../store/stockHistory/stockHistory';
@@ -14,12 +14,15 @@ import Footer from '../../components/Footer/Footer';
 import { Container, Tab, Button } from 'semantic-ui-react';
 import StockInfo from '../../components/StockInfo/StockInfo';
 import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
+import { api } from '../../api';
 import './DetailPage.css';
 
-const panes = (id, data) => [
+const panes = (id, data, stock, fs_score) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
-    render: () => <DetailOverview />,
+    render: () => {
+      return <DetailOverview id={id} stock={stock} fs_score={fs_score} />;
+    },
   },
   {
     menuItem: { key: 'News', className: 'News', content: 'News' },
@@ -42,6 +45,8 @@ const panes = (id, data) => [
 const DetailPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
   const { priceList } = useSelector((state) => state.stockHistory);
+  const [currStock, setCurrStock] = useState();
+  const [currFSscore, setCurrFSscore] = useState();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -55,6 +60,18 @@ const DetailPage = (props) => {
       document.body.style.overflow = 'auto';
     };
   }, [dispatch, loggingIn, props.match.params.id]);
+
+  useEffect(() => {
+    {
+      api.get('stocks/' + props.match.params.id + '/').then((response) => {
+        setCurrStock(response.data);
+      });
+      api.get('stocks/financialstats/score/' + props.match.params.id + '/').then((response) => {
+        setCurrFSscore(response.data);
+        //score 객체에는 score와 status가 있음, status가 0이 아니면 score를 도출하지 못한다는 뜻임 'backend/core/views/stocks.py'의 fs_score 참조
+      });
+    }
+  }, [props.match.params.id]);
 
   let graph =
     priceList.length === 0 ? (
@@ -83,7 +100,7 @@ const DetailPage = (props) => {
 
         <Tab
           menu={{ secondary: true, pointing: true }}
-          panes={panes(props.match.params.id, priceList)}
+          panes={panes(props.match.params.id, priceList, currStock, currFSscore)}
         />
       </Container>
 
