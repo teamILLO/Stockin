@@ -1,30 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { api } from '../../../api';
-import { Grid, Segment } from 'semantic-ui-react';
+import React from 'react';
+import { Grid, Header, Segment } from 'semantic-ui-react';
+
+import TotalScoreBullet from './TotalScoreBullet';
 
 const DetailOverview = (props) => {
-  const [currStock, setCurrStock] = useState();
-  const [currFSscore, setCurrFSscore] = useState();
-  useEffect(() => {
-    if (props.id) {
-      api.get('stocks/' + props.id + '/').then((response) => {
-        setCurrStock(response.data);
-      });
-      api.get('stocks/financialstats/score/' + props.id + '/').then((response) => {
-        setCurrFSscore(response.data);
-        //score 객체에는 score와 status가 있음, status가 0이 아니면 score를 도출하지 못한다는 뜻임 'backend/core/views/stocks.py'의 fs_score 참조
-      });
-    }
-  });
+  const data = [
+    {
+      id: '',
+      ranges: [0, 50, 60, 100],
+      measures: [],
+      markers:
+        props.stock && props.fs_score && props.fs_score.score
+          ? [
+              /*Math.sqrt(
+                (props.stock.score * props.stock.score +
+                  ((props.fs_score.score + 8) / 16) *
+                    50 *
+                    (((props.fs_score.score + 8) / 16) * 50)) /
+                  2,
+              ),*/
+              props.stock.score,
+            ]
+          : [],
+    },
+  ];
+
   return (
     <div data-testid="DetailOverview">
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <Segment>{'place for graph showing total score'}</Segment>
+            <Segment>
+              <Header as="h3">Overall Assessment</Header>
+              <div style={{ height: '30px' }}>
+                <TotalScoreBullet data={data} />
+              </div>
+              <br />
+              <p>
+                {
+                  /*'This stock is ' + data[0].markers.length
+                  ? data[0].markers[0] >= 60 || data[0].markers[0] + ' likely to show a ' + '' + '.'
+  : 'not assessable due to lack of data.'*/
+                  props.stock && props.stock.score >= 60
+                    ? 'It is likely to show a relatively big rise or a small drop'
+                    : props.stock && props.stock.score <= 50
+                    ? 'It is likely to show a relatively small rise or a big drop'
+                    : 'It is likely to show a standard rise or a standard drop'
+                }
+              </p>
+            </Segment>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={3}>
+        {}
+      </Grid>
+    </div>
+  );
+};
+/* This goes to the empty bracket
+<Grid.Row columns={3}>
           <Grid.Column>
             <Segment>{'place for graph showing ML score in some way'}</Segment>
           </Grid.Column>
@@ -48,9 +81,6 @@ const DetailOverview = (props) => {
             <Segment>{'place for graph comparing crawledPER and ...Avg'}</Segment>
           </Grid.Column>
         </Grid.Row>
-      </Grid>
-    </div>
-  );
-};
+        */
 
 export default DetailOverview;

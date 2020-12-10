@@ -20,7 +20,7 @@ const AboutUs = (props) => {
           <Grid.Column>
             <Image src={g} size="small" circular centered />
             <h5>G1 Lee</h5>
-            <a href="https://https://github.com/lgm0905">Github&nbsp;&nbsp;&nbsp;&nbsp;</a>
+            <a href="https://github.com/lgm0905">Github&nbsp;&nbsp;&nbsp;&nbsp;</a>
             <a href="mailto: stockinswpp@gmail.com">Email</a>
           </Grid.Column>
         </Grid.Row>

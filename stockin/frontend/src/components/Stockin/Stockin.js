@@ -7,9 +7,7 @@ const Stockin = (props) => {
       <Grid>
         <Container text textAlign="left">
           <p />
-          <Header class="header1" as="h2">
-            What is STOCKIN?
-          </Header>
+          <Header as="h2">What is STOCKIN?</Header>
           <p />
           <p>
             STOCKIN helps beginners in stock trading by providing well-organized, only essential
@@ -18,9 +16,7 @@ const Stockin = (props) => {
             time comparing among tremendous amount of data.
           </p>
           <br />
-          <Header class="header2" as="h2">
-            Features
-          </Header>
+          <Header as="h2">Features</Header>
           <p />
           <p>
             <b>Efficiently sorted stocks</b>
@@ -39,9 +35,7 @@ const Stockin = (props) => {
             You can even compare data between groups.
           </p>
           <br />
-          <Header class="header3" as="h2">
-            ....and much more!
-          </Header>
+          <Header as="h2">....and much more!</Header>
         </Container>
       </Grid>
     </div>
