@@ -7,32 +7,15 @@
   float: right;
 }
 
-.halfLeft {
-  height: 100vh;
-  /* background-color: #feab92; */
-  text-align: center;
-}
-
-.halfRight {
-  height: 100vh;
-  /* background-color: #ff6f61; */
-  text-align: center;
-  /* color: #fff; */
-}
-
-.loginBlock {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 25vh;
-}
-
 .previewBlock {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20vh;
+  height: 600px;
 }
 
-.centered {
+.center {
   margin-left: auto;
   margin-right: auto;
+}
+
+.verticalCenter {
+  text-align: center;
 }
