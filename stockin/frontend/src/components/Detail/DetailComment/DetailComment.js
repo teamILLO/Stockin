@@ -27,6 +27,7 @@ const DetailComment = (props) => {
         onChange={(event) => setComment(event.target.value)}
       />
       <Button
+        data-testid="mainButton"
         className="mainButton"
         content="Add Comment"
         labelPosition="right"

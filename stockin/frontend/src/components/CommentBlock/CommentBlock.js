@@ -21,7 +21,7 @@ const CommentBlock = (props) => {
 
   const formatingTime = (time) => {
     let temp = time.split('T');
-    let result = temp[0].replaceAll('-', '.') + ' at ';
+    let result = temp[0].replace(/-/g, '.') + ' at ';
     let hour = Number(temp[1].substring(0, 2));
     let meridiem = ' AM';
     if (hour >= 12) {

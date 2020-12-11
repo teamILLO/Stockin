@@ -55,7 +55,7 @@ describe('<DetailComment />', () => {
   });
   it('should call postComment', () => {
     render(detailComment);
-    const query = screen.getByText(/submit/i);
+    const query = screen.getByTestId(/mainbutton/i);
     fireEvent.click(query);
     expect(spyPostComment).toHaveBeenCalledTimes(1);
   });

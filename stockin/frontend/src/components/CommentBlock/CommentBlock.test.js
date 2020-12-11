@@ -18,7 +18,7 @@ import * as comment from '../../store/comment/comment';
 const defaultProps = {
   id: 1,
   author: 'TEST_AUTHOR',
-  time: '2020-11-09',
+  time: '2020-11-09T0336Z',
   content: 'TEST_CONTENT',
 };
 
@@ -65,12 +65,12 @@ describe('<CommentBlock />', () => {
     );
     commentBlockUserSame = (
       <Provider store={mockStoreUserSame}>
-        <CommentBlock history={history} {...defaultProps} />
+        <CommentBlock history={history} {...{ ...defaultProps, time: '20201109T1536Z' }} />
       </Provider>
     );
     commentBlockUserDiff = (
       <Provider store={mockStoreUserDiff}>
-        <CommentBlock history={history} {...defaultProps} />
+        <CommentBlock history={history} {...{ ...defaultProps, time: '20201109T0036Z' }} />
       </Provider>
     );
     spyEditComment = jest.spyOn(comment, 'editComment').mockImplementation(() => {
