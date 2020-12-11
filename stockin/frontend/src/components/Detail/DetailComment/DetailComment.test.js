@@ -40,6 +40,9 @@ describe('<DetailComment />', () => {
       return (dispatch) => {};
     });
   });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should render without errors', () => {
     render(detailComment);
@@ -55,8 +58,16 @@ describe('<DetailComment />', () => {
   });
   it('should call postComment', () => {
     render(detailComment);
-    const query = screen.getByTestId(/mainbutton/i);
+    let query = screen.getByPlaceholderText(/write your comment here/i);
+    fireEvent.change(query, { target: { value: 'TEST_POST' } });
+    query = screen.getByTestId(/mainbutton/i);
     fireEvent.click(query);
     expect(spyPostComment).toHaveBeenCalledTimes(1);
+  });
+  it('should not call postComment', () => {
+    render(detailComment);
+    const query = screen.getByTestId(/mainbutton/i);
+    fireEvent.click(query);
+    expect(spyPostComment).toHaveBeenCalledTimes(0);
   });
 });
