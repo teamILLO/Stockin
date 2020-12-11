@@ -64,24 +64,25 @@ const DetailPage = (props) => {
 
   useEffect(() => {
     async function getStockInfo() {
-      await api.get('stocks/' + props.match.params.id + '/');
-    }
-    try {
-      getStockInfo().then((response) => {
+      await api.get('stocks/' + props.match.params.id + '/').then((response) => {
         setCurrStock(response.data);
       });
+    }
+    try {
+      getStockInfo();
     } catch (e) {}
   }, [props.match.params.id]);
 
   useEffect(() => {
     async function getFSscore() {
-      await api.get('stocks/financialstats/score/' + props.match.params.id + '/');
+      await api
+        .get('stocks/financialstats/score/' + props.match.params.id + '/')
+        .then((response) => setCurrFSscore(response.data));
     }
+
     try {
-      getFSscore().then((response) => {
-        setCurrFSscore(response.data);
-        //score 객체에는 score와 status가 있음, status가 0이 아니면 score를 도출하지 못한다는 뜻임 'backend/core/views/stocks.py'의 fs_score 참조
-      });
+      getFSscore();
+      //score 객체에는 score와 status가 있음, status가 0이 아니면 score를 도출하지 못한다는 뜻임 'backend/core/views/stocks.py'의 fs_score 참조
     } catch (e) {}
   }, [props.match.params.id]);
 

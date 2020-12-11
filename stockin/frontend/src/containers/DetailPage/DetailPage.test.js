@@ -1,11 +1,12 @@
 import React from 'react';
-import { render, screen, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, queryAllByTestId, getByTestId } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { history } from '../../store/store';
 import DetailPage from './DetailPage';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
 import * as stockHistory from '../../store/stockHistory/stockHistory';
+import { api } from '../../api';
 
 jest.mock('../../components/Header/Header', () => {
   return jest.fn((props) => {
@@ -134,7 +135,7 @@ describe('<DetailPage />', () => {
       return (dispatch) => {};
     });
 
-    spyGet = jest.spyOn(api, 'get').mockImplementation((url, atc) => {
+    spyGet = jest.spyOn(api, 'get').mockImplementation((url) => {
       return new Promise((resolve, reject) => {
         let result;
         result = {
@@ -166,27 +167,27 @@ describe('<DetailPage />', () => {
     expect(query.length).toBe(1);
   });
 
-  // it('should change tab when clicked FiancialState', () => {
-  //   const { container } = render(detailPage);
-  //   fireEvent.click(screen.getByText(/financial state/i));
-  //   const query = queryAllByTestId(container, 'spyDetailFinancialState');
-  //   expect(query.length).toBe(1);
-  // });
+  it('should change tab when clicked FiancialState', () => {
+    const { container } = render(detailPage);
+    fireEvent.click(screen.getByText(/financial state/i));
+    const query = queryAllByTestId(container, 'spyDetailFinancialState');
+    expect(query.length).toBe(1);
+  });
 
-  // it('should change tab when clicked Comments', () => {
-  //   const { container } = render(detailPage);
-  //   fireEvent.click(screen.getByText(/comments/i));
-  //   const query = queryAllByTestId(container, 'spyDetailComment');
-  //   expect(query.length).toBe(1);
-  // });
+  it('should change tab when clicked Comments', () => {
+    const { container } = render(detailPage);
+    fireEvent.click(screen.getByText(/comments/i));
+    const query = queryAllByTestId(container, 'spyDetailComment');
+    expect(query.length).toBe(1);
+  });
 
-  // it('should redirect when loggingIn = false', () => {
-  //   render(detailPageLogout);
-  //   expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-  // });
+  it('should redirect when loggingIn = false', () => {
+    render(detailPageLogout);
+    expect(spyHistoryPush).toHaveBeenCalledTimes(1);
+  });
 
-  // it('should dispatch checkLogin when loggingIn = undefined', () => {
-  //   render(detailPageUndefined);
-  //   expect(spyCheckLogin).toHaveBeenCalledTimes(1);
-  // });
+  it('should dispatch checkLogin when loggingIn = undefined', () => {
+    render(detailPageUndefined);
+    expect(spyCheckLogin).toHaveBeenCalledTimes(1);
+  });
 });
