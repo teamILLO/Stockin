@@ -13,16 +13,27 @@ const testStockHistory = [
     { id : 5, date: '2020-12-05', endPrice : '500'},
 ];
 
+const mockUpGraphComponent = 
+  <Provider store={store}>
+    <GraphComponent 
+      history={history} 
+      stockhistory={testStockHistory} 
+      isUp={true}
+    />
+  </Provider>
 
-describe('<GraphComponent />', () => {
-  let graphComponent;
+const mockDownGraphComponent = 
+  <Provider store={store}>
+    <GraphComponent 
+      history={history} 
+      stockhistory={testStockHistory}
+      isUp={false}
+    />
+  </Provider>
 
+
+describe('<GraphComponent />', () => {  
   beforeEach(() => {
-    graphComponent = (
-        <Provider store={store}>
-          <GraphComponent history={history} stockhistory={testStockHistory} />
-        </Provider>
-    );
     console.error = jest.fn();
   });
 
@@ -31,9 +42,15 @@ describe('<GraphComponent />', () => {
     console.error.mockClear();
   });
 
-  it('should render without errors', () => {
-    const { container } = render(graphComponent);
+  it('should render without errors in up graph', () => {
+    const { container } = render(mockUpGraphComponent);
     const query = queryAllByTestId(container, 'GraphComponent');
     expect(query.length).toBe(1);
   });
+
+  it('should render without errors in down graph', () => {
+    const { container } = render(mockDownGraphComponent);
+    const query = queryAllByTestId(container, 'GraphComponent');
+    expect(query.length).toBe(1);
+  }); 
 });

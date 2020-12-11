@@ -161,10 +161,5 @@ export const RenderPopUpItems = (name) => {
       총자산 : 기업의 자본과 부채를 합한 값<br/>
     </Popup>
 
-  /* Error handling */
-  if(!(name in items)) {
-    return <Popup content='null' trigger={<Icon icon='add' />} />;
-  }
-
   return items[name];
 }
