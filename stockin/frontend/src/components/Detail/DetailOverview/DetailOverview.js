@@ -51,7 +51,13 @@ const DetailOverview = (props) => {
             </Segment>
           </Grid.Column>
         </Grid.Row>
-        <Grid.Row columns={3}>
+        {}
+      </Grid>
+    </div>
+  );
+};
+/* This goes to the empty bracket
+<Grid.Row columns={3}>
           <Grid.Column>
             <Segment>{'place for graph showing ML score in some way'}</Segment>
           </Grid.Column>
@@ -75,9 +81,6 @@ const DetailOverview = (props) => {
             <Segment>{'place for graph comparing crawledPER and ...Avg'}</Segment>
           </Grid.Column>
         </Grid.Row>
-      </Grid>
-    </div>
-  );
-};
+        */
 
 export default DetailOverview;

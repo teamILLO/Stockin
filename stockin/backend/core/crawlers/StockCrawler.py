@@ -301,22 +301,22 @@ def stockUpdate_(stock):
 
 
 # 실시간 주가 업데이트용
-def stockUpdate(process=16):
-    # start = time.time()
+def stockUpdate(process=8):
+    start = time.time()
 
     stocks = Stock.objects.all()
    
     pool = Pool(process)
     
-    # for stock in stocks:
-    #     pool.apply_async(stockUpdate_, args=(stock,))
-
-    # pool.close()
-    # pool.join()
-
     for stock in stocks:
-        stockUpdate_(stock)
-    # print('time: ' , time.time()-start)
+        pool.apply_async(stockUpdate_, args=(stock,))
+
+    pool.close()
+    pool.join()
+
+    # for stock in stocks:
+    #     stockUpdate_(stock)
+    print('time: ' , time.time()-start)
 
 
 
