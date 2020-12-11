@@ -10,47 +10,48 @@ import PreloginPage from './PreloginPage';
 import { history } from '../../store/store';
 import { Provider } from 'react-redux';
 import { getMockStore } from '../../test-utils/mocks';
+import { api } from '../../api/index';
 import * as authentication from '../../store/authentication/authentication';
 
 jest.mock('../../components/Header/Header', () => {
   return jest.fn((props) => {
-    return <div className="spyHeader"></div>;
+    return <div data-testid="spyHeader"></div>;
   });
 });
 
 jest.mock('../../components/Footer/Footer', () => {
   return jest.fn((props) => {
-    return <div className="spyFooter"></div>;
+    return <div data-testid="spyFooter"></div>;
   });
 });
 
 jest.mock('../../components/Modal/SignupModal/SignupModal', () => {
   return jest.fn((props) => {
-    return <div className="spySignupModal"></div>;
+    return <div data-testid="spySignupModal"></div>;
   });
 });
 
 jest.mock('../../components/Modal/FindPasswdModal/FindPasswdModal', () => {
   return jest.fn((props) => {
-    return <div className="spyFindPasswdModal"></div>;
+    return <div data-testid="spyFindPasswdModal"></div>;
   });
 });
 
 jest.mock('../../components/Stockin/Stockin', () => {
   return jest.fn((props) => {
-    return <div className="spyStockin"></div>;
+    return <div data-testid="spyStockin"></div>;
   });
 });
 
 jest.mock('../../components/AboutUs/AboutUs', () => {
   return jest.fn((props) => {
-    return <div className="spyAboutUs"></div>;
+    return <div data-testid="spyAboutUs"></div>;
   });
 });
 
 jest.mock('../../components/Preview/Preview', () => {
   return jest.fn((props) => {
-    return <div className="spyPreview"></div>;
+    return <div data-testid="spyPreview"></div>;
   });
 });
 
@@ -99,6 +100,10 @@ describe('<PreloginPage />', () => {
     });
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should render without errors', () => {
     const { container } = render(preLoginPage);
     const query = queryAllByTestId(container, 'PreloginPage');
@@ -108,21 +113,21 @@ describe('<PreloginPage />', () => {
   test(`should change tab when 'About Stockin' clicked`, () => {
     const { container } = render(preLoginPage);
     fireEvent.click(screen.getByText(/about stockin/i));
-    const query = queryAllByTestId(container, 'Stockin');
+    const query = queryAllByTestId(container, 'spyStockin');
     expect(query.length).toBe(1);
   });
 
   test(`should change tab when 'About Us' clicked`, () => {
     const { container } = render(preLoginPage);
     fireEvent.click(screen.getByText(/about us/i));
-    const query = queryAllByTestId(container, 'AboutUs');
+    const query = queryAllByTestId(container, 'spyAboutUs');
     expect(query.length).toBe(1);
   });
 
   test(`should change tab when 'Preview' clicked`, () => {
     const { container } = render(preLoginPage);
     fireEvent.click(screen.getByText(/preview/i));
-    const query = queryAllByTestId(container, 'Preview');
+    const query = queryAllByTestId(container, 'spyPreview');
     expect(query.length).toBe(1);
   });
 
@@ -140,14 +145,39 @@ describe('<PreloginPage />', () => {
     expect(query.value).toBe('password');
   });
 
-  test(`should dispatch tryLogin`, () => {
+  test(`should login with valid input`, () => {
+    const spyPost = jest.spyOn(api, 'post').mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 200,
+        };
+        resolve(result);
+      });
+    });
+
     const { container } = render(preLoginPage);
     const email = getByPlaceholderText(container, 'Email');
     fireEvent.change(email, { target: { value: 'test@email.com' } });
     const password = getByPlaceholderText(container, 'Password');
     fireEvent.change(password, { target: { value: 'password' } });
     fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
-    expect(spyTryLogin).toHaveBeenCalledTimes(1);
+    expect(spyPost).toHaveBeenCalledTimes(1);
+  });
+
+  test(`should login with valid input`, () => {
+    const spyPost = jest.spyOn(api, 'post').mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        const result = {
+          status: 400,
+        };
+        reject(result);
+      });
+    });
+    window.alert = jest.fn();
+
+    const { container } = render(preLoginPage);
+    fireEvent.click(screen.getByText(/Login/i, { selector: 'button' }));
+    expect(spyPost).toHaveBeenCalledTimes(1);
   });
 
   it('should redirect to when loggingIn = true', () => {
