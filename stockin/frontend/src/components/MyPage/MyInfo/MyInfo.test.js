@@ -115,4 +115,28 @@ describe('<MyInfo />', () => {
     const query = screen.queryAllByText(/newnickname/i);
     expect(query.length).toBe(0);
   });
+
+  it('should not change value when no change', () => {
+    render(myInfo);
+    fireEvent.click(screen.getByText(/edit!/i, { selector: 'button' }));
+    fireEvent.click(screen.getByText(/confirm!/i, { selector: 'button' }));
+    const query = screen.queryAllByText(/newnickname/i);
+    expect(query.length).toBe(0);
+  });
+
+  it('should sign out', () => {
+    window.confirm = jest.fn(() => true)
+    render(myInfo);
+    fireEvent.click(screen.getByText(/SIGNOUT/i, { selector: 'button' }));
+    const query = screen.queryAllByText(/newnickname/i);
+    expect(query.length).toBe(0);
+  });
+
+  it('should not sign out', () => {
+    window.confirm = jest.fn(() => false)
+    render(myInfo);
+    fireEvent.click(screen.getByText(/SIGNOUT/i, { selector: 'button' }));
+    const query = screen.queryAllByText(/newnickname/i);
+    expect(query.length).toBe(0);
+  });
 });

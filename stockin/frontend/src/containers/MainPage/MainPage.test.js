@@ -6,19 +6,20 @@ import { history } from '../../store/store';
 import { getMockStore } from '../../test-utils/mocks';
 import * as authentication from '../../store/authentication/authentication';
 import { api } from '../../api/index';
+import * as redux from 'react-redux'; 
 
 
 
 
-const initialAuthState = { loggingIn: true, user: { id: 1 },
-  groupList : [
+
+const initialAuthState = { loggingIn: true, user: {id:1} };
+const initialAuthState2 = { groupList : [
   { 'id' : 2, 'name' : 'custom group2', 'stocks' : [{'id' : 1}] }, 
   { 'id' : 1, 'name' : 'custom group1', 'stocks' : [{'id' : 1}] },
-  ] 
-};
+  ] }
 const initialAuthStateLogout = { loggingIn: false, user: null };
 const initialAuthStateUndefined = { loggingIn: undefined, user: null };
-const mockStore = getMockStore(initialAuthState);
+const mockStore = getMockStore(initialAuthState, initialAuthState2);
 const mockStoreLogout = getMockStore(initialAuthStateLogout);
 const mockStoreUndefined = getMockStore(initialAuthStateUndefined);
 
@@ -36,7 +37,7 @@ jest.mock('../../components/Footer/Footer', () => {
 
 jest.mock('../../components/StockBlock/StockBlock', ()=>{
   return jest.fn((props) => {
-    return <div className="stockBlock"></div>;
+    return <div className="stockBlock" data-testid="StockBlock"></div>;
   });
 })
 
@@ -75,26 +76,28 @@ describe('<MainPage />', () => {
       return (dispatch) => {};
     });
 
+
     spyGet = jest.spyOn(api,'get').mockImplementation((url) => {
-      console.log('@@@@@@@@@',url)
+    
+    
 
       if(url==='/groups/')
         return new Promise((resolve,reject)=>{
-          let result
+          let result;
           result = {
             data:[
-                  {'id' : 1, 'name' : 'custom group2', 'stocks' : [{'id' : 1}] },
+                  {'id' : 1, 'name' : 'custom group1', 'stocks' : [{'id' : 1}] },
                   {'id' : 2, 'name' : 'custom group2', 'stocks' : [{'id' : 1}] },
-                  {'id' : 3, 'name' : 'custom group2', 'stocks' : [{'id' : 1}] },
+                  {'id' : 3, 'name' : 'custom group3', 'stocks' : [{'id' : 1}] },
                  ]
                   
             ,  
             status: 203,
-          }
+          };
           resolve(result);
         })
       return new Promise((resolve, reject) => {
-        let result
+        let result;
         
         result = {
           data:[
@@ -107,7 +110,7 @@ describe('<MainPage />', () => {
                 
           ,  
           status: 203,
-        }
+        };
         resolve(result);
     });
     });
@@ -120,24 +123,52 @@ describe('<MainPage />', () => {
 
  
 
-  // it('should redirect when loggingIn = false', () => {
-  //   render(mainPageLogout);
-  //   expect(spyHistoryPush).toHaveBeenCalledTimes(1);
-  // });
+  it('should redirect when loggingIn = false or loggingIn = undefined' , () => {
+    render(mainPageLogout);
+    expect(spyHistoryPush).toHaveBeenCalledTimes(1);
 
-  // it('should dispatch checkLogin when loggingIn = undefined', () => {
-  //   render(mainPageUndefined);
-  //   expect(spyCheckLogin).toHaveBeenCalledTimes(1);
-  // });
+    render(mainPageUndefined);
+    expect(spyCheckLogin).toHaveBeenCalledTimes(1);
+  });
+
 
   it('should change tab when click tab', () => {
+    const useDispatchSpy = jest.spyOn(redux, 'useSelector').mockImplementation(()=>({ loggingIn:true, groupList : []})); 
     const { container } = render(mainPage);
-    fireEvent.click(screen.getAllByTestId('interestTab')[0]);
-    fireEvent.click(screen.getAllByTestId('interestTab')[0]);
-    fireEvent.click(screen.getAllByTestId('dailyTab')[0]);
-    fireEvent.click(screen.getAllByTestId('dailyTab')[0]);
-    const query = queryAllByTestId(container, 'interestTab');
-    expect(query.length).toBe(1);
+    
+    fireEvent.click(screen.getByText('DailyReport'));
+    fireEvent.click(screen.getByText('DailyReport'));
+    fireEvent.click(screen.getByText('MyInterests'));
+    fireEvent.click(screen.getByText('MyInterests'));
+
+    fireEvent.click(screen.getByTestId('addGroup'))
+
   });
+
+  it('should show addStock', () => {
+    const useDispatchSpy = jest.spyOn(redux, 'useSelector').mockImplementation(()=>({ loggingIn:true, groupList : [{'id' : 1, 'name' : 'custom group1', 'stocks' : [] }]})); 
+    const { container } = render(mainPage);
+    
+    fireEvent.click(screen.getByText('DailyReport'));
+    fireEvent.click(screen.getByText('DailyReport'));
+    fireEvent.click(screen.getByText('MyInterests'));
+    fireEvent.click(screen.getByText('MyInterests'));
+
+    fireEvent.click(screen.getByTestId('addStock'))
+
+  });
+
+  it('should show group list', () => {
+    jest.spyOn(redux, 'useSelector').mockImplementation(()=>({ loggingIn:true, groupList : [ {'id' : 1, 'name' : 'custom group1', stocks : [{'id':1},{'id':1}] },{'id' : 1, 'name' : 'custom group1', stocks : [] } ]})); 
+    render(mainPage);
+    
+    fireEvent.click(screen.getByText('DailyReport'));
+    fireEvent.click(screen.getByText('DailyReport'));
+    fireEvent.click(screen.getByText('MyInterests'));
+    fireEvent.click(screen.getByText('MyInterests'));
+
+  });
+
+
 
 });

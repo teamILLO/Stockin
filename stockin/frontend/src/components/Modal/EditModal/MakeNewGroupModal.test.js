@@ -62,4 +62,12 @@ describe('<MakeNewGroupModal />', () => {
         fireEvent.change(query, { target: { value: 'test_group' } });
         fireEvent.click(screen.getByText(/Confirm/i, { selector: 'button' }));
     });
+
+    it('should close when clicked confirm button', () => {
+      render(makeNewGroupModal);
+      fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
+      const query = screen.getByPlaceholderText('New Group');
+      fireEvent.change(query, { target: { value: '' } });
+      fireEvent.click(screen.getByText(/Confirm/i, { selector: 'button' }));
+  });
 });

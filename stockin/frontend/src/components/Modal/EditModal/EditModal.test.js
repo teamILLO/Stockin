@@ -65,5 +65,6 @@ describe('<EditModal />', () => {
         fireEvent.click(screen.getByText(/trigger/i, { selector: 'button' }));
         query = screen.queryAllByText(/관심종목 관리/i);
         expect(query.length).toBe(1);
+        fireEvent.click(screen.getByText('종목 수정'));
     });
 });

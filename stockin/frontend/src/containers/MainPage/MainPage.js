@@ -24,13 +24,15 @@ var sliderSettings = {
 };
 
 const MainPage = (props) => {
-  const { loggingIn } = useSelector((state) => state.authentication);
+  const { loggingIn, groupList } = useSelector((state) => ({
+    loggingIn : state.authentication.loggingIn,
+    groupList : state.groups.groupList
+  }));
   const dispatch = useDispatch();
 
   const [topStock, setTop] = useState([]);
   const [bottomStock, setBottom] = useState([]);
-  const { groupList } = useSelector((state) => state.groups);
-
+ 
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
@@ -68,7 +70,7 @@ const MainPage = (props) => {
       return (
         <Grid.Row centered>
           <Grid.Row centered>
-            <Icon.Group size="massive" onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
+            <Icon.Group size="massive" data-testid='addGroup' onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
               <Icon loading size="big" name="circle notch" />
               <Icon name="user x" />
             </Icon.Group>
@@ -85,7 +87,7 @@ const MainPage = (props) => {
       return (
         <Grid.Row centered>
           <Grid.Row centered>
-            <Icon.Group size="massive" onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
+            <Icon.Group size="massive" data-testid='addStock' onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
               <Icon loading size="big" name="circle notch" />
               <Icon name="user plus" />
             </Icon.Group>
