@@ -4,7 +4,7 @@ import { Container, Tab } from 'semantic-ui-react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import UpTab from './UpTab';
-import DownTab from './DownTap';
+import DownTab from './DownTab';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 

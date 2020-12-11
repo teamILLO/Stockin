@@ -4,7 +4,6 @@ import { Segment, Menu } from 'semantic-ui-react';
 import { getDownStockInfo, getDownNews, getDownStockHistory } from '../../store/stock/stock';
 import { renderReportBlock } from './index';
 
-
 const DownTab = (props) => {
   const dispatch = useDispatch();
   const [activeItem, setActiveItem] = useState('1');
@@ -18,14 +17,15 @@ const DownTab = (props) => {
   const RenderMenuItem = (start, end) => {
     let response = [];
 
-    for(let i = start; i <= end; i++) {
+    for (let i = start; i <= end; i++) {
       response.push(
         <Menu.Item
-          key={i+''}
-          name={i+''}
-          active={activeItem === (i+'')}
-          onClick={() => setActiveItem(i+'')}
-        />
+          data-testid={'menuItem' + i}
+          key={i + ''}
+          name={i + ''}
+          active={activeItem === i + ''}
+          onClick={() => setActiveItem(i + '')}
+        />,
       );
     }
     return response;
@@ -35,24 +35,22 @@ const DownTab = (props) => {
     dispatch(getDownStockInfo());
     dispatch(getDownNews());
     dispatch(getDownStockHistory());
-  },[]);
+  }, []);
 
   useEffect(() => {
     setReportBlock(renderReportBlock(down, 'down'));
-  },[down])
+  }, [down]);
 
   useEffect(() => {
-    let start_idx = (activeItem-1) * 10;
+    let start_idx = (activeItem - 1) * 10;
     setRealRenderBlock(reportBlock.slice(start_idx, start_idx + 10));
-  },[activeItem, reportBlock])
+  }, [activeItem, reportBlock]);
 
   return (
     <div className="DownTab" data-testid="DownTab">
       <Segment>
         {realRenderBlock}
-        <Menu pagination>
-          {RenderMenuItem(1,10)}
-        </Menu>
+        <Menu pagination>{RenderMenuItem(1, 10)}</Menu>
       </Segment>
     </div>
   );
