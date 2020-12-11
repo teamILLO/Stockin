@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { screen, render, fireEvent, waitForElement } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { getMockStore } from '../../../test-utils/mocks';
 import NewsDatePicker from './NewsDatePicker';
@@ -22,6 +22,7 @@ const mockStore = getMockStore(
 
 describe('<NewsDatePicker />', () => {
   let newsDatePicker, spyGetNews;
+
   beforeEach(() => {
     newsDatePicker = (
       <Provider store={mockStore}>
@@ -35,12 +36,9 @@ describe('<NewsDatePicker />', () => {
   });
 
   it('should render without errors', () => {
-    // window.history.assign('/1');
+    window.history.pushState({}, '', '/localhost:3000/detail/1/');
     const { container } = render(newsDatePicker);
     const query = container.querySelectorAll('div[class="react-datepicker-wrapper"]');
     expect(query.length).toBe(1);
-    const newDate = Date(Date.now());
-    const input = container.querySelector('input');
-    fireEvent.change(input, { target: { value: '12/25/2019' } });
   });
 });
