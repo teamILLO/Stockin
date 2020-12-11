@@ -89,12 +89,6 @@ describe('<MyPage />', () => {
     expect(spyHistoryPush).toHaveBeenCalledTimes(1);
   });
 
-  it('should call onClickSignoutHandler when signout button clicked', () => {
-    render(myPage);
-    fireEvent.click(screen.getAllByText(/signout/i, { selector: 'button' })[0]);
-    expect(spyTrySignout).toHaveBeenCalledTimes(1);
-  });
-
   it('should dispatch checkLogin when loggingIn = undefined', () => {
     render(myPageUndefined);
     expect(spyCheckLogin).toHaveBeenCalledTimes(1);
