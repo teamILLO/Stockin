@@ -7,11 +7,11 @@ describe('<DetailPriceTrends />', () => {
     const { container } = render(
       <DetailPriceTrends
         data={[
-          { date: new Date('Aug 12, 2019'), close: 2000 },
+          { date: new Date('Aug 4, 2019'), close: 2000 },
           { date: new Date(Date.now()), close: 2500 },
           { date: new Date(Date.now()), close: 2300 },
-          { date: new Date('Aug 12, 2019'), close: 0 },
-          { date: new Date('Aug 12, 2019'), close: 0 },
+          { date: new Date('Aug 3, 2019'), close: 0 },
+          { date: new Date('Aug 6, 2019'), close: 0 },
         ]}
       />,
     );
@@ -25,7 +25,7 @@ describe('<DetailPriceTrends />', () => {
         data={[
           { date: new Date('Aug 12, 2019'), close: 2000 },
           { date: new Date(Date.now()), close: 2500 },
-          { date: new Date('Aug 12, 2019'), close: 0 },
+          { date: new Date('Aug 3, 2019'), close: 0 },
           { date: new Date(Date.now()), close: 2300 },
           { date: new Date('Aug 12, 2019'), close: 0 },
           { date: new Date('Aug 12, 2019'), close: 0 },
