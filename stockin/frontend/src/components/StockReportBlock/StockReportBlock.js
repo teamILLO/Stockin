@@ -71,6 +71,7 @@ const StockReportBlock = (props) => {
     <Segment color={props.isUp ? 'red' : 'blue'} data-testid='StockReportBlock'>
       <Grid divided='vertically'>
         <Grid.Row 
+          data-testid="Grid_Row"
           columns={3} 
           style={{cursor:'pointer'}} 
           onClick={() => history.push('/detail/' + props.id)}

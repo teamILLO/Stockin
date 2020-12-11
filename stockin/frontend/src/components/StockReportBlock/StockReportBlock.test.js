@@ -1,83 +1,108 @@
 import React from 'react';
-import { render, queryAllByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, queryAllByTestId } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import StockReportBlock from './StockReportBlock';
-import { api } from '../../api/index';
+import store, { history } from '../../store/store';
 
-const testList = [
-    { stock: '1', date: 'date1', open: '1', high: '10', low: '1', close: '3' },
-    { stock: '2', date: 'date1', open: '1', high: '10', low: '1', close: '3' },
-    { stock: '3', date: 'date1', open: '1', high: '10', low: '1', close: '3' },
-];
+
+const mockProps = {
+  isUp : true,
+  id : 1,
+  rank : '1',
+  title : 'test_title',
+  isKOSPI : true,
+  code : '1',
+  price : '2',
+  yesterdayPrice : '1',
+  score : '1',
+  news : [
+    { id : '1', link : 'test_link', title : 'test_title', press : 'test_press', date : '2020-12-01'},
+    { id : '2', link : 'test_link', title : 'test_title', press : 'test_press', date : '2020-12-01'},
+  ],
+  stockhistory : [
+    { id : '1', endPrice : '1', tradeVolume : '1', date : '2020-12-01'},
+    { id : '2', endPrice : '1', tradeVolume : '1', date : '2020-12-02'},
+  ],
+}
+
+const mockProps_excluded = {
+  isUp : false,
+  id : 1,
+  rank : null,
+  title : null,
+  isKOSPI : false,
+  code : null,
+  price : null,
+  yesterdayPrice : null,
+  score : null,
+  news : [],
+  stockhistory : [],
+}
 
 
 describe('<StockReportBlock />', () => {
-  let spyPost;
+  let stockReportBlock;
+  let spyHistoryPush;
+
   beforeEach(() => {
-    spyPost = jest.spyOn(api, 'get').mockImplementation(() => {
-      return new Promise((resolve, reject) => {
-          let result
-          result = {
-            data:{
-                  'title' :'test',
-                  'isKOSPI' : 'KOSPI',
-                  'code' : 123456,
-                  'price' : 100,
-                  'yesterdayPrice' : 99
-                },  
-            status: 203,
-          }
-          resolve(result);
-      });
+    spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
+      return (dispatch) => {};
     });
-    console.error = jest.fn();
-  });
+  })
 
   afterEach(() => {
     jest.clearAllMocks();
-    console.error.mockClear();
   });
 
-  it('should render without errors', () => {
-    const { container } = render(<StockReportBlock id={1}/>);
+  it('should render without errors when StockReportBlock', () => {
+    stockReportBlock = 
+      <Provider store={store}>
+        <StockReportBlock
+          history={history}
+          isUp={mockProps.isUp}
+          id={mockProps.id}
+          rank={mockProps.rank}
+          title={mockProps.title}
+          isKOSPI={mockProps.isKOSPI}
+          code={mockProps.code}
+          price={mockProps.price}
+          yesterdayPrice={mockProps.yesterdayPrice}
+          score={mockProps.score}
+          news={mockProps.news}
+          stockhistory={mockProps.stockhistory}
+        />
+      </Provider>
+    const { container } = render(stockReportBlock);
+    let query = queryAllByTestId(container, 'StockReportBlock');
+    expect(query.length).toBe(1);
+
+    // When grid row is clicked
+    const input = screen.getAllByTestId('Grid_Row');
+    fireEvent.click(input[0]);
+  });
+
+  it('should render without errors when StockReportBlock with excluded values', () => {
+    stockReportBlock = 
+      <Provider store={store}>
+        <StockReportBlock
+          history={history}
+          isUp={mockProps_excluded.isUp}
+          id={mockProps_excluded.id}
+          rank={mockProps_excluded.rank}
+          title={mockProps_excluded.title}
+          isKOSPI={mockProps_excluded.isKOSPI}
+          code={mockProps_excluded.code}
+          price={mockProps_excluded.price}
+          yesterdayPrice={mockProps_excluded.yesterdayPrice}
+          score={mockProps_excluded.score}
+          news={mockProps_excluded.news}
+          stockhistory={mockProps_excluded.stockhistory}
+        />
+      </Provider>
+    const { container } = render(stockReportBlock);
     const query = queryAllByTestId(container, 'StockReportBlock');
     expect(query.length).toBe(1);
   });
 
-  it('should render without errors', () => {
-    spyPost = jest.spyOn(api, 'get').mockImplementation(() => {
-      return new Promise((resolve, reject) => {
-          let result
-          
-          result = {
-            data:{
-                  'title' :'test',
-                  'isKOSPI' : 'KOSPI',
-                  'code' : 123456,
-                  'price' : 100,
-                  'yesterdayPrice' : 101
-                },  
-            status: 203,
-          }
-          resolve(result);
-      });
-    });
-    const { container } = render(<StockReportBlock id={1}/>);
-    const query = queryAllByTestId(container, 'StockReportBlock');
-    expect(query.length).toBe(1);
-  });
 
-  it('should render without errors', () => {
-    spyPost = jest.spyOn(api, 'get').mockImplementation(() => {
-      return new Promise((resolve, reject) => {
-          let result
-          result = {
-            status: 404,
-          }
-          reject(result);
-      });
-    });
-    const { container } = render(<StockReportBlock id={1}/>);
-    const query = queryAllByTestId(container, 'StockReportBlock');
-    expect(query.length).toBe(1);
-  });
 });

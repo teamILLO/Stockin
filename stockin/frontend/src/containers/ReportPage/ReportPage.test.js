@@ -136,9 +136,6 @@ describe('<ReportPage />', () => {
     spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
       return (dispatch) => {};
     });
-    spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
-      return (dispatch) => {};
-    });
     spyUpStockInfo = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
       return (dispatch) => {};
     });

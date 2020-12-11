@@ -54,6 +54,7 @@ export const renderReportBlock = (li, tab) => {
     result_list.push(
       <div key={cnt}>
         <StockReportBlock
+          data-testid="StockReportBlock"
           isUp={tab === 'up' ? true : false}
           id={stock.id}
           rank={stock.rank}
