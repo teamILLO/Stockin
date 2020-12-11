@@ -3,9 +3,14 @@ import stockHistory, { updatePriceList, getStockHistory } from './stockHistory';
 import store from '../store';
 
 const testList = [
-  { stock: '1', date: 'date1', open: '1', high: '10', low: '1', close: '3' },
-  { stock: '2', date: 'date1', open: '1', high: '10', low: '1', close: '3' },
-  { stock: '3', date: 'date1', open: '1', high: '10', low: '1', close: '3' },
+  { stock: '1', date: 'date1', open: '1', high: '10', low: '1', close: '3', volume: '1' },
+  { stock: '2', date: 'date1', open: '1', high: '10', low: '1', close: '3', volume: '2' },
+  { stock: '3', date: 'date1', open: '1', high: '10', low: '1', close: '3', volume: '3' },
+];
+const testListZero = [
+  { stock: '1', date: 'date1', open: '1', high: '1', low: '1', close: '1', volume: '0' },
+  { stock: '2', date: 'date1', open: '1', high: '1', low: '1', close: '1', volume: '0' },
+  { stock: '3', date: 'date1', open: '1', high: '1', low: '1', close: '1', volume: '0' },
 ];
 
 describe('stockHistory ', () => {
@@ -37,6 +42,22 @@ describe('stockHistory ', () => {
       ),
     ).toEqual({
       priceList: testList,
+    });
+  });
+
+  it('should handle updatePriceList when volume is zero', () => {
+    expect(
+      stockHistory(
+        {
+          priceList: [],
+        },
+        {
+          type: updatePriceList.type,
+          payload: testListZero,
+        },
+      ),
+    ).toEqual({
+      priceList: testListZero,
     });
   });
 
