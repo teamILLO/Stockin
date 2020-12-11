@@ -12,10 +12,13 @@ const AboutUsPage = (props) => {
 
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
+  }, []);
+
+  useEffect(() => {
     if (loggingIn === false) {
       history.push('/prelogin');
     }
-  }, [dispatch, loggingIn]);
+  }, [loggingIn]);
 
   return (
     <div data-testid="AboutUsPage">

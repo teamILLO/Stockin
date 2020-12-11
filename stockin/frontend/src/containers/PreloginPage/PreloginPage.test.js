@@ -24,6 +24,36 @@ jest.mock('../../components/Footer/Footer', () => {
   });
 });
 
+jest.mock('../../components/Modal/SignupModal/SignupModal', () => {
+  return jest.fn((props) => {
+    return <div className="spySignupModal"></div>;
+  });
+});
+
+jest.mock('../../components/Modal/FindPasswdModal/FindPasswdModal', () => {
+  return jest.fn((props) => {
+    return <div className="spyFindPasswdModal"></div>;
+  });
+});
+
+jest.mock('../../components/Stockin/Stockin', () => {
+  return jest.fn((props) => {
+    return <div className="spyStockin"></div>;
+  });
+});
+
+jest.mock('../../components/AboutUs/AboutUs', () => {
+  return jest.fn((props) => {
+    return <div className="spyAboutUs"></div>;
+  });
+});
+
+jest.mock('../../components/Preview/Preview', () => {
+  return jest.fn((props) => {
+    return <div className="spyPreview"></div>;
+  });
+});
+
 const initialAuthState = { loggingIn: false, user: { id: 1 } };
 const initialAuthStateLogin = { loggingIn: true, user: null };
 const initialAuthStateUndefined = { loggingIn: undefined, user: null };
