@@ -45,7 +45,6 @@ const MyInterestsChart = (props) => {
       mode: 'point',
       callbacks: {
         label: (tooltipItem, data) => {
-          console.log(data.datasets[tooltipItem.datasetIndex]);
           return data.datasets[tooltipItem.datasetIndex].label;
         },
       },

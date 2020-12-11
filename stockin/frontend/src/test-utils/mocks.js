@@ -23,9 +23,6 @@ const getMockFS = jest.fn((initialState) => (state = initialState, action) => {
 const getMockGroups = jest.fn((initialState) => (state = initialState, action) => {
   return state;
 });
-const getMockIncrement = jest.fn((initialState) => (state = initialState, action) => {
-  return state;
-});
 
 export const getMockStore = (
   initialAuthState = { loggingIn: false, user: null },
@@ -34,8 +31,7 @@ export const getMockStore = (
   initialCommentState = { commentList: [] },
   initialNewsState = { news: [] },
   initialFSState = { fs: [] },
-  initialGroupsState = { group: [], groupList : [] },
-  initialIncrementState = { increment : 0 },
+  initialGroupsState = { group: [], groupList: [] },
 ) => {
   const mockAuthentication = getMockAuthentication(initialAuthState);
   const mockStock = getMockStock(initialStockState);
@@ -44,7 +40,6 @@ export const getMockStore = (
   const mockNews = getMockNews(initialNewsState);
   const mockFS = getMockFS(initialFSState);
   const mockGroups = getMockGroups(initialGroupsState);
-  const mockIncrement = getMockIncrement(initialIncrementState);
   const rootReducer = combineReducers({
     router: connectRouter(history),
     authentication: mockAuthentication,
@@ -53,8 +48,7 @@ export const getMockStore = (
     comment: mockComment,
     news: mockNews,
     fs: mockFS,
-    groups : mockGroups,
-    increment : mockIncrement,
+    groups: mockGroups,
   });
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const mockStore = createStore(rootReducer, composeEnhancers(applyMiddleware(...middlewares)));
