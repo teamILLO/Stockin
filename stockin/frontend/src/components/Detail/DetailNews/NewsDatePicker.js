@@ -77,7 +77,7 @@ const NewsDatePicker = (props) => {
   );
 
   return (
-    <div>
+    <div data-testid="datepicker">
       <DatePicker
         selected={startDate}
         onChange={(date) => setStartDate(date)}

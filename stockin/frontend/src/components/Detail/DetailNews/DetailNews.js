@@ -6,7 +6,13 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './DetailNews.css';
 
 const RenderCardItem = (item) => (
-  <Card className="newsCard" href={item.link} header={item.title} meta={item.press} />
+  <Card
+    className="newsCard"
+    key={item.title}
+    href={item.link}
+    header={item.title}
+    meta={item.press}
+  />
 );
 
 const DetailNews = (props) => {
