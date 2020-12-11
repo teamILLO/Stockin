@@ -1,3 +1,5 @@
+sudo: required
+
 matrix:
   include:
     - language: node_js
@@ -25,6 +27,7 @@ matrix:
         - mysql -e "CREATE USER 'swpp'@'localhost' IDENTIFIED BY 'Swpp2020-team15!';"
         - mysql -e "GRANT ALL PRIVILEGES ON stockinDB.* to 'swpp'@'localhost';"
         - mysql -e "GRANT ALL PRIVILEGES ON test_stockinDB.* to 'swpp'@'localhost';"
+        - sudo iptables -I INPUT 1 -p tcp --dport 80 -j ACCEPT
       script:
         - python manage.py makemigrations core
         - python manage.py migrate
