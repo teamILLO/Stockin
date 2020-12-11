@@ -348,3 +348,31 @@ class GroupsTestCase(TestCase):
         # HttpResponseNotAllowed tests
         response = client.get('/api/groups/1/stocks/1/')
         self.assertEqual(response.status_code, 405)
+
+    def test_get_group_list(self):
+        client = Client(enforce_csrf_checks=True)
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
+                    content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
+                    content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/groups/', json.dumps({'name': 'test'}),
+                    content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+
+        target_id = json.loads(response.content)['id']
+        test_stock = Stock.objects.create(title='test')
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
+        response = client.post('/api/groups/'+str(target_id)+'/stocks/', json.dumps({'id': test_stock.id}),
+                    content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+        
+        response = client.get('/api/groups/')
+        self.assertEqual(response.status_code, 200)
