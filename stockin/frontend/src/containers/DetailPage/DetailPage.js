@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Container, Tab, Button } from 'semantic-ui-react';
 import { history } from '../../store/store';
 import { getStockHistory } from '../../store/stockHistory/stockHistory';
 import { checkLogin } from '../../store/authentication/authentication';
@@ -11,7 +12,6 @@ import DetailPriceTrends from '../../components/Detail/DetailPriceTrends/DetailP
 import DetailFinancialState from '../../components/Detail/DetailFinancialState/DetailFinancialState';
 import DetailComment from '../../components/Detail/DetailComment/DetailComment';
 import Footer from '../../components/Footer/Footer';
-import { Container, Tab, Button } from 'semantic-ui-react';
 import StockInfo from '../../components/StockInfo/StockInfo';
 import AddFavoriteModal from '../../components/Modal/AddFavoriteModal/AddFavoriteModal';
 import { api } from '../../api';
@@ -20,9 +20,7 @@ import './DetailPage.css';
 const panes = (id, data, stock, fs_score) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
-    render: () => {
-      return <DetailOverview id={id} stock={stock} fs_score={fs_score} />;
-    },
+    render: () => <DetailOverview id={id} stock={stock} fs_score={fs_score} />,
   },
   {
     menuItem: { key: 'News', className: 'News', content: 'News' },
@@ -51,26 +49,34 @@ const DetailPage = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
+    document.body.style.overflow = 'auto';
+  }, []);
+
+  useEffect(() => {
     if (loggingIn === false) {
       history.push('/prelogin');
     }
-    dispatch(getStockHistory(+props.match.params.id));
-
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, [dispatch, loggingIn, props.match.params.id]);
+  }, [loggingIn]);
 
   useEffect(() => {
-    {
+    dispatch(getStockHistory(+props.match.params.id));
+  }, [dispatch, props.match.params.id]);
+
+  useEffect(() => {
+    try {
       api.get('stocks/' + props.match.params.id + '/').then((response) => {
         setCurrStock(response.data);
       });
+    } catch (e) {}
+  }, [props.match.params.id]);
+
+  useEffect(() => {
+    try {
       api.get('stocks/financialstats/score/' + props.match.params.id + '/').then((response) => {
         setCurrFSscore(response.data);
         //score 객체에는 score와 status가 있음, status가 0이 아니면 score를 도출하지 못한다는 뜻임 'backend/core/views/stocks.py'의 fs_score 참조
       });
-    }
+    } catch (e) {}
   }, [props.match.params.id]);
 
   let graph =

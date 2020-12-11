@@ -150,8 +150,8 @@ DATABASES = {
     'default' : {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'stockinDB',
-        'USER': 'root',                         # mysql user-id
-        'PASSWORD': '',         # mysql user-password
+        'USER': 'swpp',                         # mysql user-id
+        'PASSWORD': 'Swpp2020-team15!',         # mysql user-password
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'TEST': {
