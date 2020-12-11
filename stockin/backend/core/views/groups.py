@@ -32,23 +32,23 @@ def group_list_and_create(request):
                 op = ['','','','','']
                 try:
                     op[4] = fs_stock.get(quarter='20년 6월').operatingProfit
-                except ObjectDoesNotExist as e:
+                except:
                     pass
                 try:
                     op[3] = fs_stock.get(quarter='20년 3월').operatingProfit
-                except ObjectDoesNotExist as e:
+                except:
                     pass
                 try:
                     op[2] = fs_stock.get(quarter='19년 12월').operatingProfit
-                except ObjectDoesNotExist as e:
+                except:
                     pass
                 try:
                     op[1] = fs_stock.get(quarter='19년 6월').operatingProfit
-                except ObjectDoesNotExist as e:
+                except:
                     pass
                 try:
                     op[0] = fs_stock.get(quarter='19년 3월').operatingProfit
-                except ObjectDoesNotExist as e:
+                except:
                     pass
                 for i in range(5):
                     if op[i] == '-':
