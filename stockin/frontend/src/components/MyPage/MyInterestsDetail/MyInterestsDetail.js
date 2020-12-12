@@ -10,7 +10,7 @@ const MyInterestsDetail = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [panes, setPanes] = useState([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+ // const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     dispatch(getGroupList());
@@ -50,18 +50,18 @@ const MyInterestsDetail = () => {
     setPanes(results);
   }, [groupList]);
 
-  const handleTabChange = (e, { activeIndex }) => {
-    if (activeIndex === panes.length - 1) setActiveIndex(0);
-    else setActiveIndex(activeIndex);
-  };
+  // const handleTabChange = (e, { activeIndex }) => {
+  //   if (activeIndex === panes.length - 1) setActiveIndex(0);
+  //   else setActiveIndex(activeIndex);
+  // };
 
   return (
     <div className="MyInterestsDetail" data-testid="MyInterestsDetail">
       <Tab
         menu={{ attached: true, tabular: true, className: 'withButton' }}
         panes={panes}
-        activeIndex={activeIndex}
-        onTabChange={handleTabChange}
+        // activeIndex={activeIndex}
+        // onTabChange={handleTabChange}
       />
     </div>
   );
