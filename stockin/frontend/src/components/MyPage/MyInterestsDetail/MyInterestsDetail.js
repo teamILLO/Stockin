@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Tab, Button } from 'semantic-ui-react';
 import EditModal from '../../Modal/EditModal/EditModal';
 import { getGroupList } from '../../../store/groups/groups';
+import { RenderMyInterestsDetailItem } from '../index';
 import GroupStock from './GroupStock';
 import '../../../styles/buttons.css';
 
@@ -17,36 +18,7 @@ const MyInterestsDetail = () => {
   }, []);
 
   useEffect(() => {
-    var results = [];
-    results = groupList.map((e) => ({
-      menuItem: { key: e.id, content: e.name },
-      render: () => (
-        <Tab.Pane>
-          <GroupStock stocks={e.stocks} />
-        </Tab.Pane>
-      ),
-    }));
-    results = [
-      ...results,
-      {
-        menuItem: {
-          content: <EditModal trigger={<Button>edit group</Button>} />,
-          className: 'disabled',
-          key: 'editButton',
-        },
-        render: () => (
-          <h5>
-            <br />
-            <br />
-            <br />
-            PLEASE ADD GROUP!
-            <br />
-            <br />
-            <br />
-          </h5>
-        ),
-      },
-    ];
+    let results = RenderMyInterestsDetailItem(groupList);
     setPanes(results);
   }, [groupList]);
 
