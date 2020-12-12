@@ -71,7 +71,7 @@ jest.mock('../../components/Modal/AddFavoriteModal/AddFavoriteModal', () => {
 const mockStore = getMockStore(
   { loggingIn: true, user: { id: 1 } },
   { stockList: [] },
-  { priceList: [] },
+  { priceList: [{ id: 1 }, { id: 2 }] },
   { commentList: [] },
   { news: [] },
   { fs: [] },
@@ -189,5 +189,11 @@ describe('<DetailPage />', () => {
   it('should dispatch checkLogin when loggingIn = undefined', () => {
     render(detailPageUndefined);
     expect(spyCheckLogin).toHaveBeenCalledTimes(1);
+  });
+
+  it('should handle mouse hover', () => {
+    const { container } = render(detailPage);
+    fireEvent.mouseOver(getByTestId(container, 'graph'));
+    fireEvent.mouseLeave(getByTestId(container, 'graph'));
   });
 });

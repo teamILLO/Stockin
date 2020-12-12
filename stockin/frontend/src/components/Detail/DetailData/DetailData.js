@@ -100,7 +100,7 @@ const DetailData = (props) => {
         xScale={scaleTime()}
         xExtents={xExtents}
       >
-        <Chart id={1} yExtents={(d) => [d.high, d.low]}>
+        <Chart id={1} data-testid='chart-Chart' yExtents={(d) => [d.high, d.low]}>
           <XAxis axisAt="bottom" orient="bottom" ticks={6} />
           <YAxis axisAt="left" orient="left" ticks={5} />
           <CandlestickSeries {...candlesAppearance} width={timeIntervalBarWidth(utcDay)} />

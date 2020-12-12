@@ -55,7 +55,7 @@ const MyInfo = (props) => {
           <Grid.Row>
             <div style={{width:500}}>
               <Table  basic='very' celled className='myinfoTable'>
-                
+                <Table.Body>
                   <Table.Row>
                     <Table.Cell width={2}><Header as='h2'>Mail</Header></Table.Cell>
                     <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.email}</Header></Table.Cell>
@@ -64,7 +64,7 @@ const MyInfo = (props) => {
                     <Table.Cell width={2}><Header as='h2'>Nickname</Header></Table.Cell>
                     <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.nickname}</Header></Table.Cell>
                   </Table.Row>
-              
+                  </Table.Body>
                 </Table>
               </div>
           </Grid.Row>
@@ -85,7 +85,7 @@ const MyInfo = (props) => {
           <Grid.Row>
             <div style={{width:500}}>
               <Table  basic='very' celled className='myinfoTable'>
-                
+                <Table.Body>
                   <Table.Row>
                     <Table.Cell width={2}><Header as='h2'>Mail</Header></Table.Cell>
                     <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.email}</Header></Table.Cell>
@@ -94,6 +94,7 @@ const MyInfo = (props) => {
                     <Table.Cell width={2}><Header as='h2'>Nickname</Header></Table.Cell>
                     <Table.Cell width={5} textAlign='right'><Input name="nicknameInput" value={nicknameInput} onChange={(event) => setNicknameInput(event.target.value)}/></Table.Cell>
                   </Table.Row>
+                  </Table.Body>
                 </Table>
               </div>
           </Grid.Row>

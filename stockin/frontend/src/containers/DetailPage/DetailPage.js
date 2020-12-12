@@ -107,7 +107,12 @@ const DetailPage = (props) => {
       <Container>
         <StockInfo id={props.match.params.id} />
         <AddFavoriteModal trigger={<Button content="관심 등록" />} />
-        <div className="graph" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        <div
+          data-testid="graph"
+          className="graph"
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {graph}
         </div>
 
