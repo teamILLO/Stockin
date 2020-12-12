@@ -54,15 +54,7 @@ describe('<DetailData />', () => {
     const sleep = seconds => new Promise(res => setTimeout(() => res(), seconds * 1000));
     
     const { container } = render(detailData);
-    const query = screen.getByText("2040");
-    fireEvent.mouseOver(query)
-    const q =screen.getByTestId('DetailData')
-    fireEvent.mouseMove(q)
-    
-    
-    screen.debug()
-   
 
-    await sleep(2)
+    
   });
 });
