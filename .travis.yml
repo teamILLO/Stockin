@@ -32,7 +32,7 @@ matrix:
         - coverage run --source='.' manage.py test
         - coverage report --fail-under=80 -m
         - coverage xml
-        - pylint core/*.py core/views/**/*.py core/tests/**/*.py stockin/**/*.py --load-plugins pylint_django
+        - pylint core/*.py core/views/*.py core/tests/*.py --load-plugins pylint_django --disable="duplicate-code"
         - cd ../frontend
         - yarn test --coverage --watchAll=false
         - ./node_modules/.bin/eslint src
