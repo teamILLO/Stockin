@@ -16,7 +16,6 @@ const testStockHistory = [
 const mockUpGraphComponent = 
   <Provider store={store}>
     <GraphComponent 
-      history={history} 
       stockhistory={testStockHistory} 
       isUp={true}
     />
@@ -25,7 +24,6 @@ const mockUpGraphComponent =
 const mockDownGraphComponent = 
   <Provider store={store}>
     <GraphComponent 
-      history={history} 
       stockhistory={testStockHistory}
       isUp={false}
     />
