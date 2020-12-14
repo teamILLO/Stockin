@@ -1,29 +1,36 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed, HttpResponseForbidden, JsonResponse
-from django.contrib.auth import get_user_model
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
-from django.shortcuts import render, get_object_or_404
-
+'''
+comments.py
+'''
 from json import JSONDecodeError
 import json
+
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseNotAllowed, HttpResponseForbidden, JsonResponse
+from django.contrib.auth import get_user_model
+
+
+
 
 from core.models import Stock, Comment
 
 
 def comment_list(request, stock_id=""):
+    '''
+    comment_list
+    '''
     if request.method == 'GET':
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
 
         response_list = []
-        for comment in Comment.objects.filter(stock=stock_id).iterator():
-            response_list.append({'stock': stock_id, 'time': comment.time,
-                                  'content': comment.content, 'author': comment.author.nickname, 'id': comment.id})
+        for comment_ in Comment.objects.filter(stock=stock_id).iterator():
+            response_list.append({'stock': stock_id, 'time': comment_.time,
+                                  'content': comment_.content, 'author': comment_.author.nickname,
+                                  'id': comment_.id})
         return JsonResponse(response_list, safe=False)
-        
-    elif request.method == 'POST':
+
+    if request.method == 'POST':
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
         stock = get_object_or_404(Stock, id=stock_id)
@@ -31,60 +38,64 @@ def comment_list(request, stock_id=""):
             req_data = json.loads(request.body.decode())
             comment_content = req_data['content']
             comment_author = req_data['author']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponseBadRequest()
-        User = get_user_model()
-        user = User.objects.get(nickname=comment_author)
-        comment = Comment(
+        user = get_user_model().objects.get(nickname=comment_author)
+        comment_ = Comment(
             stock=stock, content=comment_content, author=user)
-        comment.save()
-        response_dict = {'id': comment.id, 'stock': comment.stock.id,
-                         'time': comment.time, 'content': comment.content, 'author': comment.author.nickname}
+        comment_.save()
+        response_dict = {'id': comment_.id, 'stock': comment_.stock.id,
+                         'time': comment_.time, 'content': comment_.content,
+                         'author': comment_.author.nickname}
         return JsonResponse(response_dict, status=201)
 
-    else:
-        return HttpResponseNotAllowed(['GET', 'POST'])
+
+    return HttpResponseNotAllowed(['GET', 'POST'])
 
 
 def comment(request, comment_id=""):
+    '''
+    comment
+    '''
     if request.method == 'GET':
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
-        comment = get_object_or_404(Comment, id=comment_id)
+        comment_ = get_object_or_404(Comment, id=comment_id)
 
-        response_dict = {'stock': comment.stock.id, 'time': comment.time,
-                         'content': comment.content, 'author': comment.author.id}
+        response_dict = {'stock': comment_.stock.id, 'time': comment_.time,
+                         'content': comment_.content, 'author': comment_.author.id}
         return JsonResponse(response_dict)
 
-    elif request.method == 'PUT':
+    if request.method == 'PUT':
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
-        comment = get_object_or_404(Comment, id=comment_id)
+        comment_ = get_object_or_404(Comment, id=comment_id)
 
-        if not (request.user.id == comment.author.id):
+        if not request.user.id == comment_id.author.id:
             return HttpResponseForbidden()
 
         try:
             req_data = json.loads(request.body.decode())
             comment_content = req_data['content']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponseBadRequest()
 
-        comment.content = comment_content
-        comment.save()
-        response_dict = {'id': comment.id, 'stock': comment.stock.id,
-                         'time': comment.time, 'content': comment.content, 'author': comment.author.id}
+        comment_.content = comment_content
+        comment_.save()
+        response_dict = {'id': comment_.id, 'stock': comment_.stock.id,
+                         'time': comment_.time, 'content': comment_.content,
+                         'author': comment_.author.id}
         return JsonResponse(response_dict, status=200)
 
-    elif request.method == 'DELETE':
+    if request.method == 'DELETE':
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
-        comment = get_object_or_404(Comment, id=comment_id)
-        if not (request.user.id == comment.author.id):
+        comment_ = get_object_or_404(Comment, id=comment_id)
+        if not request.user.id == comment_.author.id:
             return HttpResponseForbidden()
 
-        comment.delete()
+        comment_.delete()
         return HttpResponse(status=200)
 
-    else:
-        return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])
+    
+    return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])
