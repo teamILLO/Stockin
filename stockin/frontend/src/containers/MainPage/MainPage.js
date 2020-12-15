@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid, Icon, Tab } from 'semantic-ui-react';
+import { Grid, Icon, Tab, Header as SemanticHeader } from 'semantic-ui-react';
 import { getGroupList } from '../../store/groups/groups';
 import { api } from '../../api/index';
 import 'slick-carousel/slick/slick.css';
@@ -141,6 +141,9 @@ const MainPage = (props) => {
       render: () => (
         <Grid>
           <Grid.Row centered>
+          <Grid.Column width={13} style={{ height: '50px' }}>
+            <SemanticHeader id='up_reco' as='h2' icon='check' content='매수 추천 TOP10' />
+          </Grid.Column>
             <Grid.Column width={13} style={{ height: '350px' }}>
               <Slider className="topSlider" {...sliderSettings} draggable={false}>
                 {topStock.map((top, index) => {
@@ -148,8 +151,12 @@ const MainPage = (props) => {
                 })}
               </Slider>
             </Grid.Column>
-
+            
+            <Grid.Column width={13}>
+          <SemanticHeader id='down_reco' as='h2' icon='check' content='매도 추천 TOP10' />
+          </Grid.Column>
             <Grid.Column width={13} style={{ height: '350px' }}>
+              
               <Slider className="topSlider" {...sliderSettings} draggable={false}>
                 {bottomStock.map((bottom, index) => {
                   return <StockBlock id={bottom['id']} score={bottom['score']} key={index} />;

@@ -2,13 +2,10 @@
     width: 100%;
 }
 
-
 .slick-next:before {
     font-size: 40px;
     color:black; 
 }
-
-
 
 .slick-prev:before {
     margin-left:-15px;
@@ -27,4 +24,16 @@
 .slick-slider.interestSlider{
     margin-top: -20px;
     margin-bottom: 20px;
+}
+
+#up_reco{
+    color: #e60000;
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
+#down_reco{
+    color: #0000b3;
+    margin-top: 5px;
+    margin-bottom: -10px;
 }
