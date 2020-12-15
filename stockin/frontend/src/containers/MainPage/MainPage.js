@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid, Icon, Tab, Header as SemanticHeader } from 'semantic-ui-react';
+import { Grid, Icon, Tab, Header as SemanticHeader, Popup } from 'semantic-ui-react';
 import { getGroupList } from '../../store/groups/groups';
 import { api } from '../../api/index';
 import 'slick-carousel/slick/slick.css';
@@ -135,6 +135,28 @@ const MainPage = (props) => {
     );
   };
 
+  const buyPop =(
+    <span className='buyPop'>
+  <Popup
+    trigger={<Icon name='question circle outline' />} 
+    wide
+  >
+    <h5>With the learned AI, micro and macro price predictions are made, scored, and displayed in the highest order.</h5>
+  </Popup>
+  </span>
+  );
+
+  const sellPop =(
+    <span className='sellPop'>
+  <Popup
+    trigger={<Icon name='question circle outline' />} 
+    wide
+  >
+    <h5>With the learned AI, micro and macro price predictions are made, scored, and displayed in the lowest order.</h5>
+  </Popup>
+  </span>
+  );
+
   const mainpane = [
     {
       menuItem: 'DailyReport',
@@ -142,7 +164,8 @@ const MainPage = (props) => {
         <Grid>
           <Grid.Row centered>
           <Grid.Column width={13} style={{ height: '50px' }}>
-            <SemanticHeader id='up_reco' as='h2' icon='check' content='매수 추천 TOP10' />
+            <SemanticHeader id='up_reco' as='h2' icon='check' content='매수 추천 TOP10' style={{float:'left'}}/>
+            {buyPop}
           </Grid.Column>
             <Grid.Column width={13} style={{ height: '350px' }}>
               <Slider className="topSlider" {...sliderSettings} draggable={false}>
@@ -153,7 +176,8 @@ const MainPage = (props) => {
             </Grid.Column>
             
             <Grid.Column width={13}>
-          <SemanticHeader id='down_reco' as='h2' icon='check' content='매도 추천 TOP10' />
+          <SemanticHeader id='down_reco' as='h2' icon='check' content='매도 추천 TOP10' style={{float:'left'}}/>
+          {sellPop}
           </Grid.Column>
             <Grid.Column width={13} style={{ height: '350px' }}>
               
