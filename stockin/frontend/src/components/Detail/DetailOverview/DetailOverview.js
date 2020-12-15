@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Header, Segment } from 'semantic-ui-react';
 
 import TotalScoreBullet from './TotalScoreBullet';
+import CompareBarChart from './CompareBarChart';
 
 const DetailOverview = (props) => {
   const data = [
@@ -22,6 +23,36 @@ const DetailOverview = (props) => {
               props.stock.score,
             ]
           : [],
+    },
+  ];
+  const barDataSaleGrowthRate = [
+    {
+      'Sales Growth Rate': props.stock && props.stock.title,
+      'This stock': props.stock && props.stock.saleGrowthRate,
+    },
+    {
+      'Sales Growth Rate': 'Average of Similar Stocks',
+      'Average of Similar Stocks': props.stock && props.stock.saleGrowthRateAvg,
+    },
+  ];
+  const barDataOperatingMargin = [
+    {
+      'Operating Margin': props.stock && props.stock.title,
+      'This stock': props.stock && props.stock.operatingMargin,
+    },
+    {
+      'Operating Margin': 'Average of Similar Stocks',
+      'Average of Similar Stocks': props.stock && props.stock.operatingMarginAvg,
+    },
+  ];
+  const barDataPER = [
+    {
+      PER: props.stock ? props.stock.title : '',
+      'This stock': props.stock ? props.stock.crawledPER : 0,
+    },
+    {
+      PER: 'Average of Similar Stocks',
+      'Average of Similar Stocks': props.stock ? props.crawledPERAvg : 0,
     },
   ];
 
@@ -51,8 +82,14 @@ const DetailOverview = (props) => {
             </Segment>
           </Grid.Column>
         </Grid.Row>
-        {}
       </Grid>
+      <div style={{ height: '300px' }}>
+        <CompareBarChart
+          data={barDataPER}
+          keys={['This Stock', 'Average of Similar Stocks']}
+          index="PER"
+        />
+      </div>
     </div>
   );
 };
