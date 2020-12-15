@@ -4,6 +4,7 @@ index
 import csv
 import os
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.utils import OperationalError
 from core.crawlers.preprocessors.score import base_score
 
 
@@ -15,23 +16,23 @@ def get_fs_info(stock, fs_stock) :
     op_ = ['','','','','']
     try:
         op_[4] = fs_stock.get(quarter='20년 6월').operatingProfit
-    except :
+    except (ObjectDoesNotExist, OperationalError):
         pass
     try:
         op_[3] = fs_stock.get(quarter='20년 3월').operatingProfit
-    except:
+    except (ObjectDoesNotExist, OperationalError):
         pass
     try:
         op_[2] = fs_stock.get(quarter='19년 12월').operatingProfit
-    except:
+    except (ObjectDoesNotExist, OperationalError):
         pass
     try:
         op_[1] = fs_stock.get(quarter='19년 6월').operatingProfit
-    except:
+    except (ObjectDoesNotExist, OperationalError):
         pass
     try:
         op_[0] = fs_stock.get(quarter='19년 3월').operatingProfit
-    except:
+    except (ObjectDoesNotExist, OperationalError):
         pass
     for i in range(5):
         if op_[i] == '-':
@@ -46,17 +47,25 @@ def get_fs_info(stock, fs_stock) :
     rdr = csv.reader(file_)
     operating_cashflow = []
     for line in rdr:
-        if line[0] == stock.title and line[1] == '18년 12월':
-            if line[2] == ' ':
-                operating_cashflow.append('')
-            else:
-                operating_cashflow.append(float(str(line[2]).replace(',','')))
-        elif line[0] == stock.title and line[1] == '19년 12월':
-            if line[2] == ' ':
-                operating_cashflow.append('')
-            else:
-                operating_cashflow.append(float(str(line[2]).replace(',','')))
+        if line[0] == stock.title and line[1] == '18년 12월' and line[2] == ' ':
+            operating_cashflow.append('')
+        elif line[0] == stock.title and line[1] == '18년 12월':
+            operating_cashflow.append(float(str(line[2]).replace(',','')))
+            # if line[2] == ' ':
+            #     operating_cashflow.append('')
+            # else:
+            #     operating_cashflow.append(float(str(line[2]).replace(',','')))
+        elif line[0] == stock.title and line[1] == '19년 12월' and line[2] == ' ':
+            operating_cashflow.append('')
             break
+        elif line[0] == stock.title and line[1] == '19년 12월':
+            operating_cashflow.append(float(str(line[2]).replace(',','')))
+            break
+            # if line[2] == ' ':
+            #     operating_cashflow.append('')
+            # else:
+            #     operating_cashflow.append(float(str(line[2]).replace(',','')))
+            # break
     file_.close()
 
     # response = {'score' : score, 'status': if score is None,
