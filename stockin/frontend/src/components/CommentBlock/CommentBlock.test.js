@@ -34,7 +34,7 @@ const mockStoreUserNull = getMockStore(
 );
 
 const mockStoreUserSame = getMockStore(
-  { loggedIn: true, user: { nickname: 'TEST_AUTHOR' } },
+  { loggedIn: true, user: { id: 1, nickname: 'TEST_AUTHOR' } },
   { stockList: [] },
   { priceList: [] },
   initialCommentState,
@@ -43,7 +43,7 @@ const mockStoreUserSame = getMockStore(
 );
 
 const mockStoreUserDiff = getMockStore(
-  { loggedIn: true, user: { nickname: 'TEST_ARTHUR' } },
+  { loggedIn: true, user: { id: 1, nickname: 'TEST_ARTHUR' } },
   { stockList: [] },
   { priceList: [] },
   initialCommentState,

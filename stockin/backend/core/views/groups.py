@@ -82,20 +82,23 @@ def group_list_and_create(request):
     return HttpResponseNotAllowed(['GET', 'POST'])
 
 
-def group_edit(request, id='') :
+def group_edit(request, group_id='') :
     '''
     group_edit
     '''
-    if request.method == 'PUT':
+    if request.method in ['PUT', 'DELETE']:
         # check user is logged_in
         if not request.user.is_authenticated :
             return HttpResponse(status=401)
-
-        group = get_object_or_404(Group, id=id)
+        group = get_object_or_404(Group, id=group_id)
 
         # check user valid
         if group.user != request.user :
             return HttpResponse(status=403)
+
+    if request.method == 'PUT':
+
+        group = get_object_or_404(Group, id=group_id)
 
         try :
             body = request.body.decode()
@@ -111,15 +114,7 @@ def group_edit(request, id='') :
         return HttpResponse(content=json.dumps(response_dict), status = 200)
 
     if request.method == 'DELETE':
-        # check user is logged_in
-        if not request.user.is_authenticated :
-            return HttpResponse(status=401)
-
-        group = get_object_or_404(Group, id=id)
-
-        # check user valid
-        if group.user != request.user :
-            return HttpResponse(status=403)
+        group = get_object_or_404(Group, id=group_id)
 
         # TO-do : Delete fail handle
         group.delete()
@@ -130,19 +125,23 @@ def group_edit(request, id='') :
     return HttpResponseNotAllowed(['PUT', 'DELETE'])
 
 
-def group_stock_list(request, id=''):
+def group_stock_list(request, group_id=''):
     '''
     group_stock_list
     '''
-    if request.method == 'GET':
+    if request.method in ['GET', 'POST']:
         # check if user is logged_in
         if not request.user.is_authenticated :
             return HttpResponse(status=401)
 
-        group = get_object_or_404(Group, id=id)
+        group = get_object_or_404(Group, id=group_id)
         # check user valid
         if group.user != request.user :
             return HttpResponse(status=403)
+
+    if request.method == 'GET':
+
+        group = get_object_or_404(Group, id=group_id)
 
         response_list = []
         for stock in group.stocks.all():
@@ -152,27 +151,18 @@ def group_stock_list(request, id=''):
         return JsonResponse(response_list, safe=False)
 
     if request.method == 'POST':
-        # check if user is logged_in
-        if not request.user.is_authenticated :
-            return HttpResponse(status=401)
 
-        group = get_object_or_404(Group, id=id)
-        # check user valid
-        if group.user != request.user :
-            return HttpResponse(status=403)
+        group = get_object_or_404(Group, id=group_id)
 
-        try:
-            body = request.body.decode()
-            stock_id = json.loads(body)['id']
+        # try:
+        body = request.body.decode()
+        stock_id = json.loads(body)['id']
 
-        except (KeyError, JSONDecodeError):
-            return HttpResponseBadRequest()
+        # except (KeyError, JSONDecodeError):
+        #     return HttpResponseBadRequest()
 
         # find record in stock model
-        try:
-            target_stock = Stock.objects.get(id=stock_id)
-        except Stock.DoesNotExist:
-            return HttpResponseBadRequest()
+        target_stock = get_object_or_404(Stock,id=stock_id)
 
         # if stock already exists, immediate return 204 'NO CONTENT'
         if group.stocks.filter(id=int(stock_id)) :

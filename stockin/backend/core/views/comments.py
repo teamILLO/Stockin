@@ -57,9 +57,18 @@ def comment(request, comment_id=""):
     '''
     comment
     '''
-    if request.method == 'GET':
+    if request.method in ['GET', 'PUT', 'DELETE']:
         if not request.user.is_authenticated:
             return HttpResponse(status=401)
+
+    if request.method in ['PUT', 'DELETE']:
+        comment_ = get_object_or_404(Comment, id=comment_id)
+
+        if not request.user.id == comment_.author.id:
+            return HttpResponseForbidden()
+
+    if request.method == 'GET':
+
         comment_ = get_object_or_404(Comment, id=comment_id)
 
         response_dict = {'stock': comment_.stock.id, 'time': comment_.time,
@@ -67,18 +76,14 @@ def comment(request, comment_id=""):
         return JsonResponse(response_dict)
 
     if request.method == 'PUT':
-        if not request.user.is_authenticated:
-            return HttpResponse(status=401)
+
         comment_ = get_object_or_404(Comment, id=comment_id)
 
-        if not request.user.id == comment_.author.id:
-            return HttpResponseForbidden()
-
-        try:
-            req_data = json.loads(request.body.decode())
-            comment_content = req_data['content']
-        except (KeyError, JSONDecodeError):
-            return HttpResponseBadRequest()
+        # try:
+        req_data = json.loads(request.body.decode())
+        comment_content = req_data['content']
+        # except (KeyError, JSONDecodeError):
+        #     return HttpResponseBadRequest()
 
         comment_.content = comment_content
         comment_.save()
@@ -88,12 +93,8 @@ def comment(request, comment_id=""):
         return JsonResponse(response_dict, status=200)
 
     if request.method == 'DELETE':
-        if not request.user.is_authenticated:
-            return HttpResponse(status=401)
-        comment_ = get_object_or_404(Comment, id=comment_id)
-        if not request.user.id == comment_.author.id:
-            return HttpResponseForbidden()
 
+        comment_ = get_object_or_404(Comment, id=comment_id)
         comment_.delete()
         return HttpResponse(status=200)
 

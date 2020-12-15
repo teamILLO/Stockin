@@ -4,6 +4,33 @@ import { Button, Comment, Form } from 'semantic-ui-react';
 import { deleteComment, editComment } from '../../store/comment/comment';
 import './CommentBlock.css';
 
+const avatar = [
+  'avatar/small/ade.jpg',
+  'avatar/small/chris.jpg',
+  'avatar/small/christian.jpg',
+  'avatar/small/daniel.jpg',
+  'avatar/small/elliot.jpg',
+  'avatar/small/helen.jpg',
+  'avatar/small/jenny.jpg',
+  'avatar/small/joe.jpg',
+  'avatar/small/justen.jpg',
+  'avatar/small/laura.jpg',
+  'avatar/small/matt.jpg',
+  'avatar/small/nan.jpg',
+  'avatar/small/steve.jpg',
+  'avatar/small/stevie.jpg',
+  'avatar/small/veronika.jpg',
+  'avatar2/small/elyse.png',
+  'avatar2/small/kristy.png',
+  'avatar2/small/lena.png',
+  'avatar2/small/lindsay.png',
+  'avatar2/small/mark.png',
+  'avatar2/small/matthew.png',
+  'avatar2/small/molly.png',
+  'avatar2/small/patrick.png',
+  'avatar2/small/rachel.png',
+];
+
 const CommentBlock = (props) => {
   const { user } = useSelector((state) => state.authentication);
   const [edit, setEdit] = useState(false);
@@ -53,7 +80,7 @@ const CommentBlock = (props) => {
     );
   const content = edit ? (
     <Comment className="Comment">
-      <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+      <Comment.Avatar src={'https://semantic-ui.com/images/' + avatar[user.id % 24]} />
       <Comment.Content>
         <Comment.Author as="a">{props.author}</Comment.Author>
         <Comment.Metadata>
@@ -76,7 +103,13 @@ const CommentBlock = (props) => {
     </Comment>
   ) : (
     <Comment className="Comment">
-      <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+      <Comment.Avatar
+        src={
+          user
+            ? 'https://semantic-ui.com/images/' + avatar[user.id % 24]
+            : 'https://semantic-ui.com/images/avatar/small/ade.jpg'
+        }
+      />
       <Comment.Content>
         <Comment.Author as="a">{props.author}</Comment.Author>
         <Comment.Metadata>

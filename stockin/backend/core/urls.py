@@ -45,8 +45,8 @@ urlpatterns = [
 
     # group model
     path('groups/', views.group_list_and_create, name='group_list_and_create'),
-    path('groups/<int:id>/', views.group_edit, name='group_edit'),
-    path('groups/<int:id>/stocks/', views.group_stock_list, name='group_stock edit'),
+    path('groups/<int:group_id>/', views.group_edit, name='group_edit'),
+    path('groups/<int:group_id>/stocks/', views.group_stock_list, name='group_stock edit'),
     path('groups/<int:group_id>/stocks/<int:stock_id>/',
         views.group_stock_delete,
         name='group_stock_delete'),

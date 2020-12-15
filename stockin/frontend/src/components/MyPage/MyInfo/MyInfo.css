@@ -1,3 +1,9 @@
-.myinfoTable{
+/* .myinfoTable{
     width: 1000px;
+} */
+
+.ui.medium.image.avatar {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
 }
