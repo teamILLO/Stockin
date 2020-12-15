@@ -55,10 +55,13 @@ const MainPage = (props) => {
   const [bottomStock, setBottom] = useState([]);
 
   useEffect(() => {
-    if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
       history.push('/prelogin');
     }
+  }, [loggingIn]);
+
+  useEffect(() => {
+    if (loggingIn === undefined) dispatch(checkLogin());
 
     api.get('stocks/top10/').then((response) => {
       const stocks = response.data;
@@ -79,14 +82,13 @@ const MainPage = (props) => {
     });
 
     dispatch(getGroupList());
-  }, [loggingIn]);
+  }, []);
 
   const clickPlease = () => {
     history.push('/mypage');
   };
 
   const myInterest = () => {
-    let stockcount = 0;
     if (groupList.length === 0)
       return (
         <Grid.Row centered>
@@ -111,68 +113,50 @@ const MainPage = (props) => {
         </Grid.Row>
       );
 
-    groupList.map((e) => (stockcount += e.stocks.length));
-
-    if (stockcount === 0)
-      return (
-        <Grid.Row centered>
-          <br />
-          <br />
-          <br />
-          <br />
-          <Grid.Row centered>
-            <Icon.Group
-              size="huge"
-              data-testid="addStock"
-              onClick={() => clickPlease()}
-              style={{ cursor: 'pointer' }}
-            >
-              <Icon loading size="big" name="circle notch" />
-              <Icon name="user plus" />
-            </Icon.Group>
-            <br />
-            <h3>Please add stock to your group!</h3>
-            <br /> <br /> <br />
-          </Grid.Row>
-        </Grid.Row>
-      );
+    let panes = groupList.map((e, index) => {
+      if (e.stocks.length == 0)
+        return {
+          menuItem: e.name,
+          render: () => (
+            <div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <Icon.Group
+                size="huge"
+                data-testid="addStock"
+                onClick={() => clickPlease()}
+                style={{ cursor: 'pointer' }}
+              >
+                <Icon loading size="big" name="circle notch" />
+                <Icon name="user plus" />
+              </Icon.Group>
+              <br />
+              <h3>Please add stock to your group!</h3>
+              <br /> <br /> <br />
+            </div>
+          ),
+        };
+      else {
+        return {
+          menuItem: e.name,
+          render: () => (
+            <Grid centered>
+              {e.stocks.map((stock, index) => {
+                return <StockBlock id={stock['id']} score={stock['score']} key={index} />;
+              })}
+            </Grid>
+          ),
+        };
+      }
+    });
 
     return (
-      <Grid>
-        <Grid.Row centered>
-          {groupList.map((e, index) => {
-            if (e.stocks.length > 0)
-              return (
-                <Grid.Column
-                  className="interest_tab"
-                  width={13}
-                  style={{ height: '350px' }}
-                  key={index}
-                >
-                  <Tab panes={panes(e)} />
-                </Grid.Column>
-              );
-          })}
-        </Grid.Row>
-      </Grid>
-    );
-  };
-  const panes = (e) => {
-    return [
-      {
-        menuItem: e.name,
-        render: () => <Tab.Pane>{panes_slider(e)}</Tab.Pane>,
-      },
-    ];
-  };
-
-  const panes_slider = (e) => {
-    return (
-      <Slider className="interestSlider" {...sliderSettings} draggable={false}>
-        {e.stocks.map((stock, index) => {
-          return <StockBlock id={stock['id']} score={stock['score']} key={index} />;
-        })}
-      </Slider>
+      <div>
+        <br />
+        <Tab panes={panes} menu={{ secondary: true }} />
+      </div>
     );
   };
 

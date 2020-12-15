@@ -66,7 +66,7 @@ export const RenderMyInterestsItem = (groupList) => {
           <br />
           <br />
           <br />
-          PLEASE ADD OR SELECT GROUP!
+          PLEASE ADD GROUP!
           <br />
           <br />
           <br />

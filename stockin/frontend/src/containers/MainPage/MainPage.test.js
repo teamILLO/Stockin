@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, queryAllByTestId, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import MainPage from './MainPage';
 import { Provider } from 'react-redux';
 import { history } from '../../store/store';
@@ -11,7 +11,7 @@ import * as redux from 'react-redux';
 const initialAuthState = { loggingIn: true, user: { id: 1 } };
 const initialAuthState2 = {
   groupList: [
-    { id: 2, name: 'custom group2', stocks: [{ id: 1 }] },
+    { id: 2, name: 'custom group2', stocks: [{ id: 2 }] },
     { id: 1, name: 'custom group1', stocks: [{ id: 1 }] },
   ],
 };
@@ -81,8 +81,8 @@ describe('<MainPage />', () => {
           result = {
             data: [
               { id: 1, name: 'custom group1', stocks: [{ id: 1 }] },
-              { id: 2, name: 'custom group2', stocks: [{ id: 1 }] },
-              { id: 3, name: 'custom group3', stocks: [{ id: 1 }] },
+              { id: 2, name: 'custom group2', stocks: [{ id: 2 }] },
+              { id: 3, name: 'custom group3', stocks: [{ id: 3 }] },
             ],
 
             status: 203,
@@ -135,12 +135,10 @@ describe('<MainPage />', () => {
   });
 
   it('should show addStock', () => {
-    const useDispatchSpy = jest
-      .spyOn(redux, 'useSelector')
-      .mockImplementation(() => ({
-        loggingIn: true,
-        groupList: [{ id: 1, name: 'custom group1', stocks: [] }],
-      }));
+    const useDispatchSpy = jest.spyOn(redux, 'useSelector').mockImplementation(() => ({
+      loggingIn: true,
+      groupList: [{ id: 1, name: 'custom group1', stocks: [] }],
+    }));
     const { container } = render(mainPage);
 
     fireEvent.click(screen.getByText('DailyReport'));
@@ -156,7 +154,7 @@ describe('<MainPage />', () => {
       loggingIn: true,
       groupList: [
         { id: 1, name: 'custom group1', stocks: [{ id: 1 }, { id: 1 }] },
-        { id: 1, name: 'custom group1', stocks: [] },
+        { id: 2, name: 'custom group2', stocks: [] },
       ],
     }));
     render(mainPage);
