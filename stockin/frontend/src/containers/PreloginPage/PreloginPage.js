@@ -2,18 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Stockin from '../../components/Stockin/Stockin';
 import AboutUs from '../../components/AboutUs/AboutUs';
 import Preview from '../../components/Preview/Preview';
-import {
-  Tab,
-  Button,
-  Form,
-  Grid,
-  Checkbox,
-  Item,
-  Container,
-  Image,
-  Segment,
-  Divider,
-} from 'semantic-ui-react';
+import { Tab, Button, Form, Grid, Checkbox, Item, Container, Image } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../store/store';
 import { tryLogin, checkLogin } from '../../store/authentication/authentication';
@@ -66,10 +55,14 @@ const PreloginPage = (props) => {
 
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
+    api.get('/users/token/');
+  }, []);
+
+  useEffect(() => {
     if (loggingIn === true) {
       history.push('/main');
     }
-  }, [dispatch, loggingIn]);
+  }, [loggingIn]);
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">

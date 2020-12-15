@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Tab, Button } from 'semantic-ui-react';
-import EditModal from '../../Modal/EditModal/EditModal';
+import { Tab } from 'semantic-ui-react';
 import { getGroupList } from '../../../store/groups/groups';
 import { RenderMyInterestsDetailItem } from '../index';
-import GroupStock from './GroupStock';
 import '../../../styles/buttons.css';
 
 const MyInterestsDetail = () => {
   const dispatch = useDispatch();
   const { groupList } = useSelector((state) => state.groups);
   const [panes, setPanes] = useState([]);
- // const [activeIndex, setActiveIndex] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     dispatch(getGroupList());

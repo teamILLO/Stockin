@@ -37,3 +37,20 @@
     margin-top: 5px;
     margin-bottom: -10px;
 }
+
+/* .question.circle.outline.icon{
+    position: relative;
+    left: 5px;
+    top: 39px
+} */
+.buyPop{
+    position: relative;
+    left: 5px;
+    top: 40px
+}
+
+.sellPop{
+    position: relative;
+    left: 5px;
+    top: 20px
+}

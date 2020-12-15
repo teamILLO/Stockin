@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import StockBlock from '../../components/StockBlock/StockBlock';
-import { Grid, Icon, Tab, Header as SemanticHeader } from 'semantic-ui-react';
+import { Grid, Icon, Tab, Header as SemanticHeader, Popup, Container } from 'semantic-ui-react';
 import { getGroupList } from '../../store/groups/groups';
 import { api } from '../../api/index';
 import 'slick-carousel/slick/slick.css';
@@ -15,24 +15,45 @@ import './MainPage.css';
 
 var sliderSettings = {
   dots: false,
-  infinite: false,
+  infinite: true,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow: 4,
   slidesToScroll: 2,
   initialSlide: 0,
   arrows: true,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 4,
+      },
+    },
+    {
+      breakpoint: 990,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 706,
+      settings: {
+        slidesToShow: 2,
+        infinite: true,
+      },
+    },
+  ],
 };
 
 const MainPage = (props) => {
   const { loggingIn, groupList } = useSelector((state) => ({
-    loggingIn : state.authentication.loggingIn,
-    groupList : state.groups.groupList
+    loggingIn: state.authentication.loggingIn,
+    groupList: state.groups.groupList,
   }));
   const dispatch = useDispatch();
 
   const [topStock, setTop] = useState([]);
   const [bottomStock, setBottom] = useState([]);
- 
+
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
     if (loggingIn === false) {
@@ -60,38 +81,58 @@ const MainPage = (props) => {
     dispatch(getGroupList());
   }, [loggingIn]);
 
-  const clickPlease=()=>{
-    history.push('/mypage')
-  }
+  const clickPlease = () => {
+    history.push('/mypage');
+  };
 
   const myInterest = () => {
     let stockcount = 0;
-    if (groupList.length == 0)
+    if (groupList.length === 0)
       return (
         <Grid.Row centered>
+          <br />
+          <br />
+          <br />
+          <br />
           <Grid.Row centered>
-            <Icon.Group size="massive" data-testid='addGroup' onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
+            <Icon.Group
+              size="huge"
+              data-testid="addGroup"
+              onClick={() => clickPlease()}
+              style={{ cursor: 'pointer' }}
+            >
               <Icon loading size="big" name="circle notch" />
               <Icon name="user x" />
             </Icon.Group>
-            <h1>Please make your own group!</h1>
+            <br />
+            <h3>Please make your own group!</h3>
+            <br /> <br /> <br />
           </Grid.Row>
         </Grid.Row>
       );
 
-    groupList.map((e) => {
-      stockcount += e.stocks.length;
-    });
+    groupList.map((e) => (stockcount += e.stocks.length));
 
-    if (stockcount == 0)
+    if (stockcount === 0)
       return (
         <Grid.Row centered>
+          <br />
+          <br />
+          <br />
+          <br />
           <Grid.Row centered>
-            <Icon.Group size="massive" data-testid='addStock' onClick={()=>clickPlease()} style={{cursor: 'pointer'}}>
+            <Icon.Group
+              size="huge"
+              data-testid="addStock"
+              onClick={() => clickPlease()}
+              style={{ cursor: 'pointer' }}
+            >
               <Icon loading size="big" name="circle notch" />
               <Icon name="user plus" />
             </Icon.Group>
-            <h1>Please add stock to your group!</h1>
+            <br />
+            <h3>Please add stock to your group!</h3>
+            <br /> <br /> <br />
           </Grid.Row>
         </Grid.Row>
       );
@@ -135,15 +176,44 @@ const MainPage = (props) => {
     );
   };
 
+  const buyPop = (
+    <span className="buyPop">
+      <Popup trigger={<Icon color="grey" size="large" name="question circle outline" />} wide>
+        <h5>
+          With the learned AI, micro and macro price predictions are made, scored, and displayed in
+          the highest order.
+        </h5>
+      </Popup>
+    </span>
+  );
+
+  const sellPop = (
+    <span className="sellPop">
+      <Popup trigger={<Icon color="grey" size="large" name="question circle outline" />} wide>
+        <h5>
+          With the learned AI, micro and macro price predictions are made, scored, and displayed in
+          the lowest order.
+        </h5>
+      </Popup>
+    </span>
+  );
+
   const mainpane = [
     {
       menuItem: 'DailyReport',
       render: () => (
         <Grid>
           <Grid.Row centered>
-          <Grid.Column width={13} style={{ height: '50px' }}>
-            <SemanticHeader id='up_reco' as='h2' icon='check' content='매수 추천 TOP10' />
-          </Grid.Column>
+            <Grid.Column width={13} style={{ height: '50px' }}>
+              <SemanticHeader
+                id="up_reco"
+                as="h2"
+                icon="check"
+                content="매수 추천 TOP10"
+                style={{ float: 'left' }}
+              />
+              {buyPop}
+            </Grid.Column>
             <Grid.Column width={13} style={{ height: '350px' }}>
               <Slider className="topSlider" {...sliderSettings} draggable={false}>
                 {topStock.map((top, index) => {
@@ -151,12 +221,18 @@ const MainPage = (props) => {
                 })}
               </Slider>
             </Grid.Column>
-            
+
             <Grid.Column width={13}>
-          <SemanticHeader id='down_reco' as='h2' icon='check' content='매도 추천 TOP10' />
-          </Grid.Column>
+              <SemanticHeader
+                id="down_reco"
+                as="h2"
+                icon="check"
+                content="매도 추천 TOP10"
+                style={{ float: 'left' }}
+              />
+              {sellPop}
+            </Grid.Column>
             <Grid.Column width={13} style={{ height: '350px' }}>
-              
               <Slider className="topSlider" {...sliderSettings} draggable={false}>
                 {bottomStock.map((bottom, index) => {
                   return <StockBlock id={bottom['id']} score={bottom['score']} key={index} />;
@@ -173,8 +249,9 @@ const MainPage = (props) => {
   return (
     <div data-testid="MainPage">
       <Header history={props.history} />
-
-      <Tab panes={mainpane} />
+      <Container>
+        <Tab panes={mainpane} />
+      </Container>
 
       <Footer history={props.history} />
     </div>

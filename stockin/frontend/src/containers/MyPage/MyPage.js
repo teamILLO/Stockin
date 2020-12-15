@@ -10,9 +10,6 @@ import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import { Tab } from 'semantic-ui-react';
 
-const onClickHandler = (id) => {
-  history.push('/detail/' + id);
-};
 const panes = [
   {
     menuItem: { key: 'My Interests', className: 'My Interests', content: 'My Interests' },
@@ -34,7 +31,6 @@ const panes = [
 
 const MyPage = (props) => {
   const { loggingIn } = useSelector((state) => state.authentication);
-  const { user } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
 
   useEffect(() => {

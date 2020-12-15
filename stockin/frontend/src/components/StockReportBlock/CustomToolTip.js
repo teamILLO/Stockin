@@ -1,8 +1,5 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
-
 import './CustomToolTip.css';
-
 
 const CustomToolTip = (props) => {
   let date = '';
@@ -16,9 +13,9 @@ const CustomToolTip = (props) => {
   if(props.active) {
     date = props.payload[0].payload.date;
     endPrice = props.payload[0].payload.endPrice;
-    endPrice = endPrice ? props.payload[0].payload.endPrice.toLocaleString('en-us') : "0";
+    endPrice = endPrice ? props.payload[0].payload.endPrice.toLocaleString('en-us') : '0';
     tradeVolume = props.payload[0].payload.tradeVolume;
-    tradeVolume = tradeVolume ? tradeVolume.toLocaleString('en-us') : "-";
+    tradeVolume = tradeVolume ? tradeVolume.toLocaleString('en-us') : '-';
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Card } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import { useSelector } from 'react-redux';
 import NewsDatePicker from './NewsDatePicker';
 import 'react-datepicker/dist/react-datepicker.css';

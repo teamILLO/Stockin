@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Button, Input, Label, Grid, Table, Image, Header } from 'semantic-ui-react';
+import { Button, Input, Grid, Table, Image, Header } from 'semantic-ui-react';
 import { updateUserInfo } from '../../../store/authentication/authentication';
 import { api } from '../../../api/index';
 import { trySignout } from '../../../store/authentication/authentication';
@@ -67,7 +67,7 @@ const MyInfo = (props) => {
 
   const onClickSignoutHandler = () => {
     const r = window.confirm('Do you really want to Sign Out?');
-    if (r == true) {
+    if (r === true) {
       dispatch(trySignout(user));
     }
   };
