@@ -32,10 +32,12 @@
 #up_reco{
     color: #e60000;
     margin-top: 25px;
+    margin-bottom: 5px;
     
 }
 
 #down_reco{
     color: #0000b3;
-    margin-top: 25px;
+    margin-top: 5px;
+    margin-bottom: -10px;
 }
