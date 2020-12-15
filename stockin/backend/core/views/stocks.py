@@ -1,7 +1,7 @@
 '''
 stocks
 '''
-import json
+import json, math
 from datetime import timedelta
 
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -129,7 +129,7 @@ def stock_top10(request):
     stock_top10
     '''
     if request.method =='GET':
-        stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:10]
+        stocks=Stock.objects.all().values_list('id','fin_score').order_by('-fin_score')[:10]
         response_list=[]
         for stock in stocks:
             response_list.append({
@@ -146,7 +146,7 @@ def stock_bottom10(request):
     stock_bottom10
     '''
     if request.method =='GET':
-        stocks=Stock.objects.all().values_list('id','score').order_by('score')[:10]
+        stocks=Stock.objects.all().values_list('id','fin_score').order_by('fin_score')[:10]
         response_list=[]
         for stock in stocks:
             response_list.append({
@@ -168,13 +168,13 @@ def stock_top100_stockinfo(request) :
 
         # using cache
         # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.all().values('id','title',
-        #  'isKOSPI','code','price','yesterdayPrice','score').order_by('-score'))
+        #  'isKOSPI','code','price','yesterdayPrice','fin_score').order_by('-fin_score'))
         # stocks = stock_qs[0:100]
 
         # original
         stocks=Stock.objects.all().values('id','title','isKOSPI',
                                 'code','price','yesterdayPrice',
-                                'score').order_by('-score')[0:100]
+                                'fin_score').order_by('-fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -186,13 +186,14 @@ def stock_top100_stockinfo(request) :
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score' : stock['score'],
+                'score' : stock['fin_score'],
             })
             cnt = cnt + 1
 
         return JsonResponse(response_list, safe=False)
 
     return HttpResponseNotAllowed(['GET'])
+
 
 def stock_top100_news(request) :
     '''
@@ -201,7 +202,7 @@ def stock_top100_news(request) :
     if request.method =='GET':
         response_list=[]
 
-        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('-fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -234,7 +235,7 @@ def stock_top100_stockhistory(request) :
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('-fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -267,13 +268,13 @@ def stock_bottom100_stockinfo(request) :
 
         # using cache
         # stock_qs = cache.get_or_set('down_stockinfo', Stock.objects.all().values('id',
-        # 'title','isKOSPI','code','price','yesterdayPrice','score').order_by('score'))
+        # 'title','isKOSPI','code','price','yesterdayPrice','fin_score').order_by('fin_score'))
         # stocks = stock_qs[0:100]
 
         # original
         stocks=Stock.objects.all().values('id','title','isKOSPI',
                                     'code','price','yesterdayPrice',
-                                    'score').order_by('score')[0:100]
+                                    'fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -285,7 +286,7 @@ def stock_bottom100_stockinfo(request) :
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score' : stock['score'],
+                'score' : stock['fin_score'],
             })
             cnt = cnt + 1
 
@@ -301,7 +302,7 @@ def stock_bottom100_news(request) :
     if request.method =='GET':
         response_list=[]
 
-        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -333,7 +334,7 @@ def stock_bottom100_stockhistory(request) :
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
