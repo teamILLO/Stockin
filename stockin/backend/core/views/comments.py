@@ -71,7 +71,7 @@ def comment(request, comment_id=""):
             return HttpResponse(status=401)
         comment_ = get_object_or_404(Comment, id=comment_id)
 
-        if not request.user.id == comment_id.author.id:
+        if not request.user.id == comment_.author.id:
             return HttpResponseForbidden()
 
         try:
@@ -97,5 +97,4 @@ def comment(request, comment_id=""):
         comment_.delete()
         return HttpResponse(status=200)
 
-    
     return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])

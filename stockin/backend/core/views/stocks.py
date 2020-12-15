@@ -16,7 +16,7 @@ import json, csv, os
 
 from core.models import Stock, StockHistory, FinancialStat, News
 from core.crawlers.preprocessors.score import base_score
-from core.views.index import getFSInfo
+from core.views.index import get_fs_info
 
 
 def stock_fs(request, stock_id=''):
@@ -104,7 +104,7 @@ def fs_score(request, stock_id=""):
     if request.method == 'GET':
         stock = get_object_or_404(Stock, id=stock_id)
         fs_stock = FinancialStat.objects.filter(stock_id=stock_id)
-        response = getFSInfo(stock, fs_stock)
+        response = get_fs_info(stock, fs_stock)
         
         return JsonResponse(response, status=201)
     else:
