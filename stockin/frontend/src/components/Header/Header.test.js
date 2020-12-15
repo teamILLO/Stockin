@@ -39,7 +39,7 @@ describe('<Header />', () => {
     jest.clearAllMocks();
   });
 
-  it('should render without errors', () => {
+  it('should render without errors', async () => {
     const { container } = render(header);
     const query = queryAllByTestId(container, 'Header');
     expect(query.length).toBe(1);
