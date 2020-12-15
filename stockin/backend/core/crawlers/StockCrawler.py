@@ -205,7 +205,7 @@ def initialStockAdd():
         fs_score = get_fs_info(stock, fs_stock)
 
         if fs_score['score'] is None : 
-            fin_score = round(stock.score * 0.7)
+            fin_score = stock.score
         else :
             fin_score = round( stock.score * 0.7 + (fs_score['score'] + (5*math.pi/2)) * (20/math.pi) * 0.3 )
         
