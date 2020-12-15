@@ -155,7 +155,7 @@ const MainPage = (props) => {
     return (
       <div>
         <br />
-        <Tab panes={panes} menu={{ secondary: true }} />
+        <Tab panes={panes} menu={{ pointing: true }} />
       </div>
     );
   };
