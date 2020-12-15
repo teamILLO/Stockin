@@ -59,6 +59,7 @@ class Stock(models.Model):
     after20 = models.IntegerField(null=True, blank=True)
     after60 = models.IntegerField(null=True, blank=True)
     score = models.SmallIntegerField(null=True, default=50)
+    fin_score = models.SmallIntegerField(null=True, default=50)
 
     # override functions for redis
     # def save(self, *args, **kwargs):
