@@ -1,5 +1,6 @@
 import React from 'react';
 import { ResponsiveBullet } from '@nivo/bullet';
+import './TotalScoreBullet.css';
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
