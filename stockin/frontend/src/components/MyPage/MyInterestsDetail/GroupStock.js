@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import { history } from '../../../store/store';
 
@@ -26,7 +26,16 @@ function sortReducer(state, action) {
 
 const RenderTableItem = (stock) => (
   <Table.Row key={stock.id}>
-    <Table.Cell onClick={() => history.push('/detail/' + stock.id)}>{stock.title}</Table.Cell>
+    <Table.Cell>
+      <Icon
+        data-testid="redirectIcon"
+        color="grey"
+        link
+        name="zoom"
+        onClick={() => history.push('/detail/' + stock.id)}
+      />
+      {stock.title}
+    </Table.Cell>
     <Table.Cell>
       {stock.price ? stock.price.toLocaleString('en-US', { minimumFractionDigits: 0 }) : '-'}
     </Table.Cell>

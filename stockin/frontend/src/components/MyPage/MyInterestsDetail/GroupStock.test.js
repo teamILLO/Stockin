@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent, getByTestId } from '@testing-library/react';
+import { render, screen, fireEvent, getByTestId, queryAllByTestId } from '@testing-library/react';
 import GroupStock from './GroupStock';
 import { Provider } from 'react-redux';
 import { api } from '../../../api/index';
@@ -92,6 +92,19 @@ describe('<GroupStock />', () => {
         amount: 'test_amount',
         isKOSPI: 'test_isKOSPI',
       },
+      {
+        id: 2,
+        title: 'test_title2',
+        price: 'test_price2',
+        highestPrice: 'test_highestPrice2',
+        lowestPrice: 'test_lowestPrice2',
+        tradeVolume: 'test_tradeVolume2',
+        tradeValue: 'test_tradeValue2',
+        startPrice: 'test_startPrice2',
+        yesterdayPrice: 'test_yesterdayPrice2',
+        amount: 'test_amount2',
+        isKOSPI: 'test_isKOSPI2',
+      },
     ];
     const groupStock = (
       <Provider store={store}>
@@ -107,6 +120,6 @@ describe('<GroupStock />', () => {
     fireEvent.click(getByTestId(container, 'lowestPrice'));
     fireEvent.click(getByTestId(container, 'tradeVolume'));
     fireEvent.click(getByTestId(container, 'tradeValue'));
-    fireEvent.click(screen.getByText('test_title'));
+    fireEvent.click(queryAllByTestId(container, 'redirectIcon')[0]);
   });
 });
