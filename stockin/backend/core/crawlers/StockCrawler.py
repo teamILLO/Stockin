@@ -7,6 +7,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'stockin.settings')
 import django
 django.setup()
 from core.models import Stock, StockHistory, FinancialStat
+from core.views.index import get_fs_info
 
 import pandas as pd
 import requests
@@ -23,6 +24,7 @@ import OpenDartReader
 from django import db
 import csv
 import json
+import math
 
 
 
@@ -192,9 +194,29 @@ def initialStockAdd():
             ))
 
     FinancialStat.objects.bulk_create(financial_list)
-            
-                        
 
+    print('Crawling finished, start FS score calculate...')
+    # For FS
+    stocks = Stock.objects.all()
+
+    for stock in stocks:
+        # get fs max score 5pi / 2
+        fs_stock = FinancialStat.objects.filter(stock_id=stock.id)
+        fs_score = get_fs_info(stock, fs_stock)
+
+        if fs_score['score'] is None : 
+            fin_score = round(stock.score * 0.5)
+        else :
+            fin_score = round( (stock.score + fs_score['score'] * (40/math.pi)) * 0.5 )
+        
+        # save
+        s = Stock.objects.get(id=stock.id)
+        s.fin_score = fin_score
+        s.save(['fin_score'])
+    
+    print('FS score calculate finished!')
+
+        
 # daily update scoring data
 def scoringUpdate():
     Stock.objects.all().delete()

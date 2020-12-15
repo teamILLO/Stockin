@@ -1,7 +1,7 @@
 '''
 stocks
 '''
-import json
+import json, math
 from datetime import timedelta
 
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -164,31 +164,53 @@ def stock_top100_stockinfo(request) :
     stock_top100_stockinfo
     '''
     if request.method =='GET':
-        response_list=[]
-
-        # using cache
+        response_list = []
+        temp_list = []
+        # using cache ( need to modify )
         # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.all().values('id','title',
         #  'isKOSPI','code','price','yesterdayPrice','score').order_by('-score'))
         # stocks = stock_qs[0:100]
 
-        # original
-        stocks=Stock.objects.all().values('id','title','isKOSPI',
-                                'code','price','yesterdayPrice',
-                                'score').order_by('-score')[0:100]
+        stocks = Stock.objects.all()
 
-        cnt = 1
         for stock in stocks:
-            response_list.append({
-                'id': stock['id'],
-                'rank' : cnt,
-                'title' : stock['title'],
-                'isKOSPI' : stock['isKOSPI'],
-                'code' : stock['code'],
-                'price' : stock['price'],
-                'yesterdayPrice' : stock['yesterdayPrice'],
-                'score' : stock['score'],
-            })
-            cnt = cnt + 1
+            # get fs max score 5pi / 2
+            fs_stock = FinancialStat.objects.filter(stock_id=stock.id)
+            fs_score = get_fs_info(stock, fs_stock)
+            # if fs_score['score'] is None : 
+            #     fin_score = stock.score * 0.5
+            # else :
+            #     fin_score = (stock.score + fs_score['score'] * (40/math.pi)) * 0.5
+
+            # temp_list.append({
+            #     'id': stock.id,
+            #     'title' : stock.title,
+            #     'isKOSPI' : stock.isKOSPI,
+            #     'code' : stock.code,
+            #     'price' : stock.price,
+            #     'yesterdayPrice' : stock.yesterdayPrice,
+            #     'score' : fin_score,
+            # })
+        print(1)
+
+        # # iterate response_list & sorting by score (top 100)
+        # temp_list = sorted(temp_list, key=lambda item: item['score'], reverse=True )[0:100]
+
+        # cnt = 1
+        # for item in temp_list:
+        #     item['rank'] = cnt
+
+        #     response_list.append({
+        #         'id': item['id'],
+        #         'rank' : item['rank'],
+        #         'title' : item['title'],
+        #         'isKOSPI' : item['isKOSPI'],
+        #         'code' : item['code'],
+        #         'price' : item['price'],
+        #         'yesterdayPrice' : item['yesterdayPrice'],
+        #         'score' : fin_score,
+        #     })
+        #     cnt = cnt + 1
 
         return JsonResponse(response_list, safe=False)
 
