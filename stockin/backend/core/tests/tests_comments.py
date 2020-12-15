@@ -1,18 +1,26 @@
-from django.test import TestCase, Client
-from core.models import News, Stock, Comment, CustomUser
-from django.contrib.auth import get_user_model
-
+'''
+test_comments
+'''
 import os
 import json
+
+from django.test import TestCase, Client
+from core.models import Stock, Comment, CustomUser
 
 pwd = os.getenv("BACK_TEST_PWD").split(',')[0]
 
 class NewsTestCase(TestCase):
+    '''
+    NewsTestCase
+    '''
     def test_comment_list(self):
+        '''
+        test_comment_list
+        '''
         client = Client(enforce_csrf_checks=True)
 
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
-        
+
         # GET request when user is not logged_in
         response = client.get('/api/stocks/'+str(test_stock.id)+'/comments/')
         self.assertEqual(response.status_code, 401)
@@ -20,47 +28,57 @@ class NewsTestCase(TestCase):
         # POST request
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/',
+                                HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 401)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
+        response = client.post('/api/users/signup/',
+                    json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
+        response = client.post('/api/users/signin/',
+                    json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/'+str(test_stock.id+1)+'/comments/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.post('/api/stocks/'+str(test_stock.id+1)+'/comments/',
+                    HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 404)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/', json.dumps({'invalid': 'foo'}),
+        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/',
+                    json.dumps({'invalid': 'foo'}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 400)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/', json.dumps({'content': 'foo', 'author' : 'user'}),
+        response = client.post('/api/stocks/'+str(test_stock.id)+'/comments/',
+                    json.dumps({'content': 'foo', 'author' : 'user'}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
         # GET request
         response = client.get('/api/stocks/'+str(test_stock.id)+'/comments/')
-        self.assertEqual(response.status_code, 200) 
+        self.assertEqual(response.status_code, 200)
 
         # HttpResponseNotAllowed tests
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.delete('/api/stocks/'+str(test_stock.id)+'/comments/', HTTP_X_CSRFTOKEN=csrftoken)
+        response = client.delete('/api/stocks/'+str(test_stock.id)+'/comments/',
+                    HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
 
     def test_comment(self):
+        '''
+        test_comment
+        '''
         client = Client(enforce_csrf_checks=True)
 
         # GET, PUT, DELETE request when user is not logged_in
@@ -80,26 +98,35 @@ class NewsTestCase(TestCase):
         # Create test comment
         # Create comment with "id = 1"
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
-    
+
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signup/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
+        response = client.post('/api/users/signup/',
+                    json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/users/signin/', json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
+        response = client.post('/api/users/signin/',
+                    json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
 
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
-        response = client.post('/api/stocks/1/comments/', json.dumps({'content': 'foo', 'author' : 'user'}),
+        response = client.post('/api/stocks/1/comments/',
+                    json.dumps({'content': 'foo', 'author' : 'user'}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 201)
 
         # Create comment with "id = 2"
-        test_user = CustomUser.objects.create(email = 'foo@foo.com', nickname = 'foo', is_staff=False, is_active=False)
-        test_comment = Comment.objects.create(stock = test_stock, author = test_user, content = 'foo')
+        test_user = CustomUser.objects.create(email = 'foo@foo.com',
+                                            nickname = 'foo',
+                                            is_staff=False,
+                                            is_active=False)
+
+        Comment.objects.create(stock = test_stock,
+                            author = test_user,
+                            content = 'foo')
 
         # GET request
         response = client.get('/api/comments/3/')
@@ -155,10 +182,3 @@ class NewsTestCase(TestCase):
         csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/comments/1/', HTTP_X_CSRFTOKEN=csrftoken)
         self.assertEqual(response.status_code, 405)
-        
-
-
-
-        
-
-        

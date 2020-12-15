@@ -1,14 +1,23 @@
+'''
+tests_news
+'''
 from django.test import TestCase, Client
 from core.models import News, Stock
-import json
 
 class NewsTestCase(TestCase):
+    '''
+    NewsTestCase
+    '''
     def test_get_news_list(self):
+        '''
+        test_get_news_list
+        '''
         client = Client(enforce_csrf_checks=True)
 
         # GET request
         test_stock = Stock.objects.create(title='foo_title', code='foo_code', sector='foo_sector')
-        test_news = News.objects.create(stock=test_stock, title='foo', press='foo', link='foo', date='2020-11-11')
+        News.objects.create(stock=test_stock, title='foo',
+                            press='foo', link='foo', date='2020-11-11')
 
         response = client.get('/api/news/stocks/1/date/2020/')
         self.assertEqual(response.status_code, 400)

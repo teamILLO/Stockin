@@ -32,7 +32,6 @@ matrix:
         - coverage run --source='.' manage.py test
         - coverage report --fail-under=80 -m
         - coverage xml
-        - pylint **/*.py --load-plugins pylint_django
         - cd ../frontend
         - yarn test --coverage --watchAll=false
         - ./node_modules/.bin/eslint src
@@ -40,5 +39,6 @@ matrix:
         - sonar-scanner
       after_success:
         - cd stockin/backend
+        - pylint core/*.py core/views/*.py core/tests/*.py --load-plugins pylint_django --disable="duplicate-code"
         - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
         - coveralls

@@ -14,15 +14,18 @@ const CommentList = (props) => {
   return (
     <div className="CommentList" data-testid="CommentList">
       <Comment.Group>
-        {commentList.map((comment) => (
-          <CommentBlock
-            id={comment.id}
-            key={comment.id}
-            author={comment.author}
-            time={comment.time}
-            content={comment.content}
-          />
-        ))}
+        {commentList
+          .slice(0)
+          .reverse()
+          .map((comment) => (
+            <CommentBlock
+              id={comment.id}
+              key={comment.id}
+              author={comment.author}
+              time={comment.time}
+              content={comment.content}
+            />
+          ))}
       </Comment.Group>
     </div>
   );
