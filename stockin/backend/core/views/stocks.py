@@ -129,7 +129,7 @@ def stock_top10(request):
     stock_top10
     '''
     if request.method =='GET':
-        stocks=Stock.objects.all().values_list('id','score').order_by('-score')[:10]
+        stocks=Stock.objects.all().values_list('id','fin_score').order_by('-fin_score')[:10]
         response_list=[]
         for stock in stocks:
             response_list.append({
@@ -146,7 +146,7 @@ def stock_bottom10(request):
     stock_bottom10
     '''
     if request.method =='GET':
-        stocks=Stock.objects.all().values_list('id','score').order_by('score')[:10]
+        stocks=Stock.objects.all().values_list('id','fin_score').order_by('fin_score')[:10]
         response_list=[]
         for stock in stocks:
             response_list.append({
@@ -164,57 +164,36 @@ def stock_top100_stockinfo(request) :
     stock_top100_stockinfo
     '''
     if request.method =='GET':
-        response_list = []
-        temp_list = []
-        # using cache ( need to modify )
+        response_list=[]
+
+        # using cache
         # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.all().values('id','title',
-        #  'isKOSPI','code','price','yesterdayPrice','score').order_by('-score'))
+        #  'isKOSPI','code','price','yesterdayPrice','fin_score').order_by('-fin_score'))
         # stocks = stock_qs[0:100]
 
-        stocks = Stock.objects.all()
+        # original
+        stocks=Stock.objects.all().values('id','title','isKOSPI',
+                                'code','price','yesterdayPrice',
+                                'fin_score').order_by('-fin_score')[0:100]
 
+        cnt = 1
         for stock in stocks:
-            # get fs max score 5pi / 2
-            fs_stock = FinancialStat.objects.filter(stock_id=stock.id)
-            fs_score = get_fs_info(stock, fs_stock)
-            # if fs_score['score'] is None : 
-            #     fin_score = stock.score * 0.5
-            # else :
-            #     fin_score = (stock.score + fs_score['score'] * (40/math.pi)) * 0.5
-
-            # temp_list.append({
-            #     'id': stock.id,
-            #     'title' : stock.title,
-            #     'isKOSPI' : stock.isKOSPI,
-            #     'code' : stock.code,
-            #     'price' : stock.price,
-            #     'yesterdayPrice' : stock.yesterdayPrice,
-            #     'score' : fin_score,
-            # })
-        print(1)
-
-        # # iterate response_list & sorting by score (top 100)
-        # temp_list = sorted(temp_list, key=lambda item: item['score'], reverse=True )[0:100]
-
-        # cnt = 1
-        # for item in temp_list:
-        #     item['rank'] = cnt
-
-        #     response_list.append({
-        #         'id': item['id'],
-        #         'rank' : item['rank'],
-        #         'title' : item['title'],
-        #         'isKOSPI' : item['isKOSPI'],
-        #         'code' : item['code'],
-        #         'price' : item['price'],
-        #         'yesterdayPrice' : item['yesterdayPrice'],
-        #         'score' : fin_score,
-        #     })
-        #     cnt = cnt + 1
+            response_list.append({
+                'id': stock['id'],
+                'rank' : cnt,
+                'title' : stock['title'],
+                'isKOSPI' : stock['isKOSPI'],
+                'code' : stock['code'],
+                'price' : stock['price'],
+                'yesterdayPrice' : stock['yesterdayPrice'],
+                'score' : stock['fin_score'],
+            })
+            cnt = cnt + 1
 
         return JsonResponse(response_list, safe=False)
 
     return HttpResponseNotAllowed(['GET'])
+
 
 def stock_top100_news(request) :
     '''
@@ -223,7 +202,7 @@ def stock_top100_news(request) :
     if request.method =='GET':
         response_list=[]
 
-        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('-fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -256,7 +235,7 @@ def stock_top100_stockhistory(request) :
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','score').order_by('-score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('-fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -289,13 +268,13 @@ def stock_bottom100_stockinfo(request) :
 
         # using cache
         # stock_qs = cache.get_or_set('down_stockinfo', Stock.objects.all().values('id',
-        # 'title','isKOSPI','code','price','yesterdayPrice','score').order_by('score'))
+        # 'title','isKOSPI','code','price','yesterdayPrice','fin_score').order_by('fin_score'))
         # stocks = stock_qs[0:100]
 
         # original
         stocks=Stock.objects.all().values('id','title','isKOSPI',
                                     'code','price','yesterdayPrice',
-                                    'score').order_by('score')[0:100]
+                                    'fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -307,7 +286,7 @@ def stock_bottom100_stockinfo(request) :
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score' : stock['score'],
+                'score' : stock['fin_score'],
             })
             cnt = cnt + 1
 
@@ -323,7 +302,7 @@ def stock_bottom100_news(request) :
     if request.method =='GET':
         response_list=[]
 
-        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -355,7 +334,7 @@ def stock_bottom100_stockhistory(request) :
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','score').order_by('score')[0:100]
+        stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:

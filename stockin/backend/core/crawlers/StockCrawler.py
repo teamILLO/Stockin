@@ -200,19 +200,18 @@ def initialStockAdd():
     stocks = Stock.objects.all()
 
     for stock in stocks:
-        # get fs max score 5pi / 2
+        # FS max score 5pi / 2
         fs_stock = FinancialStat.objects.filter(stock_id=stock.id)
         fs_score = get_fs_info(stock, fs_stock)
 
         if fs_score['score'] is None : 
-            fin_score = round(stock.score * 0.5)
+            fin_score = round(stock.score * 0.7)
         else :
-            fin_score = round( (stock.score + fs_score['score'] * (40/math.pi)) * 0.5 )
+            fin_score = round( stock.score * 0.7 + (fs_score['score'] + (5*math.pi/2)) * (20/math.pi) * 0.3 )
         
         # save
-        s = Stock.objects.get(id=stock.id)
-        s.fin_score = fin_score
-        s.save(['fin_score'])
+        stock.fin_score = fin_score
+        stock.save()
     
     print('FS score calculate finished!')
 
