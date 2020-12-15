@@ -3,7 +3,6 @@
 
 
 ### score
-Main_page, Report_page에서 매수추천 score는 Ml점수 + FS점수 로 하지않고 <br/>
-ML점수로만 score을 보여줌. <br/>
+***Main_page, Report_page***에서 매수추천 score는 Ml점수 + FS점수로 하지않고 ML점수로만 score을 보여주기로함. <br/>
 <br/>
-대신에 Overview_page에서 수익성(ML점수) 와 안정성(FS점수)을 각각 보여주고 이를 비교하여 추가 설명을 집어 넣는걸로함
+대신에 ***Overview_page***에서 수익성(ML점수) 와 안정성(FS점수)을 각각 보여주고 이를 비교하여 추가 설명을 집어 넣는걸로함
