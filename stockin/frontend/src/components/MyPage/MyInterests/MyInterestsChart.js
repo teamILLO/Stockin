@@ -42,7 +42,7 @@ const MyInterestsChart = (props) => {
       display: false,
     },
     tooltips: {
-      mode: 'point',
+      mode: 'nearest',
       callbacks: {
         label: (tooltipItem, data) => {
           return data.datasets[tooltipItem.datasetIndex].label;

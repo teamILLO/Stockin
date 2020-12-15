@@ -10,6 +10,9 @@ import { history } from '../../store/store';
 import { checkLogin } from '../../store/authentication/authentication';
 import { Tab } from 'semantic-ui-react';
 
+const onClickHandler = (id) => {
+  history.push('/detail/' + id);
+};
 const panes = [
   {
     menuItem: { key: 'My Interests', className: 'My Interests', content: 'My Interests' },
