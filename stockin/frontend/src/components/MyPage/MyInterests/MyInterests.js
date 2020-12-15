@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Tab, Button } from 'semantic-ui-react';
-import MyInterestsChart from './MyInterestsChart';
-import EditModal from '../../Modal/EditModal/EditModal';
+import { Tab } from 'semantic-ui-react';
 import { getGroupList } from '../../../store/groups/groups';
 import { RenderMyInterestsItem } from '../index';
 import '../../../styles/buttons.css';

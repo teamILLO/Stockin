@@ -55,7 +55,7 @@ const CommentBlock = (props) => {
       meridiem = ' PM';
       hour -= 12;
     }
-    if (hour == 0) hour = 12;
+    if (hour === 0) hour = 12;
     result += String(hour) + ':' + temp[1].substring(3, 5) + meridiem;
     return result;
   };
