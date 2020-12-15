@@ -20,7 +20,9 @@ import './DetailPage.css';
 const panes = (id, data, stock, fs_score) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
-    render: () => <DetailOverview id={id} stock={stock} fs_score={fs_score} />,
+    render: () => {
+      return <DetailOverview id={id} stock={stock} fs_score={fs_score} />;
+    },
   },
   {
     menuItem: { key: 'News', className: 'News', content: 'News' },
