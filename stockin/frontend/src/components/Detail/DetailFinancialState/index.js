@@ -28,9 +28,9 @@ export const RenderTableItem = (item) => {
     const quarter = <Table.HeaderCell key={item.id}><div>{item.quarter}<br/>IFRS 연결</div></Table.HeaderCell>;
   
     /* Body */
-    const sales = <Table.Cell key={item.id}>{item.sales}</Table.Cell>;
-    const operatingProfit = <Table.Cell key={item.id}>{item.operatingProfit}</Table.Cell>;
-    const netIncome = <Table.Cell key={item.id}>{item.netIncome}</Table.Cell>;
+    const sales = <Table.Cell key={item.id}>{item.sales ==='-' ? '-' : Number(item.sales).toLocaleString('en-us')}</Table.Cell>;
+    const operatingProfit = <Table.Cell key={item.id}>{item.operatingProfit === '-' ? '-' : Number(item.operatingProfit).toLocaleString('en-us')}</Table.Cell>;
+    const netIncome = <Table.Cell key={item.id}>{item.netIncome === '-' ? '-' : Number(item.netIncome).toLocaleString('en-us')}</Table.Cell>;
     const operatingMargin = <Table.Cell key={item.id}>{item.operatingMargin}</Table.Cell>;
     const netProfitMargin = <Table.Cell key={item.id}>{item.netProfitMargin}</Table.Cell>;
     const PER = <Table.Cell key={item.id}>{item.PER}</Table.Cell>;
@@ -96,7 +96,7 @@ export const RenderPopUpItems = (name) => {
       영업이익 : 영업활동을 통해 순수하게 남은 이익<br/>
       영업 외 수익 : 기업의 주된 영업활동이 아닌 활동으로부터 발생한 수익과 차익<br/>
       영업 외 손실 : 기업의 주된 영업활동 이외에서 발생한 비용<br/>
-      법인세 비용 : 회계기간에 기업이 납부해야할 법인세(기업의 세금)를 말한다.
+      법인세 비용 : 회계기간에 기업이 납부해야할 법인세(기업의 세금)
     </Popup>   
 
   items.operatingMargin =
