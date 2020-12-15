@@ -3,61 +3,119 @@ import { Grid, Header, Segment } from 'semantic-ui-react';
 
 import TotalScoreBullet from './TotalScoreBullet';
 import CompareBarChart from './CompareBarChart';
+import { useEffect, useState } from 'react';
 
 const DetailOverview = (props) => {
-  const data = [
-    {
-      id: '',
-      ranges: [0, 50, 60, 100],
-      measures: [],
-      markers:
-        props.stock && props.fs_score && props.fs_score.score
-          ? [
-              /*Math.sqrt(
-                (props.stock.score * props.stock.score +
-                  ((props.fs_score.score + 8) / 16) *
-                    50 *
-                    (((props.fs_score.score + 8) / 16) * 50)) /
-                  2,
-              ),*/
-              props.stock.score,
-            ]
-          : [],
-    },
-  ];
-  const barDataSaleGrowthRate = [
-    {
-      'Sales Growth Rate': props.stock && props.stock.title,
-      'This stock': props.stock && props.stock.saleGrowthRate,
-    },
-    {
-      'Sales Growth Rate': 'Average of Similar Stocks',
-      'Average of Similar Stocks': props.stock && props.stock.saleGrowthRateAvg,
-    },
-  ];
-  const barDataOperatingMargin = [
-    {
-      'Operating Margin': props.stock && props.stock.title,
-      'This stock': props.stock && props.stock.operatingMarginRate,
-    },
-    {
-      'Operating Margin': 'Average of Similar Stocks',
-      'Average of Similar Stocks': props.stock && props.stock.operatingMarginRateAvg,
-    },
-  ];
-  const barDataPER = [
-    {
-      PER: props.stock ? props.stock.title : '',
-      'This stock': props.stock ? props.stock.crawledPER : 0,
-    },
-    {
-      PER: 'Average of Similar Stocks',
-      'Average of Similar Stocks': props.stock ? props.stock.crawledPERAvg : 0,
-    },
-  ];
+  const [data, setData] = useState([])
+  const [barDataSaleGrowthRate, setbar1] = useState([])
+  const [barDataOperatingMargin, setbar2] = useState([])
+  const [barDataPER, setbar3] = useState([])
+  useEffect(()=>{
+    setData([
+      {
+        id: '',
+        ranges: [0, 50, 60, 100],
+        measures: [],
+        markers:
+          props.stock && props.fs_score && props.fs_score.score
+            ? [
+                /*Math.sqrt(
+                  (props.stock.score * props.stock.score +
+                    ((props.fs_score.score + 8) / 16) *
+                      50 *
+                      (((props.fs_score.score + 8) / 16) * 50)) /
+                    2,
+                ),*/
+                props.stock.score,
+              ]
+            : [],
+      },
+    ]);
+    setbar1([
+      {
+      PER: props.stock && props.stock.title,
+        'This Stock': props.stock && props.stock.saleGrowthRate,
+      },
+      {
+        'Sales Growth Rate': 'Average of Similar Stocks',
+        'Average of Similar Stocks': props.stock && props.stock.saleGrowthRateAvg,
+      },
+    ]);
+    setbar2([
+      {
+        PER: props.stock ? props.stock.title : '',
+        'This Stock': props.stock ? props.stock.operatingMarginRate:0,
+      },
+      {
+        PER: 'Average of Similar Stocks',
+        'Average of Similar Stocks': props.stock ? props.stock.operatingMarginRateAvg :0,
+      },
+    ]);
+    setbar3([
+      {
+        PER: props.stock ? props.stock.title : '',
+        'This Stock': props.stock ? Number(props.stock.crawledPER) : 0,
+      },
+      {
+        PER: 'Average of Similar Stocks',
+        'Average of Similar Stocks': props.stock ? props.stock.crawledPERAvg : 0,
+      },
+    ])
+  },[props])
+  // const data = [
+  //   {
+  //     id: '',
+  //     ranges: [0, 50, 60, 100],
+  //     measures: [],
+  //     markers:
+  //       props.stock && props.fs_score && props.fs_score.score
+  //         ? [
+  //             /*Math.sqrt(
+  //               (props.stock.score * props.stock.score +
+  //                 ((props.fs_score.score + 8) / 16) *
+  //                   50 *
+  //                   (((props.fs_score.score + 8) / 16) * 50)) /
+  //                 2,
+  //             ),*/
+  //             props.stock.score,
+  //           ]
+  //         : [],
+  //   },
+  // ];
+  // const barDataSaleGrowthRate = [
+  //   {
+  //     'Sales Growth Rate': props.stock && props.stock.title,
+  //     'This stock': props.stock && props.stock.saleGrowthRate,
+  //   },
+  //   {
+  //     'Sales Growth Rate': 'Average of Similar Stocks',
+  //     'Average of Similar Stocks': props.stock && props.stock.saleGrowthRateAvg,
+  //   },
+  // ];
+  // const barDataOperatingMargin = [
+  //   {
+  //     'Operating Margin': props.stock && props.stock.title,
+  //     'This stock': props.stock && props.stock.operatingMarginRate,
+  //   },
+  //   {
+  //     'Operating Margin': 'Average of Similar Stocks',
+  //     'Average of Similar Stocks': props.stock && props.stock.operatingMarginRateAvg,
+  //   },
+  // ];
+  // const barDataPER = [
+  //   {
+  //     PER: props.stock ? props.stock.title : '',
+  //     'This stock': props.stock ? props.stock.crawledPER : 0,
+  //   },
+  //   {
+  //     PER: 'Average of Similar Stocks',
+  //     'Average of Similar Stocks': props.stock ? props.stock.crawledPERAvg : 0,
+  //   },
+  // ];
 
   return (
     <div data-testid="DetailOverview">
+      {console.log('@@@@@@@@@', props)}
       <Grid>
         <Grid.Row>
           <Grid.Column>

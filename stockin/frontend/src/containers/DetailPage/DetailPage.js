@@ -21,6 +21,7 @@ const panes = (id, data, stock, fs_score) => [
   {
     menuItem: { key: 'Overview', className: 'Overview', content: 'Overview' },
     render: () => {
+      console.log('@@@@@@@@@@@@@@2',stock)
       return <DetailOverview id={id} stock={stock} fs_score={fs_score} />;
     },
   },
