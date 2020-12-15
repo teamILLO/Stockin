@@ -6,11 +6,11 @@ import CompareBarChart from './CompareBarChart';
 import { useEffect, useState } from 'react';
 
 const DetailOverview = (props) => {
-  const [data, setData] = useState([])
-  const [barDataSaleGrowthRate, setbar1] = useState([])
-  const [barDataOperatingMargin, setbar2] = useState([])
-  const [barDataPER, setbar3] = useState([])
-  useEffect(()=>{
+  const [data, setData] = useState([]);
+  const [barDataSaleGrowthRate, setbar1] = useState([]);
+  const [barDataOperatingMargin, setbar2] = useState([]);
+  const [barDataPER, setbar3] = useState([]);
+  useEffect(() => {
     setData([
       {
         id: '',
@@ -33,22 +33,22 @@ const DetailOverview = (props) => {
     ]);
     setbar1([
       {
-      PER: props.stock && props.stock.title,
-        'This Stock': props.stock && props.stock.saleGrowthRate,
+        'Sales Growth Rate': props.stock ? props.stock.title : '',
+        'This Stock': props.stock ? props.stock.saleGrowthRate : 0,
       },
       {
         'Sales Growth Rate': 'Average of Similar Stocks',
-        'Average of Similar Stocks': props.stock && props.stock.saleGrowthRateAvg,
+        'Average of Similar Stocks': props.stock ? props.stock.saleGrowthRateAvg : 0,
       },
     ]);
     setbar2([
       {
-        PER: props.stock ? props.stock.title : '',
-        'This Stock': props.stock ? props.stock.operatingMarginRate:0,
+        'Operating Margin': props.stock ? props.stock.title : '',
+        'This Stock': props.stock ? props.stock.operatingMarginRate : 0,
       },
       {
-        PER: 'Average of Similar Stocks',
-        'Average of Similar Stocks': props.stock ? props.stock.operatingMarginRateAvg :0,
+        'Operating Margin': 'Average of Similar Stocks',
+        'Average of Similar Stocks': props.stock ? props.stock.operatingMarginRateAvg : 0,
       },
     ]);
     setbar3([
@@ -60,8 +60,8 @@ const DetailOverview = (props) => {
         PER: 'Average of Similar Stocks',
         'Average of Similar Stocks': props.stock ? props.stock.crawledPERAvg : 0,
       },
-    ])
-  },[props])
+    ]);
+  }, [props]);
   // const data = [
   //   {
   //     id: '',
@@ -115,7 +115,6 @@ const DetailOverview = (props) => {
 
   return (
     <div data-testid="DetailOverview">
-      {console.log('@@@@@@@@@', props)}
       <Grid>
         <Grid.Row>
           <Grid.Column>
@@ -140,31 +139,42 @@ const DetailOverview = (props) => {
             </Segment>
           </Grid.Column>
         </Grid.Row>
+        <Grid.Row columns={3}>
+          <Grid.Column>
+            <div style={{ height: '300px' }}>
+              <h4>Sales Growth Rate</h4>
+              <CompareBarChart
+                data={barDataSaleGrowthRate}
+                label={(d) => `${d.value}%`}
+                keys={['This Stock', 'Average of Similar Stocks']}
+                index="Sales Growth Rate"
+              />
+            </div>
+          </Grid.Column>
+          <Grid.Column>
+            <div style={{ height: '300px' }}>
+              <h4>PER</h4>
+              <CompareBarChart
+                data={barDataPER}
+                label={(d) => `${d.value}`}
+                keys={['This Stock', 'Average of Similar Stocks']}
+                index="PER"
+              />
+            </div>
+          </Grid.Column>
+          <Grid.Column>
+            <div style={{ height: '300px' }}>
+              <h4>Operating Margin</h4>
+              <CompareBarChart
+                data={barDataOperatingMargin}
+                label={(d) => `${d.value}%`}
+                keys={['This Stock', 'Average of Similar Stocks']}
+                index="Operating Margin"
+              />
+            </div>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
-      <div style={{ height: '300px' }}>
-        {console.log(barDataSaleGrowthRate)}
-        <CompareBarChart
-          data={barDataSaleGrowthRate}
-          keys={['This Stock', 'Average of Similar Stocks']}
-          index="PER"
-        />
-      </div>
-      <div style={{ height: '300px' }}>
-        {console.log(barDataPER)}
-        <CompareBarChart
-          data={barDataPER}
-          keys={['This Stock', 'Average of Similar Stocks']}
-          index="PER"
-        />
-      </div>
-      <div style={{ height: '300px' }}>
-        {console.log(barDataOperatingMargin)}
-        <CompareBarChart
-          data={barDataOperatingMargin}
-          keys={['This Stock', 'Average of Similar Stocks']}
-          index="PER"
-        />
-      </div>
     </div>
   );
 };

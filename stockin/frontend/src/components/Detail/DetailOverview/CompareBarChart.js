@@ -49,16 +49,13 @@ const CompareBarChart = (props) => {
       borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
       axisTop={null}
       axisRight={null}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-      }}
+      axisBottom={null}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
       }}
+      label={props.label}
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
@@ -86,9 +83,21 @@ const CompareBarChart = (props) => {
           ],
         },
       ]}
+      tooltip={({ id, value, color }) => (
+        <strong style={{ color }}>
+          {props.index}: {props.label({ value: value })}
+        </strong>
+      )}
       animate={true}
       motionStiffness={90}
       motionDamping={15}
+      theme={{
+        tooltip: {
+          container: {
+            background: '#333',
+          },
+        },
+      }}
     />
   );
 };
