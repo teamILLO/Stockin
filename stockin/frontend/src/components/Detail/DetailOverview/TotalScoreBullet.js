@@ -15,6 +15,7 @@ const TotalScoreBullet = (props) => (
     titleAlign="start"
     titleOffsetX={-70}
     measureSize={0.2}
+    isInteractive={false}
   />
 );
 

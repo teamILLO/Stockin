@@ -1,4 +1,4 @@
-g rect:first-child {
+/* g rect:first-child {
   fill: #555555;
 }
 g rect {
@@ -6,4 +6,16 @@ g rect {
 }
 g rect:last-child {
   fill: #cecece;
+} */
+
+g rect:nth-child(1) {
+  fill: #00ff00;
+}
+
+g rect:nth-child(2) {
+  fill: #ff0000;
+}
+
+g rect:nth-child(3) {
+  fill: #0000ff;
 }
