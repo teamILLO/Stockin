@@ -28,3 +28,14 @@
     margin-top: -20px;
     margin-bottom: 20px;
 }
+
+#up_reco{
+    color: #e60000;
+    margin-top: 25px;
+    
+}
+
+#down_reco{
+    color: #0000b3;
+    margin-top: 25px;
+}
