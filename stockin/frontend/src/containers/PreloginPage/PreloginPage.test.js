@@ -68,7 +68,8 @@ describe('<PreloginPage />', () => {
     preLoginPageUndefined,
     spyHistoryPush,
     spyTryLogin,
-    spyCheckLogin;
+    spyCheckLogin,
+    spyGetToken;
 
   beforeEach(() => {
     preLoginPage = (
@@ -92,10 +93,16 @@ describe('<PreloginPage />', () => {
     spyHistoryPush = jest.spyOn(history, 'push').mockImplementation((text) => {
       return (dispatch) => {};
     });
+
     spyTryLogin = jest.spyOn(authentication, 'tryLogin').mockImplementation((user) => {
       return (dispatch) => {};
     });
+
     spyCheckLogin = jest.spyOn(authentication, 'checkLogin').mockImplementation(() => {
+      return (dispatch) => {};
+    });
+
+    spyGetToken = jest.spyOn(api, 'get').mockImplementation(() => {
       return (dispatch) => {};
     });
   });

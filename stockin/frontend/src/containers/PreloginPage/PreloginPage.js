@@ -55,10 +55,14 @@ const PreloginPage = (props) => {
 
   useEffect(() => {
     if (loggingIn === undefined) dispatch(checkLogin());
+    api.get('/users/token/');
+  }, []);
+
+  useEffect(() => {
     if (loggingIn === true) {
       history.push('/main');
     }
-  }, [dispatch, loggingIn]);
+  }, [loggingIn]);
 
   return (
     <div className="PreloginPage" data-testid="PreloginPage">
