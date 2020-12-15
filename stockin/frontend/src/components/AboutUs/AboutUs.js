@@ -4,6 +4,7 @@ import j from '../../images/junhyeok.png';
 import w from '../../images/woo0.png';
 import g from '../../images/g1.jpg';
 import d from '../../images/down.jpg';
+
 const AboutUs = (props) => {
   return (
     <div className="AboutUs" data-testid="AboutUs">

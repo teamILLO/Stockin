@@ -7,6 +7,33 @@ import { trySignout } from '../../../store/authentication/authentication';
 
 import './MyInfo.css';
 
+const avatar = [
+  'avatar/large/ade.jpg',
+  'avatar/large/chris.jpg',
+  'avatar/large/christian.jpg',
+  'avatar/large/daniel.jpg',
+  'avatar/large/elliot.jpg',
+  'avatar/large/helen.jpg',
+  'avatar/large/jenny.jpg',
+  'avatar/large/joe.jpg',
+  'avatar/large/justen.jpg',
+  'avatar/large/laura.jpg',
+  'avatar/large/matt.jpg',
+  'avatar/large/nan.jpg',
+  'avatar/large/steve.jpg',
+  'avatar/large/stevie.jpg',
+  'avatar/large/veronika.jpg',
+  'avatar2/large/elyse.png',
+  'avatar2/large/kristy.png',
+  'avatar2/large/lena.png',
+  'avatar2/large/lindsay.png',
+  'avatar2/large/mark.png',
+  'avatar2/large/matthew.png',
+  'avatar2/large/molly.png',
+  'avatar2/large/patrick.png',
+  'avatar2/large/rachel.png',
+];
+
 const MyInfo = (props) => {
   const { user } = useSelector((state) => state.authentication);
   const [nicknameInput, setNicknameInput] = useState('');
@@ -15,9 +42,9 @@ const MyInfo = (props) => {
 
   const changeNick = async () => {
     let is_duplicated = false;
-    if (user.nickname === nicknameInput){
-      alert('Nickname doesn\'t change!')
-      return
+    if (user.nickname === nicknameInput) {
+      alert("Nickname doesn't change!");
+      return;
     }
     await api.post('/users/duplicate/', { email: '', nickname: nicknameInput }).then((response) => {
       if (response.data['duplicate']) {
@@ -50,27 +77,44 @@ const MyInfo = (props) => {
       <div className="MyInfo" data-testid="MyInfo">
         <Grid centered>
           <Grid.Row>
-          <Image  src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" size='medium' circular/>
+            <Image
+              src={'https://semantic-ui.com/images/' + avatar[user.id % 24]}
+              size="medium"
+              circular
+              className="avatar"
+            />
           </Grid.Row>
           <Grid.Row>
-            <div style={{width:500}}>
-              <Table  basic='very' celled className='myinfoTable'>
+            <div style={{ width: 500 }}>
+              <Table basic="very" celled className="myinfoTable">
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell width={2}><Header as='h2'>Mail</Header></Table.Cell>
-                    <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.email}</Header></Table.Cell>
-                  </Table.Row>    
-                  <Table.Row>
-                    <Table.Cell width={2}><Header as='h2'>Nickname</Header></Table.Cell>
-                    <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.nickname}</Header></Table.Cell>
+                    <Table.Cell width={2}>
+                      <Header as="h2">Mail</Header>
+                    </Table.Cell>
+                    <Table.Cell width={5} textAlign="right">
+                      <Header as="h5">{user && user.email}</Header>
+                    </Table.Cell>
                   </Table.Row>
-                  </Table.Body>
-                </Table>
-              </div>
+                  <Table.Row>
+                    <Table.Cell width={2}>
+                      <Header as="h2">Nickname</Header>
+                    </Table.Cell>
+                    <Table.Cell width={5} textAlign="right">
+                      <Header as="h5">{user && user.nickname}</Header>
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            </div>
           </Grid.Row>
           <Grid.Row>
-            <Button onClick={() => clickEdit()} color='grey'>Edit!</Button>
-            <Button onClick={onClickSignoutHandler} color='red'>SIGNOUT</Button>
+            <Button onClick={() => clickEdit()} color="grey">
+              Edit!
+            </Button>
+            <Button onClick={onClickSignoutHandler} color="red">
+              SIGNOUT
+            </Button>
           </Grid.Row>
         </Grid>
       </div>
@@ -79,24 +123,41 @@ const MyInfo = (props) => {
     return (
       <div className="MyInfoEdit" data-testid="MyInfoEdit">
         <Grid centered>
-        <Grid.Row>
-          <Image  src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" size='medium' circular/>
+          <Grid.Row>
+            <Image
+              src={'https://semantic-ui.com/images/' + avatar[user.id % 24]}
+              size="medium"
+              circular
+              className="avatar"
+            />
           </Grid.Row>
           <Grid.Row>
-            <div style={{width:500}}>
-              <Table  basic='very' celled className='myinfoTable'>
+            <div style={{ width: 500 }}>
+              <Table basic="very" celled className="myinfoTable">
                 <Table.Body>
                   <Table.Row>
-                    <Table.Cell width={2}><Header as='h2'>Mail</Header></Table.Cell>
-                    <Table.Cell width={5} textAlign='right'><Header as='h5'>{user && user.email}</Header></Table.Cell>
-                  </Table.Row>    
-                  <Table.Row>
-                    <Table.Cell width={2}><Header as='h2'>Nickname</Header></Table.Cell>
-                    <Table.Cell width={5} textAlign='right'><Input name="nicknameInput" value={nicknameInput} onChange={(event) => setNicknameInput(event.target.value)}/></Table.Cell>
+                    <Table.Cell width={2}>
+                      <Header as="h2">Mail</Header>
+                    </Table.Cell>
+                    <Table.Cell width={5} textAlign="right">
+                      <Header as="h5">{user && user.email}</Header>
+                    </Table.Cell>
                   </Table.Row>
-                  </Table.Body>
-                </Table>
-              </div>
+                  <Table.Row>
+                    <Table.Cell width={2}>
+                      <Header as="h2">Nickname</Header>
+                    </Table.Cell>
+                    <Table.Cell width={5} textAlign="right">
+                      <Input
+                        name="nicknameInput"
+                        value={nicknameInput}
+                        onChange={(event) => setNicknameInput(event.target.value)}
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
+            </div>
           </Grid.Row>
           <Grid.Row>
             <Button onClick={() => changeNick()}>Confirm!</Button>
