@@ -1,18 +1,25 @@
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseNotAllowed, JsonResponse
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import get_user_model
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt
-from django.shortcuts import render, get_object_or_404
-from django.db.utils import IntegrityError
-from django.core.mail import EmailMessage
+'''
+users
+'''
 import json
 from json import JSONDecodeError
+
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotAllowed, JsonResponse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user_model
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.shortcuts import get_object_or_404
+from django.db.utils import IntegrityError
+from django.core.mail import EmailMessage
+
 
 User = get_user_model()
 
 
 def signup(request):
+    '''
+    signup
+    '''
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
         email = req_data['email']
@@ -21,23 +28,26 @@ def signup(request):
         try:
             User.objects.create_user(
                 email=email, nickname=nickname, password=password)
-        except IntegrityError as er:
+        except IntegrityError:
             return HttpResponse(status=406)
         response_dict = {'email': email,
                          'nickname': nickname, 'password': password}
         return HttpResponse(content=json.dumps(response_dict), status=201)
 
-    else:
-        return HttpResponseNotAllowed(['POST'])
+
+    return HttpResponseNotAllowed(['POST'])
 
 
 def signin(request):
+    '''
+    signin
+    '''
     if request.method == 'POST':
         try:
             req_data = json.loads(request.body.decode())
             email = req_data['email']
             password = req_data['password']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponseBadRequest()
         user = authenticate(email=email, password=password)
         if user is not None:
@@ -46,45 +56,54 @@ def signin(request):
             response_dict = {'email': email, 'nickname': user.nickname,
                              'password': password, 'id': user.id}
             return JsonResponse(response_dict, status=201)
-        else:
-            return HttpResponse(status=401)
 
-    else:
-        return HttpResponseNotAllowed(['POST'])
+        return HttpResponse(status=401)
+
+
+    return HttpResponseNotAllowed(['POST'])
 
 
 def logoff(request):
+    '''
+    logoff
+    '''
     if request.method == 'GET':
         if request.user.is_authenticated:
             logout(request)
             return HttpResponse(status=204)
-        else:
-            return HttpResponse(status=401)
-            
-    else:
-        return HttpResponseNotAllowed(['GET'])
+
+        return HttpResponse(status=401)
+
+
+    return HttpResponseNotAllowed(['GET'])
 
 
 def signout(request):
+    '''
+    signout
+    '''
     if request.method == 'POST':
         try:
             req_data = json.loads(request.body.decode())
             email = req_data['email']
             password = req_data['password']
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponseBadRequest()
         user = authenticate(email=email, password=password)
         if user is not None and user.is_authenticated:
             user.delete()
             return HttpResponse(status=204)
-        else:
-            return HttpResponse(status=401)
 
-    else:
-        return HttpResponseNotAllowed(['POST'])
+        return HttpResponse(status=401)
+
+
+    return HttpResponseNotAllowed(['POST'])
 
 
 def duplicate(request):
+    '''
+    duplicate
+    '''
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
         email = req_data['email']
@@ -100,15 +119,18 @@ def duplicate(request):
         if len(filter_result) >= 1:
             response_dict = {'duplicate': True }
             return HttpResponse(content=json.dumps(response_dict), status=203)
-        else:
-            response_dict = {'duplicate': False }
-            return HttpResponse(content=json.dumps(response_dict), status=203)
 
-    else:
-        return HttpResponseNotAllowed(['POST'])
+        response_dict = {'duplicate': False }
+        return HttpResponse(content=json.dumps(response_dict), status=203)
+
+
+    return HttpResponseNotAllowed(['POST'])
 
 
 def send_code(request):
+    '''
+    send_code
+    '''
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
         email = req_data['email']
@@ -120,11 +142,14 @@ def send_code(request):
         ).send()
         return HttpResponse(status=204)
 
-    else:
-        return HttpResponseNotAllowed(['POST'])
+
+    return HttpResponseNotAllowed(['POST'])
 
 
 def user_info(request):
+    '''
+    user_info
+    '''
     if request.method == 'GET':
         if not request.user.is_authenticated:
             response_dict = {'email': 'none', 'nickname': 'none'}
@@ -147,10 +172,10 @@ def user_info(request):
                                     'password': target_user.password, 'id': target_user.id}
                 return JsonResponse(response_dict, status=201)
 
-            elif not request.user.is_authenticated:
-                        return HttpResponse(status=401)
+            if not request.user.is_authenticated:
+                return HttpResponse(status=401)
 
-            elif req_data['change'] == 'nickname':
+            if req_data['change'] == 'nickname':
                 email = req_data['email']
                 nickname = req_data['nickname']
                 target_user = get_object_or_404(User, email=email)
@@ -160,17 +185,20 @@ def user_info(request):
                                     'password': target_user.password, 'id': target_user.id}
                 return JsonResponse(response_dict, status=201)
 
-        except (KeyError, JSONDecodeError) as e:
+        except (KeyError, JSONDecodeError):
             return HttpResponseBadRequest()
 
-    else:
-        return HttpResponseNotAllowed(['GET','PUT'])
+
+    return HttpResponseNotAllowed(['GET','PUT'])
 
 
 @ensure_csrf_cookie
 def token(request):
+    '''
+    token
+    '''
     if request.method == 'GET':
         return HttpResponse(status=204)
-        
-    else:
-        return HttpResponseNotAllowed(['GET'])
+
+
+    return HttpResponseNotAllowed(['GET'])
