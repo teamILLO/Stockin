@@ -5,10 +5,10 @@ Wooyoung so genius
 경축
 
 - 12/16 (2pm ~)
-- - Deploy (Check news, tradevolume, detail stock chart) (Woo0)
+- - Deploy (Check news, tradevolume, detail stock chart) (Down)
 - - Filming demo
 - - Change rank standard from MLscore to (MLscore+FSscore) (G1)
-- - Slider 겹침 (Down)
+- - Slider 겹침 (Woo0)
 - - overview graph (JH)
 
 - - Together
