@@ -1,104 +1,133 @@
-.ui.card.stockBlock{
-    background-color: #fafafa;     
-    width: 230px;
-    height: 300px;
-    border : 40px;
-    border-radius: 18px;
-    
+.ui.card.stockBlock {
+  background-color: #fafafa;
+  width: 210px;
+  height: 290px;
+  border: 40px;
+  border-radius: 18px;
+  margin: 2px;
 }
 
-
-.stockTitle{
-    font-size : 25px;
-    color: black;
-    font-weight: 900;
-    position: relative;
-    left : 6px;
-    white-space:nowrap;
+.stockTitle {
+  font-size: 23px;
+  color: black;
+  font-weight: 900;
+  position: relative;
+  left: 10px;
+  white-space: nowrap;
 }
 
-.stockInfo{
-    font-size : 10px;
-  
-    position: relative;
-    left : 10px;
+.stockInfo {
+  font-size: 10px;
+  position: relative;
+  left: 10px;
 }
 
-.dashboard{
-    width: 180px;
-    position: relative;
-    left : 10px;
+.dashboard {
+  width: 165px;
+  position: relative;
+  left: 10px;
 }
-.dashboard2{
-    width: 180px;
-    position: relative;
-    left : 10px;
+.dashboard2 {
+  width: 165px;
+  position: relative;
+  left: 10px;
 }
-
 
 .dashboard .CircularProgressbar-text {
-    fill: #f00101;
-    font-size: 20px;
-    font-weight: 1000;
-    text-anchor: middle;
+  fill: #f00101;
+  font-size: 20px;
+  font-weight: 1000;
+  text-anchor: middle;
 }
 .dashboard .CircularProgressbar-path {
-    stroke: red;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 0.5s ease 0s;
+  stroke: red;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
 }
 
 .dashboard2 .CircularProgressbar-text {
-    fill: #1c0ca8;
-    font-size: 20px;
-    font-weight: 1000;
-    text-anchor: middle;
+  fill: #1c0ca8;
+  font-size: 20px;
+  font-weight: 1000;
+  text-anchor: middle;
 }
 .dashboard2 .CircularProgressbar-path {
-    stroke:  #1c0ca8;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 0.5s ease 0s;
+  stroke: #1c0ca8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
 }
 
-.dashboardContent{
-    height: 10%;
+.dashboardContent {
+  height: 10%;
 }
 
-.priceZone{
-
-    background-color: #f00101;
-    height: 55px;
-    border-radius: 0px 0px 15px 15px;
-    padding-top: 6px;
-    padding-left: 4px;
-    
+.priceZone {
+  background-color: #f00101;
+  height: 55px;
+  border-radius: 0px 0px 15px 15px;
+  padding-top: 6px;
+  padding-left: 4px;
 }
 
-.priceZone2{
-
-    background-color:  #1c0ca8;
-    height: 55px;
-    border-radius: 0px 0px 15px 15px;
-    padding-top: 6px;
-    padding-left: 4px;
-    
+.priceZone2 {
+  background-color: #1c0ca8;
+  height: 55px;
+  border-radius: 0px 0px 15px 15px;
+  padding-top: 6px;
+  padding-left: 4px;
 }
 
-.stockPrice{
-    font-size : 35px;
-    font-weight: 900;
-    color: white;
+.stockPrice {
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
 
-    position: relative;
-    top: 10px;
-    left: 5px;
+  position: relative;
+  top: 10px;
+  left: 5px;
 }
 
-.variation{
-    font-size : 15px;
-    font-weight: 700;
-    color: white;
-    position: relative;
-    top: 10px;
-    left: 10px;
+.variation {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  position: relative;
+  top: 10px;
+  left: 10px;
+}
+
+@media (max-width: 1200px) {
+  .ui.card.stockBlock {
+    width: 180px;
+    height: 260px;
+  }
+
+  .stockTitle {
+    font-size: 22px;
+  }
+
+  .dashboard {
+    width: 146px;
+    left: 3px;
+  }
+  .dashboard2 {
+    width: 146px;
+    left: 3px;
+  }
+
+  .priceZone {
+    height: 50px;
+  }
+
+  .priceZone2 {
+    height: 50px;
+  }
+
+  .stockPrice {
+    font-size: 25px;
+  }
+
+  .variation {
+    font-size: 12px;
+  }
 }

@@ -15,12 +15,33 @@ import './MainPage.css';
 
 var sliderSettings = {
   dots: false,
-  infinite: false,
+  infinite: true,
   speed: 500,
   slidesToShow: 4,
   slidesToScroll: 2,
   initialSlide: 0,
   arrows: true,
+  responsive: [
+    {
+      breakpoint: 1200,
+      settings: {
+        slidesToShow: 4,
+      },
+    },
+    {
+      breakpoint: 990,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 706,
+      settings: {
+        slidesToShow: 2,
+        infinite: true,
+      },
+    },
+  ],
 };
 
 const MainPage = (props) => {
