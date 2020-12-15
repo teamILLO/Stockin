@@ -14,7 +14,7 @@ const DetailOverview = (props) => {
     setData([
       {
         id: '',
-        ranges: [0, 50, 60, 100],
+        ranges: [0, 30, 50, 60, 80, 100],
         measures: [],
         markers:
           props.stock && props.fs_score && props.fs_score.score
@@ -124,16 +124,24 @@ const DetailOverview = (props) => {
                 <TotalScoreBullet data={data} />
               </div>
               <br />
+              <h5>
+                Overall score :{' '}
+                {props.stock ? props.stock.score : 'Cannot Calculate due to lack of data'}
+              </h5>
               <p>
                 {
                   /*'This stock is ' + data[0].markers.length
                   ? data[0].markers[0] >= 60 || data[0].markers[0] + ' likely to show a ' + '' + '.'
   : 'not assessable due to lack of data.'*/
-                  props.stock && props.stock.score >= 60
-                    ? 'It is likely to show a relatively big rise or a small drop'
-                    : props.stock && props.stock.score <= 50
-                    ? 'It is likely to show a relatively small rise or a big drop'
-                    : 'It is likely to show a standard rise or a standard drop'
+                  props.stock && props.stock.score >= 80
+                    ? 'It is likely to show a relatively huge rise or a tiny drop when compared to other stocks'
+                    : props.stock && props.stock.score >= 60
+                    ? 'It is likely to show a relatively big rise or a small drop when compared to other stocks'
+                    : props.stock && props.stock.score >= 50
+                    ? 'It is likely to show a standard rise or a standard drop'
+                    : props.stock && props.stock.score >= 30
+                    ? 'It is likely to show a relatively small rise or a big drop when compared to other stocks'
+                    : 'It is likely to show a relatively tiny rise or a huge drop when compared to other stocks'
                 }
               </p>
             </Segment>
@@ -141,37 +149,43 @@ const DetailOverview = (props) => {
         </Grid.Row>
         <Grid.Row columns={3}>
           <Grid.Column>
-            <div style={{ height: '300px' }}>
-              <h4>Sales Growth Rate</h4>
-              <CompareBarChart
-                data={barDataSaleGrowthRate}
-                label={(d) => `${d.value}%`}
-                keys={['This Stock', 'Average of Similar Stocks']}
-                index="Sales Growth Rate"
-              />
-            </div>
+            <Segment>
+              <div style={{ height: '300px' }}>
+                <h4>Sales Growth Rate</h4>
+                <CompareBarChart
+                  data={barDataSaleGrowthRate}
+                  label={(d) => `${d.value}%`}
+                  keys={['This Stock', 'Average of Similar Stocks']}
+                  index="Sales Growth Rate"
+                />
+              </div>
+            </Segment>
           </Grid.Column>
           <Grid.Column>
-            <div style={{ height: '300px' }}>
-              <h4>PER</h4>
-              <CompareBarChart
-                data={barDataPER}
-                label={(d) => `${d.value}`}
-                keys={['This Stock', 'Average of Similar Stocks']}
-                index="PER"
-              />
-            </div>
+            <Segment>
+              <div style={{ height: '300px' }}>
+                <h4>PER</h4>
+                <CompareBarChart
+                  data={barDataPER}
+                  label={(d) => `${d.value}`}
+                  keys={['This Stock', 'Average of Similar Stocks']}
+                  index="PER"
+                />
+              </div>
+            </Segment>
           </Grid.Column>
           <Grid.Column>
-            <div style={{ height: '300px' }}>
-              <h4>Operating Margin</h4>
-              <CompareBarChart
-                data={barDataOperatingMargin}
-                label={(d) => `${d.value}%`}
-                keys={['This Stock', 'Average of Similar Stocks']}
-                index="Operating Margin"
-              />
-            </div>
+            <Segment>
+              <div style={{ height: '300px' }}>
+                <h4>Operating Margin</h4>
+                <CompareBarChart
+                  data={barDataOperatingMargin}
+                  label={(d) => `${d.value}%`}
+                  keys={['This Stock', 'Average of Similar Stocks']}
+                  index="Operating Margin"
+                />
+              </div>
+            </Segment>
           </Grid.Column>
         </Grid.Row>
       </Grid>

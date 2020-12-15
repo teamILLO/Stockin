@@ -11,7 +11,7 @@ const CompareBarChart = (props) => {
       padding={0.3}
       valueScale={{ type: 'linear' }}
       indexScale={{ type: 'band', round: true }}
-      colors={{ scheme: 'nivo' }}
+      colors={{ scheme: 'accent' }}
       defs={[
         {
           id: 'dots',
