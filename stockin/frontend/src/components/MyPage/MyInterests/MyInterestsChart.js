@@ -24,8 +24,8 @@ const MyInterestsChart = (props) => {
       xAxes: [
         {
           ticks: {
-            min: -8,
-            max: 8,
+            min: -Math.PI * 3,
+            max: Math.PI * 3,
             display: false,
           },
           gridLines: {

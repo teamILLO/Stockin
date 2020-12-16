@@ -14,7 +14,7 @@ const DetailOverview = (props) => {
   const [barDataPER, setbar3] = useState([]);
 
   const scoreScaler = (score) => {
-    return ((+score + (Math.PI * 5) / 2) / Math.PI) * 20;
+    return ((+score + Math.PI * 3) / Math.PI / 3) * 50;
   };
 
   const riseAdjective =
@@ -38,19 +38,19 @@ const DetailOverview = (props) => {
       ? 'big'
       : 'huge';
   const stabilityAdjectve =
-    props.fs_score && props.fs_score.score && Math.round(scoreScaler(+props.fs_score.score)) >= 65
+    props.fs_score && props.fs_score.score && Math.round(scoreScaler(+props.fs_score.score)) >= 80
       ? 'very high'
       : props.fs_score &&
         props.fs_score.score &&
-        Math.round(scoreScaler(+props.fs_score.score)) >= 55
+        Math.round(scoreScaler(+props.fs_score.score)) >= 70
       ? 'high'
       : props.fs_score &&
         props.fs_score.score &&
-        Math.round(scoreScaler(+props.fs_score.score)) >= 45
+        Math.round(scoreScaler(+props.fs_score.score)) >= 60
       ? 'standard'
       : props.fs_score &&
         props.fs_score.score &&
-        Math.round(scoreScaler(+props.fs_score.score)) >= 35
+        Math.round(scoreScaler(+props.fs_score.score)) >= 50
       ? 'low'
       : 'very low';
 
@@ -78,7 +78,7 @@ const DetailOverview = (props) => {
     setData2([
       {
         id: 'stability',
-        ranges: [0, 35, 45, 55, 65, 100],
+        ranges: [0, 50, 60, 70, 80, 100],
         measures: [],
         markers:
           props.stock && props.fs_score && props.fs_score.score
@@ -195,7 +195,7 @@ const DetailOverview = (props) => {
               <br />
               <h5>
                 Profitability Score :{' '}
-                {props.stock
+                {props.stock && props.fs_score && props.fs_score.score
                   ? `${props.stock.score} / 100`
                   : 'Cannot calculate due to lack of data'}
               </h5>
@@ -209,7 +209,7 @@ const DetailOverview = (props) => {
               </h5>
               <Segment raised>
                 <h5>Summary</h5>
-                <Image as="icon" size="mini" src={line} />
+                <Image as="i" size="mini" src={line} />
                 <br />
                 <br />
                 <p>
