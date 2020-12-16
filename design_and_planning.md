@@ -533,7 +533,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ## Testing Plan<br />
 
-- **Unit testing**<br />Every component, reducer, and module should be tested automatically. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
+- **Unit testing**<br />Every component, reducer, and module should be tested automatically. We will test frontend(react, redux) with Jest and React testing library, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
 
 - **Functional testing**<br />Every API should be tested. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
 
