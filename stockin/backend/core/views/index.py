@@ -109,6 +109,7 @@ def get_top_rank_info(info_len):
                                 'code','price','yesterdayPrice',    \
                                 'score').order_by('-score')
 
+
     # 한달치 확인, length check
     cnt = 0
     for stock in initial_stocks :
