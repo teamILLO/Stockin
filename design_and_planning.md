@@ -9,7 +9,7 @@ Rev. 1.3 2020-12-17 - revise backend api & response format
 
 ## System Architecture<br />
 
-<img src = "https://user-images.githubusercontent.com/59424336/97679637-de506180-1ad8-11eb-9d7f-f248d3de02b7.png" width="100%">
+<img src = "https://github.com/swsnu/swpp2020-team15/blob/master/images/system_architecture.png" width="100%">
 
 ---
 
@@ -19,11 +19,11 @@ This is django-specific model diagram. Actually, since only models we deal with 
 When representing class relations, three line connected class matches to “many”, one line connected class matches to “one”.
 That is, “Group” model and “Stock” model is “many to many” relationship.
 
-![image](https://user-images.githubusercontent.com/26567209/97522291-c7c7de80-19e2-11eb-8e6e-d7d33c0c5c89.png)
+![image](https://github.com/swsnu/swpp2020-team15/blob/master/images/model.png)
 
 ## View
 
-![Untitled Diagram](https://user-images.githubusercontent.com/13393489/97493421-43f10080-19a8-11eb-9371-78c7350ae9c7.png)
+![Untitled Diagram](https://github.com/swsnu/swpp2020-team15/blob/master/images/view.png)
 
 #### 0. Headers and footers
 
@@ -157,13 +157,13 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ## Controller
 
-<img src = "https://user-images.githubusercontent.com/59424336/97441314-edfe6780-196b-11eb-9fb6-6672c8eb5490.jpg" width="70%">
+<img src = "https://github.com/swsnu/swpp2020-team15/blob/master/images/controller.jpg" width="70%">
 
 ## Implementation Details
 
 ### Frontend design
 
-![frontend_design(1)](https://user-images.githubusercontent.com/54826729/97574073-0b940580-1a2e-11eb-8d97-ebae68a15f56.png)
+![frontend_design(1)](https://github.com/swsnu/swpp2020-team15/blob/master/images/frontend_design.png)
 
 #### 0. Headers and footers
 
