@@ -30,7 +30,7 @@
 .dashboard2 {
   width: 165px;
   position: relative;
-  left: 10px;
+  text-align: center;
 }
 
 .dashboard .CircularProgressbar-text {
