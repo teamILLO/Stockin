@@ -9,7 +9,7 @@ const Footer = (props) => {
   const links = [
     {
       id: 'github',
-      href: `https://www.github.com`,
+      href: `https://github.com/swsnu/swpp2020-team15`,
     },
     {
       id: 'facebook official',
