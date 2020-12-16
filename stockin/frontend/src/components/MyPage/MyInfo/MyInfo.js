@@ -90,7 +90,7 @@ const MyInfo = (props) => {
                 <Table.Body>
                   <Table.Row>
                     <Table.Cell width={2}>
-                      <Header as="h2">Mail</Header>
+                      <Header as="h3">Mail</Header>
                     </Table.Cell>
                     <Table.Cell width={5} textAlign="right">
                       <Header as="h5">{user && user.email}</Header>
@@ -98,7 +98,7 @@ const MyInfo = (props) => {
                   </Table.Row>
                   <Table.Row>
                     <Table.Cell width={2}>
-                      <Header as="h2">Nickname</Header>
+                      <Header as="h3">Nickname</Header>
                     </Table.Cell>
                     <Table.Cell width={5} textAlign="right">
                       <Header as="h5">{user && user.nickname}</Header>
@@ -137,7 +137,7 @@ const MyInfo = (props) => {
                 <Table.Body>
                   <Table.Row>
                     <Table.Cell width={2}>
-                      <Header as="h2">Mail</Header>
+                      <Header as="h3">Mail</Header>
                     </Table.Cell>
                     <Table.Cell width={5} textAlign="right">
                       <Header as="h5">{user && user.email}</Header>
@@ -145,7 +145,7 @@ const MyInfo = (props) => {
                   </Table.Row>
                   <Table.Row>
                     <Table.Cell width={2}>
-                      <Header as="h2">Nickname</Header>
+                      <Header as="h3">Nickname</Header>
                     </Table.Cell>
                     <Table.Cell width={5} textAlign="right">
                       <Input

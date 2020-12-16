@@ -22,6 +22,7 @@ const CommentList = (props) => {
               id={comment.id}
               key={comment.id}
               author={comment.author}
+              author_id={comment.author_id}
               time={comment.time}
               content={comment.content}
             />

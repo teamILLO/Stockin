@@ -105,8 +105,8 @@ const CommentBlock = (props) => {
     <Comment className="Comment">
       <Comment.Avatar
         src={
-          user
-            ? 'https://semantic-ui.com/images/' + avatar[user.id % 24]
+          props.author_id
+            ? 'https://semantic-ui.com/images/' + avatar[props.author_id % 24]
             : 'https://semantic-ui.com/images/avatar/small/ade.jpg'
         }
       />

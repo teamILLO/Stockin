@@ -26,7 +26,7 @@ def comment_list(request, stock_id=""):
         response_list = []
         for comment_ in Comment.objects.filter(stock=stock_id).iterator():
             response_list.append({'stock': stock_id, 'time': comment_.time,
-                                  'content': comment_.content, 'author': comment_.author.nickname,
+                                  'content': comment_.content, 'author': comment_.author.nickname, 'author_id': comment_.author.id,
                                   'id': comment_.id})
         return JsonResponse(response_list, safe=False)
 
@@ -46,7 +46,7 @@ def comment_list(request, stock_id=""):
         comment_.save()
         response_dict = {'id': comment_.id, 'stock': comment_.stock.id,
                          'time': comment_.time, 'content': comment_.content,
-                         'author': comment_.author.nickname}
+                         'author': comment_.author.nickname, 'author_id': comment_.author.id}
         return JsonResponse(response_dict, status=201)
 
 
@@ -72,7 +72,7 @@ def comment(request, comment_id=""):
         comment_ = get_object_or_404(Comment, id=comment_id)
 
         response_dict = {'stock': comment_.stock.id, 'time': comment_.time,
-                         'content': comment_.content, 'author': comment_.author.id}
+                         'content': comment_.content, 'author': comment_.author.id, 'author_id': comment_.author.id}
         return JsonResponse(response_dict)
 
     if request.method == 'PUT':
@@ -89,7 +89,7 @@ def comment(request, comment_id=""):
         comment_.save()
         response_dict = {'id': comment_.id, 'stock': comment_.stock.id,
                          'time': comment_.time, 'content': comment_.content,
-                         'author': comment_.author.id}
+                         'author': comment_.author.id, 'author_id': comment_.author.id}
         return JsonResponse(response_dict, status=200)
 
     if request.method == 'DELETE':
