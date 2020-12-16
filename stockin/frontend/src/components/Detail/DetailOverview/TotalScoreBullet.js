@@ -19,14 +19,18 @@ const CustomMarker = ({ x, size, color, onMouseEnter, onMouseMove, onMouseLeave 
       fill="none"
     />
     <path d="M 0 -1 L 1 0 L 0 1 L -1 0 Z" fill={color} />
-    <path transform={`translate(0,${size})`} d="M0 -10 L 10 0 L 0 10 L -10 0 Z" fill={color} />
+    <path
+      transform={`translate(0,${size})`}
+      d="M0 -10 L 10 0 L 0 10 L -10 0 Z"
+      fill={'rgba(51,30,51,1)'}
+    />
   </g>
 );
 
 const TotalScoreBullet = (props) => {
   return (
     <ResponsiveBullet
-      rangeColors="reds"
+      rangeColors={props.color}
       data={props.data}
       margin={{ top: 10, right: 90, bottom: 10, left: 90 }}
       spacing={46}
