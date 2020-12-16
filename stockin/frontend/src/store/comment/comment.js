@@ -78,6 +78,7 @@ export const postComment = (stock_id, content, author) => async (dispatch) => {
             time: response.data.time,
             content: content,
             author: response.data.author,
+            author_id: response.data.author_id,
           }),
         );
       });
