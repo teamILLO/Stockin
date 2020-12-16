@@ -13,50 +13,6 @@ from core.models import Stock, StockHistory, FinancialStat, News
 from core.views.index import get_fs_info, get_top_rank_info, get_bottom_rank_info
 
 
-def stock_fs(request, stock_id=''):
-    '''
-    stock_fs
-    '''
-    if request.method == 'GET':
-        # For debugging
-        # print(FinancialStat.objects.all().explain())
-        # print(FinancialStat.objects.filter(stock__id = stock_id).explain())
-
-        response_list = []
-        fs_list = FinancialStat.objects.filter(stock__id = stock_id)
-
-        for fs_ in fs_list:
-            response_dict = {'id': fs_.id, 'stock_id': fs_.stock.id, 'quarter': fs_.quarter,
-                            'sales': fs_.sales, 'operatingProfit': fs_.operatingProfit,
-                            'netIncome': fs_.netIncome, 'operatingMargin': fs_.operatingMargin,
-                            'netProfitMargin': fs_.netProfitMargin, 'PER': fs_.PER, 'PBR': fs_.PBR,
-                            'ROE': fs_.ROE}
-            response_list.append(response_dict)
-
-        return JsonResponse(response_list, safe=False)
-
-
-    return HttpResponseNotAllowed(['GET'])
-
-
-def price_list(request, stock_id=""):
-    '''
-    price_list
-    '''
-    if request.method == 'GET':
-        get_object_or_404(Stock, id=stock_id)
-        response_list = []
-        for stock_history in StockHistory.objects.filter(stock_id=stock_id).iterator():
-            response_list.append({'stock': stock_id, 'date': stock_history.date,
-                        'open': stock_history.startPrice, 'high': stock_history.highestPrice,
-                        'low': stock_history.lowestPrice, 'close': stock_history.endPrice,
-                        'volume': stock_history.tradeVolume})
-        return JsonResponse(response_list, safe=False)
-
-
-    return HttpResponseNotAllowed(['GET'])
-
-
 def stock_list(request):
     '''
     stock_list
@@ -111,51 +67,18 @@ def stock_info(request, stock_id=''):
     return HttpResponseNotAllowed(['GET'])
 
 
-def fs_score(request, stock_id=""):
+def price_list(request, stock_id=""):
     '''
-    fs_score
+    price_list
     '''
     if request.method == 'GET':
-        stock = get_object_or_404(Stock, id=stock_id)
-        fs_stock = FinancialStat.objects.filter(stock_id=stock_id)
-        response = get_fs_info(stock, fs_stock)
-
-        return JsonResponse(response, status=201)
-
-    return HttpResponseNotAllowed(['GET'])
-
-
-def stock_top10(request):
-    '''
-    stock_top10
-    '''
-    if request.method =='GET':
-        stocks = get_top_rank_info(10)
-
-        response_list=[]
-        for stock in stocks:
-            response_list.append({
-                'id': stock['id'],
-                'score':stock['score']
-            })
-        return JsonResponse(response_list, safe=False)
-
-    return HttpResponseNotAllowed(['GET'])
-
-
-def stock_bottom10(request):
-    '''
-    stock_bottom10
-    '''
-    if request.method =='GET':
-        response_list=[]
-        stocks = get_top_rank_info(10)
-
-        for stock in stocks:
-            response_list.append({
-                'id': stock['id'],
-                'score':stock['score']
-            })
+        get_object_or_404(Stock, id=stock_id)
+        response_list = []
+        for stock_history in StockHistory.objects.filter(stock_id=stock_id).iterator():
+            response_list.append({'stock': stock_id, 'date': stock_history.date,
+                        'open': stock_history.startPrice, 'high': stock_history.highestPrice,
+                        'low': stock_history.lowestPrice, 'close': stock_history.endPrice,
+                        'volume': stock_history.tradeVolume})
         return JsonResponse(response_list, safe=False)
 
     return HttpResponseNotAllowed(['GET'])
@@ -217,6 +140,7 @@ def stock_top100_news(request) :
 
 
     return HttpResponseNotAllowed(['GET'])
+
 
 def stock_top100_stockhistory(request) :
     '''
@@ -288,6 +212,7 @@ def stock_bottom100_stockinfo(request) :
 
     return HttpResponseNotAllowed(['GET'])
 
+
 def stock_bottom100_news(request) :
     '''
     stock_bottom100_news
@@ -315,8 +240,8 @@ def stock_bottom100_news(request) :
 
         return JsonResponse(response_list, safe=False)
 
-
     return HttpResponseNotAllowed(['GET'])
+
 
 def stock_bottom100_stockhistory(request) :
     '''
@@ -349,5 +274,81 @@ def stock_bottom100_stockhistory(request) :
 
         return JsonResponse(response_list, safe=False)
 
+    return HttpResponseNotAllowed(['GET'])
+
+
+def stock_top10(request):
+    '''
+    stock_top10
+    '''
+    if request.method =='GET':
+        stocks = get_top_rank_info(10)
+
+        response_list=[]
+        for stock in stocks:
+            response_list.append({
+                'id': stock['id'],
+                'score':stock['score']
+            })
+        return JsonResponse(response_list, safe=False)
 
     return HttpResponseNotAllowed(['GET'])
+
+
+def stock_bottom10(request):
+    '''
+    stock_bottom10
+    '''
+    if request.method =='GET':
+        response_list=[]
+        stocks = get_top_rank_info(10)
+
+        for stock in stocks:
+            response_list.append({
+                'id': stock['id'],
+                'score':stock['score']
+            })
+        return JsonResponse(response_list, safe=False)
+
+    return HttpResponseNotAllowed(['GET'])
+
+
+def stock_fs(request, stock_id=''):
+    '''
+    stock_fs
+    '''
+    if request.method == 'GET':
+        # For debugging
+        # print(FinancialStat.objects.all().explain())
+        # print(FinancialStat.objects.filter(stock__id = stock_id).explain())
+
+        response_list = []
+        fs_list = FinancialStat.objects.filter(stock__id = stock_id)
+
+        for fs_ in fs_list:
+            response_dict = {'id': fs_.id, 'stock_id': fs_.stock.id, 'quarter': fs_.quarter,
+                            'sales': fs_.sales, 'operatingProfit': fs_.operatingProfit,
+                            'netIncome': fs_.netIncome, 'operatingMargin': fs_.operatingMargin,
+                            'netProfitMargin': fs_.netProfitMargin, 'PER': fs_.PER, 'PBR': fs_.PBR,
+                            'ROE': fs_.ROE}
+            response_list.append(response_dict)
+
+        return JsonResponse(response_list, safe=False)
+
+
+    return HttpResponseNotAllowed(['GET'])
+
+
+def fs_score(request, stock_id=""):
+    '''
+    fs_score
+    '''
+    if request.method == 'GET':
+        stock = get_object_or_404(Stock, id=stock_id)
+        fs_stock = FinancialStat.objects.filter(stock_id=stock_id)
+        response = get_fs_info(stock, fs_stock)
+
+        return JsonResponse(response, status=201)
+
+    return HttpResponseNotAllowed(['GET'])
+

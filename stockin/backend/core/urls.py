@@ -19,7 +19,6 @@ urlpatterns = [
     # stock model
     path('stocks/', views.stock_list, name='stock list'),   # cached
     path('stocks/<int:stock_id>/', views.stock_info, name='stock_info'),
-    path('stocks/financialstats/stock/<int:stock_id>/', views.stock_fs, name='stock_fs'),
     path('stocks/price/<int:stock_id>/', views.price_list, name='price_list'),
     path('stocks/report/up/stockinfo/',
         views.stock_top100_stockinfo,
@@ -37,12 +36,8 @@ urlpatterns = [
         name='stock_bottom100_stockhistory'),
     path('stocks/top10/', views.stock_top10, name='stock_top10'),
     path('stocks/bottom10/', views.stock_bottom10, name='stock_bottom10'),
+    path('stocks/financialstats/stock/<int:stock_id>/', views.stock_fs, name='stock_fs'),
     path('stocks/financialstats/score/<int:stock_id>/', views.fs_score, name='fs_score'),
-
-    # news model
-    path('news/stocks/<int:stock_id>/date/<str:news_date>/',
-        views.get_news_list,
-        name='get_news_list'),
 
     # group model
     path('groups/', views.group_list_and_create, name='group_list_and_create'),
@@ -55,4 +50,10 @@ urlpatterns = [
     # comment model
     path('stocks/<int:stock_id>/comments/', views.comment_list, name='comment_list'),
     path('comments/<int:comment_id>/', views.comment, name='comment'),
+    
+    # news model
+    path('news/stocks/<int:stock_id>/date/<str:news_date>/',
+        views.get_news_list,
+        name='get_news_list'),
+
 ]

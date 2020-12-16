@@ -31,8 +31,7 @@ def signup(request):
         except IntegrityError:
             return HttpResponse(status=406)
         request.session['user'] = user.id
-        response_dict = {'email': email,
-                         'nickname': nickname, 'id':user.id}
+        response_dict = {'email': email, 'nickname': nickname, 'id':user.id}
         return HttpResponse(content=json.dumps(response_dict), status=201)
 
 
@@ -61,6 +60,18 @@ def signin(request):
 
 
     return HttpResponseNotAllowed(['POST'])
+
+def check_login(request):
+    '''
+    check_login
+    '''
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            response_dict = {'email': request.user.email, 'nickname': request.user.nickname, 'id': request.user.id}
+            return JsonResponse(response_dict, status=200)
+        return HttpResponse(status=401)
+
+    return HttpResponseNotAllowed(['GET'])
 
 
 def logoff(request):
@@ -193,18 +204,6 @@ def user_info(request):
 
     return HttpResponseNotAllowed(['GET','PUT'])
 
-
-def check_login(request):
-    '''
-    check_login
-    '''
-    if request.method == 'GET':
-        if request.user.is_authenticated:
-            response_dict = {'email': request.user.email, 'nickname': request.user.nickname, 'id': request.user.id}
-            return JsonResponse(response_dict, status=200)
-        return HttpResponseBadRequest()
-
-    return HttpResponseNotAllowed(['GET'])
 
 
 @ensure_csrf_cookie
