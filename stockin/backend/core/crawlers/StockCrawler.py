@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import os,sys, getopt
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -28,7 +29,6 @@ import math
 
 
 
-#처음 엑셀 추출용
 def initialStockAddFromExcel():
     # driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'core/crawlers/phantomjs/phantomjs-2.1.1-linux-x86_64/bin/phantomjs'))
     driver = webdriver.PhantomJS(os.path.join(BASE_DIR, 'core/crawlers/phantomjs/phantomjs-2.1.1-macosx/bin/phantomjs')) 
@@ -43,7 +43,7 @@ def initialStockAddFromExcel():
     writer.writeheader()
     i = 0
     try:
-        code_title = pd.read_excel(os.path.join(BASE_DIR,'core/crawlers/KOSPI.xls'))[['종목코드', '기업명']]
+        code_title = pd.read_excel(os.path.join(BASE_DIR,'core/crawlers/KOSPI.xls'), encoding='utf-8')[['종목코드', '기업명']]
         code_title.종목코드 = code_title.종목코드.map('{:06d}'.format)
         
         for stock in code_title.iloc:
