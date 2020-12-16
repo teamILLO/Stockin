@@ -21,7 +21,7 @@ const Footer = (props) => {
     },
     {
       id: 'instagram',
-      href: `https://www.instagram.com`,
+      href: 'https://www.instagram.com/stockin_swpp/',
     },
   ];
 
