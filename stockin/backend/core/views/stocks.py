@@ -2,6 +2,7 @@
 stocks
 '''
 import json, math
+import numpy as np
 from datetime import timedelta
 
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
@@ -9,7 +10,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
 from core.models import Stock, StockHistory, FinancialStat, News
-from core.views.index import get_fs_info
+from core.views.index import get_fs_info, get_top_rank_info, get_bottom_rank_info
 
 
 def stock_fs(request, stock_id=''):
@@ -129,12 +130,13 @@ def stock_top10(request):
     stock_top10
     '''
     if request.method =='GET':
-        stocks=Stock.objects.all().values_list('id','fin_score').order_by('-fin_score')[:10]
+        stocks = get_top_rank_info(10)
+
         response_list=[]
         for stock in stocks:
             response_list.append({
-                'id': stock[0],
-                'score':stock[1]
+                'id': stock['id'],
+                'score':stock['score']
             })
         return JsonResponse(response_list, safe=False)
 
@@ -146,12 +148,13 @@ def stock_bottom10(request):
     stock_bottom10
     '''
     if request.method =='GET':
-        stocks=Stock.objects.all().values_list('id','fin_score').order_by('fin_score')[:10]
         response_list=[]
+        stocks = get_top_rank_info(10)
+
         for stock in stocks:
             response_list.append({
-                'id': stock[0],
-                'score':stock[1]
+                'id': stock['id'],
+                'score':stock['score']
             })
         return JsonResponse(response_list, safe=False)
 
@@ -164,17 +167,8 @@ def stock_top100_stockinfo(request) :
     stock_top100_stockinfo
     '''
     if request.method =='GET':
-        response_list=[]
-
-        # using cache
-        # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.all().values('id','title',
-        #  'isKOSPI','code','price','yesterdayPrice','fin_score').order_by('-fin_score'))
-        # stocks = stock_qs[0:100]
-
-        # original
-        stocks=Stock.objects.all().values('id','title','isKOSPI',
-                                'code','price','yesterdayPrice',
-                                'fin_score').order_by('-fin_score')[0:100]
+        response_list = []
+        stocks = get_top_rank_info(100)
 
         cnt = 1
         for stock in stocks:
@@ -186,7 +180,7 @@ def stock_top100_stockinfo(request) :
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score' : stock['fin_score'],
+                'score' : stock['score'],
             })
             cnt = cnt + 1
 
@@ -201,8 +195,7 @@ def stock_top100_news(request) :
     '''
     if request.method =='GET':
         response_list=[]
-
-        stocks=Stock.objects.all().values('id','fin_score').order_by('-fin_score')[0:100]
+        stocks = get_top_rank_info(100)
 
         cnt = 1
         for stock in stocks:
@@ -231,11 +224,10 @@ def stock_top100_stockhistory(request) :
     '''
     if request.method =='GET':
         response_list=[]
+        stocks = get_top_rank_info(100)
 
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
-
-        stocks=Stock.objects.all().values('id','fin_score').order_by('-fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -265,6 +257,7 @@ def stock_bottom100_stockinfo(request) :
     '''
     if request.method =='GET':
         response_list=[]
+        stocks = get_bottom_rank_info(100)
 
         # using cache
         # stock_qs = cache.get_or_set('down_stockinfo', Stock.objects.all().values('id',
@@ -272,9 +265,9 @@ def stock_bottom100_stockinfo(request) :
         # stocks = stock_qs[0:100]
 
         # original
-        stocks=Stock.objects.all().values('id','title','isKOSPI',
-                                    'code','price','yesterdayPrice',
-                                    'fin_score').order_by('fin_score')[0:100]
+        # stocks=Stock.objects.all().values('id','title','isKOSPI',
+        #                             'code','price','yesterdayPrice',
+        #                             'fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -286,7 +279,7 @@ def stock_bottom100_stockinfo(request) :
                 'code' : stock['code'],
                 'price' : stock['price'],
                 'yesterdayPrice' : stock['yesterdayPrice'],
-                'score' : stock['fin_score'],
+                'score' : stock['score'],
             })
             cnt = cnt + 1
 
@@ -301,8 +294,9 @@ def stock_bottom100_news(request) :
     '''
     if request.method =='GET':
         response_list=[]
+        stocks = get_bottom_rank_info(100)
 
-        stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
+        # stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
@@ -330,17 +324,18 @@ def stock_bottom100_stockhistory(request) :
     '''
     if request.method =='GET':
         response_list=[]
+        stocks = get_bottom_rank_info(100)
 
         enddate = timezone.now().date()
         startdate = enddate - timedelta(days=30)
 
-        stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
+        # stocks=Stock.objects.all().values('id','fin_score').order_by('fin_score')[0:100]
 
         cnt = 1
         for stock in stocks:
             # Get StockHistory(1 month)
             stockhis_qs = StockHistory.objects.values('id', 'date',
-            'endPrice').filter(stock__id = stock['id']).filter(date__range=[startdate, enddate])
+            'endPrice','tradeVolume').filter(stock__id = stock['id']).filter(date__range=[startdate, enddate])
             stockhis_list = []
             for stockhis in stockhis_qs :
                 stockhis_list.append(stockhis)

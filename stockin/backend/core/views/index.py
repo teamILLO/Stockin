@@ -3,9 +3,15 @@ index
 '''
 import csv
 import os
+import numpy as np
+from datetime import timedelta
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.utils import OperationalError
+from django.utils import timezone
 from core.crawlers.preprocessors.score import base_score
+
+from core.models import Stock, StockHistory, FinancialStat, News
 
 
 
@@ -75,3 +81,69 @@ def get_fs_info(stock, fs_stock) :
                         stock.operatingMarginRateAvg)
 
     return response
+
+def get_top_rank_info(len):
+    enddate = timezone.now().date()
+    startdate = enddate - timedelta(days=30)
+    duration = int(np.busday_count(startdate, enddate+timedelta(days=1)))
+
+    response_list=[]
+    stocks=[]
+
+    # using cache
+    # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.exclude(tradeVolume__isnull=True).exclude(tradeVolume__exact=0).values('id','title',
+    #  'isKOSPI','code','price','yesterdayPrice','score').order_by('-score'))
+    # stocks = stock_qs[0:100]
+
+    # 초기 filtering
+    initial_stocks=Stock.objects.exclude(tradeVolume__isnull=True).exclude(tradeVolume__exact=0).values('id','title','isKOSPI',
+                            'code','price','yesterdayPrice',
+                            'score').order_by('-score')
+
+    # 한달치 확인, length check
+    cnt = 0
+    for stock in initial_stocks : 
+        if cnt is len :
+            break
+
+        stockhis_qs = StockHistory.objects.filter(stock__id=stock['id']).filter(date__range=[startdate, enddate]).exclude(tradeVolume__isnull=True).exclude(tradeVolume__exact=0)
+
+        # tradeVolume 에 null or 0 값이 없는 경우
+        if stockhis_qs.count() is duration :
+            stocks.append(stock)
+            cnt = cnt + 1
+
+    return stocks
+
+def get_bottom_rank_info(len):
+    enddate = timezone.now().date()
+    startdate = enddate - timedelta(days=30)
+    duration = int(np.busday_count(startdate, enddate+timedelta(days=1)))
+
+    response_list=[]
+    stocks=[]
+
+    # using cache
+    # stock_qs = cache.get_or_set('up_stockinfo', Stock.objects.exclude(tradeVolume__isnull=True).exclude(tradeVolume__exact=0).values('id','title',
+    #  'isKOSPI','code','price','yesterdayPrice','score').order_by('-score'))
+    # stocks = stock_qs[0:100]
+
+    # 초기 filtering
+    initial_stocks=Stock.objects.exclude(tradeVolume__isnull=True).exclude(tradeVolume__exact=0).values('id','title','isKOSPI',
+                            'code','price','yesterdayPrice',
+                            'score').order_by('score')
+
+    # 한달치 확인, length check
+    cnt = 0
+    for stock in initial_stocks : 
+        if cnt is len :
+            break
+
+        stockhis_qs = StockHistory.objects.filter(stock__id=stock['id']).filter(date__range=[startdate, enddate]).exclude(tradeVolume__isnull=True).exclude(tradeVolume__exact=0)
+
+        # tradeVolume 에 null or 0 값이 없는 경우
+        if stockhis_qs.count() is duration :
+            stocks.append(stock)
+            cnt = cnt + 1
+
+    return stocks

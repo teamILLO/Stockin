@@ -11,3 +11,4 @@ selenium
 pandas
 OpenDartReader
 sklearn
+numpy
