@@ -238,9 +238,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
 | | ``` api/stocks/:stock_id/ ``` | Get stock info | X | X | X |
 | | ``` api/stocks/report/up/stockinfo/ ``` | Get stockinfo of top 100 stocks | X | X | X |
-| | ``` api/stocks/report/up/news/ ``` | Get news of top 100 stockss | X | X | X |
 | | ``` api/stocks/report/down/stockinfo/ ``` | Get stockinfo of bottom 100 stocks | X | X | X |
-| | ``` api/stocks/report/down/news/ ``` | Get news of bottom 100 stocks  | X | X | X |
 | | ``` api/stocks/top10/ ``` | Get top 10 stocks | X | X | X |
 | | ``` api/stocks/bottom10/ ``` | Get bottom 10 stocks | X | X | X |
 | | ``` api/stocks/financialstats/stock/:stock_id/ ``` | Get financial statement of specified stock | X | X | X |
@@ -255,6 +253,8 @@ That is, “Group” model and “Stock” model is “many to many” relations
 | Comment | ``` api/stocks/:stock_id/comments/  ``` | Get stock's comment list   | Create comment | X | X |
 | | ``` api/comments/:comment_id/  ``` | Get a comment | X | Edit comment | Delete comment |
 | News | ``` api/news/stock/:stock_id/date/:news_date/ ``` | Get news list of specified date | X | X | X |
+| | ``` api/stocks/report/up/news/ ``` | Get news of top 100 stockss | X | X | X |
+| | ``` api/stocks/report/down/news/ ``` | Get news of bottom 100 stocks  | X | X | X |
 
 
 ### User Model
@@ -287,7 +287,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * Success : status 204
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
-
 
 #### ``` api/users/signout/ ```
 - POST
@@ -322,6 +321,89 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * NotFound : status 404
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
+
+#### ``` api/users/token/ ```
+- GET
+   * Success : status 204
+- NotAllowedMethod : status 405
+
+### Stock Model
+#### ``` api/stocks/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/:stock_id/ ```
+- GET
+   * response form : ``` {“title”: string, “code”: string, “sector”: string, “price”: integer, “highestPrice”: integer, “lowestPrice”: integer, “tradeVolume”: integer, “tradeValue”: integer, “startPrice”: integer, “yesterdayPrice”: integer, “amount”: integer, “isKOSPI”: boolean, "saleGrowthRate": string, "saleGrowthRate": string, "saleGrowthRateAvg": string, "operatingMarginRate": string, "operatingMarginRateAvg": string, "crawledPER": string, "crawledPERAvg": string, "debtRatio": string, "score": integer} ```
+   * Success : status 203
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/report/up/stockinfo/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "rank": integer, “title”: string, “isKOSPI”: boolean, “code”: string, “price”: integer, “yesterdayPrice”: integer, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/report/down/stockinfo/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "rank": integer, “title”: string, “isKOSPI”: boolean, “code”: string, “price”: integer, “yesterdayPrice”: integer, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/top10/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/bottom10/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/fiancialstats/stock/:stock_id ```
+- GET
+   * response form(list) : each element :  ``` {"id": id, "stock_id": integer, "quarter" : string, "sales" : string, "operatingProfit": string, "netIncome": string, "operatingMargin": string, "netProfitMargin": string, "PER" : string, "PBR": string, "ROE": string} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/fiancialstats/score/:stock_id ```
+- GET
+   * response form :  ``` {"score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+
+
+
+### StockHistory Model
+#### ``` api/stocks/history/:stockhistory_date ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+   * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/history/:stockhistory_stock_id ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
+   * Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/price/:stock_id ```
+- GET
+  - response form(list) : each element : `{“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer}`
+  - Success : status 200
+- AuthenticateError : status 401
+- NotAllowedMethod : status 405
+
+
+
+
 
 ### Group Model
 #### ``` api/groups/ ```
@@ -375,36 +457,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-### Stock Model
-#### ``` api/stocks/ ```
-- GET
-   * response form : list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
-### StockHistory Model
-#### ``` api/stocks/history/:stockhistory_date ```
-- GET
-   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
-#### ``` api/stocks/history/:stockhistory_stock_id ```
-- GET
-   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
-#### ``` api/stocks/price/:stock_id ```
-- GET
-  - response form(list) : each element : `{“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer}`
-  - Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
 ### Comment Model
 #### `api/stocks/:stock_id/comments`
 - GET
@@ -454,12 +506,6 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-### FinancialStat Model
-#### ``` api/stocks/fiancialstats/stock/:stock_id ```
-- GET
-   * response form :  ``` {"id": id, "stock_id": integer, "quarter" : string, "sales" : string, "operatingProfit": string, "netIncome": string, "operatingMargin": string, "netProfitMargin": string, "PER" : string, "PBR": string, "ROE": string} ```
-   * Success : status 200
-- NotAllowedMethod : status 405
 
 ## Implementation Plan
 
