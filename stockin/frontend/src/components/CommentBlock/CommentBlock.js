@@ -80,7 +80,7 @@ const CommentBlock = (props) => {
     );
   const content = edit ? (
     <Comment className="Comment">
-      <Comment.Avatar src={'https://semantic-ui.com/images/' + avatar[user.id % 24]} />
+      <Comment.Avatar src={'https://semantic-ui.com/images/' + avatar[props.author_id % 24]} />
       <Comment.Content>
         <Comment.Author as="a">{props.author}</Comment.Author>
         <Comment.Metadata>
@@ -106,7 +106,7 @@ const CommentBlock = (props) => {
       <Comment.Avatar
         src={
           user
-            ? 'https://semantic-ui.com/images/' + avatar[user.id % 24]
+            ? 'https://semantic-ui.com/images/' + avatar[props.author_id % 24]
             : 'https://semantic-ui.com/images/avatar/small/ade.jpg'
         }
       />
