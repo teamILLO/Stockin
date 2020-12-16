@@ -226,54 +226,70 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ```api/users/signup ``` | X | Create user | X | X |
-| | ``` api/users/signin ``` | X | User login check | X | X |
-| | ``` api/users/logout ``` | User logout | X | X | X |
-| | ``` api/users/signout ``` | X | User signout | X | X |
-| | ``` api/users/duplicate ``` | X | Check signup integrity | X | X |
-| | ``` api/users/sendCode ``` | X | Send code to user | X | X |
-| | ``` api/users/userInfo ``` | Get user's info | X | Edit user info | X |
-| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
-| | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
-| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
-| | ``` api/groups/:group_id/stocks/:stock_id ``` | X | X | X | Delete stock |
+| User | ```api/users/signup/ ``` | X | Create user | X | X |
+| | ``` api/users/signin/ ``` | X | User login | X | X |
+| | ``` api/users/checklogin/ ``` | User login check | X | X | X |
+| | ``` api/users/logout/ ``` | User logout | X | X | X |
+| | ``` api/users/signout/ ``` | X | User signout | X | X |
+| | ``` api/users/duplicate/ ``` | X | Check signup integrity | X | X |
+| | ``` api/users/sendCode/ ``` | X | Send code to user | X | X |
+| | ``` api/users/userInfo/ ``` | Get user's info | X | Edit user info | X |
+| | ``` api/users/token/ ``` | Get token | X | X | X |
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
-| StockHistory | ``` api/stocks/price/:stock_id ``` | Get stock price info | X | X | X |
-| | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
-| | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
+| | ``` api/stocks/:stock_id/ ``` | Get stock info | X | X | X |
+| | ``` api/stocks/report/up/stockinfo/ ``` | Get stockinfo of top 100 stocks | X | X | X |
+| | ``` api/stocks/report/up/news/ ``` | Get news of top 100 stockss | X | X | X |
+| | ``` api/stocks/report/down/stockinfo/ ``` | Get stockinfo of bottom 100 stocks | X | X | X |
+| | ``` api/stocks/report/down/news/ ``` | Get news of bottom 100 stocks  | X | X | X |
+| | ``` api/stocks/top10/ ``` | Get top 10 stocks | X | X | X |
+| | ``` api/stocks/bottom10/ ``` | Get bottom 10 stocks | X | X | X |
+| | ``` api/stocks/financialstats/stock/:stock_id/ ``` | Get financial statement of specified stock | X | X | X |
+| | ``` api/stocks/financialstats/score/:stock_id/ ``` | Get financial score of specified stock | X | X | X |
+| StockHistory | ``` api/stocks/price/:stock_id/ ``` | Get stock price info | X | X | X |
+| | ``` api/stocks/report/up/stockhistory/ ``` | Get stockhistory of top 100 stocks | X | X | X |
+| | ``` api/stocks/report/down/stockhistory/ ``` | Get stockhistory of bottom 100 stocks | X | X | X |
+| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
+| | ``` api/groups/:group_id/ ``` | X | X | Update group name | Delete group |
+| | ``` api/groups/:group_id/stocks/ ``` | Get user's all stock | Add stocks | X | X |
+| | ``` api/groups/:group_id/stocks/:stock_id/ ``` | X | X | X | Delete stock |
 | Comment | ``` api/stocks/:stock_id/comments/  ``` | Get stock's comment list   | Create comment | X | X |
 | | ``` api/comments/:comment_id/  ``` | Get a comment | X | Edit comment | Delete comment |
-| News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
-| Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
-| | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
-| FinancialStat | ``` api/stocks/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
+| News | ``` api/news/stock/:stock_id/date/:news_date/ ``` | Get news list of specified date | X | X | X |
+
 
 ### User Model
-#### ``` api/users/signup ```
+#### ``` api/users/signup/ ```
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
    * IntegrityError : status 406
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/users/signin ```
+#### ``` api/users/signin/ ```
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * request form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
    * KeyError : status 400
    * AuthenticateError : status 401
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/users/logout ```
+#### ``` api/users/checklogin/ ```
+- GET
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * AuthenticateError : status 401
+   * Success : status 201
+- NotAllowedMethod : status 405
+
+#### ``` api/users/logout/ ```
 - GET
    * Success : status 204
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
 
-#### ``` api/users/signout ```
+#### ``` api/users/signout/ ```
 - POST
    * resquest form : ``` {“email”: string, “password": string} ```
    * KeyError : status 400
@@ -281,23 +297,26 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * Success : status 204
 - NotAllowedMethod : status 405
 
-#### ``` api/users/duplicate ```
+#### ``` api/users/duplicate/ ```
 - POST
-   * resquest form : ``` {“email”: string} ```
+   * resquest form : ``` {“email”: string, "nickname": string} ```
    * response form : ``` {“duplicate”: boolean} ```
    * Success : status 203
 - NotAllowedMethod : status 405
 
-#### ``` api/user/sendCode```
+#### ``` api/user/sendCode/```
 - POST
    * requset form : ``` {“email”: string, “code”: integer} ```
    * Sucess : status 204
 - NotAllowedMethod : status 405
 
-#### ``` api/users/userInfo ```
+#### ``` api/users/userInfo/ ```
+- GET
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * Success : status 203
 - PUT
    * request form : ``` {“change”: string, "email": string, “nickname": string} or {“change”: string, "email": string, “password": string}  ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
    * KeyError : status 400
    * Success : status 201
    * NotFound : status 404
