@@ -5,6 +5,7 @@
 Rev. 1.0 2020-10-31 - initial version<br/>
 Rev. 1.1 2020-11-10 - additional backend model `Comment`, `Stock`, `StockHistory`<br/>
 Rev. 1.2 2020-11-19 - revise backend api & response format
+Rev. 1.3 2020-12-17 - revise backend api & response format
 
 ## System Architecture<br />
 
@@ -226,54 +227,69 @@ That is, “Group” model and “Stock” model is “many to many” relations
 ### Backend design
 | Model | API | GET | POST | PUT | DELETE |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| User | ```api/users/signup ``` | X | Create user | X | X |
-| | ``` api/users/signin ``` | X | User login check | X | X |
-| | ``` api/users/logout ``` | User logout | X | X | X |
-| | ``` api/users/signout ``` | X | User signout | X | X |
-| | ``` api/users/duplicate ``` | X | Check signup integrity | X | X |
-| | ``` api/users/sendCode ``` | X | Send code to user | X | X |
-| | ``` api/users/userInfo ``` | Get user's info | X | Edit user info | X |
-| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
-| | ``` api/groups/:group_id ``` | X | X | Update group name | Delete group |
-| | ``` api/groups/:group_id/stocks ``` | Get user's all stock | Add stocks | X | X |
-| | ``` api/groups/:group_id/stocks/:stock_id ``` | X | X | X | Delete stock |
+| User | ```api/users/signup/ ``` | X | Create user | X | X |
+| | ``` api/users/signin/ ``` | X | User login | X | X |
+| | ``` api/users/checklogin/ ``` | User login check | X | X | X |
+| | ``` api/users/logout/ ``` | User logout | X | X | X |
+| | ``` api/users/signout/ ``` | X | User signout | X | X |
+| | ``` api/users/duplicate/ ``` | X | Check signup integrity | X | X |
+| | ``` api/users/sendCode/ ``` | X | Send code to user | X | X |
+| | ``` api/users/userInfo/ ``` | Get user's info | X | Edit user info | X |
+| | ``` api/users/token/ ``` | Get token | X | X | X |
 | Stock | ``` api/stocks/ ``` | Get stock list | X | X | X |
-| StockHistory | ``` api/stocks/price/:stock_id ``` | Get stock price info | X | X | X |
-| | ``` api/stocks/history/:stockhistory_date ``` | Get stock history list of date | X | X | X |
-| | ``` api/stocks/history/:stockhistory_id ``` | Get specified stockhistory info | X | X | X |
+| | ``` api/stocks/:stock_id/ ``` | Get stock info | X | X | X |
+| | ``` api/stocks/report/up/stockinfo/ ``` | Get stockinfo of top 100 stocks | X | X | X |
+| | ``` api/stocks/report/down/stockinfo/ ``` | Get stockinfo of bottom 100 stocks | X | X | X |
+| | ``` api/stocks/top10/ ``` | Get top 10 stocks | X | X | X |
+| | ``` api/stocks/bottom10/ ``` | Get bottom 10 stocks | X | X | X |
+| | ``` api/stocks/financialstats/stock/:stock_id/ ``` | Get financial statement of specified stock | X | X | X |
+| | ``` api/stocks/financialstats/score/:stock_id/ ``` | Get financial score of specified stock | X | X | X |
+| StockHistory | ``` api/stocks/price/:stock_id/ ``` | Get stock price info | X | X | X |
+| | ``` api/stocks/report/up/stockhistory/ ``` | Get stockhistory of top 100 stocks | X | X | X |
+| | ``` api/stocks/report/down/stockhistory/ ``` | Get stockhistory of bottom 100 stocks | X | X | X |
+| Group | ``` api/groups/ ``` | Get user's group list | Create group | X | X |
+| | ``` api/groups/:group_id/ ``` | X | X | Update group name | Delete group |
+| | ``` api/groups/:group_id/stocks/ ``` | Get user's all stock | Add stocks | X | X |
+| | ``` api/groups/:group_id/stocks/:stock_id/ ``` | X | X | X | Delete stock |
 | Comment | ``` api/stocks/:stock_id/comments/  ``` | Get stock's comment list   | Create comment | X | X |
 | | ``` api/comments/:comment_id/  ``` | Get a comment | X | Edit comment | Delete comment |
-| News | ``` api/news/stock/:stock_id/date/:news_date ``` | Get news list of specified date | X | X | X |
-| Report | ``` api/reports/date/:report_date ``` | Get report list of specified date | X | X | X |
-| | ``` api/reports/date/:report_date/stock/:stock_title ``` | Get report of specified stock & date | X | X | X |
-| FinancialStat | ``` api/stocks/financialstats/stock/:stock_id ``` | Get financial statement of specified stock | X | X | X |
+| News | ``` api/news/stock/:stock_id/date/:news_date/ ``` | Get news list of specified date | X | X | X |
+| | ``` api/stocks/report/up/news/ ``` | Get news of top 100 stockss | X | X | X |
+| | ``` api/stocks/report/down/news/ ``` | Get news of bottom 100 stocks  | X | X | X |
+
 
 ### User Model
-#### ``` api/users/signup ```
+#### ``` api/users/signup/ ```
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string} ```
+   * request form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
    * IntegrityError : status 406
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/users/signin ```
+#### ``` api/users/signin/ ```
 - POST
-   * request form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * request form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
    * KeyError : status 400
    * AuthenticateError : status 401
    * Success : status 201
 - NotAllowedMethod : status 405
 
-#### ``` api/users/logout ```
+#### ``` api/users/checklogin/ ```
+- GET
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * AuthenticateError : status 401
+   * Success : status 201
+- NotAllowedMethod : status 405
+
+#### ``` api/users/logout/ ```
 - GET
    * Success : status 204
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-
-#### ``` api/users/signout ```
+#### ``` api/users/signout/ ```
 - POST
    * resquest form : ``` {“email”: string, “password": string} ```
    * KeyError : status 400
@@ -281,33 +297,109 @@ That is, “Group” model and “Stock” model is “many to many” relations
    * Success : status 204
 - NotAllowedMethod : status 405
 
-#### ``` api/users/duplicate ```
+#### ``` api/users/duplicate/ ```
 - POST
-   * resquest form : ``` {“email”: string} ```
+   * resquest form : ``` {“email”: string, "nickname": string} ```
    * response form : ``` {“duplicate”: boolean} ```
    * Success : status 203
 - NotAllowedMethod : status 405
 
-#### ``` api/user/sendCode```
+#### ``` api/user/sendCode/```
 - POST
    * requset form : ``` {“email”: string, “code”: integer} ```
    * Sucess : status 204
 - NotAllowedMethod : status 405
 
-#### ``` api/users/userInfo ```
+#### ``` api/users/userInfo/ ```
+- GET
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
+   * Success : status 203
 - PUT
    * request form : ``` {“change”: string, "email": string, “nickname": string} or {“change”: string, "email": string, “password": string}  ```
-   * response form : ``` {“email”: string, "nickname": string, “password": string, "id": id} ```
+   * response form : ``` {“email”: string, "nickname": string, "id": id} ```
    * KeyError : status 400
    * Success : status 201
    * NotFound : status 404
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
+#### ``` api/users/token/ ```
+- GET
+   * Success : status 204
+- NotAllowedMethod : status 405
+
+### Stock Model
+#### ``` api/stocks/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/:stock_id/ ```
+- GET
+   * response form : ``` {“title”: string, “code”: string, “sector”: string, “price”: integer, “highestPrice”: integer, “lowestPrice”: integer, “tradeVolume”: integer, “tradeValue”: integer, “startPrice”: integer, “yesterdayPrice”: integer, “amount”: integer, “isKOSPI”: boolean, "saleGrowthRate": string, "saleGrowthRate": string, "saleGrowthRateAvg": string, "operatingMarginRate": string, "operatingMarginRateAvg": string, "crawledPER": string, "crawledPERAvg": string, "debtRatio": string, "score": integer} ```
+   * Success : status 203
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/report/up/stockinfo/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "rank": integer, “title”: string, “isKOSPI”: boolean, “code”: string, “price”: integer, “yesterdayPrice”: integer, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/report/down/stockinfo/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "rank": integer, “title”: string, “isKOSPI”: boolean, “code”: string, “price”: integer, “yesterdayPrice”: integer, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/top10/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/bottom10/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/fiancialstats/stock/:stock_id/ ```
+- GET
+   * response form(list) : each element :  ``` {"id": id, "stock_id": integer, "quarter" : string, "sales" : string, "operatingProfit": string, "netIncome": string, "operatingMargin": string, "netProfitMargin": string, "PER" : string, "PBR": string, "ROE": string} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/fiancialstats/score/:stock_id/ ```
+- GET
+   * response form :  ``` {"score": integer} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+### StockHistory Model
+#### ``` api/stocks/price/:stock_id/ ```
+- GET
+  - response form(list) : each element : `{“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer}`
+  - Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/report/up/stockhistory/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "stockhistory": [{“date”: date(“%Y-%m-%d”), "endPrice": integer, "tradeVolume": integer}]} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
+#### ``` api/stocks/report/down/stockhistory/ ```
+- GET
+   * response form(list) : each element :  ``` {“id”: id, "stockhistory": [{“date”: date(“%Y-%m-%d”), "endPrice": integer, "tradeVolume": integer}, ...]} ```
+   * Success : status 200
+- NotAllowedMethod : status 405
+
 ### Group Model
 #### ``` api/groups/ ```
 - GET
-   * response form(list) : each element :  ``` {“id”: id, “user”: string, “name”: string} ```
+   * response form(list) : each element :  ``` {“id”: id, “user”: string, “name”: string, "stocks": [{"id": id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highestPrice”: integer, “lowestPrice”: integer, “tradeVolume”: integer, “tradeValue”: integer, “startPrice”: integer, “yesterdayPrice”: integer, “amount”: integer, “isKOSPI”: boolean, "score": integer, "fs_score": integer}, ...] } ```
    * Success : status 200
 - POST
    * request form : ``` {“name”: string} ```
@@ -317,7 +409,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/groups/:group_id ```
+#### ``` api/groups/:group_id/ ```
 - PUT
    * request form : ``` {“name”: string} ```
    * response form : ``` {“id”: id, “user”: string, “name”: string} ```
@@ -332,7 +424,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/groups/:group_id/stocks ```
+#### ``` api/groups/:group_id/stocks/ ```
 - GET
    * response form(list) : each element :  ``` {“id”: id, “title”: string} ```
    * NotFound : status 404
@@ -349,98 +441,62 @@ That is, “Group” model and “Stock” model is “many to many” relations
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/groups/:group_id/stocks/:stock_id ```
+#### ``` api/groups/:group_id/stocks/:stock_id/ ```
 - DELETE
    *  NotFound : status 404
    *  Success : status 200
 - AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-### Stock Model
-#### ``` api/stocks/ ```
-- GET
-   * response form : list : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
-### StockHistory Model
-#### ``` api/stocks/history/:stockhistory_date ```
-- GET
-   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
-#### ``` api/stocks/history/:stockhistory_stock_id ```
-- GET
-   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “updown” : integer} ```
-   * Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
-#### ``` api/stocks/price/:stock_id ```
-- GET
-  - response form(list) : each element : `{“stock" : stock_id, "date" : string, "open" : integer, "high" : integer, "low": integer, "close": integer, "volume": integer}`
-  - Success : status 200
-- AuthenticateError : status 401
-- NotAllowedMethod : status 405
-
 ### Comment Model
-#### `api/stocks/:stock_id/comments`
+#### `api/stocks/:stock_id/comments/`
 - GET
-  - response form : list : each element : `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - response form : list : each element : `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string, "author": string, "author_id": integer}`
   - Success : status 200
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 - POST
-  - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - response form : list :  `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string, "author": string, "author_id": integer}`
   - KeyError : status 400
   - Success : status 201
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 
-#### `api/comments/:comment_id`
+#### `api/comments/:comment_id/`
 - GET
-  - response form : list : `{“stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - response form : list :  `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string, "author": string, "author_id": integer}`
   - Success : status 200
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 - PUT
-  - response form : list : `{“id”: id, “stock”: id of stock, "time": DateTime, "content": string, "author": string}`
+  - response form : list :  `{"id": id of comment, “stock”: id of stock, "time": DateTime, "content": string, "author": string, "author": string, "author_id": integer}`
   - KeyError : status 400
   - Success : status 200
 - DoesNotExistError : status 404
 - NotAllowedMethod : status 405
 
 ### News Model
-#### ``` api/news/stock/:stock_id/date/:news_date ```
+#### ``` api/news/stock/:stock_id/date/:news_date/ ```
 - GET
    * response form(list) : each element :  ``` {"id" : id, "title" : string, "press" : string, "link" : string, "date" : string(YYYY-MM-DD)} ```
    * Success : status 200
 - NotAllowedMethod : status 405
 
-### Report Model
-#### ``` api/reports/date/:report_date ```
+#### ``` api/stocks/report/up/news/ ```
 - GET
-   * response form(list) : each element :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+   * response form(list) : each element :  ``` {"id" : id, 'news': [{"id" : id, "title" : string, "press" : string, "link" : string, "date" : string(YYYY-MM-DD)}, ...]} ```
    * Success : status 200
-- AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-#### ``` api/reports/date/:report_date/stock/:stock_title ```
+
+#### ``` api/stocks/report/down/news/ ```
 - GET
-   * response form :  ``` {“id”: id, “title”: string, “code”: string, “sector”: string, “price”: integer, “highest_price”: integer, “lowest_price”: integer, “trade_volume”: integer, “trade_value”: integer, “start_price”: integer, “yesterday_price”: integer, “amount”: integer, “is_kospi”: boolean, “date”:date(“%Y-%m-%d”),  “rank”: integer, “stockin_score”: integer,  “news_analysis_result”: integer, “content”:text} ```
+   * response form(list) : each element :  ``` {"id" : id, 'news': [{"id" : id, "title" : string, "press" : string, "link" : string, "date" : string(YYYY-MM-DD)}, ...]} ```
    * Success : status 200
-- AuthenticateError : status 401
 - NotAllowedMethod : status 405
 
-### FinancialStat Model
-#### ``` api/stocks/fiancialstats/stock/:stock_id ```
-- GET
-   * response form :  ``` {"id": id, "stock_id": integer, "quarter" : string, "sales" : string, "operatingProfit": string, "netIncome": string, "operatingMargin": string, "netProfitMargin": string, "PER" : string, "PBR": string, "ROE": string} ```
-   * Success : status 200
-- NotAllowedMethod : status 405
+
+
 
 ## Implementation Plan
 
@@ -478,7 +534,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ## Testing Plan<br />
 
-- **Unit testing**<br />Every component, reducer, and module should be tested automatically. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
+- **Unit testing**<br />Every component, reducer, and module should be tested automatically. We will test frontend(react, redux) with Jest and React testing library, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
 
 - **Functional testing**<br />Every API should be tested. We will test frontend(react, redux) with Jest and Enzyme, and backend(django) with python unit test. These tests should reach 80% coverage.<br />
 
