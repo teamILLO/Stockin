@@ -1,9 +1,9 @@
 '''
 stocks
 '''
-import json, math
-import numpy as np
 from datetime import timedelta
+
+import json
 
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import get_object_or_404
@@ -334,8 +334,9 @@ def stock_bottom100_stockhistory(request) :
         cnt = 1
         for stock in stocks:
             # Get StockHistory(1 month)
-            stockhis_qs = StockHistory.objects.values('id', 'date',
-            'endPrice','tradeVolume').filter(stock__id = stock['id']).filter(date__range=[startdate, enddate])
+            stockhis_qs = StockHistory.objects.values('id', 'date','endPrice','tradeVolume') \
+                            .filter(stock__id = stock['id']) \
+                            .filter(date__range=[startdate, enddate])
             stockhis_list = []
             for stockhis in stockhis_qs :
                 stockhis_list.append(stockhis)
