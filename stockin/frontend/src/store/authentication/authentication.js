@@ -29,32 +29,43 @@ export const tryLogin = (user) => async (dispatch) => {
   try {
     await api.post('/users/signin/', user).then((response) => {
       dispatch(login(response.data));
-      sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+      // sessionStorage.setItem('userInfo', JSON.stringify(response.data));
     });
   } catch (e) {
     return console.error(e.message);
   }
 };
 
+// export const checkLogin = () => async (dispatch) => {
+//   const userInfo = sessionStorage.getItem('userInfo');
+//   if (userInfo != null) {
+//     try {
+//       const user = JSON.parse(userInfo);
+//       await api.post('/users/signin/', user).then((response) => {
+//         dispatch(login(response.data));
+//       });
+//     } catch (e) {
+//       return console.error(e.message);
+//     }
+//   } else dispatch(logout());
+// };
+
 export const checkLogin = () => async (dispatch) => {
-  const userInfo = sessionStorage.getItem('userInfo');
-  if (userInfo != null) {
-    try {
-      const user = JSON.parse(userInfo);
-      await api.post('/users/signin/', user).then((response) => {
-        dispatch(login(response.data));
-      });
-    } catch (e) {
-      return console.error(e.message);
-    }
-  } else dispatch(logout());
+  try {
+    await api.get('/users/checklogin/').then((response) => {
+      dispatch(login(response.data));
+    });
+  } catch (e) {
+    dispatch(logout());
+    return console.error(e.message);
+  }
 };
 
 export const tryLogout = () => async (dispatch) => {
   try {
     await api.get('/users/logout/').then((response) => {
       dispatch(logout());
-      sessionStorage.removeItem('userInfo');
+      // sessionStorage.removeItem('userInfo');
     });
   } catch (e) {
     return console.error(e.message);
@@ -66,7 +77,7 @@ export const trySignup = (user) => async (dispatch) => {
     await api.post('/users/signup/', user).then(async (response) => {
       await api.post('/users/signin/', user).then((response) => {
         dispatch(login(response.data));
-        sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+        // sessionStorage.setItem('userInfo', JSON.stringify(response.data));
       });
     });
   } catch (e) {
@@ -78,7 +89,7 @@ export const trySignout = (user) => async (dispatch) => {
   try {
     await api.post('/users/signout/', user).then((response) => {
       dispatch(logout());
-      sessionStorage.removeItem('userInfo');
+      // sessionStorage.removeItem('userInfo');
     });
   } catch (e) {
     return console.error(e.message);
@@ -89,7 +100,7 @@ export const updateUserInfo = (userChange) => async (dispatch) => {
   try {
     await api.put('/users/userInfo/', userChange).then((response) => {
       dispatch(login(response.data));
-      sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+      // sessionStorage.setItem('userInfo', JSON.stringify(response.data));
     });
   } catch (e) {
     return console.error(e.message);

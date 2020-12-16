@@ -8,6 +8,7 @@ urlpatterns = [
     # user model
     path('users/signup/', views.signup, name='sign_up'),
     path('users/signin/', views.signin, name='sign_in'),
+    path('users/checklogin/', views.check_login, name='check_login'),
     path('users/logout/', views.logoff, name='log_out'),
     path('users/signout/', views.signout, name='sign_out'),
     path('users/duplicate/', views.duplicate, name='duplicate'),

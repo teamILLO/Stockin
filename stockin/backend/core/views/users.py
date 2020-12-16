@@ -30,8 +30,9 @@ def signup(request):
                 email=email, nickname=nickname, password=password)
         except IntegrityError:
             return HttpResponse(status=406)
+        request.session['user'] = user.id
         response_dict = {'email': email,
-                         'nickname': nickname, 'password': password}
+                         'nickname': nickname, 'id':user.id}
         return HttpResponse(content=json.dumps(response_dict), status=201)
 
 
@@ -52,9 +53,8 @@ def signin(request):
         user = authenticate(email=email, password=password)
         if user is not None:
             login(request, user)
-            # request.session['user'] = user.id
-            response_dict = {'email': email, 'nickname': user.nickname,
-                             'password': password, 'id': user.id}
+            request.session['user'] = user.id
+            response_dict = {'email': email, 'nickname': user.nickname,'id': user.id}
             return JsonResponse(response_dict, status=201)
 
         return HttpResponse(status=401)
@@ -70,6 +70,8 @@ def logoff(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
             logout(request)
+            if request.session.get('user'):
+                del(request.session['user'])
             return HttpResponse(status=204)
 
         return HttpResponse(status=401)
@@ -92,6 +94,8 @@ def signout(request):
         user = authenticate(email=email, password=password)
         if user is not None and user.is_authenticated:
             user.delete()
+            if request.session.get('user'):
+                del(request.session['user'])
             return HttpResponse(status=204)
 
         return HttpResponse(status=401)
@@ -171,8 +175,7 @@ def user_info(request):
                 target_user = get_object_or_404(User, email=email)
                 target_user.set_password(password)
                 target_user.save()
-                response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
-                                    'password': target_user.password, 'id': target_user.id}
+                response_dict = {'email': target_user.email, 'nickname': target_user.nickname,'id': target_user.id}
 
             if req_data['change'] == 'nickname':
                 email = req_data['email']
@@ -180,8 +183,7 @@ def user_info(request):
                 target_user = get_object_or_404(User, email=email)
                 target_user.nickname = nickname
                 target_user.save()
-                response_dict = {'email': target_user.email, 'nickname': target_user.nickname,
-                                    'password': target_user.password, 'id': target_user.id}
+                response_dict = {'email': target_user.email, 'nickname': target_user.nickname, 'id': target_user.id}
 
             return JsonResponse(response_dict, status=201)
 
@@ -190,6 +192,19 @@ def user_info(request):
 
 
     return HttpResponseNotAllowed(['GET','PUT'])
+
+
+def check_login(request):
+    '''
+    check_login
+    '''
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            response_dict = {'email': request.user.email, 'nickname': request.user.nickname, 'id': request.user.id}
+            return JsonResponse(response_dict, status=200)
+        return HttpResponseBadRequest()
+
+    return HttpResponseNotAllowed(['GET'])
 
 
 @ensure_csrf_cookie
