@@ -4,7 +4,7 @@
 
 Rev. 1.0 2020-10-31 - initial version<br/>
 Rev. 1.1 2020-11-10 - additional backend model `Comment`, `Stock`, `StockHistory`<br/>
-Rev. 1.2 2020-11-19 - revise backend api & response format
+Rev. 1.2 2020-11-19 - revise backend api & response format <br/>
 Rev. 1.3 2020-12-17 - revise backend api & response format
 
 ## System Architecture<br />
