@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table, Icon } from 'semantic-ui-react';
 import _ from 'lodash';
 import { history } from '../../../store/store';
 
 function sortReducer(state, action) {
   switch (action.type) {
+    case 'SET_DATA':
+      return {
+        ...state,
+        data: action.data,
+        column: null,
+        direction: null,
+      };
     case 'CHANGE_SORT':
       if (state.column === action.column) {
         return {
@@ -69,6 +76,11 @@ const GroupStock = (props) => {
     direction: null,
   });
   const { column, data, direction } = state;
+
+  useEffect(() => {
+    dispatch({ type: 'SET_DATA', data: props.stocks });
+  }, [props.stocks]);
+
   return (
     <Table sortable celled>
       <Table.Header>

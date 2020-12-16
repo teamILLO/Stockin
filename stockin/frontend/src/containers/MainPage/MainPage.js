@@ -114,7 +114,7 @@ const MainPage = (props) => {
       );
 
     let panes = groupList.map((e, index) => {
-      if (e.stocks.length == 0)
+      if (e.stocks.length === 0)
         return {
           menuItem: e.name,
           render: () => (
