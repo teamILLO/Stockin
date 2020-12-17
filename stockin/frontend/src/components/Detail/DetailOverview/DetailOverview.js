@@ -60,19 +60,18 @@ const DetailOverview = (props) => {
         id: 'profitability',
         ranges: [0, 30, 50, 60, 80, 100],
         measures: [],
-        markers:
-          props.stock && props.fs_score && props.fs_score.score
-            ? [
-                /*Math.sqrt(
+        markers: props.stock
+          ? [
+              /*Math.sqrt(
                   (props.stock.score * props.stock.score +
                     ((props.fs_score.score + 8) / 16) *
                       50 *
                       (((props.fs_score.score + 8) / 16) * 50)) /
                     2,
                 ),*/
-                props.stock.score,
-              ]
-            : [],
+              props.stock.score,
+            ]
+          : [],
       },
     ]);
     setData2([
@@ -195,7 +194,7 @@ const DetailOverview = (props) => {
               <br />
               <h5>
                 Profitability Score :{' '}
-                {props.stock && props.fs_score && props.fs_score.score
+                {props.stock
                   ? `${props.stock.score} / 100`
                   : 'Cannot calculate due to lack of data'}
               </h5>
@@ -215,6 +214,8 @@ const DetailOverview = (props) => {
                 <p>
                   {props.stock && props.fs_score && props.fs_score.score
                     ? `It is likely to show a ${riseAdjective} rise or a ${dropAdjective} drop when compared to other stocks, and it shows ${stabilityAdjectve} stability.`
+                    : props.stock
+                    ? `It is likely to show a ${riseAdjective} rise or a ${dropAdjective} drop when compared to other stocks.`
                     : 'No summary due to lack of data.'}
                 </p>
               </Segment>
