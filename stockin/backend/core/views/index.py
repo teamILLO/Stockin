@@ -87,7 +87,7 @@ def get_top_rank_info(info_len):
     '''
     get_top_rank_info
     '''
-    enddate = timezone.now().date()
+    enddate = timezone.now().date()- timedelta(days=1)
     startdate = enddate - timedelta(days=30)
     duration = int(np.busday_count(startdate, enddate+timedelta(days=1)))
 
@@ -132,7 +132,7 @@ def get_bottom_rank_info(info_len):
     '''
     get_bottom_rank_info
     '''
-    enddate = timezone.now().date()
+    enddate = timezone.now().date()- timedelta(days=1)
     startdate = enddate - timedelta(days=30)
     duration = int(np.busday_count(startdate, enddate+timedelta(days=1)))
 
