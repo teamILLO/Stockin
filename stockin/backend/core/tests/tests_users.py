@@ -105,6 +105,9 @@ class UsersTestCase(TestCase):
         response = client.post('/api/users/signup/',
                     json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
+
+        response = client.get('/api/users/token/')
+        csrftoken = response.cookies['csrftoken'].value
         response = client.post('/api/users/signup/',
                     json.dumps({'email': 'normal@user.com', 'nickname': 'user', 'password': pwd}),
                     content_type='application/json', HTTP_X_CSRFTOKEN=csrftoken)
@@ -282,6 +285,7 @@ class UsersTestCase(TestCase):
         response = client.get('/api/users/userInfo/')
         self.assertEqual(response.status_code, 203)
 
+        response = client.get('/api/users/logout/')
         response = client.get('/api/users/token/')
         csrftoken = response.cookies['csrftoken'].value
         response = client.put('/api/users/userInfo/', json.dumps(
