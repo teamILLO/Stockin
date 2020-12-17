@@ -50,7 +50,7 @@ urlpatterns = [
     # comment model
     path('stocks/<int:stock_id>/comments/', views.comment_list, name='comment_list'),
     path('comments/<int:comment_id>/', views.comment, name='comment'),
-    
+
     # news model
     path('news/stocks/<int:stock_id>/date/<str:news_date>/',
         views.get_news_list,
