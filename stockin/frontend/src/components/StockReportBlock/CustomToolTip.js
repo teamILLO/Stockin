@@ -6,11 +6,12 @@ const CustomToolTip = (props) => {
   let endPrice = 0;
   let tradeVolume = 0;
 
-  if(props.payload === null) {
+  if (props.payload === null) {
     return <div className="CustomToolTip" data-testid="CustomToolTip"></div>;
   }
+
   // console.log(props);
-  if(props.active) {
+  if (props.active) {
     date = props.payload[0].payload.date;
     endPrice = props.payload[0].payload.endPrice;
     endPrice = endPrice ? props.payload[0].payload.endPrice.toLocaleString('en-us') : '0';
@@ -20,11 +21,11 @@ const CustomToolTip = (props) => {
 
   return (
     <div className="CustomToolTip" data-testid="CustomToolTip">
-      <p style={props.isUp ? {color : 'red'} : {color : 'blue'}}>{date}</p>
-      <p id='endprice'>종가 : {endPrice}원</p>
-      <p id='tradevolume'>거래량 : {tradeVolume}주</p>
+      <p style={props.isUp ? { color: 'red' } : { color: 'blue' }}>{date}</p>
+      <p id="endprice">종가 : {endPrice}원</p>
+      <p id="tradevolume">거래량 : {tradeVolume}주</p>
     </div>
   );
-}
+};
 
 export default CustomToolTip;

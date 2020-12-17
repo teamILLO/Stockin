@@ -22,6 +22,12 @@ const defaultProps = {
   content: 'TEST_CONTENT',
 };
 
+const wrongProps = {
+  author: 'TEST_AUTHOR',
+  time: '2020-11-09T0336Z',
+  content: 'TEST_CONTENT',
+};
+
 const initialCommentState = { commentList: [{ ...defaultProps, stock: 1 }] };
 
 const mockStoreUserNull = getMockStore(
@@ -55,6 +61,7 @@ describe('<CommentBlock />', () => {
   let commentBlockUserNull,
     commentBlockUserSame,
     commentBlockUserDiff,
+    commentBlockIDExist,
     spyEditComment,
     spyDeleteComment;
   beforeEach(() => {
@@ -73,6 +80,16 @@ describe('<CommentBlock />', () => {
         <CommentBlock history={history} {...{ ...defaultProps, time: '20201109T0036Z' }} />
       </Provider>
     );
+    commentBlockIDExist = (
+      <Provider store={mockStoreUserDiff}>
+        <CommentBlock
+          history={history}
+          author_id={1}
+          {...{ ...defaultProps, time: '20201109T0036Z' }}
+        />
+      </Provider>
+    );
+
     spyEditComment = jest.spyOn(comment, 'editComment').mockImplementation(() => {
       return (dispatch) => {};
     });
@@ -81,11 +98,19 @@ describe('<CommentBlock />', () => {
       return (dispatch) => {};
     });
   });
+
   it('should render without errors', () => {
     const { container } = render(commentBlockUserNull);
     const query = queryAllByTestId(container, 'CommentBlock');
     expect(query.length).toBe(1);
   });
+
+  it('should render without errors when author_id is none', () => {
+    const { container } = render(commentBlockIDExist);
+    const query = queryAllByTestId(container, 'CommentBlock');
+    expect(query.length).toBe(1);
+  });
+
   it('should have edit and delete buttons', () => {
     const { container } = render(commentBlockUserSame);
     let query = queryAllByText(container, /edit/i);
@@ -93,6 +118,7 @@ describe('<CommentBlock />', () => {
     query = queryAllByText(container, /delete/i);
     expect(query.length).toBe(1);
   });
+
   it('should not have edit and delete buttons', () => {
     const { container } = render(commentBlockUserDiff);
     let query = queryAllByText(container, /edit/i);
@@ -100,6 +126,7 @@ describe('<CommentBlock />', () => {
     query = queryAllByText(container, /delete/i);
     expect(query.length).toBe(0);
   });
+
   it('should have submit edit button and be gone when clicked', async () => {
     render(commentBlockUserSame);
     let query;

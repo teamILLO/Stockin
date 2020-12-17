@@ -7,9 +7,17 @@ import * as authentication from '../../../store/authentication/authentication';
 import { api } from '../../../api/index';
 import MyInfo from './MyInfo';
 
-
 const mockStore = getMockStore(
   { loggingIn: true, user: { email: 'test@email.com', nickname: 'nickname', id: 1 } },
+  { stockList: [] },
+  { priceList: [] },
+  { commentList: [] },
+  { news: [] },
+  { fs: [] },
+);
+
+const mockStoreUserNull = getMockStore(
+  { loggingIn: true },
   { stockList: [] },
   { priceList: [] },
   { commentList: [] },
@@ -19,7 +27,7 @@ const mockStore = getMockStore(
 window.alert = jest.fn();
 
 describe('<MyInfo />', () => {
-  let myInfo, spyUpdateUserInfo, spyPost;
+  let myInfo, myInfoUserNull, spyUpdateUserInfo, spyPost;
 
   beforeEach(() => {
     myInfo = (
@@ -28,19 +36,25 @@ describe('<MyInfo />', () => {
       </Provider>
     );
 
+    myInfoUserNull = (
+      <Provider store={mockStoreUserNull}>
+        <MyInfo history={history} />
+      </Provider>
+    );
+
     spyPost = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
-          let result
-          if(url === '/users/duplicate/')
-              result = {
-                  status: 200,
-                  data: {'duplicate': false},
-              };
-          else
-              result = {
-                  status: 200,
-              }
-          resolve(result);
+        let result;
+        if (url === '/users/duplicate/')
+          result = {
+            status: 200,
+            data: { duplicate: false },
+          };
+        else
+          result = {
+            status: 200,
+          };
+        resolve(result);
       });
     });
 
@@ -61,6 +75,12 @@ describe('<MyInfo />', () => {
     expect(query.length).toBe(1);
   });
 
+  it('should render without errors when user is null', () => {
+    const { container } = render(myInfoUserNull);
+    const query = queryAllByTestId(container, 'MyInfo');
+    expect(query.length).toBe(1);
+  });
+
   it('should call clickEdit when edit button clicked', () => {
     const { container } = render(myInfo);
     fireEvent.click(screen.getByText(/edit!/i, { selector: 'button' }));
@@ -73,26 +93,24 @@ describe('<MyInfo />', () => {
     fireEvent.click(screen.getByText(/edit!/i, { selector: 'button' }));
     let input = container.querySelector('input[name="nicknameInput"]');
     fireEvent.change(input, { target: { value: 'newNickname' } });
-    await wait(() =>
-      fireEvent.click(screen.getByText(/confirm!/i, { selector: 'button' }))
-    );
+    await wait(() => fireEvent.click(screen.getByText(/confirm!/i, { selector: 'button' })));
     expect(spyUpdateUserInfo).toHaveBeenCalledTimes(1);
   });
 
   it('should not change value when nickname duplicated', async () => {
     spyPost = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
-          let result
-          if(url === '/users/duplicate/')
-              result = {
-                  status: 200,
-                  data: {'duplicate': true},
-              };
-          else
-              result = {
-                  status: 200,
-              }
-          resolve(result);
+        let result;
+        if (url === '/users/duplicate/')
+          result = {
+            status: 200,
+            data: { duplicate: true },
+          };
+        else
+          result = {
+            status: 200,
+          };
+        resolve(result);
       });
     });
 
@@ -100,9 +118,7 @@ describe('<MyInfo />', () => {
     fireEvent.click(screen.getByText(/edit!/i, { selector: 'button' }));
     let input = container.querySelector('input[name="nicknameInput"]');
     fireEvent.change(input, { target: { value: 'newNickname' } });
-    await wait(() =>
-      fireEvent.click(screen.getByText(/confirm!/i, { selector: 'button' }))
-    );
+    await wait(() => fireEvent.click(screen.getByText(/confirm!/i, { selector: 'button' })));
     expect(spyUpdateUserInfo).toHaveBeenCalledTimes(0);
   });
 
@@ -125,7 +141,7 @@ describe('<MyInfo />', () => {
   });
 
   it('should sign out', () => {
-    window.confirm = jest.fn(() => true)
+    window.confirm = jest.fn(() => true);
     render(myInfo);
     fireEvent.click(screen.getByText(/SIGNOUT/i, { selector: 'button' }));
     const query = screen.queryAllByText(/newnickname/i);
@@ -133,7 +149,7 @@ describe('<MyInfo />', () => {
   });
 
   it('should not sign out', () => {
-    window.confirm = jest.fn(() => false)
+    window.confirm = jest.fn(() => false);
     render(myInfo);
     fireEvent.click(screen.getByText(/SIGNOUT/i, { selector: 'button' }));
     const query = screen.queryAllByText(/newnickname/i);
