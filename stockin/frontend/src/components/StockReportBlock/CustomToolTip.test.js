@@ -4,43 +4,37 @@ import { Provider } from 'react-redux';
 import store from '../../store/store';
 import CustomToolTip from './CustomToolTip';
 
-const stubPayload = [
-    { payload : { id : 1, date : '12-02', endPrice : 1, tradeVolume : 1 }}
-]
+const stubPayload = [{ payload: { id: 1, date: '12-02', endPrice: 1, tradeVolume: 1 } }];
 
 const stubPayload_excluded = [
-    { payload : { id : 2, date : '12-02', endPrice : null, tradeVolume : null }}
-]
+  { payload: { id: 2, date: '12-02', endPrice: null, tradeVolume: null } },
+];
 
-const mockActiveCustomToolTip = 
+const mockActiveCustomToolTip = (
   <Provider store={store}>
-    <CustomToolTip
-      active={true}
-      isUp={true}
-      payload={stubPayload}
-    />
+    <CustomToolTip active={true} isUp={true} payload={stubPayload} />
   </Provider>
+);
 
-const mockActiveCustomToolTip_excluded = 
+const mockActiveCustomToolTip_excluded = (
   <Provider store={store}>
-    <CustomToolTip
-      active={true}
-      isUp={true}
-      payload={stubPayload_excluded}
-    />
+    <CustomToolTip active={true} isUp={true} payload={stubPayload_excluded} />
   </Provider>
+);
 
-const mockNonActiveCustomToolTip = 
+const mockNonActiveCustomToolTip = (
   <Provider store={store}>
-    <CustomToolTip
-      active={false}
-      isUp={false}
-      payload={stubPayload}
-    />
+    <CustomToolTip active={false} isUp={false} payload={stubPayload} />
   </Provider>
+);
 
+const mockCustomToolTipNull = (
+  <Provider store={store}>
+    <CustomToolTip payload={null} />
+  </Provider>
+);
 
-describe('<CustomToolTip />', () => {  
+describe('<CustomToolTip />', () => {
   beforeEach(() => {
     console.error = jest.fn();
   });
@@ -64,6 +58,12 @@ describe('<CustomToolTip />', () => {
 
   it('should render without errors in non-active tooltip', () => {
     const { container } = render(mockNonActiveCustomToolTip);
+    const query = queryAllByTestId(container, 'CustomToolTip');
+    expect(query.length).toBe(1);
+  });
+
+  it('should render without errors when payload is null', () => {
+    const { container } = render(mockCustomToolTipNull);
     const query = queryAllByTestId(container, 'CustomToolTip');
     expect(query.length).toBe(1);
   });

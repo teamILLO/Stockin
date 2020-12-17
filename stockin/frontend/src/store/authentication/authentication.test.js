@@ -105,7 +105,7 @@ describe('authentication ', () => {
   });
 
   it(`should work when 'checkLogin' calls`, (done) => {
-    const spy = jest.spyOn(api, 'post').mockImplementation((url, atc) => {
+    const spy = jest.spyOn(api, 'get').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 200,
@@ -122,7 +122,7 @@ describe('authentication ', () => {
   });
 
   it(`should not work when 'checkLogin' calls with error`, (done) => {
-    jest.spyOn(api, 'post').mockImplementation((url, atc) => {
+    jest.spyOn(api, 'get').mockImplementation((url, atc) => {
       return new Promise((resolve, reject) => {
         const result = {
           status: 400,
@@ -199,7 +199,7 @@ describe('authentication ', () => {
     });
 
     store.dispatch(trySignup(testuser)).then(() => {
-      expect(spy).toHaveBeenCalledTimes(2);
+      expect(spy).toHaveBeenCalledTimes(1);
       done();
     });
   });
