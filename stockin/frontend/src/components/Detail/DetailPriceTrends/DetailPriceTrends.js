@@ -19,7 +19,7 @@ const DetailPriceTrends = (props) => {
   };
 
   const monthGetter = (date) => {
-    return date.getMonth() > 9 ? date.getMonth() : '0' + date.getMonth();
+    return date.getMonth() > 8 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
   };
 
   const dayGetter = (date) => {
