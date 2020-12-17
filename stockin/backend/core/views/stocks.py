@@ -351,4 +351,3 @@ def fs_score(request, stock_id=""):
         return JsonResponse(response, status=201)
 
     return HttpResponseNotAllowed(['GET'])
-

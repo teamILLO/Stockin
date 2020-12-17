@@ -18,7 +18,8 @@ matrix:
       install:
         - cd stockin/frontend
         - yarn install
-        - yarn add coveralls
+        - yarn global add coveralls
+        - gem install coveralls-lcov
         - cd ../backend
         - source ~/virtualenv/python3.7/bin/activate
         - pip3 install -r requirements.txt
@@ -38,7 +39,10 @@ matrix:
         - ./node_modules/.bin/eslint src
         - cd ../..
         - sonar-scanner
+        
       after_success:
+        - cd stockin/frontend
+        - coveralls-lcov -v -n coverage/lcov.info > coverage.json
+        - cd ../../
         - cd stockin/backend
-        - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-        - coveralls
+        - coveralls --merge=../../stockin/frontend/coverage.json
