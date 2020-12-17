@@ -32,7 +32,7 @@ const DetailData = (props) => {
   };
   const tooltipContent = (ys) => {
     return ({ currentItem, xAccessor }) => {
-      if (currentItem.close === currentItem.open)
+      if (currentItem.volume === 0)
         return {
           x: 'no transaction',
           y: [
