@@ -75,10 +75,10 @@ export const tryLogout = () => async (dispatch) => {
 export const trySignup = (user) => async (dispatch) => {
   try {
     await api.post('/users/signup/', user).then(async (response) => {
-      await api.post('/users/signin/', user).then((response) => {
-        dispatch(login(response.data));
-        // sessionStorage.setItem('userInfo', JSON.stringify(response.data));
-      });
+      // await api.post('/users/signin/', user).then((response) => {
+      dispatch(login(response.data));
+      // sessionStorage.setItem('userInfo', JSON.stringify(response.data));
+      // });
     });
   } catch (e) {
     return console.error(e.message);
@@ -89,7 +89,7 @@ export const trySignout = (user) => async (dispatch) => {
   try {
     await api.post('/users/signout/', user).then((response) => {
       dispatch(logout());
-      // sessionStorage.removeItem('userInfo');
+      // sessionStorage.removeItem('userInfo');w
     });
   } catch (e) {
     return console.error(e.message);

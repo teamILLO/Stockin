@@ -78,7 +78,7 @@ const MyInfo = (props) => {
         <Grid centered>
           <Grid.Row>
             <Image
-              src={'https://semantic-ui.com/images/' + avatar[user.id % 24]}
+              src={user ? 'https://semantic-ui.com/images/' + avatar[user.id % 24] : ''}
               size="medium"
               circular
               className="avatar"
@@ -125,7 +125,7 @@ const MyInfo = (props) => {
         <Grid centered>
           <Grid.Row>
             <Image
-              src={'https://semantic-ui.com/images/' + avatar[user.id % 24]}
+              src={user ? 'https://semantic-ui.com/images/' + avatar[user.id % 24] : ''}
               size="medium"
               circular
               className="avatar"
