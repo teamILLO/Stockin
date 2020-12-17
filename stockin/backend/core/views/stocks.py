@@ -118,7 +118,7 @@ def stock_top100_news(request) :
     '''
     if request.method =='GET':
         response_list=[]
-        stocks = get_top_rank_info(100)
+        stocks = get_bottom_rank_info(100)
 
         cnt = 1
         for stock in stocks:
