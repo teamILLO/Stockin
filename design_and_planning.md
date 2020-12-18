@@ -163,7 +163,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ### Frontend design
 
-![Frame 1 (3)](https://user-images.githubusercontent.com/59424336/102583502-250d2000-4148-11eb-8929-41f5a7eb5812.png)
+![Frame 1 (4)](https://user-images.githubusercontent.com/59424336/102585394-b5992f80-414b-11eb-8b12-0271aad5c537.png)
 
 #### 0. Headers and footers
 
