@@ -9,8 +9,11 @@ from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
+from django.core.cache import cache
+
 from core.models import Stock, StockHistory, FinancialStat, News
 from core.views.index import get_fs_info, get_top_rank_info, get_bottom_rank_info
+
 
 
 def stock_list(request):
@@ -19,10 +22,10 @@ def stock_list(request):
     '''
     if request.method == 'GET':
         # using cache
-        # stock_qs = cache.get_or_set('stocks', Stock.objects.values('id','title','code','sector'))
+        stock_qs = cache.get_or_set('stocks', Stock.objects.values('id','title','code','sector'))
 
         # original
-        stock_qs = Stock.objects.values('id', 'title', 'code', 'sector')
+        # stock_qs = Stock.objects.values('id', 'title', 'code', 'sector')
 
         return JsonResponse(list(stock_qs), safe=False)
 
