@@ -5,7 +5,7 @@
 Rev. 1.0 2020-10-31 - initial version<br/>
 Rev. 1.1 2020-11-10 - additional backend model `Comment`, `Stock`, `StockHistory`<br/>
 Rev. 1.2 2020-11-19 - revise backend api & response format <br/>
-Rev. 1.3 2020-12-17 - revise backend api & response format
+Rev. 1.3 2020-12-17 - revise backend api & response format & frontend design <br/>
 
 ## System Architecture<br />
 
@@ -163,7 +163,7 @@ That is, “Group” model and “Stock” model is “many to many” relations
 
 ### Frontend design
 
-![frontend_design(1)](https://github.com/swsnu/swpp2020-team15/blob/master/images/frontend_design.png)
+![Frame 1 (4)](https://user-images.githubusercontent.com/59424336/102585394-b5992f80-414b-11eb-8b12-0271aad5c537.png)
 
 #### 0. Headers and footers
 
