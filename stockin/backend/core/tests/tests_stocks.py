@@ -1,8 +1,12 @@
 '''
 tests_stocks
 '''
+from datetime import timedelta
+
+import numpy as np
 
 from django.test import TestCase, Client
+from django.utils import timezone
 from core.models import Stock, StockHistory, FinancialStat, News
 
 
@@ -157,12 +161,35 @@ class StocksTestCase(TestCase):
         client = Client(enforce_csrf_checks=True)
         stock_list = []
 
+        enddate = timezone.now().date()- timedelta(days=1)
+        startdate = enddate - timedelta(days=30)
+        duration = int(np.busday_count(startdate, enddate+timedelta(days=1)))
+
+        # set first, second stock to failing
+        stock_list.append( Stock.objects.create(
+                title = 'foo_title',
+                code = 'foo_code',
+                sector = 'foo_sector',
+                tradeVolume = 1,
+                score = 30,
+        ))
+
+        stock_list.append( Stock.objects.create(
+                title = 'foo_title',
+                code = 'foo_code',
+                sector = 'foo_sector',
+                tradeVolume = 1,
+                score = 70,
+        ))
+
         # Create 100 stocks
         for i in range(100) :
             stock_list.append( Stock.objects.create(
                 title = 'foo_title',
                 code = 'foo_code',
                 sector = 'foo_sector',
+                tradeVolume = 1,
+                score = 50,
             ))
 
         # Create news objects
@@ -175,13 +202,31 @@ class StocksTestCase(TestCase):
                 link = 'foo_link',
             )
 
+        testdate = timezone.now().date()- timedelta(days=2)
+
+        # set first, second stock to failing
+        StockHistory.objects.create(
+            stock = stock_list[0],
+            date = testdate,
+            tradeVolume = 1,
+            endPrice = 100,
+        )
+        StockHistory.objects.create(
+            stock = stock_list[1],
+            date = testdate,
+            tradeVolume = 1,
+            endPrice = 100,
+        )
+
         # Create stockhistory objects
-        for i in range(100) :
-            StockHistory.objects.create(
-                stock = stock_list[i],
-                date = '2020-12-07',
-                endPrice = 100,
-            )
+        for i in range(2, 102) :
+            for _ in range(duration) :
+                StockHistory.objects.create(
+                    stock = stock_list[i],
+                    date = testdate,
+                    tradeVolume = 1,
+                    endPrice = 100,
+                )
 
         # stock_top100_stockinfo
         response = client.get('/api/stocks/report/up/stockinfo/')

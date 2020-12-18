@@ -41,10 +41,6 @@ def get_fs_info(stock, fs_stock) :
         op_[0] = fs_stock.get(quarter='19년 3월').operatingProfit
     except (ObjectDoesNotExist, OperationalError):
         pass
-    for i in range(5):
-        if op_[i] == '-':
-            op_[i] = ''
-    # liability rate
 
     # operatingCashflow
     script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
@@ -108,7 +104,6 @@ def get_top_rank_info(info_len):
                                 .values('id','title','isKOSPI',     \
                                 'code','price','yesterdayPrice',    \
                                 'score').order_by('-score')
-
 
     # 한달치 확인, length check
     cnt = 0
